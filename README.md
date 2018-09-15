@@ -30,7 +30,7 @@ https://gitee.com/GeekPerson/central-platform
 
 ### 基于OCP的企业微服务体验地址
 
-http://47.94.252.160:8066
+http://59.110.164.254:8066
 
 用户名/密码：admin/admin
 
