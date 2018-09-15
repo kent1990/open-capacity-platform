@@ -23,6 +23,11 @@
 
 
 
+### 1.5.x将在2019年8月1日停止维护，请尽快升级到2.0版本,2.0项目地址：
+
+https://gitee.com/GeekPerson/central-platform
+
+
 ### 基于OCP的企业微服务体验地址
 
 http://47.94.252.160:8066
