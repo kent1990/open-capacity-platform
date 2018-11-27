@@ -1,0 +1,172 @@
+CREATE OR REPLACE PROCEDURE --version20180926017
+                                                                                                                                       CRM_OWNER_USER.BI_tcard_info_imp_4_P ( 
+   on_ret_code          OUT NUMBER,                        --返回码 0——成功 ，1——失败。
+   os_ret_info          OUT VARCHAR2                                    --返回信息
+                                    )
+/***********************************************************
+* 存储过程名: BI_tcard_info_imp_P
+* 建立日期  :  20180917001
+* 版权声明  :
+* 作    者  :   owen
+* 模    块  :  接口
+* 功能描述  :
+*-------------------------------------------------------
+* 修改历史
+* 序号  日期             需求编号              修改人      简要描述
+************************************************************ */
+AS
+   VS_STATUS           NUMBER (8);
+   vs_flag             VARCHAR2 (12);
+   vs_prompt           VARCHAR2 (300);
+   vs_note             VARCHAR2 (300);
+   vs_buffer           VARCHAR2 (1000);
+
+   vs_MONTH_PART       VARCHAR2 (50);
+   vs_EPARCHY_CODE     VARCHAR2 (50);
+   vn_user_id          NUMBER;
+   vs_CALL_TYPE_DESC   VARCHAR2 (50);
+   vs_NET_TYPE_DESC    VARCHAR2 (50);
+   vn_DURATION         NUMBER;
+   vn_CALL_TIME        NUMBER;
+   vs_service_id varchar2(50) ;
+   vn_count number :=0  ;
+
+   CURSOR card_info
+   IS
+      SELECT *
+        FROM bi_tcard_info_imp_t
+       WHERE status = 0;
+BEGIN
+   
+      FOR rec IN card_info
+      LOOP
+         BEGIN
+            vn_count:=vn_count +1 ;
+            vs_MONTH_PART := rec.MONTH_PART;
+            vs_EPARCHY_CODE := rec.EPARCHY_CODE;
+            vn_user_id := rec.USER_ID;
+            vs_note := rec.note;
+
+            UPDATE bi_tcard_info_imp_t
+               SET STATUS = 2, note = 'ok'
+             WHERE     MONTH_PART = vs_MONTH_PART
+                   AND EPARCHY_CODE = vs_EPARCHY_CODE
+                   AND USER_ID = vn_user_id;
+
+
+            MERGE /*+index (A IND_BI_TCARD_INFO_INFO_USER)*/ INTO BI_TCARD_INFO_INFO_T A
+           USING (SELECT *
+                    FROM (SELECT t.*,
+                                 SUM (
+                                    CASE
+                                       WHEN net_type = 0 THEN DURATION
+                                       ELSE 0
+                                    END)
+                                 OVER (PARTITION BY user_id ORDER BY IN_DATE)
+                                    owner_net,
+                                 SUM (
+                                    CASE
+                                       WHEN call_type = 1 THEN DURATION
+                                       ELSE 0
+                                    END)
+                                 OVER (PARTITION BY user_id ORDER BY IN_DATE)
+                                    owner_call,
+                                  SUM (
+                                    CASE
+                                       WHEN call_type = 1 and net_type = 0 THEN DURATION
+                                       ELSE 0
+                                    END)
+                                 OVER (PARTITION BY user_id ORDER BY IN_DATE)
+                                    owner_net_call,
+                                 SUM (DURATION)
+                                 OVER (PARTITION BY user_id ORDER BY IN_DATE)
+                                    sum_duration,
+                                 SUM (
+                                    CASE
+                                       WHEN net_type = 0 THEN call_time
+                                       ELSE 0
+                                    END)
+                                 OVER (PARTITION BY user_id ORDER BY IN_DATE)
+                                    owner_net_times,
+                                 SUM (
+                                    CASE
+                                       WHEN call_type = 1 THEN call_time
+                                       ELSE 0
+                                    END)
+                                 OVER (PARTITION BY user_id ORDER BY IN_DATE)
+                                    owner_call_times,
+                                   SUM (
+                                    CASE
+                                       WHEN call_type = 1 and net_Type = 0 THEN call_time
+                                       ELSE 0
+                                    END)
+                                 OVER (PARTITION BY user_id ORDER BY IN_DATE)
+                                    owner_net_call_times,
+                                 SUM (call_time)
+                                 OVER (PARTITION BY user_id ORDER BY IN_DATE)
+                                    sum_times
+                            FROM bi_tcard_info_imp_t t
+                           WHERE user_id = vn_user_id
+                                 AND EPARCHY_CODE = vs_EPARCHY_CODE )
+                   WHERE ROWNUM <= 1) B
+              ON (a.user_id = b.user_id AND a.EPARCHY_CODE = b.EPARCHY_CODE)
+      WHEN NOT MATCHED
+      THEN
+         INSERT     (MONTH_PART,
+                     EPARCHY_CODE,
+                     USER_ID,
+                     SERVICE_ID ,
+
+
+                     STATUS,
+                     IN_DATE,
+                     NOTE,
+                     OWNER_NET,
+                     OWNER_CALL,
+                     OWNER_NET_CALL ,
+                     SUM_DURATION,
+                     OWNER_NET_TIMES,
+                     OWNER_CALL_TIMES,
+                     OWNER_NET_CALL_TIMES ,
+                     SUM_TIMES)
+             VALUES (b.MONTH_PART,
+                     b.EPARCHY_CODE,
+                     b.USER_ID,
+                     b.service_id ,
+
+                     b.STATUS,
+                     b.IN_DATE,
+                     b.NOTE,
+                     b.OWNER_NET,
+                     b.OWNER_CALL,
+                     b.OWNER_NET_CALL ,
+                     b.SUM_DURATION,
+                     b.OWNER_NET_TIMES,
+                     b.OWNER_CALL_TIMES,
+                     b.OWNER_NET_CALL_TIMES,
+                     b.SUM_TIMES);
+                     
+                     
+          if mod(vn_count, 1000) = 0 then
+          
+            commit ;
+          end if ;           
+             
+         EXCEPTION
+            WHEN OTHERS
+            THEN
+               NULL;
+         END;
+      END LOOP;
+
+ 
+    commit ;
+ 
+EXCEPTION
+   WHEN OTHERS
+   THEN
+      ROLLBACK;
+      ON_RET_CODE := '1';
+      OS_RET_INFO := '处理异常:' || SUBSTRB (SQLERRM, 1, 200);
+END BI_tcard_info_imp_4_P;
+/

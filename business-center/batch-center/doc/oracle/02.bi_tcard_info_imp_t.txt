@@ -1,0 +1,214 @@
+DROP TABLE CRM_OWNER_USER.BI_TCARD_INFO_IMP_T CASCADE CONSTRAINTS;
+
+CREATE TABLE CRM_OWNER_USER.BI_TCARD_INFO_IMP_T
+(
+  MONTH_PART      VARCHAR2(50 BYTE),
+  EPARCHY_CODE    VARCHAR2(50 BYTE),
+  USER_ID         NUMBER,
+  SERVICE_ID      VARCHAR2(50 BYTE),
+  CALL_TYPE       VARCHAR2(50 BYTE),
+  CALL_TYPE_DESC  VARCHAR2(50 BYTE),
+  NET_TYPE        VARCHAR2(50 BYTE),
+  NET_TYPE_DESC   VARCHAR2(50 BYTE),
+  DURATION        NUMBER,
+  CALL_TIME       NUMBER,
+  STATUS          NUMBER,
+  IN_DATE         DATE,
+  NOTE            VARCHAR2(50 BYTE)
+)
+PARTITION BY RANGE (EPARCHY_CODE)
+(  
+  PARTITION PART_000 VALUES LESS THAN ('000')
+    LOGGING
+    NOCOMPRESS 
+    TABLESPACE TS_TAB_CUST
+    PCTFREE    10
+    INITRANS   1
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                BUFFER_POOL      DEFAULT
+               ),  
+  PARTITION PART_740 VALUES LESS THAN ('741')
+    LOGGING
+    NOCOMPRESS 
+    TABLESPACE TS_TAB_CUST
+    PCTFREE    10
+    INITRANS   1
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                BUFFER_POOL      DEFAULT
+               ),  
+  PARTITION PART_750 VALUES LESS THAN ('751')
+    LOGGING
+    NOCOMPRESS 
+    TABLESPACE TS_TAB_CUST
+    PCTFREE    10
+    INITRANS   1
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                BUFFER_POOL      DEFAULT
+               ),  
+  PARTITION PART_751 VALUES LESS THAN ('752')
+    LOGGING
+    NOCOMPRESS 
+    TABLESPACE TS_TAB_CUST
+    PCTFREE    10
+    INITRANS   1
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                BUFFER_POOL      DEFAULT
+               ),  
+  PARTITION PART_752 VALUES LESS THAN ('753')
+    LOGGING
+    NOCOMPRESS 
+    TABLESPACE TS_TAB_CUST
+    PCTFREE    10
+    INITRANS   1
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                BUFFER_POOL      DEFAULT
+               ),  
+  PARTITION PART_753 VALUES LESS THAN ('754')
+    LOGGING
+    NOCOMPRESS 
+    TABLESPACE TS_TAB_CUST
+    PCTFREE    10
+    INITRANS   1
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                BUFFER_POOL      DEFAULT
+               ),  
+  PARTITION PART_754 VALUES LESS THAN ('755')
+    LOGGING
+    NOCOMPRESS 
+    TABLESPACE TS_TAB_CUST
+    PCTFREE    10
+    INITRANS   1
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                BUFFER_POOL      DEFAULT
+               ),  
+  PARTITION PART_755 VALUES LESS THAN ('756')
+    LOGGING
+    NOCOMPRESS 
+    TABLESPACE TS_TAB_CUST
+    PCTFREE    10
+    INITRANS   1
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                BUFFER_POOL      DEFAULT
+               ),  
+  PARTITION PART_756 VALUES LESS THAN ('757')
+    LOGGING
+    NOCOMPRESS 
+    TABLESPACE TS_TAB_CUST
+    PCTFREE    10
+    INITRANS   1
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                BUFFER_POOL      DEFAULT
+               ),  
+  PARTITION PART_757 VALUES LESS THAN ('758')
+    LOGGING
+    NOCOMPRESS 
+    TABLESPACE TS_TAB_CUST
+    PCTFREE    10
+    INITRANS   1
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                BUFFER_POOL      DEFAULT
+               ),  
+  PARTITION PART_758 VALUES LESS THAN ('759')
+    LOGGING
+    NOCOMPRESS 
+    TABLESPACE TS_TAB_CUST
+    PCTFREE    10
+    INITRANS   1
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                BUFFER_POOL      DEFAULT
+               ),  
+  PARTITION PART_759 VALUES LESS THAN ('760')
+    LOGGING
+    NOCOMPRESS 
+    TABLESPACE TS_TAB_CUST
+    PCTFREE    10
+    INITRANS   1
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                BUFFER_POOL      DEFAULT
+               )
+)
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING;
+
+COMMENT ON COLUMN CRM_OWNER_USER.BI_TCARD_INFO_IMP_T.MONTH_PART IS '账期';
+
+COMMENT ON COLUMN CRM_OWNER_USER.BI_TCARD_INFO_IMP_T.EPARCHY_CODE IS '地市';
+
+COMMENT ON COLUMN CRM_OWNER_USER.BI_TCARD_INFO_IMP_T.USER_ID IS '用户';
+
+COMMENT ON COLUMN CRM_OWNER_USER.BI_TCARD_INFO_IMP_T.CALL_TYPE IS '呼叫类型';
+
+COMMENT ON COLUMN CRM_OWNER_USER.BI_TCARD_INFO_IMP_T.CALL_TYPE_DESC IS '呼叫类型';
+
+COMMENT ON COLUMN CRM_OWNER_USER.BI_TCARD_INFO_IMP_T.NET_TYPE IS '网络类型';
+
+COMMENT ON COLUMN CRM_OWNER_USER.BI_TCARD_INFO_IMP_T.NET_TYPE_DESC IS '网络类型';
+
+COMMENT ON COLUMN CRM_OWNER_USER.BI_TCARD_INFO_IMP_T.DURATION IS '时长';
+
+COMMENT ON COLUMN CRM_OWNER_USER.BI_TCARD_INFO_IMP_T.CALL_TIME IS '次数';
+
+COMMENT ON COLUMN CRM_OWNER_USER.BI_TCARD_INFO_IMP_T.STATUS IS '状态';
+
+COMMENT ON COLUMN CRM_OWNER_USER.BI_TCARD_INFO_IMP_T.IN_DATE IS '入库时间';
+
+COMMENT ON COLUMN CRM_OWNER_USER.BI_TCARD_INFO_IMP_T.NOTE IS '备注';
+
+
+
+create index ind_BI_TCARD_INFO_IMP_user on BI_TCARD_INFO_IMP_T (user_id ,EPARCHY_CODE) local ;
+
+create public synonym bi_tcard_info_imp_t for bi_tcard_info_imp_t ;
+grant all on bi_tcard_info_imp_t to public ;
+
+create table BI_TCARD_INFO_IMP_BAK AS select * from BI_TCARD_INFO_IMP_T where 1=2 ;

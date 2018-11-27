@@ -13,8 +13,7 @@ target/
 .classpath
 target/
 bin/
-open-cxf-service/
-open-elasticsearch/
+soap-center/
 
 
 # idea ignore
@@ -36,4 +35,3 @@ Thumbs.db
 
 # else
 .springBeans
-/open-layui-web/logs/

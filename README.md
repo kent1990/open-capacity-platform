@@ -1,11 +1,7 @@
-# <H1 align="center">open-capacity-platform 微服务能力开发平台</H1 > 
+# open-capacity-platform 微服务能力开发平台 
+ 
+简称ocp是基于layui+springcloud的企业级微服务框架(用户权限管理，配置中心管理，应用管理，....),其核心的设计目标是分离前后端，快速开发部署，学习简单，功能强大，提供快速接入核心接口能力，其目标是帮助企业搭建一套类似百度能力开放平台的框架；
 
-<p align="center">
- <img src="https://img.shields.io/circleci/project/vuejs/vue/dev.svg" alt="Build Status">
-  <img src="https://img.shields.io/badge/Spring%20Cloud-Edgware.SR3-blue.svg" alt="Coverage Status">
-  <img src="https://img.shields.io/badge/Spring%20Boot-1.5.9-blue.svg" alt="Downloads">
-  <img src="https://img.shields.io/npm/l/vue.svg" alt="License">
-</p>
 
 ### 欢迎进群（群内领资料）
 
@@ -13,107 +9,30 @@
 
 <a target="_blank" href="https://jq.qq.com/?_wv=1027&k=5JSjd5D"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="open-capacity-platform交流" title="open-capacity-platform交流"></a>
 
-![](https://i.imgur.com/kxpc628.png)
+![](https://i.imgur.com/kxpc628.png) 
 
-
-
-### 简介
-
-​        简称ocp是基于layui+springcloud的企业级微服务框架(用户权限管理，配置中心管理，应用管理，....),其核心的设计目标是分离前后端，快速开发部署，学习简单，功能强大，提供快速接入核心接口能力，其目标是帮助企业搭建一套类似百度能力开放平台的框架。
-
-
-
-### 1.5.x将在2019年8月1日停止维护，请尽快升级到2.0版本,2.0项目地址：
-
-https://gitee.com/GeekPerson/central-platform
-
-
-### 基于OCP的企业微服务体验地址
-
-http://59.110.164.254:8066
-
-用户名/密码：admin/admin
-
-
-
-### 组织结构
-
-open-capacity-platform
-
-```
-├    open-db-core  -- 数据库逻辑封装    
-├    open-eureka-center    -- eureka服务注册发现套件   
-├       ├── open-eureka-server   --服务注册中心[1111]    
-├       └── open-eureka-client    --注册服务样例工程[7768]  
-├    open-config-center   -- 配置中心   
-├         ├──  apollo    -- 阿波罗配置中心  
-├         ├       ├── apollo-adminservice      --[8090]    
-├         ├       ├── apollo-assembly     
-├         ├       ├── apollo-biz   
-├         ├       ├── apollo-buildtools    
-├         ├       ├── apollo-client    
-├         ├       ├── apollo-common     
-├         ├       ├── apollo-configservice     --[8080] 
-├         ├       ├── apollo-core  
-├         ├       └── apollo-demo  
-├         └      apollo-gateway  -- 阿波罗整合网关样例工程[9000]  
-├    open-oauth-center --oauth2套件   
-├       ├── open-oauth-server   --oauth认证中心[8000]  
-├       ├── open-oauth-client    --oauth资源服务器样例工程[8100]   
-├       ├── open-capacity-client-two  --oauth资源服务器样例工程[8200]    
-├       └── open-oauth-sso  --oauth sso样例工程[9997]  
-├    open-api-gateway  -- 服务网关[9200]  
-├    open-layui-web  --  基于jwt spring security的layui后台管理系统     
-├    open-xxl-job  -- 分布式调度任务
-├       ├── xxl-job-core  --核心库
-├       ├── xxl-job-admin   --job管理器    
-├       └── xxl-job-demo    --job执行器
-├     open-monitor-center  -- 监控中心
-├       ├── open-admin-server  -- spring boot admin server[9998]  
-├       ├    cachecloud-open-parent  -- 搜狐redis云平台   
-├       ├        ├── cachecloud-open-client    
-├       ├        ├── cachecloud-open-common   
-├       ├        └── cachecloud-open-web    
-├       └─  open-zipkin-center   -- zipkin链路跟踪[9412]  
-├               ├── open-zipkin-server-kafka   --zipkin链路跟踪服务端
-└               └── open-zipkin-client-kafka    --zipkin链路跟踪客户端  
-```
-
-
-
-#### 开发工具:
-
-- MySql: 数据库
-- Tomcat: 应用服务器
-- SVN|Git: 版本管理
-- Nginx: 反向代理服务器
-- IntelliJ IDEA/STS-3.8.0.RELEASE : 开发IDE/STS
-- Navicat for MySQL: 数据库客户端
-
-
-
-### 开发环境
-
-JDK8+  
-
-READIS 3.X  
-
-MySQL 5.6 + 
-
-MAVEN 3.3.9  
-
-
-
-
-###   技术介绍 
+##   技术介绍 
 ![](https://i.imgur.com/29QKUkG.png)  
-###   框架设计
+##   框架设计
 ![](https://i.imgur.com/vn03vIX.jpg)
 
+## 开发环境  
+redis3.X  
+jdk1.8  
+MySQL Server 5.6  
+maven3.3.9  
+sts-3.8.0.RELEASE  
 
+##  框架使用资料   
+链接：https://pan.baidu.com/s/10Kae9_YotU5GnneaCk_p5Q 
+密码：xqjb
+
+
+##  项目地址
+http://59.110.164.254:8066/login.html 用户名/密码：admin/admin
 
 ##  ocp项目演示
-
+ 
 ![](http://img1.ph.126.net/WAraEeweVw2SyTUSG1dT6Q==/3887169428474612491.gif) 
 
 
@@ -126,70 +45,105 @@ MAVEN 3.3.9
 ## oauth单点登录   
 ![](https://i.imgur.com/PwcuvoC.gif)
 
+## 项目组织结构分析 
+
+ ![](https://i.imgur.com/EMvYmyr.png)
+
 
 
 
 ## 一. open-capacity-platform能力开放平台管理    
-
+   
 01.用户登录
-
-
-
-<img src="https://i.imgur.com/Wpo9STn.png" />
+![](https://i.imgur.com/4PKB9CF.png)
 
 02.用户管理
-
-![](https://i.imgur.com/Ud65k7j.png)
+![](https://i.imgur.com/j4ThxL5.png)
 
 03.角色管理
 
-![](https://i.imgur.com/Vl4n8Wr.png)
+![](https://i.imgur.com/IrtLUDg.png)
 
 04.菜单管理
-![](https://i.imgur.com/DXFAsUy.png)
+![](https://i.imgur.com/j269pA8.png)
 
 
+05.权限管理
 
-05.注册中心   
-![](https://i.imgur.com/L1RMEoq.png)
+![](https://i.imgur.com/s6l27rb.png)
 
- ![](https://i.imgur.com/IKHAQ1c.png)
 
-06.配置中心   
-![](https://i.imgur.com/PrHbd6P.png)
-![](https://i.imgur.com/Zyy4XjQ.png)
+06.注册中心   
+ ![](https://i.imgur.com/zwaKg01.png)
+
 
 
 07.服务管理
 
-![](https://i.imgur.com/eDqMHBF.png)  
+![](https://i.imgur.com/2ufms9u.png)
 
 08.应用管理  
-![](https://i.imgur.com/BKN06Te.png)
+![](https://i.imgur.com/LC7UI5X.png)
 
 
-09.定时任务
+09.token管理
 
-![](https://i.imgur.com/boiJhNU.jpg)
+![](https://i.imgur.com/Pg80eh1.png)
 
 
 
 
 
 ## 部署 
-1.cd /root/sop/eureka-server/bin/ &&  ./start.sh  启动注册中心服务   
-2.cd /root/sop/config-center/configservice/bin/ &&  ./start.sh 启动配置中心configservice服务     
-3.cd /root/sop/config-center/adminservice/bin/  &&  ./start.sh  启动配置中心adminservice 服务  
-4.cd /root/sop/config-center/portalservice/bin/ &&  ./start.sh 启动配置中心portalservice服务   
-5.cd /root/sop/apollo-zuul/bin/ &&  ./start.sh 启动演示apollo-zuul项目   
+
+1.下载代码
+
+```
+ git clone  https://gitee.com/owenwangwen/open-capacity-platform.git
+```
+
+2.启动对应的服务
+
+a.先启动 register-center 注册中心的 eureka-server 注册服务
+
+b.在启动 api-gateway 网关服务
+
+c.再启动 oauth-center 认证中心 oauth-server 认证服务
+
+d.在启动 business-center 业务中心的 对应服务 file-center user-center back-center
+
+e.启动 monitor-center 监控中心 admin-server zipkin-center
 
 
-启动后效果预览   
-![](https://i.imgur.com/H0CiqbD.jpg)
+  
 
+灰度发布功能演示  
+军哥的项目【[https://github.com/Nepxion/Discovery](https://github.com/Nepxion/Discovery):4.8.0-RC1】  
+a.先启动 register-center 注册中心的 eureka-server 注册服务  
+b.启动gray-center的zuul-server  
+c.启动gray-center中的original-service的【DiscoveryApplicationA1】，【DiscoveryApplicationA2】，【DiscoveryApplicationB1】，【DiscoveryApplicationB2】，【DiscoveryApplicationC1】，【DiscoveryApplicationC2】，【DiscoveryApplicationC3】  
+d.启动gray-center的discovery-console  
+e.启动gray-center的discovery-console-desktop  
 
+ 
+灰度管理UI  
+用户名:admin      
+密码  :admin  
+![](https://i.imgur.com/QINO2jZ.png)
 
+页面   
+![](https://i.imgur.com/o4Lifbi.png)
 
+基于版本的灰度发布
+![](https://i.imgur.com/nWEwwqv.png)
+![](https://i.imgur.com/7GeY6ws.png)
+![](https://i.imgur.com/jvLTe0N.png)
+![](https://i.imgur.com/LfrJKQH.png)
 
+基于规则的灰度发布  
+【待续】
 
+请参考
+[https://github.com/Nepxion/Docs/blob/master/discovery-doc/README_QUICK_START.md](https://github.com/Nepxion/Docs/blob/master/discovery-doc/README_QUICK_START.md)，感谢军哥分享  
 
+ 

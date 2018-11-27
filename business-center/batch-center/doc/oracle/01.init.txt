@@ -1,0 +1,16 @@
+SET DEFINE OFF;
+Insert into CRM_OWNER_USER.BI_FILE_IMP_PARAM_T
+   (PARAM_ID, USE_SGN)
+ Values
+   ('tcard_info', 1);
+COMMIT;
+SET DEFINE OFF;
+Insert into CRM_OWNER_USER.BI_FILE_IMP_MIDD_T
+   (PARAM_ID, SEQ, USE_SGN, FILE_NAME_SQL, FILE_NAME_LEN, FIRST_FLAG, CNT_STAT, CNT_LEN, FROM_DIR, BAK_DIR, ERR_DIR, PROC_SQL, IF_FTP, FTP_IP, FTP_USER, FTP_PASSWORD, FTP_SOURCE_DIR, FTP_GET_TYPE, FTP_IF_BAK, FTP_TIME_LIMIT, FTP_IF_LOG, ALL_FILE_FLAG, IF_VALID, NOTE)
+ Values
+   ('tcard_info', 1, 1, 'select ''T_CARD_CALL_NET*.txt'' from dual', 0, 
+    1, 0, 0, './work/', './bak/', 
+    './err/', 'BI_tcard_info_imp_P', 0, '192.168.216.100', 'oracle', 
+    'oracle', './', 'asc', 1, 20, 
+    0, 0, 1, 't卡用户导入');
+COMMIT;
