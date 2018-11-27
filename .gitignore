@@ -15,6 +15,7 @@ target/
 bin/
 soap-center/
 sms-center/
+04.sms-center.sql
 
 # idea ignore
 .idea/
