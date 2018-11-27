@@ -14,7 +14,7 @@ target/
 target/
 bin/
 soap-center/
-
+sms-center/
 
 # idea ignore
 .idea/
