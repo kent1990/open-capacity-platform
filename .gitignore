@@ -13,7 +13,8 @@ target/
 .classpath
 target/
 bin/
-soap-center/
+NewCustServSer/
+SrenewSer/
 sms-center/
 04.sms-center.sql
 
