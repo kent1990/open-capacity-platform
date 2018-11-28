@@ -16,8 +16,8 @@ spring:
       notify:  
         mail:  
           enabled: true
-          to: wang.wen@neusoft.com
-          from: 624191343@qq.com  
+          to: xxxxxxxxxxx
+          from: xxxxxxxxxxx 
 #          ignore-changes: UNKNOWN:UP  
           ignore-changes:  
             -  
@@ -29,9 +29,9 @@ spring:
         #,unieap-eureka-server-single
         location: turbine  
   mail:
-    host: smtp.qq.com
-    username: 624191343@qq.com
-    password: ncjqyzalnadfbfid
+    host: smtp.163.com
+    username: xxxxxxxxxxx
+    password: xxxxxxxxxxx
     properties:
         mail.smtp.auth : true
         mail.smtp.timeout : 2000
