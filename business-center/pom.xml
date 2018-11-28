@@ -33,6 +33,6 @@
   	<module>generator-center</module>
   	<module>log-center</module>
   	<module>batch-center</module>
-  	<module>sms-center</module>
+  	<!-- <module>sms-center</module> -->
   </modules>
 </project>

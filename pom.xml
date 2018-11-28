@@ -179,9 +179,9 @@
 		<module>job-center</module>
 		<!-- 灰度发布中心 -->
 		<module>gray-center</module>
-		<!-- 调优中心 -->
+		<!-- 调优中心 
 		<module>tuning-center</module>
-
+		-->
 
 		<module>monitor-center</module>
 		<module>new-api-gateway</module>

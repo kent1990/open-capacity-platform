@@ -52,7 +52,7 @@ public final class TraditionalSimplifiedWebServiceSoap_TraditionalSimplifiedWebS
         
         {
         System.out.println("Invoking toTraditionalChinese...");
-        java.lang.String _toTraditionalChinese_sText = "";
+        java.lang.String _toTraditionalChinese_sText = "学";
         java.lang.String _toTraditionalChinese__return = port.toTraditionalChinese(_toTraditionalChinese_sText);
         System.out.println("toTraditionalChinese.result=" + _toTraditionalChinese__return);
 
@@ -60,7 +60,7 @@ public final class TraditionalSimplifiedWebServiceSoap_TraditionalSimplifiedWebS
         }
         {
         System.out.println("Invoking toSimplifiedChinese...");
-        java.lang.String _toSimplifiedChinese_sText = "";
+        java.lang.String _toSimplifiedChinese_sText = "学";
         java.lang.String _toSimplifiedChinese__return = port.toSimplifiedChinese(_toSimplifiedChinese_sText);
         System.out.println("toSimplifiedChinese.result=" + _toSimplifiedChinese__return);
 
