@@ -212,7 +212,26 @@
 			<name>Binary</name>
 			<email>154232101@qq.com</email>
 		</developer>
-
-
+		<developer>
+			<id>6</id>
+			<name>financeyuan</name>
+			<email>2478412512@qq.com</email>
+		</developer>
+		<developer>
+			<id>7</id>
+			<name>1758783856</name>
+			<email>1758783856@qq.com</email>
+		</developer>
+		<developer>
+			<id>8</id>
+			<name>68335397</name>
+			<email>68335397@qq.com</email>
+		</developer>
+		<developer>
+			<id>9</id>
+			<name>415213294</name>
+			<email>415213294@qq.com</email>
+		</developer>
+		
 	</developers>
 </project>
