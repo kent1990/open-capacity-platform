@@ -147,3 +147,25 @@ e.启动gray-center的discovery-console-desktop
 [https://github.com/Nepxion/Docs/blob/master/discovery-doc/README_QUICK_START.md](https://github.com/Nepxion/Docs/blob/master/discovery-doc/README_QUICK_START.md)，感谢军哥分享  
 
  
+容器化部署  
+springcloud应用平台  
+![](https://i.imgur.com/Jrrr24T.png)
+
+注册中心  
+![](https://i.imgur.com/qJeIXFp.png)  
+
+用户中心  
+![](https://i.imgur.com/Xrbaxbx.png)  
+
+认证中心
+![](https://i.imgur.com/Wdd5OfL.png)
+
+api网关
+![](https://i.imgur.com/S6uT4yC.png) 
+![](https://i.imgur.com/oo8nJs7.png)
+![](https://i.imgur.com/eX9x9uW.png)
+
+后台中心
+![](https://i.imgur.com/F5oRpQr.png)
+
+

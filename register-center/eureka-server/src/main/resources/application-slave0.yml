@@ -3,7 +3,6 @@ server:
 spring:
   application:
     name: eureka-server
-  profiles: slave0
   zipkin:
     base-url: http://127.0.0.1:11008
 management:

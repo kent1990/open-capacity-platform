@@ -23,7 +23,7 @@ security:
  
 spring:
   application:
-    name: open-auth-sso
+    name: auth-sso
   datasource:
       type: com.alibaba.druid.pool.DruidDataSource
 #      driver-class-name:  oracle.jdbc.OracleDriver

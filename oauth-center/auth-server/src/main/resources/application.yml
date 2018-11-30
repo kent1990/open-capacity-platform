@@ -1,6 +1,6 @@
 server:
-#  port: 8000
-  port: ${randomServerPort.value[8000,8000]}    #随机端口
+  port: 8000
+#  port: ${randomServerPort.value[8000,8000]}    #随机端口
 management:
   endpoints:
     web:
@@ -158,13 +158,14 @@ eureka:
     instance-info-replication-interval-seconds: 3  
   instance:
     prefer-ip-address: true
-#    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${spring.application.instance_id:${server.port}}
-    #instance-id: ${spring.application.name}:${docker.ipAddress}:${spring.application.instance_id:${server.port}}
-    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${spring.application.instance_id:${randomServerPort.value[8000,8000]}}
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${spring.application.instance_id:${server.port}}
+#    instance-id: ${spring.application.name}:${docker.ipAddress}:${spring.application.instance_id:${server.port}}
+#    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${spring.application.instance_id:${randomServerPort.value[8000,8000]}}
     lease-renewal-interval-in-seconds: 5  #每隔几秒告诉eureka服务器我还存活，用于心跳检测
     lease-expiration-duration-in-seconds: 10 #如果心跳检测一直没有发送，10秒后会从eureka服务器中将此服务剔除
     #注册实例文档
-    status-page-url: http://${spring.cloud.client.ip-address}:${randomServerPort.value[8000,8000]}/document.html # 随机端口
+#    status-page-url: http://${spring.cloud.client.ip-address}:${randomServerPort.value[8000,8000]}/document.html # 随机端口
+    status-page-url:   ${spring.cloud.client.ip-address}:${server.port}/auth/doc.html
 #    status-page-url: http://${docker.ipAddress}:${server.port}/auth/doc.html # 固定端口
     
 logging:

@@ -5,7 +5,7 @@
     <artifactId>oauth-center</artifactId>
     <version>1.0.1</version>
   </parent>
-  <artifactId>oauth-server</artifactId>
+  <artifactId>auth-client</artifactId>
   <!--
   ~
   ~  Copyright (c) 2018-2025, open-capacity-platform All rights reserved.
@@ -24,15 +24,14 @@
   ~  Author: owen gitgeek (624191343@qq.com)
   ~
 -->
-   <dependencies>
-	 
-		<dependency>
+  <dependencies>
+  		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+ 		 <dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-oauth2</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -40,35 +39,11 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		
-		<!--  -->
-		<dependency>
-			<groupId>org.springframework.session</groupId>
-			<artifactId>spring-session-data-redis</artifactId>
-		</dependency>
-
-		<!--<dependency>-->
-			<!--<groupId>org.springframework.cloud</groupId>-->
-			<!--<artifactId>spring-cloud-starter-feign</artifactId>-->
-		<!--</dependency>-->
-
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
-		
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-openfeign</artifactId>
-		</dependency>
-		
   </dependencies>
-
-	<!-- 形成带第三方jar包的可执行jar包，jar包目录结构如下 application.properties lib META-INF mybatis 
+  <!-- 形成带第三方jar包的可执行jar包，jar包目录结构如下 application.properties lib META-INF mybatis 
 		org -->
 	<build>
 		<plugins>
