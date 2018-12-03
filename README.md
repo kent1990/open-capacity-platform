@@ -148,24 +148,33 @@ e.启动gray-center的discovery-console-desktop
 
  
 容器化部署  
-springcloud应用平台  
-![](https://i.imgur.com/Jrrr24T.png)
+ocp应用平台    
+![](http://img0.ph.126.net/0gQUodl-QS2FmkRsUw3BPw==/6597977963263648713.png)  
 
-注册中心  
-![](https://i.imgur.com/qJeIXFp.png)  
+注册中心    
+![](http://img2.ph.126.net/UuDhT06DJPaB0DecIYMqdA==/149463212733907928.png)
+![](http://img1.ph.126.net/MuVyFzVIPTmsJRRsSv0Vgg==/2022679182743353609.png)    
+![](http://img0.ph.126.net/twhyrxYRNf26G_rxUQYXxg==/6597951574984586385.png)    
 
-用户中心  
-![](https://i.imgur.com/Xrbaxbx.png)  
 
-认证中心
-![](https://i.imgur.com/Wdd5OfL.png)
+用户中心    
+![](http://img1.ph.126.net/pUGpv_8y_EMJOWuHvna9kA==/6597926286217145491.png) 
+![](http://img1.ph.126.net/ATZlo9vaJ_gA5iyKQMNwBQ==/6597829529193908410.png)  
+ 
 
-api网关
-![](https://i.imgur.com/S6uT4yC.png) 
-![](https://i.imgur.com/oo8nJs7.png)
-![](https://i.imgur.com/eX9x9uW.png)
+认证中心   
+![](http://img2.ph.126.net/QIWIdx79SKLL0SqimHMZDQ==/6597660204403980152.png)
 
-后台中心
-![](https://i.imgur.com/F5oRpQr.png)
+api网关   
+![](http://img1.ph.126.net/SqaZnnOyBHyicVHLt59jfQ==/6608263894540967428.png) 
+![](http://img2.ph.126.net/fV2hOJWqpU40CunAuWirFw==/3339700598772540566.png) 
+
+负载均衡器
+![](http://img2.ph.126.net/lx_2oqwMcIiK8zkenZ0Tzw==/1846475847322348424.png)
+
+
+后台中心  
+![](http://img2.ph.126.net/MtrkJWG-PrBYyO7JV2zSAg==/797981559075261050.png)
+![](http://img1.ph.126.net/96D-QfTT_AZG6E9Tp7w1tg==/6597926286217145494.png)
 
 

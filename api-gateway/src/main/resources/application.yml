@@ -82,7 +82,7 @@ spring:
 ################### redis 单机版 start ########################## 
     host: 59.110.164.254
     port: 6379
-    timeout: 3000
+    timeout: 5000
     database: 1
   zipkin:
     base-url: http://127.0.0.1:11008
@@ -162,7 +162,7 @@ hystrix:
           enabled: true
         isolation:
           thread:
-            timeoutInMilliseconds: 16000          
+            timeoutInMilliseconds: 900000          
         
 
  

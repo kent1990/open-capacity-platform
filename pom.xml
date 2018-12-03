@@ -177,8 +177,9 @@
 		<module>soap-center</module>
 		<!-- 任务中心 -->
 		<module>job-center</module>
-		<!-- 灰度发布中心 -->
+		<!-- 灰度发布中心
 		<module>gray-center</module>
+		 -->
 		<!-- 调优中心 
 		<module>tuning-center</module>
 		-->
