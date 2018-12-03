@@ -148,6 +148,7 @@ e.启动gray-center的discovery-console-desktop
 
  
 容器化部署  
+
 ocp应用平台    
 ![](http://img2.ph.126.net/y13TgCVkI80ae7G3n1A9KA==/6597948276449826809.png)  
 
@@ -176,5 +177,8 @@ api网关
 后台中心  
 ![](http://img1.ph.126.net/htjV0GHm1PB7y3Bo0NBTzA==/797981559075261049.png)
 ![](http://img0.ph.126.net/HHuE9XmggkqtsUAS3eiJxg==/6597926286217145493.png)
+
+资源消耗情况
+![](https://i.imgur.com/qMvUVKH.png)
 
 
