@@ -149,32 +149,32 @@ e.启动gray-center的discovery-console-desktop
  
 容器化部署  
 ocp应用平台    
-![](http://img0.ph.126.net/0gQUodl-QS2FmkRsUw3BPw==/6597977963263648713.png)  
+![](http://img2.ph.126.net/y13TgCVkI80ae7G3n1A9KA==/6597948276449826809.png)  
 
 注册中心    
-![](http://img2.ph.126.net/UuDhT06DJPaB0DecIYMqdA==/149463212733907928.png)
-![](http://img1.ph.126.net/MuVyFzVIPTmsJRRsSv0Vgg==/2022679182743353609.png)    
-![](http://img0.ph.126.net/twhyrxYRNf26G_rxUQYXxg==/6597951574984586385.png)    
+![](http://img1.ph.126.net/lmUPx8HVCqJcYoWS9rTttg==/149463212733907927.png)
+![](http://img0.ph.126.net/QlFe6b68aDowIJ5TtrKssA==/2022679182743353608.png)    
+![](http://img1.ph.126.net/9X_TxaEaVKUO22G_ZIzozA==/1872934495133335456.png)    
 
 
 用户中心    
-![](http://img1.ph.126.net/pUGpv_8y_EMJOWuHvna9kA==/6597926286217145491.png) 
-![](http://img1.ph.126.net/ATZlo9vaJ_gA5iyKQMNwBQ==/6597829529193908410.png)  
+![](http://img2.ph.126.net/yl1gevE5UngxOtPmf7tC0A==/6597345744077955611.png) 
+![](http://img0.ph.126.net/E4mbUIYTYRgw8OHy0nFxJA==/6597829529193908409.png)  
  
 
 认证中心   
-![](http://img2.ph.126.net/QIWIdx79SKLL0SqimHMZDQ==/6597660204403980152.png)
+![](http://img1.ph.126.net/YLk9hvRy_oAU2IvIAkJHlg==/6597660204403980151.png)
 
 api网关   
-![](http://img1.ph.126.net/SqaZnnOyBHyicVHLt59jfQ==/6608263894540967428.png) 
-![](http://img2.ph.126.net/fV2hOJWqpU40CunAuWirFw==/3339700598772540566.png) 
+![](http://img1.ph.126.net/qHcPvCZzEfD4q4ywiMnmOA==/2670634579131172549.png) 
+![](http://img2.ph.126.net/ZlXSke9CftUBzD8rYlTDaw==/6597374331380276267.png) 
 
-负载均衡器
-![](http://img2.ph.126.net/lx_2oqwMcIiK8zkenZ0Tzw==/1846475847322348424.png)
+负载均衡器  
+![](http://img1.ph.126.net/Sm0cqs_bviRsML2VPM2hgw==/1491535901690337271.png)
 
 
 后台中心  
-![](http://img2.ph.126.net/MtrkJWG-PrBYyO7JV2zSAg==/797981559075261050.png)
-![](http://img1.ph.126.net/96D-QfTT_AZG6E9Tp7w1tg==/6597926286217145494.png)
+![](http://img1.ph.126.net/htjV0GHm1PB7y3Bo0NBTzA==/797981559075261049.png)
+![](http://img0.ph.126.net/HHuE9XmggkqtsUAS3eiJxg==/6597926286217145493.png)
 
 
