@@ -97,8 +97,9 @@ spring:
 
 
 
-
 mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl 
   config-location: classpath:mybatis.cfg.xml
   mapper-locations: classpath*:com/open/**/dao/*.xml  
 
@@ -137,7 +138,7 @@ hystrix:
 eureka:
   client:
     serviceUrl:
-      defaultZone:  http://eureka-server:1111/eureka  #http://130.75.131.241:8761/eureka,http://130.75.131.248:8762/eureka
+      defaultZone:  http://127.0.0.1:1111/eureka  #http://130.75.131.241:8761/eureka,http://130.75.131.248:8762/eureka
       #http://134.224.249.33:1111/eureka/  正式库
       #http://134.224.249.33:1111/eureka/  测试库
       #http://127.0.0.1:8761/eureka,http://127.0.0.1:8762/eureka
@@ -152,6 +153,8 @@ eureka:
     lease-expiration-duration-in-seconds: 10 #如果心跳检测一直没有发送，10秒后会从eureka服务器中将此服务剔除
     status-page-url: http://${spring.cloud.client.ip-address}:${server.port}/document.html #固定端口
 #    status-page-url: http://${spring.cloud.client.ip-address}:${randomServerPort.value[7000,7005]}/document.html #随机端口
+    
+    
     
 logging:
   level:
