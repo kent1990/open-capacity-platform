@@ -181,55 +181,58 @@
 		<!-- 调优中心 
 		<module>tuning-center</module>
 		-->
-
+		<!-- 监控中心 -->
 		<module>monitor-center</module>
+		<!-- spring cloud gateway -->
 		<module>new-api-gateway</module>
 	</modules>
 	<developers>
+		 
 		<developer>
-			<id>1</id>
-			<name>owen</name>
-			<email>624191343@qq.com</email>
-		</developer>
-		<developer>
-			<id>2</id>
+			<id>01</id>
 			<name>gitgeek</name>
 			<email>986969368@qq.com</email>
 		</developer>
 		<developer>
-			<id>3</id>
+			<id>02</id>
 			<name>someday</name>
 			<email>842695235@qq.com</email>
 		</developer>
 		<developer>
-			<id>4</id>
+			<id>03</id>
 			<name>caoheyang911016</name>
 			<email>328690901@qq.com</email>
 		</developer>
 		<developer>
-			<id>5</id>
+			<id>04</id>
 			<name>Binary</name>
 			<email>154232101@qq.com</email>
 		</developer>
 		<developer>
-			<id>6</id>
+			<id>05</id>
 			<name>financeyuan</name>
 			<email>2478412512@qq.com</email>
 		</developer>
 		<developer>
-			<id>7</id>
+			<id>06</id>
 			<name>1758783856</name>
 			<email>1758783856@qq.com</email>
 		</developer>
 		<developer>
-			<id>8</id>
+			<id>07</id>
 			<name>68335397</name>
 			<email>68335397@qq.com</email>
 		</developer>
 		<developer>
-			<id>9</id>
+			<id>08</id>
 			<name>415213294</name>
 			<email>415213294@qq.com</email>
 		</developer>
+		<developer>
+			<id>09</id>
+			<name>573059382</name>
+			<email>573059382@qq.com</email>
+		</developer>
+		
 	</developers>
 </project>

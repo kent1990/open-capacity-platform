@@ -45,9 +45,8 @@ http://59.110.164.254:8066/login.html 用户名/密码：admin/admin
 ## oauth单点登录   
 ![](https://i.imgur.com/PwcuvoC.gif)
 
-## 项目组织结构分析 
-
- ![](https://i.imgur.com/EMvYmyr.png)
+## 项目组织结构分析  
+![](https://i.imgur.com/AHNZKdr.png)
 
 
 
