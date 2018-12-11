@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: apollo-portal
+  profiles:
+    active: ${apollo_profile}
+
+server:
+  port: 8070
+  
+logging:
+  level:
+    com.ctrip: INFO  
+
+management:
+  health:
+    status:
+      order: DOWN, OUT_OF_SERVICE, UNKNOWN, UP 
+
+

@@ -8,7 +8,7 @@
   <artifactId>soap-center</artifactId>
   <packaging>pom</packaging>
   <modules>
-  	<module>NewCustServSer</module>
+  	<!--<module>NewCustServSer</module>-->
   	<module>TraditionalSimplifiedWebService</module>
   </modules>
 </project>
