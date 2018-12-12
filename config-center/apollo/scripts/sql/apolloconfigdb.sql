@@ -1,17 +1,13 @@
- 
+# Host: 59.110.164.254  (Version 5.7.22)
+# Date: 2018-12-12 22:52:42
+# Generator: MySQL-Front 5.4  (Build 4.153) - http://www.mysqlfront.de/
 
-# Create Database
-# ------------------------------------------------------------
-CREATE DATABASE IF NOT EXISTS ApolloConfigDB DEFAULT CHARACTER SET = utf8mb4;
+#
+# Structure for table "app"
+#
 
-Use ApolloConfigDB;
-
-# Dump of table app
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `App`;
-
-CREATE TABLE `App` (
+DROP TABLE IF EXISTS `app`;
+CREATE TABLE `app` (
   `Id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
   `AppId` varchar(500) NOT NULL DEFAULT 'default' COMMENT 'AppID',
   `Name` varchar(500) NOT NULL DEFAULT 'default' COMMENT '应用名',
@@ -28,16 +24,20 @@ CREATE TABLE `App` (
   KEY `AppId` (`AppId`(191)),
   KEY `DataChange_LastTime` (`DataChange_LastTime`),
   KEY `IX_Name` (`Name`(191))
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='应用表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='应用表';
 
+#
+# Data for table "app"
+#
 
+INSERT INTO `app` VALUES (1,'zuulservice','apollo-gateway','TEST1','样例部门1','apollo','apollo@acme.com',b'0','apollo','2018-12-12 22:33:41','apollo','2018-12-12 22:33:41');
 
-# Dump of table appnamespace
-# ------------------------------------------------------------
+#
+# Structure for table "appnamespace"
+#
 
-DROP TABLE IF EXISTS `AppNamespace`;
-
-CREATE TABLE `AppNamespace` (
+DROP TABLE IF EXISTS `appnamespace`;
+CREATE TABLE `appnamespace` (
   `Id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增主键',
   `Name` varchar(32) NOT NULL DEFAULT '' COMMENT 'namespace名字，注意，需要全局唯一',
   `AppId` varchar(32) NOT NULL DEFAULT '' COMMENT 'app id',
@@ -53,16 +53,20 @@ CREATE TABLE `AppNamespace` (
   KEY `IX_AppId` (`AppId`),
   KEY `Name_AppId` (`Name`,`AppId`),
   KEY `DataChange_LastTime` (`DataChange_LastTime`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='应用namespace定义';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='应用namespace定义';
 
+#
+# Data for table "appnamespace"
+#
 
+INSERT INTO `appnamespace` VALUES (1,'application','zuulservice','properties',b'0','default app namespace',b'0','apollo','2018-12-12 22:33:43','apollo','2018-12-12 22:33:43');
 
-# Dump of table audit
-# ------------------------------------------------------------
+#
+# Structure for table "audit"
+#
 
-DROP TABLE IF EXISTS `Audit`;
-
-CREATE TABLE `Audit` (
+DROP TABLE IF EXISTS `audit`;
+CREATE TABLE `audit` (
   `Id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
   `EntityName` varchar(50) NOT NULL DEFAULT 'default' COMMENT '表名',
   `EntityId` int(10) unsigned DEFAULT NULL COMMENT '记录ID',
@@ -75,16 +79,20 @@ CREATE TABLE `Audit` (
   `DataChange_LastTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最后修改时间',
   PRIMARY KEY (`Id`),
   KEY `DataChange_LastTime` (`DataChange_LastTime`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='日志审计表';
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COMMENT='日志审计表';
 
+#
+# Data for table "audit"
+#
 
+INSERT INTO `audit` VALUES (1,'App',1,'INSERT',NULL,b'0','apollo','2018-12-12 22:33:43',NULL,'2018-12-12 22:33:43'),(2,'AppNamespace',1,'INSERT',NULL,b'0','apollo','2018-12-12 22:33:43',NULL,'2018-12-12 22:33:43'),(3,'Cluster',1,'INSERT',NULL,b'0','apollo','2018-12-12 22:33:43',NULL,'2018-12-12 22:33:43'),(4,'Namespace',1,'INSERT',NULL,b'0','apollo','2018-12-12 22:33:43',NULL,'2018-12-12 22:33:43'),(5,'Item',1,'INSERT',NULL,b'0','apollo','2018-12-12 22:34:17',NULL,'2018-12-12 22:34:17'),(6,'Item',2,'INSERT',NULL,b'0','apollo','2018-12-12 22:34:36',NULL,'2018-12-12 22:34:36'),(7,'Item',3,'INSERT',NULL,b'0','apollo','2018-12-12 22:36:38',NULL,'2018-12-12 22:36:38'),(8,'Release',1,'INSERT',NULL,b'0','apollo','2018-12-12 22:37:17',NULL,'2018-12-12 22:37:17'),(9,'ReleaseHistory',1,'INSERT',NULL,b'0','apollo','2018-12-12 22:37:17',NULL,'2018-12-12 22:37:17'),(10,'Item',4,'INSERT',NULL,b'0','apollo','2018-12-12 22:39:34',NULL,'2018-12-12 22:39:34'),(11,'Release',2,'INSERT',NULL,b'0','apollo','2018-12-12 22:39:39',NULL,'2018-12-12 22:39:39'),(12,'ReleaseHistory',2,'INSERT',NULL,b'0','apollo','2018-12-12 22:39:39',NULL,'2018-12-12 22:39:39'),(13,'Cluster',2,'INSERT',NULL,b'0','apollo','2018-12-12 22:39:49',NULL,'2018-12-12 22:39:49'),(14,'Namespace',2,'INSERT',NULL,b'0','apollo','2018-12-12 22:39:49',NULL,'2018-12-12 22:39:49'),(15,'Namespace',2,'DELETE',NULL,b'0','apollo','2018-12-12 22:39:56',NULL,'2018-12-12 22:39:56'),(16,'Cluster',2,'DELETE',NULL,b'0','apollo','2018-12-12 22:39:57',NULL,'2018-12-12 22:39:57'),(17,'ReleaseHistory',3,'INSERT',NULL,b'0','apollo','2018-12-12 22:39:57',NULL,'2018-12-12 22:39:57'),(18,'Branch',2,'DELETE',NULL,b'0','apollo','2018-12-12 22:39:57',NULL,'2018-12-12 22:39:57'),(19,'Release',3,'INSERT',NULL,b'0','apollo','2018-12-12 22:40:25',NULL,'2018-12-12 22:40:25'),(20,'ReleaseHistory',4,'INSERT',NULL,b'0','apollo','2018-12-12 22:40:25',NULL,'2018-12-12 22:40:25'),(21,'Item',5,'INSERT',NULL,b'0','apollo','2018-12-12 22:51:19',NULL,'2018-12-12 22:51:19'),(22,'ItemSet',NULL,'INSERT',NULL,b'0','apollo','2018-12-12 22:51:19',NULL,'2018-12-12 22:51:19'),(23,'Item',2,'UPDATE',NULL,b'0','apollo','2018-12-12 22:51:20',NULL,'2018-12-12 22:51:20'),(24,'Item',3,'UPDATE',NULL,b'0','apollo','2018-12-12 22:51:20',NULL,'2018-12-12 22:51:20'),(25,'Item',4,'UPDATE',NULL,b'0','apollo','2018-12-12 22:51:21',NULL,'2018-12-12 22:51:21'),(26,'ItemSet',NULL,'UPDATE',NULL,b'0','apollo','2018-12-12 22:51:21',NULL,'2018-12-12 22:51:21'),(27,'Release',4,'INSERT',NULL,b'0','apollo','2018-12-12 22:51:24',NULL,'2018-12-12 22:51:24'),(28,'ReleaseHistory',5,'INSERT',NULL,b'0','apollo','2018-12-12 22:51:24',NULL,'2018-12-12 22:51:24');
 
-# Dump of table cluster
-# ------------------------------------------------------------
+#
+# Structure for table "cluster"
+#
 
-DROP TABLE IF EXISTS `Cluster`;
-
-CREATE TABLE `Cluster` (
+DROP TABLE IF EXISTS `cluster`;
+CREATE TABLE `cluster` (
   `Id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增主键',
   `Name` varchar(32) NOT NULL DEFAULT '' COMMENT '集群名字',
   `AppId` varchar(32) NOT NULL DEFAULT '' COMMENT 'App id',
@@ -98,16 +106,20 @@ CREATE TABLE `Cluster` (
   KEY `IX_AppId_Name` (`AppId`,`Name`),
   KEY `IX_ParentClusterId` (`ParentClusterId`),
   KEY `DataChange_LastTime` (`DataChange_LastTime`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='集群';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='集群';
 
+#
+# Data for table "cluster"
+#
 
+INSERT INTO `cluster` VALUES (1,'default','zuulservice',0,b'0','apollo','2018-12-12 22:33:43','apollo','2018-12-12 22:33:43'),(2,'20181212223948-7231dc6a5ab92209','zuulservice',1,b'1','apollo','2018-12-12 22:39:49','apollo','2018-12-12 22:39:57');
 
-# Dump of table commit
-# ------------------------------------------------------------
+#
+# Structure for table "commit"
+#
 
-DROP TABLE IF EXISTS `Commit`;
-
-CREATE TABLE `Commit` (
+DROP TABLE IF EXISTS `commit`;
+CREATE TABLE `commit` (
   `Id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
   `ChangeSets` longtext NOT NULL COMMENT '修改变更集',
   `AppId` varchar(500) NOT NULL DEFAULT 'default' COMMENT 'AppID',
@@ -124,14 +136,20 @@ CREATE TABLE `Commit` (
   KEY `AppId` (`AppId`(191)),
   KEY `ClusterName` (`ClusterName`(191)),
   KEY `NamespaceName` (`NamespaceName`(191))
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='commit 历史表';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='commit 历史表';
 
-# Dump of table grayreleaserule
-# ------------------------------------------------------------
+#
+# Data for table "commit"
+#
 
-DROP TABLE IF EXISTS `GrayReleaseRule`;
+INSERT INTO `commit` VALUES (1,'{\"createItems\":[{\"namespaceId\":1,\"key\":\"server.port\",\"value\":\"9999\",\"lineNum\":1,\"id\":1,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2018-12-12 22:34:16\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2018-12-12 22:34:16\"}],\"updateItems\":[],\"deleteItems\":[]}','zuulservice','default','application',NULL,b'0','apollo','2018-12-12 22:34:17','apollo','2018-12-12 22:34:17'),(2,'{\"createItems\":[{\"namespaceId\":1,\"key\":\"zuul.routes.test163.path\",\"value\":\"http://www.163.com\",\"lineNum\":2,\"id\":2,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2018-12-12 22:34:36\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2018-12-12 22:34:36\"}],\"updateItems\":[],\"deleteItems\":[]}','zuulservice','default','application',NULL,b'0','apollo','2018-12-12 22:34:36','apollo','2018-12-12 22:34:36'),(3,'{\"createItems\":[{\"namespaceId\":1,\"key\":\"eureka.client.serviceUrl.defaultZone\",\"value\":\"http://192.168.0.78:1111/eureka/\",\"lineNum\":3,\"id\":3,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2018-12-12 22:36:37\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2018-12-12 22:36:38\"}],\"updateItems\":[],\"deleteItems\":[]}','zuulservice','default','application',NULL,b'0','apollo','2018-12-12 22:36:38','apollo','2018-12-12 22:36:38'),(4,'{\"createItems\":[{\"namespaceId\":1,\"key\":\"spring.application.name\",\"value\":\"sop-api-gateway\",\"lineNum\":4,\"id\":4,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2018-12-12 22:39:34\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2018-12-12 22:39:34\"}],\"updateItems\":[],\"deleteItems\":[]}','zuulservice','default','application',NULL,b'0','apollo','2018-12-12 22:39:35','apollo','2018-12-12 22:39:35'),(5,'{\"createItems\":[{\"namespaceId\":1,\"key\":\"zuul.routes.test163.url\",\"value\":\"http://www.163.com\",\"comment\":\"\",\"lineNum\":2,\"id\":5,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2018-12-12 22:51:18\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2018-12-12 22:51:20\"}],\"updateItems\":[{\"oldItem\":{\"namespaceId\":1,\"key\":\"zuul.routes.test163.path\",\"value\":\"http://www.163.com\",\"lineNum\":2,\"id\":2,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2018-12-12 22:34:36\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2018-12-12 22:34:36\"},\"newItem\":{\"namespaceId\":1,\"key\":\"zuul.routes.test163.path\",\"value\":\"/test163/\",\"lineNum\":3,\"id\":2,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2018-12-12 22:34:36\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2018-12-12 22:51:20\"}}],\"deleteItems\":[]}','zuulservice','default','application',NULL,b'0','apollo','2018-12-12 22:51:21','apollo','2018-12-12 22:51:21');
 
-CREATE TABLE `GrayReleaseRule` (
+#
+# Structure for table "grayreleaserule"
+#
+
+DROP TABLE IF EXISTS `grayreleaserule`;
+CREATE TABLE `grayreleaserule` (
   `Id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
   `AppId` varchar(32) NOT NULL DEFAULT 'default' COMMENT 'AppID',
   `ClusterName` varchar(32) NOT NULL DEFAULT 'default' COMMENT 'Cluster Name',
@@ -148,15 +166,20 @@ CREATE TABLE `GrayReleaseRule` (
   PRIMARY KEY (`Id`),
   KEY `DataChange_LastTime` (`DataChange_LastTime`),
   KEY `IX_Namespace` (`AppId`,`ClusterName`,`NamespaceName`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='灰度规则表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='灰度规则表';
 
+#
+# Data for table "grayreleaserule"
+#
 
-# Dump of table instance
-# ------------------------------------------------------------
+INSERT INTO `grayreleaserule` VALUES (1,'zuulservice','default','application','20181212223948-7231dc6a5ab92209','[]',0,0,b'0','apollo','2018-12-12 22:39:56','apollo','2018-12-12 22:39:56');
 
-DROP TABLE IF EXISTS `Instance`;
+#
+# Structure for table "instance"
+#
 
-CREATE TABLE `Instance` (
+DROP TABLE IF EXISTS `instance`;
+CREATE TABLE `instance` (
   `Id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增Id',
   `AppId` varchar(32) NOT NULL DEFAULT 'default' COMMENT 'AppID',
   `ClusterName` varchar(32) NOT NULL DEFAULT 'default' COMMENT 'ClusterName',
@@ -168,16 +191,20 @@ CREATE TABLE `Instance` (
   UNIQUE KEY `IX_UNIQUE_KEY` (`AppId`,`ClusterName`,`Ip`,`DataCenter`),
   KEY `IX_IP` (`Ip`),
   KEY `IX_DataChange_LastTime` (`DataChange_LastTime`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='使用配置的应用实例';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='使用配置的应用实例';
 
+#
+# Data for table "instance"
+#
 
+INSERT INTO `instance` VALUES (1,'zuulservice','default','','192.168.0.78','2018-12-12 22:38:02','2018-12-12 22:38:02');
 
-# Dump of table instanceconfig
-# ------------------------------------------------------------
+#
+# Structure for table "instanceconfig"
+#
 
-DROP TABLE IF EXISTS `InstanceConfig`;
-
-CREATE TABLE `InstanceConfig` (
+DROP TABLE IF EXISTS `instanceconfig`;
+CREATE TABLE `instanceconfig` (
   `Id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增Id',
   `InstanceId` int(11) unsigned DEFAULT NULL COMMENT 'Instance Id',
   `ConfigAppId` varchar(32) NOT NULL DEFAULT 'default' COMMENT 'Config App Id',
@@ -192,16 +219,20 @@ CREATE TABLE `InstanceConfig` (
   KEY `IX_ReleaseKey` (`ReleaseKey`),
   KEY `IX_DataChange_LastTime` (`DataChange_LastTime`),
   KEY `IX_Valid_Namespace` (`ConfigAppId`,`ConfigClusterName`,`ConfigNamespaceName`,`DataChange_LastTime`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='应用实例的配置信息';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='应用实例的配置信息';
 
+#
+# Data for table "instanceconfig"
+#
 
+INSERT INTO `instanceconfig` VALUES (1,1,'zuulservice','default','application','20181212225123-7231dc6a5ab9220b','2018-12-12 22:51:25','2018-12-12 22:38:02','2018-12-12 22:51:26');
 
-# Dump of table item
-# ------------------------------------------------------------
+#
+# Structure for table "item"
+#
 
-DROP TABLE IF EXISTS `Item`;
-
-CREATE TABLE `Item` (
+DROP TABLE IF EXISTS `item`;
+CREATE TABLE `item` (
   `Id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增Id',
   `NamespaceId` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '集群NamespaceId',
   `Key` varchar(128) NOT NULL DEFAULT 'default' COMMENT '配置项Key',
@@ -216,16 +247,20 @@ CREATE TABLE `Item` (
   PRIMARY KEY (`Id`),
   KEY `IX_GroupId` (`NamespaceId`),
   KEY `DataChange_LastTime` (`DataChange_LastTime`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='配置项目';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='配置项目';
 
+#
+# Data for table "item"
+#
 
+INSERT INTO `item` VALUES (1,1,'server.port','9999',NULL,1,b'0','apollo','2018-12-12 22:34:17','apollo','2018-12-12 22:34:17'),(2,1,'zuul.routes.test163.path','/test163/',NULL,3,b'0','apollo','2018-12-12 22:34:36','apollo','2018-12-12 22:51:21'),(3,1,'eureka.client.serviceUrl.defaultZone','http://192.168.0.78:1111/eureka/',NULL,4,b'0','apollo','2018-12-12 22:36:38','apollo','2018-12-12 22:51:21'),(4,1,'spring.application.name','sop-api-gateway',NULL,5,b'0','apollo','2018-12-12 22:39:34','apollo','2018-12-12 22:51:21'),(5,1,'zuul.routes.test163.url','http://www.163.com','',2,b'0','apollo','2018-12-12 22:51:19','apollo','2018-12-12 22:51:19');
 
-# Dump of table namespace
-# ------------------------------------------------------------
+#
+# Structure for table "namespace"
+#
 
-DROP TABLE IF EXISTS `Namespace`;
-
-CREATE TABLE `Namespace` (
+DROP TABLE IF EXISTS `namespace`;
+CREATE TABLE `namespace` (
   `Id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增主键',
   `AppId` varchar(500) NOT NULL DEFAULT 'default' COMMENT 'AppID',
   `ClusterName` varchar(500) NOT NULL DEFAULT 'default' COMMENT 'Cluster Name',
@@ -239,16 +274,20 @@ CREATE TABLE `Namespace` (
   KEY `AppId_ClusterName_NamespaceName` (`AppId`(191),`ClusterName`(191),`NamespaceName`(191)),
   KEY `DataChange_LastTime` (`DataChange_LastTime`),
   KEY `IX_NamespaceName` (`NamespaceName`(191))
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='命名空间';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='命名空间';
 
+#
+# Data for table "namespace"
+#
 
+INSERT INTO `namespace` VALUES (1,'zuulservice','default','application',b'0','apollo','2018-12-12 22:33:43','apollo','2018-12-12 22:33:43'),(2,'zuulservice','20181212223948-7231dc6a5ab92209','application',b'1','apollo','2018-12-12 22:39:49','apollo','2018-12-12 22:39:57');
 
-# Dump of table namespacelock
-# ------------------------------------------------------------
+#
+# Structure for table "namespacelock"
+#
 
-DROP TABLE IF EXISTS `NamespaceLock`;
-
-CREATE TABLE `NamespaceLock` (
+DROP TABLE IF EXISTS `namespacelock`;
+CREATE TABLE `namespacelock` (
   `Id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增id',
   `NamespaceId` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '集群NamespaceId',
   `DataChange_CreatedBy` varchar(32) NOT NULL DEFAULT 'default' COMMENT '创建人邮箱前缀',
@@ -261,14 +300,17 @@ CREATE TABLE `NamespaceLock` (
   KEY `DataChange_LastTime` (`DataChange_LastTime`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='namespace的编辑锁';
 
+#
+# Data for table "namespacelock"
+#
 
 
-# Dump of table release
-# ------------------------------------------------------------
+#
+# Structure for table "release"
+#
 
-DROP TABLE IF EXISTS `Release`;
-
-CREATE TABLE `Release` (
+DROP TABLE IF EXISTS `release`;
+CREATE TABLE `release` (
   `Id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增主键',
   `ReleaseKey` varchar(64) NOT NULL DEFAULT '' COMMENT '发布的Key',
   `Name` varchar(64) NOT NULL DEFAULT 'default' COMMENT '发布名字',
@@ -287,15 +329,20 @@ CREATE TABLE `Release` (
   KEY `AppId_ClusterName_GroupName` (`AppId`(191),`ClusterName`(191),`NamespaceName`(191)),
   KEY `DataChange_LastTime` (`DataChange_LastTime`),
   KEY `IX_ReleaseKey` (`ReleaseKey`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='发布';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COMMENT='发布';
 
+#
+# Data for table "release"
+#
 
-# Dump of table releasehistory
-# ------------------------------------------------------------
+INSERT INTO `release` VALUES (1,'20181212223716-7231dc6a5ab92207','20181212223713-release','','zuulservice','default','application','{\"server.port\":\"9999\",\"zuul.routes.test163.path\":\"http://www.163.com\",\"eureka.client.serviceUrl.defaultZone\":\"http://192.168.0.78:1111/eureka/\"}',b'0',b'0','apollo','2018-12-12 22:37:17','apollo','2018-12-12 22:37:17'),(2,'20181212223938-7231dc6a5ab92208','20181212223936-release','','zuulservice','default','application','{\"spring.application.name\":\"sop-api-gateway\",\"server.port\":\"9999\",\"zuul.routes.test163.path\":\"http://www.163.com\",\"eureka.client.serviceUrl.defaultZone\":\"http://192.168.0.78:1111/eureka/\"}',b'0',b'0','apollo','2018-12-12 22:39:39','apollo','2018-12-12 22:39:39'),(3,'20181212224025-7231dc6a5ab9220a','20181212224022-release','','zuulservice','default','application','{\"spring.application.name\":\"sop-api-gateway\",\"server.port\":\"9999\",\"zuul.routes.test163.path\":\"http://www.163.com\",\"eureka.client.serviceUrl.defaultZone\":\"http://192.168.0.78:1111/eureka/\"}',b'0',b'0','apollo','2018-12-12 22:40:25','apollo','2018-12-12 22:40:25'),(4,'20181212225123-7231dc6a5ab9220b','20181212225120-release','','zuulservice','default','application','{\"zuul.routes.test163.url\":\"http://www.163.com\",\"spring.application.name\":\"sop-api-gateway\",\"server.port\":\"9999\",\"zuul.routes.test163.path\":\"/test163/\",\"eureka.client.serviceUrl.defaultZone\":\"http://192.168.0.78:1111/eureka/\"}',b'0',b'0','apollo','2018-12-12 22:51:23','apollo','2018-12-12 22:51:23');
 
-DROP TABLE IF EXISTS `ReleaseHistory`;
+#
+# Structure for table "releasehistory"
+#
 
-CREATE TABLE `ReleaseHistory` (
+DROP TABLE IF EXISTS `releasehistory`;
+CREATE TABLE `releasehistory` (
   `Id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增Id',
   `AppId` varchar(32) NOT NULL DEFAULT 'default' COMMENT 'AppID',
   `ClusterName` varchar(32) NOT NULL DEFAULT 'default' COMMENT 'ClusterName',
@@ -314,31 +361,40 @@ CREATE TABLE `ReleaseHistory` (
   KEY `IX_Namespace` (`AppId`,`ClusterName`,`NamespaceName`,`BranchName`),
   KEY `IX_ReleaseId` (`ReleaseId`),
   KEY `IX_DataChange_LastTime` (`DataChange_LastTime`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='发布历史';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='发布历史';
 
+#
+# Data for table "releasehistory"
+#
 
-# Dump of table releasemessage
-# ------------------------------------------------------------
+INSERT INTO `releasehistory` VALUES (1,'zuulservice','default','application','default',1,0,0,'{\"isEmergencyPublish\":false}',b'0','apollo','2018-12-12 22:37:17','apollo','2018-12-12 22:37:17'),(2,'zuulservice','default','application','default',2,1,0,'{\"isEmergencyPublish\":false}',b'0','apollo','2018-12-12 22:39:39','apollo','2018-12-12 22:39:39'),(3,'zuulservice','default','application','20181212223948-7231dc6a5ab92209',0,0,7,'{}',b'0','apollo','2018-12-12 22:39:57','apollo','2018-12-12 22:39:57'),(4,'zuulservice','default','application','default',3,2,0,'{\"isEmergencyPublish\":false}',b'0','apollo','2018-12-12 22:40:25','apollo','2018-12-12 22:40:25'),(5,'zuulservice','default','application','default',4,3,0,'{\"isEmergencyPublish\":false}',b'0','apollo','2018-12-12 22:51:24','apollo','2018-12-12 22:51:24');
 
-DROP TABLE IF EXISTS `ReleaseMessage`;
+#
+# Structure for table "releasemessage"
+#
 
-CREATE TABLE `ReleaseMessage` (
+DROP TABLE IF EXISTS `releasemessage`;
+CREATE TABLE `releasemessage` (
   `Id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增主键',
   `Message` varchar(1024) NOT NULL DEFAULT '' COMMENT '发布的消息内容',
   `DataChange_LastTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最后修改时间',
   PRIMARY KEY (`Id`),
   KEY `DataChange_LastTime` (`DataChange_LastTime`),
   KEY `IX_Message` (`Message`(191))
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='发布消息';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COMMENT='发布消息';
 
+#
+# Data for table "releasemessage"
+#
 
+INSERT INTO `releasemessage` VALUES (3,'zuulservice+20181212223948-7231dc6a5ab92209+application','2018-12-12 22:39:56'),(6,'zuulservice+default+application','2018-12-12 22:51:24');
 
-# Dump of table serverconfig
-# ------------------------------------------------------------
+#
+# Structure for table "serverconfig"
+#
 
-DROP TABLE IF EXISTS `ServerConfig`;
-
-CREATE TABLE `ServerConfig` (
+DROP TABLE IF EXISTS `serverconfig`;
+CREATE TABLE `serverconfig` (
   `Id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增Id',
   `Key` varchar(64) NOT NULL DEFAULT 'default' COMMENT '配置项Key',
   `Cluster` varchar(32) NOT NULL DEFAULT 'default' COMMENT '配置对应的集群，default为不针对特定的集群',
@@ -352,15 +408,10 @@ CREATE TABLE `ServerConfig` (
   PRIMARY KEY (`Id`),
   KEY `IX_Key` (`Key`),
   KEY `DataChange_LastTime` (`DataChange_LastTime`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='配置服务自身配置';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COMMENT='配置服务自身配置';
 
-# Config
-# ------------------------------------------------------------
-INSERT INTO `ServerConfig` (`Key`, `Cluster`, `Value`, `Comment`)
-VALUES
-    ('eureka.service.url', 'default', 'http://localhost:8080/eureka/', 'Eureka服务Url，多个service以英文逗号分隔'),
-    ('namespace.lock.switch', 'default', 'false', '一次发布只能有一个人修改开关'),
-    ('item.key.length.limit', 'default', '128', 'item key 最大长度限制'),
-    ('item.value.length.limit', 'default', '20000', 'item value最大长度限制'),
-    ('config-service.cache.enabled', 'default', 'false', 'ConfigService是否开启缓存，开启后能提高性能，但是会增大内存消耗！');
- 
+#
+# Data for table "serverconfig"
+#
+
+INSERT INTO `serverconfig` VALUES (1,'eureka.service.url','default','http://127.0.0.1:1111/eureka/','Eureka服务Url，多个service以英文逗号分隔',b'0','default','2018-12-11 14:05:44','','2018-12-11 14:14:21'),(2,'namespace.lock.switch','default','false','一次发布只能有一个人修改开关',b'0','default','2018-12-11 14:05:44','','2018-12-11 14:05:44'),(3,'item.key.length.limit','default','128','item key 最大长度限制',b'0','default','2018-12-11 14:05:44','','2018-12-11 14:05:44'),(4,'item.value.length.limit','default','20000','item value最大长度限制',b'0','default','2018-12-11 14:05:44','','2018-12-11 14:05:44'),(5,'config-service.cache.enabled','default','false','ConfigService是否开启缓存，开启后能提高性能，但是会增大内存消耗！',b'0','default','2018-12-11 14:05:44','','2018-12-11 14:05:44');

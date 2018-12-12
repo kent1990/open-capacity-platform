@@ -1,16 +1,13 @@
+# Host: 59.110.164.254  (Version 5.7.22)
+# Date: 2018-12-12 22:53:10
+# Generator: MySQL-Front 5.4  (Build 4.153) - http://www.mysqlfront.de/
 
-# Create Database
-# ------------------------------------------------------------
-CREATE DATABASE IF NOT EXISTS ApolloPortalDB DEFAULT CHARACTER SET = utf8mb4;
+#
+# Structure for table "app"
+#
 
-Use ApolloPortalDB;
-
-# Dump of table app
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `App`;
-
-CREATE TABLE `App` (
+DROP TABLE IF EXISTS `app`;
+CREATE TABLE `app` (
   `Id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
   `AppId` varchar(500) NOT NULL DEFAULT 'default' COMMENT 'AppID',
   `Name` varchar(500) NOT NULL DEFAULT 'default' COMMENT '应用名',
@@ -27,16 +24,20 @@ CREATE TABLE `App` (
   KEY `AppId` (`AppId`(191)),
   KEY `DataChange_LastTime` (`DataChange_LastTime`),
   KEY `IX_Name` (`Name`(191))
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='应用表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='应用表';
 
+#
+# Data for table "app"
+#
 
+INSERT INTO `app` VALUES (1,'zuulservice','apollo-gateway','TEST1','样例部门1','apollo','apollo@acme.com',b'0','apollo','2018-12-12 22:33:41','apollo','2018-12-12 22:33:41');
 
-# Dump of table appnamespace
-# ------------------------------------------------------------
+#
+# Structure for table "appnamespace"
+#
 
-DROP TABLE IF EXISTS `AppNamespace`;
-
-CREATE TABLE `AppNamespace` (
+DROP TABLE IF EXISTS `appnamespace`;
+CREATE TABLE `appnamespace` (
   `Id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增主键',
   `Name` varchar(32) NOT NULL DEFAULT '' COMMENT 'namespace名字，注意，需要全局唯一',
   `AppId` varchar(32) NOT NULL DEFAULT '' COMMENT 'app id',
@@ -52,16 +53,38 @@ CREATE TABLE `AppNamespace` (
   KEY `IX_AppId` (`AppId`),
   KEY `Name_AppId` (`Name`,`AppId`),
   KEY `DataChange_LastTime` (`DataChange_LastTime`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='应用namespace定义';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='应用namespace定义';
 
+#
+# Data for table "appnamespace"
+#
 
+INSERT INTO `appnamespace` VALUES (1,'application','zuulservice','properties',b'0','default app namespace',b'0','apollo','2018-12-12 22:33:41','apollo','2018-12-12 22:33:41');
 
-# Dump of table consumer
-# ------------------------------------------------------------
+#
+# Structure for table "authorities"
+#
 
-DROP TABLE IF EXISTS `Consumer`;
+DROP TABLE IF EXISTS `authorities`;
+CREATE TABLE `authorities` (
+  `Id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增Id',
+  `Username` varchar(64) NOT NULL,
+  `Authority` varchar(50) NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `Consumer` (
+#
+# Data for table "authorities"
+#
+
+INSERT INTO `authorities` VALUES (1,'apollo','ROLE_user');
+
+#
+# Structure for table "consumer"
+#
+
+DROP TABLE IF EXISTS `consumer`;
+CREATE TABLE `consumer` (
   `Id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增Id',
   `AppId` varchar(500) NOT NULL DEFAULT 'default' COMMENT 'AppID',
   `Name` varchar(500) NOT NULL DEFAULT 'default' COMMENT '应用名',
@@ -79,14 +102,17 @@ CREATE TABLE `Consumer` (
   KEY `DataChange_LastTime` (`DataChange_LastTime`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='开放API消费者';
 
+#
+# Data for table "consumer"
+#
 
 
-# Dump of table consumeraudit
-# ------------------------------------------------------------
+#
+# Structure for table "consumeraudit"
+#
 
-DROP TABLE IF EXISTS `ConsumerAudit`;
-
-CREATE TABLE `ConsumerAudit` (
+DROP TABLE IF EXISTS `consumeraudit`;
+CREATE TABLE `consumeraudit` (
   `Id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增Id',
   `ConsumerId` int(11) unsigned DEFAULT NULL COMMENT 'Consumer Id',
   `Uri` varchar(1024) NOT NULL DEFAULT '' COMMENT '访问的Uri',
@@ -98,14 +124,17 @@ CREATE TABLE `ConsumerAudit` (
   KEY `IX_ConsumerId` (`ConsumerId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='consumer审计表';
 
+#
+# Data for table "consumeraudit"
+#
 
 
-# Dump of table consumerrole
-# ------------------------------------------------------------
+#
+# Structure for table "consumerrole"
+#
 
-DROP TABLE IF EXISTS `ConsumerRole`;
-
-CREATE TABLE `ConsumerRole` (
+DROP TABLE IF EXISTS `consumerrole`;
+CREATE TABLE `consumerrole` (
   `Id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增Id',
   `ConsumerId` int(11) unsigned DEFAULT NULL COMMENT 'Consumer Id',
   `RoleId` int(10) unsigned DEFAULT NULL COMMENT 'Role Id',
@@ -120,14 +149,17 @@ CREATE TABLE `ConsumerRole` (
   KEY `IX_ConsumerId_RoleId` (`ConsumerId`,`RoleId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='consumer和role的绑定表';
 
+#
+# Data for table "consumerrole"
+#
 
 
-# Dump of table consumertoken
-# ------------------------------------------------------------
+#
+# Structure for table "consumertoken"
+#
 
-DROP TABLE IF EXISTS `ConsumerToken`;
-
-CREATE TABLE `ConsumerToken` (
+DROP TABLE IF EXISTS `consumertoken`;
+CREATE TABLE `consumertoken` (
   `Id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增Id',
   `ConsumerId` int(11) unsigned DEFAULT NULL COMMENT 'ConsumerId',
   `Token` varchar(128) NOT NULL DEFAULT '' COMMENT 'token',
@@ -142,12 +174,17 @@ CREATE TABLE `ConsumerToken` (
   KEY `DataChange_LastTime` (`DataChange_LastTime`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='consumer token表';
 
-# Dump of table favorite
-# ------------------------------------------------------------
+#
+# Data for table "consumertoken"
+#
 
-DROP TABLE IF EXISTS `Favorite`;
 
-CREATE TABLE `Favorite` (
+#
+# Structure for table "favorite"
+#
+
+DROP TABLE IF EXISTS `favorite`;
+CREATE TABLE `favorite` (
   `Id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
   `UserId` varchar(32) NOT NULL DEFAULT 'default' COMMENT '收藏的用户',
   `AppId` varchar(500) NOT NULL DEFAULT 'default' COMMENT 'AppID',
@@ -163,12 +200,17 @@ CREATE TABLE `Favorite` (
   KEY `DataChange_LastTime` (`DataChange_LastTime`)
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COMMENT='应用收藏表';
 
-# Dump of table permission
-# ------------------------------------------------------------
+#
+# Data for table "favorite"
+#
 
-DROP TABLE IF EXISTS `Permission`;
 
-CREATE TABLE `Permission` (
+#
+# Structure for table "permission"
+#
+
+DROP TABLE IF EXISTS `permission`;
+CREATE TABLE `permission` (
   `Id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增Id',
   `PermissionType` varchar(32) NOT NULL DEFAULT '' COMMENT '权限类型',
   `TargetId` varchar(256) NOT NULL DEFAULT '' COMMENT '权限对象类型',
@@ -180,16 +222,20 @@ CREATE TABLE `Permission` (
   PRIMARY KEY (`Id`),
   KEY `IX_TargetId_PermissionType` (`TargetId`(191),`PermissionType`),
   KEY `IX_DataChange_LastTime` (`DataChange_LastTime`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='permission表';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COMMENT='permission表';
 
+#
+# Data for table "permission"
+#
 
+INSERT INTO `permission` VALUES (1,'CreateCluster','zuulservice',b'0','apollo','2018-12-12 22:33:41','apollo','2018-12-12 22:33:41'),(2,'CreateNamespace','zuulservice',b'0','apollo','2018-12-12 22:33:41','apollo','2018-12-12 22:33:41'),(3,'AssignRole','zuulservice',b'0','apollo','2018-12-12 22:33:41','apollo','2018-12-12 22:33:41'),(4,'ModifyNamespace','zuulservice+application',b'0','apollo','2018-12-12 22:33:42','apollo','2018-12-12 22:33:42'),(5,'ReleaseNamespace','zuulservice+application',b'0','apollo','2018-12-12 22:33:42','apollo','2018-12-12 22:33:42'),(6,'ModifyNamespace','zuulservice+application+DEV',b'0','apollo','2018-12-12 22:33:42','apollo','2018-12-12 22:33:42'),(7,'ReleaseNamespace','zuulservice+application+DEV',b'0','apollo','2018-12-12 22:33:42','apollo','2018-12-12 22:33:42');
 
-# Dump of table role
-# ------------------------------------------------------------
+#
+# Structure for table "role"
+#
 
-DROP TABLE IF EXISTS `Role`;
-
-CREATE TABLE `Role` (
+DROP TABLE IF EXISTS `role`;
+CREATE TABLE `role` (
   `Id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增Id',
   `RoleName` varchar(256) NOT NULL DEFAULT '' COMMENT 'Role name',
   `IsDeleted` bit(1) NOT NULL DEFAULT b'0' COMMENT '1: deleted, 0: normal',
@@ -200,16 +246,20 @@ CREATE TABLE `Role` (
   PRIMARY KEY (`Id`),
   KEY `IX_RoleName` (`RoleName`(191)),
   KEY `IX_DataChange_LastTime` (`DataChange_LastTime`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='角色表';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COMMENT='角色表';
 
+#
+# Data for table "role"
+#
 
+INSERT INTO `role` VALUES (1,'Master+zuulservice',b'0','apollo','2018-12-12 22:33:41','apollo','2018-12-12 22:33:41'),(2,'ModifyNamespace+zuulservice+application',b'0','apollo','2018-12-12 22:33:42','apollo','2018-12-12 22:33:42'),(3,'ReleaseNamespace+zuulservice+application',b'0','apollo','2018-12-12 22:33:42','apollo','2018-12-12 22:33:42'),(4,'ModifyNamespace+zuulservice+application+DEV',b'0','apollo','2018-12-12 22:33:42','apollo','2018-12-12 22:33:42'),(5,'ReleaseNamespace+zuulservice+application+DEV',b'0','apollo','2018-12-12 22:33:42','apollo','2018-12-12 22:33:42');
 
-# Dump of table rolepermission
-# ------------------------------------------------------------
+#
+# Structure for table "rolepermission"
+#
 
-DROP TABLE IF EXISTS `RolePermission`;
-
-CREATE TABLE `RolePermission` (
+DROP TABLE IF EXISTS `rolepermission`;
+CREATE TABLE `rolepermission` (
   `Id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增Id',
   `RoleId` int(10) unsigned DEFAULT NULL COMMENT 'Role Id',
   `PermissionId` int(10) unsigned DEFAULT NULL COMMENT 'Permission Id',
@@ -222,16 +272,20 @@ CREATE TABLE `RolePermission` (
   KEY `IX_DataChange_LastTime` (`DataChange_LastTime`),
   KEY `IX_RoleId` (`RoleId`),
   KEY `IX_PermissionId` (`PermissionId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='角色和权限的绑定表';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COMMENT='角色和权限的绑定表';
 
+#
+# Data for table "rolepermission"
+#
 
+INSERT INTO `rolepermission` VALUES (1,1,1,b'0','apollo','2018-12-12 22:33:41','apollo','2018-12-12 22:33:41'),(2,1,2,b'0','apollo','2018-12-12 22:33:42','apollo','2018-12-12 22:33:42'),(3,1,3,b'0','apollo','2018-12-12 22:33:42','apollo','2018-12-12 22:33:42'),(4,2,4,b'0','apollo','2018-12-12 22:33:42','apollo','2018-12-12 22:33:42'),(5,3,5,b'0','apollo','2018-12-12 22:33:42','apollo','2018-12-12 22:33:42'),(6,4,6,b'0','apollo','2018-12-12 22:33:42','apollo','2018-12-12 22:33:42'),(7,5,7,b'0','apollo','2018-12-12 22:33:42','apollo','2018-12-12 22:33:42');
 
-# Dump of table serverconfig
-# ------------------------------------------------------------
+#
+# Structure for table "serverconfig"
+#
 
-DROP TABLE IF EXISTS `ServerConfig`;
-
-CREATE TABLE `ServerConfig` (
+DROP TABLE IF EXISTS `serverconfig`;
+CREATE TABLE `serverconfig` (
   `Id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增Id',
   `Key` varchar(64) NOT NULL DEFAULT 'default' COMMENT '配置项Key',
   `Value` varchar(2048) NOT NULL DEFAULT 'default' COMMENT '配置项值',
@@ -244,16 +298,20 @@ CREATE TABLE `ServerConfig` (
   PRIMARY KEY (`Id`),
   KEY `IX_Key` (`Key`),
   KEY `DataChange_LastTime` (`DataChange_LastTime`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='配置服务自身配置';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COMMENT='配置服务自身配置';
 
+#
+# Data for table "serverconfig"
+#
 
+INSERT INTO `serverconfig` VALUES (1,'apollo.portal.envs','dev','可支持的环境列表',b'0','default','2018-12-11 14:05:29','','2018-12-11 14:05:29'),(2,'organizations','[{\"orgId\":\"TEST1\",\"orgName\":\"样例部门1\"},{\"orgId\":\"TEST2\",\"orgName\":\"样例部门2\"}]','部门列表',b'0','default','2018-12-11 14:05:29','','2018-12-11 14:05:29'),(3,'superAdmin','apollo','Portal超级管理员',b'0','default','2018-12-11 14:05:29','','2018-12-11 14:05:29'),(4,'api.readTimeout','10000','http接口read timeout',b'0','default','2018-12-11 14:05:29','','2018-12-11 14:05:29'),(5,'consumer.token.salt','someSalt','consumer token salt',b'0','default','2018-12-11 14:05:29','','2018-12-11 14:05:29'),(6,'admin.createPrivateNamespace.switch','true','是否允许项目管理员创建私有namespace',b'0','default','2018-12-11 14:05:29','','2018-12-11 14:05:29'),(7,'configView.memberOnly.envs','pro','只对项目成员显示配置信息的环境列表，多个env以英文逗号分隔',b'0','default','2018-12-11 14:05:29','','2018-12-11 14:05:29');
 
-# Dump of table userrole
-# ------------------------------------------------------------
+#
+# Structure for table "userrole"
+#
 
-DROP TABLE IF EXISTS `UserRole`;
-
-CREATE TABLE `UserRole` (
+DROP TABLE IF EXISTS `userrole`;
+CREATE TABLE `userrole` (
   `Id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增Id',
   `UserId` varchar(128) DEFAULT '' COMMENT '用户身份标识',
   `RoleId` int(10) unsigned DEFAULT NULL COMMENT 'Role Id',
@@ -266,53 +324,30 @@ CREATE TABLE `UserRole` (
   KEY `IX_DataChange_LastTime` (`DataChange_LastTime`),
   KEY `IX_RoleId` (`RoleId`),
   KEY `IX_UserId_RoleId` (`UserId`,`RoleId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='用户和role的绑定表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COMMENT='用户和role的绑定表';
 
-# Dump of table Users
-# ------------------------------------------------------------
+#
+# Data for table "userrole"
+#
 
-DROP TABLE IF EXISTS `Users`;
+INSERT INTO `userrole` VALUES (1,'apollo',1,b'0','apollo','2018-12-12 22:33:42','apollo','2018-12-12 22:33:42'),(2,'apollo',2,b'0','apollo','2018-12-12 22:33:42','apollo','2018-12-12 22:33:42'),(3,'apollo',3,b'0','apollo','2018-12-12 22:33:42','apollo','2018-12-12 22:33:42');
 
-CREATE TABLE `Users` (
+#
+# Structure for table "users"
+#
+
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users` (
   `Id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增Id',
   `Username` varchar(64) NOT NULL DEFAULT 'default' COMMENT '用户名',
   `Password` varchar(64) NOT NULL DEFAULT 'default' COMMENT '密码',
   `Email` varchar(64) NOT NULL DEFAULT 'default' COMMENT '邮箱地址',
   `Enabled` tinyint(4) DEFAULT NULL COMMENT '是否有效',
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='用户表';
 
+#
+# Data for table "users"
+#
 
-# Dump of table Authorities
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `Authorities`;
-
-CREATE TABLE `Authorities` (
-  `Id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增Id',
-  `Username` varchar(64) NOT NULL,
-  `Authority` varchar(50) NOT NULL,
-  PRIMARY KEY (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-
-# Config
-# ------------------------------------------------------------
-INSERT INTO `ServerConfig` (`Key`, `Value`, `Comment`)
-VALUES
-    ('apollo.portal.envs', 'dev', '可支持的环境列表'),
-    ('organizations', '[{\"orgId\":\"TEST1\",\"orgName\":\"样例部门1\"},{\"orgId\":\"TEST2\",\"orgName\":\"样例部门2\"}]', '部门列表'),
-    ('superAdmin', 'apollo', 'Portal超级管理员'),
-    ('api.readTimeout', '10000', 'http接口read timeout'),
-    ('consumer.token.salt', 'someSalt', 'consumer token salt'),
-    ('admin.createPrivateNamespace.switch', 'true', '是否允许项目管理员创建私有namespace'),
-    ('configView.memberOnly.envs', 'pro', '只对项目成员显示配置信息的环境列表，多个env以英文逗号分隔');
-
-
-INSERT INTO `Users` (`Username`, `Password`, `Email`, `Enabled`)
-VALUES
-	('apollo', '$2a$10$7r20uS.BQ9uBpf3Baj3uQOZvMVvB1RN3PYoKE94gtz2.WAOuiiwXS', 'apollo@acme.com', 1);
-
-INSERT INTO `Authorities` (`Username`, `Authority`) VALUES ('apollo', 'ROLE_user');
-
-
+INSERT INTO `users` VALUES (1,'apollo','$2a$10$7r20uS.BQ9uBpf3Baj3uQOZvMVvB1RN3PYoKE94gtz2.WAOuiiwXS','apollo@acme.com',1);
