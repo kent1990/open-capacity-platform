@@ -31,7 +31,7 @@
 		<disruptor.version>3.4.1</disruptor.version>
 		<swagger.m.version>1.0.6</swagger.m.version>
 		<docker.image.prefix>owen</docker.image.prefix>
-		<spring-boot.version>2.0.3.RELEASE</spring-boot.version>
+		<spring-boot.version>2.0.4.RELEASE</spring-boot.version>
 		<spring-platform.version>Cairo-SR3</spring-platform.version>
 		<spring-security.version>5.1.1.RELEASE</spring-security.version>
 		<security-oauth2.version>2.3.4.RELEASE</security-oauth2.version>
@@ -39,7 +39,7 @@
 		<commons-collections4.version>4.1</commons-collections4.version>
 		<fastjson.version>1.2.47</fastjson.version>
 		<jasypt.version>1.14</jasypt.version>
-		<spring-boot-dependencies.version>2.0.3.RELEASE</spring-boot-dependencies.version>
+		<spring-boot-dependencies.version>2.0.4.RELEASE</spring-boot-dependencies.version>
 		<spring-cloud-dependencies.version>Finchley.SR2</spring-cloud-dependencies.version>
 	</properties>
 
