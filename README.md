@@ -76,16 +76,20 @@ http://59.110.164.254:8066/login.html 用户名/密码：admin/admin
  ![](https://i.imgur.com/zwaKg01.png)
 
 
+07.配置中心  
+![](https://i.imgur.com/jW0hugt.png)  
+![](https://i.imgur.com/F80zBA4.png)  
 
-07.服务管理
+
+08.服务管理
 
 ![](https://i.imgur.com/2ufms9u.png)
 
-08.应用管理  
+09.应用管理  
 ![](https://i.imgur.com/LC7UI5X.png)
 
 
-09.token管理
+10.token管理
 
 ![](https://i.imgur.com/Pg80eh1.png)
 
