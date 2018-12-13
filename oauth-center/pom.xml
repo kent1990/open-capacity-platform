@@ -9,6 +9,7 @@
 	<artifactId>oauth-center</artifactId>
 	<packaging>pom</packaging>
 	<description>OAuth2.0认证体系</description>
+	
 	<!--
   ~
   ~  Copyright (c) 2018-2025, open-capacity-platform All rights reserved.
