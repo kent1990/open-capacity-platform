@@ -16,7 +16,7 @@
 		<java.version>1.8</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<platform-bom.version>Cairo-SR3</platform-bom.version>
-		<spring-boot.version>2.0.3.RELEASE</spring-boot.version>
+		<spring-boot.version>2.0.4.RELEASE</spring-boot.version>
 		<spring-cloud.version>Finchley.SR2</spring-cloud.version>
 		<!-- Plugins Version -->
 		<maven-compiler-plugin.version>3.6.0</maven-compiler-plugin.version>
@@ -246,7 +246,7 @@
 				<scope>import</scope>
 			</dependency>
 			<!-- ctrip modified -->
-			<!-- removed duplicated javax/persistence classes -->
+			<!-- removed duplicated javax/persistence classes
 			<dependency>
 				<groupId>com.ctrip.3rdparty.tomcat.embed</groupId>
 				<artifactId>tomcat-embed-core</artifactId>
@@ -258,6 +258,7 @@
 					</exclusion>
 				</exclusions>
 			</dependency>
+			 -->
 		</dependencies>
 	</dependencyManagement>
 
@@ -354,17 +355,7 @@
 						<groupId>org.springframework.boot</groupId>
 						<artifactId>spring-boot-starter-web</artifactId>
 						<version>${spring-boot.version}</version>
-						<exclusions>
-							<exclusion>
-								<groupId>org.apache.tomcat.embed</groupId>
-								<artifactId>tomcat-embed-logging-juli</artifactId>
-							</exclusion>
-							<!-- use ctrip modified version instead -->
-							<exclusion>
-								<groupId>org.apache.tomcat.embed</groupId>
-								<artifactId>tomcat-embed-core</artifactId>
-							</exclusion>
-						</exclusions>
+						 
 					</dependency>
 					<!-- eureka -->
 					<dependency>
@@ -427,12 +418,7 @@
 					<!-- end of eureka -->
 				</dependencies>
 			</dependencyManagement>
-			<dependencies>
-				<dependency>
-					<groupId>com.ctrip.3rdparty.tomcat.embed</groupId>
-					<artifactId>tomcat-embed-core</artifactId>
-				</dependency>
-			</dependencies>
+			 
 		</profile>
 		<profile>
 			<!-- for ctrip development with logging capability -->
@@ -460,17 +446,7 @@
 						<groupId>org.springframework.boot</groupId>
 						<artifactId>spring-boot-starter-web</artifactId>
 						<version>${spring-boot.version}</version>
-						<exclusions>
-							<exclusion>
-								<groupId>org.apache.tomcat.embed</groupId>
-								<artifactId>tomcat-embed-logging-juli</artifactId>
-							</exclusion>
-							<!-- use ctrip modified version instead -->
-							<exclusion>
-								<groupId>org.apache.tomcat.embed</groupId>
-								<artifactId>tomcat-embed-core</artifactId>
-							</exclusion>
-						</exclusions>
+						 
 					</dependency>
 					<!-- eureka -->
 					<dependency>
@@ -538,10 +514,7 @@
 					<groupId>com.dianping.cat</groupId>
 					<artifactId>cat-client</artifactId>
 				</dependency>
-				<dependency>
-					<groupId>com.ctrip.3rdparty.tomcat.embed</groupId>
-					<artifactId>tomcat-embed-core</artifactId>
-				</dependency>
+				 
 				<dependency>
 					<groupId>com.ctrip.framework.clogging</groupId>
 					<artifactId>clogging-agent</artifactId>
