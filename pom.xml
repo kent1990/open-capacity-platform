@@ -187,7 +187,8 @@
 		<module>monitor-center</module>
 		<!-- spring cloud gateway -->
 		<module>new-api-gateway</module>
-		
+
+		<module>mq-center</module>
 	</modules>
 	<developers>
 		 

@@ -1,0 +1,24 @@
+server:
+  port: 8085
+
+spring: 
+  output:
+    ansi:
+      enabled: always
+  messages:
+    basename: /i18n/message
+  profiles: 
+    active: dev
+    
+################################################################################################################  
+###Disruptor (DisruptorProperties) 基本配置：  
+################################################################################################################  
+  disruptor:
+    enabled: true
+    multi-producer: false
+    ring-buffer-size: 1024
+    ring-thread-numbers:  4
+    #handler-definitions:
+    # - /Event-DC-Output/TagA-Output/** = emailHandler
+    # - /Event-DC-Output/TagB-Output/** = smsHandler 
+    
