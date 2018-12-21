@@ -152,33 +152,36 @@ e.启动gray-center的discovery-console-desktop
  
 容器化部署  
 
+主机管理  
+![](https://i.imgur.com/0uq6o9G.png)  
 ocp应用平台    
-![](http://img2.ph.126.net/y13TgCVkI80ae7G3n1A9KA==/6597948276449826809.png)  
+ ![](https://i.imgur.com/0A5z4MH.png)      
 
 注册中心    
-![](http://img1.ph.126.net/lmUPx8HVCqJcYoWS9rTttg==/149463212733907927.png)
-![](http://img0.ph.126.net/QlFe6b68aDowIJ5TtrKssA==/2022679182743353608.png)    
-![](http://img1.ph.126.net/9X_TxaEaVKUO22G_ZIzozA==/1872934495133335456.png)    
+![](https://i.imgur.com/cS6Wp2D.png)    
+![](https://i.imgur.com/S6naIh3.png)  
+![](https://i.imgur.com/M3e8mIA.png)     
 
 
 用户中心    
-![](http://img2.ph.126.net/yl1gevE5UngxOtPmf7tC0A==/6597345744077955611.png) 
-![](http://img0.ph.126.net/E4mbUIYTYRgw8OHy0nFxJA==/6597829529193908409.png)  
+![](https://i.imgur.com/yR5up2L.png)    
+![](https://i.imgur.com/iNgqpOn.png)   
  
 
 认证中心   
-![](http://img1.ph.126.net/YLk9hvRy_oAU2IvIAkJHlg==/6597660204403980151.png)
+![](https://i.imgur.com/caCkRBk.png)    
+![](https://i.imgur.com/0gbdnTr.png)  
 
 api网关   
-![](http://img1.ph.126.net/qHcPvCZzEfD4q4ywiMnmOA==/2670634579131172549.png) 
-![](http://img2.ph.126.net/ZlXSke9CftUBzD8rYlTDaw==/6597374331380276267.png) 
+![](https://i.imgur.com/mE2Jcl6.png)  
+![](https://i.imgur.com/Gzm9DRJ.png)
 
 负载均衡器  
-![](http://img1.ph.126.net/Sm0cqs_bviRsML2VPM2hgw==/1491535901690337271.png)
+![](https://i.imgur.com/LtsAJ36.png)
 
 
 后台中心  
-![](http://img1.ph.126.net/htjV0GHm1PB7y3Bo0NBTzA==/797981559075261049.png)
+![](https://i.imgur.com/LilbWW5.png)
 ![](http://img0.ph.126.net/HHuE9XmggkqtsUAS3eiJxg==/6597926286217145493.png)
 
 资源消耗情况
