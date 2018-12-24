@@ -30,6 +30,14 @@ public class AuthAuthorizeConfigProvider implements AuthorizeConfigProvider {
 		config.antMatchers(permitUrlProperties.getOauth_urls()).permitAll();
 		//前后分离时需要带上
 		config.antMatchers(HttpMethod.OPTIONS).permitAll();
+		
+		//nepxion放行
+		config.antMatchers("/version/**").permitAll();
+		
+		config.antMatchers("/router/**").permitAll();
+		
+		config.antMatchers("/config/**").permitAll();
+		
         
 		return true;
 	}

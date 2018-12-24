@@ -82,10 +82,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-		</dependency>
+		 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
@@ -96,7 +93,22 @@
 			<optional>true</optional>
 		</dependency>
 
-
+		<dependency>
+			<groupId>com.nepxion</groupId>
+			<artifactId>discovery-plugin-starter-eureka</artifactId>
+			<!-- <artifactId>discovery-plugin-starter-consul</artifactId> -->
+			<!-- <artifactId>discovery-plugin-starter-zookeeper</artifactId> -->
+		</dependency>
+		<dependency>
+			<groupId>com.nepxion</groupId>
+			<!-- <artifactId>discovery-console-starter-apollo</artifactId> -->
+			<!--<artifactId>discovery-console-starter-nacos</artifactId> -->
+			<artifactId>discovery-console-starter-redis</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.nepxion</groupId>
+			<artifactId>discovery-plugin-strategy-starter-service</artifactId>
+		</dependency>
 
 		<!-- swagger -->
 		<dependency>

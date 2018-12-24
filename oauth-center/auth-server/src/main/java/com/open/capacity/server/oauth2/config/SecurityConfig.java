@@ -63,6 +63,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		web.ignoring().antMatchers("/index.html");
 		web.ignoring().antMatchers("/oauth/user/token");
 		web.ignoring().antMatchers("/oauth/client/token");
+		
+		//nepxion放行
+		web.ignoring().antMatchers("/version/**");
+		web.ignoring().antMatchers("/router/**");
+		web.ignoring().antMatchers("/config/**");
+		
+		
+ 
+				
+		
 	}
 	/**
 	 * 认证管理

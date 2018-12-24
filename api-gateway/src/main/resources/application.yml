@@ -11,10 +11,37 @@ server:
     buffers-per-region: 1024
     direct-buffers: true 
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
 
 spring:
   application:
-    name: auth-gateway
+    name: api-gateway
+    # Plugin config  
+    register:
+      control: 
+        enabled: true   # 开启和关闭服务注册层面的控制。一旦关闭，服务注册的黑/白名单过滤功能将失效，最大注册数的限制过滤功能将失效。缺失则默认为true  
+    discovery:
+      control:
+        enabled: true   # 开启和关闭服务发现层面的控制。一旦关闭，服务多版本调用的控制功能将失效，动态屏蔽指定IP地址的服务实例被发现的功能将失效。缺失则默认为true
+    config:
+      format: xml # 规则文件的格式，支持xml和json。缺失则默认为xml  # spring.application.config.format=json
+      path: classpath:rule.xml    # 本地规则文件的路径，支持两种方式：classpath:rule.xml（rule.json） - 规则文件放在resources目录下，便于打包进jar；file:rule.xml（rule.json） - 规则文件放在工程根目录下，放置在外部便于修改。缺失则默认为不装载本地规则
+      rest:
+        control:
+          enabled: true  # 开启和关闭通过Rest方式对规则配置的控制和推送。一旦关闭，只能通过远程配置中心来控制和推送。缺失则默认为true   
+    # Plugin strategy config
+    strategy:
+      control: 
+        enabled:  true  # 开启和关闭用户自定义和编程灰度路由策略的控制，例如用户根据业务参数的不同，负载均衡到不同的服务器。缺失则默认为true 
+      request:
+        headers: version;region;token;Authorization  # 用户自定义和编程灰度路由策略的时候，对REST调用拦截的时候（支持Feign或者RestTemplate调用），需要把来自外部的指定Header参数传递到服务里，如果多个用“;”分隔，不允许出现空格。该项配置只对服务有效，对网关无效。缺失则默认关闭该功能                 
   datasource:
     dynamic:
       enable: true
@@ -82,7 +109,7 @@ spring:
 ################### redis 单机版 start ########################## 
     host: 59.110.164.254
     port: 6379
-    timeout: 5000
+    timeout: 6000
     database: 1
   zipkin:
     base-url: http://127.0.0.1:11008
@@ -261,6 +288,10 @@ eureka:
     registry-fetch-interval-seconds: 3  
     instance-info-replication-interval-seconds: 3      
   instance:
+    metadataMap:  
+      version: 1.0 
+      group: ocp
+      region: dev
     prefer-ip-address: true
     instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${spring.application.instance_id:${server.port}}
 #    instance-id: ${spring.application.name}:${docker.ipAddress}:${spring.application.instance_id:${server.port}}

@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import com.netflix.appinfo.ApplicationInfoManager;
-
 /**
  * @author 作者 owen E-mail: 624191343@qq.com
  * @version 创建时间：2017年11月12日 上午22:57:51
@@ -21,9 +19,6 @@ public class TestController {
 	
 	@Resource
 	private RestTemplate restTemplate ;
-	
-	@Resource
-	private ApplicationInfoManager  applicationInfoManager ;
 
 	@GetMapping("/hello")
 	public String hello() {
@@ -33,9 +28,6 @@ public class TestController {
 	
 	@GetMapping("/test")
 	public String hello1() {
-		
-		applicationInfoManager.getInfo().getMetadata()
-		
 		ResponseEntity<String> result = restTemplate.getForEntity ("http://eureka-client/hello", String.class);
 		return result.getBody();
 	}
