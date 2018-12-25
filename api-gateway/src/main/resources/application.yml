@@ -271,7 +271,11 @@ zuul:
 #      api-docs-path: /auth-client/v2/api-docs
 #      swagger-version: 2.0     
    
+
+ 
 swagger:
+  service:
+    enabled: false     #去除nepxion swagger  
   butler:
     api-docs-path:  v2/api-docs
     auto-generate-from-zuul-routes: true

@@ -174,8 +174,10 @@ feign:
      response:
        enabled: true                    
 
- 
-            
+#去除nepxion swagger 
+swagger:
+  service:
+    enabled: false            
 
 eureka:
   client:

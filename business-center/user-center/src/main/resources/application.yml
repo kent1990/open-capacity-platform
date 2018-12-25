@@ -183,7 +183,10 @@ eureka:
     status-page-url: http://${spring.cloud.client.ip-address}:${server.port}/document.html #固定端口
 #    status-page-url: http://${spring.cloud.client.ip-address}:${randomServerPort.value[7000,7005]}/document.html #随机端口
     
-    
+#去除nepxion swagger 
+swagger:
+  service:
+    enabled: false       
     
 logging:
   level:
