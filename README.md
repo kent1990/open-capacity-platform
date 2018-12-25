@@ -128,6 +128,11 @@ c.启动gray-center中的original-service的【DiscoveryApplicationA1】，【Di
 d.启动gray-center的discovery-console  
 e.启动gray-center的discovery-console-desktop  
 
+ocp灰度发布功能  
+![](https://i.imgur.com/vgUAqoF.png)  
+![](https://i.imgur.com/jx7MvS6.png)  
+![](https://i.imgur.com/7qlO4XD.png)  
+  
  
 灰度管理UI  
 用户名:admin      

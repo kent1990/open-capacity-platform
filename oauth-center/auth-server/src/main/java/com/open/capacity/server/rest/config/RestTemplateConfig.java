@@ -1,5 +1,7 @@
 package com.open.capacity.server.rest.config;
 
+import java.util.Collections;
+
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
@@ -10,6 +12,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.DefaultResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
+
+import com.nepxion.discovery.plugin.strategy.service.aop.RestTemplateStrategyInterceptor;
 
 
 /**
@@ -24,7 +28,7 @@ public class RestTemplateConfig {
 
 	@Bean
 	@LoadBalanced
-	public RestTemplate restTemplate() {
+	public RestTemplate restTemplate(RestTemplateStrategyInterceptor restTemplateStrategyInterceptor) {
 //		 长连接
 		PoolingHttpClientConnectionManager pollingConnectionManager = new PoolingHttpClientConnectionManager();
 //		 总连接数
@@ -52,7 +56,7 @@ public class RestTemplateConfig {
 		RestTemplate restTemplate = new RestTemplate();
 		restTemplate.setRequestFactory(clientHttpRequestFactory);
 		restTemplate.setErrorHandler(new DefaultResponseErrorHandler());
-
+		restTemplate.setInterceptors(Collections.singletonList(restTemplateStrategyInterceptor));
 		return restTemplate;
 	}
 }
