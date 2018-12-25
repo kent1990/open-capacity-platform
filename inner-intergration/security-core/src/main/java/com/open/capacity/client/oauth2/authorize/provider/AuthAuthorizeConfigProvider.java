@@ -32,6 +32,13 @@ public class AuthAuthorizeConfigProvider implements AuthorizeConfigProvider {
 		config.antMatchers(HttpMethod.OPTIONS).permitAll();
 		
 		//nepxion放行
+		
+		config.antMatchers("/actuator/version/**").permitAll();
+		
+		config.antMatchers("/actuator/router/**").permitAll();
+		
+		config.antMatchers("/actuator/config/**").permitAll();
+		
 		config.antMatchers("/version/**").permitAll();
 		
 		config.antMatchers("/router/**").permitAll();

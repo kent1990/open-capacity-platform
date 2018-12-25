@@ -68,6 +68,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		web.ignoring().antMatchers("/version/**");
 		web.ignoring().antMatchers("/router/**");
 		web.ignoring().antMatchers("/config/**");
+		web.ignoring().antMatchers("/actuator/version/**") ;
+		web.ignoring().antMatchers("/actuator/router/**") ;
+		web.ignoring().antMatchers("/actuator/config/**") ;
 		
 		
  
