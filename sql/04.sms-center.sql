@@ -1,4 +1,4 @@
-﻿###导出 sms-center 的数据库结构
+##导出 sms-center 的数据库结构
 CREATE DATABASE IF NOT EXISTS `sms-center` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
 USE `sms-center`;
 SET FOREIGN_KEY_CHECKS=0;

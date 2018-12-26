@@ -10,6 +10,6 @@
   <modules>
   	<module>disruptor-starter</module>
   	<module>disruptor-demo</module>
-  	<module>sms-drugstore</module>
+  	<!-- <module>sms-drugstore</module> -->
   </modules>
 </project>

@@ -34,8 +34,6 @@ public class TestController {
 	@GetMapping("/test")
 	public String hello1() {
 		
-		applicationInfoManager.getInfo().getMetadata()
-		
 		ResponseEntity<String> result = restTemplate.getForEntity ("http://eureka-client/hello", String.class);
 		return result.getBody();
 	}
