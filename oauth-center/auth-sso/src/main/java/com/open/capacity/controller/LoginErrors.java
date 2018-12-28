@@ -10,6 +10,10 @@ public   class LoginErrors {
 	public String dashboard() {
 		return "redirect:/#/";
 	}
-
+	
+	@RequestMapping("/login")
+	public String login() {
+		return "redirect:/#/";
+	}
 }
 

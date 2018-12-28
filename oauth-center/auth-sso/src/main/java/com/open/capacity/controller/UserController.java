@@ -11,34 +11,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/dashboard")
 public class UserController {
 
-    @GetMapping("/user")
-    public Authentication currentUser() {
-        return SecurityContextHolder.getContext().getAuthentication();
-    }
+	
     @GetMapping("/hello")
     public String hello() {
         return "hello";
     }
 
+    @RequestMapping("/message")
+	public Map<String, Object> dashboard() {
+		return Collections.<String, Object> singletonMap("message", "Yay!");
+	}
 
     @GetMapping("/users")
     public Authentication user(Authentication user) {
         return user;
     }
 
-    @RequestMapping("/dashboard/message")
-	public Map<String, Object> dashboard() {
-    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-    	
-		return Collections.<String, Object> singletonMap("message", auth.getPrincipal());
-	}
-
-	@RequestMapping("/dashboard/user")
+    @RequestMapping("/user")
 	public Principal user(Principal user) {
 		return user;
 	}
+
+    
+    
+
+	
+ 
     
     
 }

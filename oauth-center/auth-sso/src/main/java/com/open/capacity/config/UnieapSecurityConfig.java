@@ -40,43 +40,29 @@ import com.fasterxml.jackson.core.filter.TokenFilter;
 @Configuration
 @EnableOAuth2Sso
 public class UnieapSecurityConfig extends WebSecurityConfigurerAdapter {
-
- 
-
-	@Override
-	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources", "/configuration/security",
-				"/swagger-ui.html", "/webjars/**", "/doc.html", "/login.html");
-		web.ignoring().antMatchers("/js/**");
-		web.ignoring().antMatchers("/css/**");
-		web.ignoring().antMatchers("/health");
-		// 忽略登录界面
-		web.ignoring().antMatchers("/home.html","/dashboard.html") ;
-		web.ignoring().antMatchers("/index.html");
-	}
-
+	
+	
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-		http.formLogin().and().antMatcher("/**")
-				// 所有请求都得经过认证和授权
-				.authorizeRequests().anyRequest().authenticated().and().authorizeRequests().antMatchers("/", "/anon")
-				.permitAll().and().csrf().csrfTokenRepository(csrfTokenRepository()).and()
+		http.antMatcher("/dashboard/**").authorizeRequests().anyRequest()
+				.authenticated().and().csrf()
+				.csrfTokenRepository(csrfTokenRepository()).and()
 				.addFilterAfter(csrfHeaderFilter(), CsrfFilter.class)
-				// 退出的URL是/logout
-				.logout().logoutUrl("/dashboard/logout").permitAll().logoutSuccessUrl("/");
-
-		// 新增token过滤器
-
+				.logout().logoutUrl("/dashboard/logout").permitAll()
+				.logoutSuccessUrl("/");
 	}
 
 	private Filter csrfHeaderFilter() {
 		return new OncePerRequestFilter() {
 			@Override
-			protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
-					FilterChain filterChain) throws ServletException, IOException {
-				CsrfToken csrf = (CsrfToken) request.getAttribute(CsrfToken.class.getName());
+			protected void doFilterInternal(HttpServletRequest request,
+					HttpServletResponse response, FilterChain filterChain)
+					throws ServletException, IOException {
+				CsrfToken csrf = (CsrfToken) request
+						.getAttribute(CsrfToken.class.getName());
 				if (csrf != null) {
-					Cookie cookie = new Cookie("XSRF-TOKEN", csrf.getToken());
+					Cookie cookie = new Cookie("XSRF-TOKEN",
+							csrf.getToken());
 					cookie.setPath("/");
 					response.addCookie(cookie);
 				}
@@ -90,7 +76,6 @@ public class UnieapSecurityConfig extends WebSecurityConfigurerAdapter {
 		repository.setHeaderName("X-XSRF-TOKEN");
 		return repository;
 	}
-	
-	 
+
 
 }

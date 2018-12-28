@@ -118,8 +118,8 @@ security:
 
 
 permit:
-  http_urls:  /test163/** , /api-auth/** , /health ,/doc.html,/test111 ,/api-user/users-anon/login ,/user-center/users-anon/login,/document.html,**/v2/api-docs
-  oauth_urls: /test163/** , /api-auth/** , /doc.html ,/test111 ,/api-user/users-anon/login,/user-center/users-anon/login,/document.html,**/v2/api-docs
+  http_urls:  /test163/** , /api-auth/** , /health ,/doc.html,/test111 ,/api-user/users-anon/login ,/user-center/users-anon/login,/document.html,**/v2/api-docs ,/oauth/** ,/login.html,/user/login,/css/** ,/js/** 
+  oauth_urls: /test163/** , /api-auth/** , /doc.html ,/test111 ,/api-user/users-anon/login,/user-center/users-anon/login,/document.html,**/v2/api-docs,/oauth/** ,/login.html ,/user/login,/css/** ,/js/** 
   
 
  
@@ -184,41 +184,42 @@ zuul:
     parameter: debugRequest
   retryable: false    #关闭重试
   sensitive-headers: #/oauth/token需要请求头处理
+  ignored-headers: Access-Control-Allow-Credentials,Access-Control-Allow-Origin,Access-Control-Allow-Methods
   add-host-header: true
+#  add-proxy-headers: true  #授权码跳转问题
   routes:
 #    演示配置
 #    baidu:  
 #      path: /test163/**
 #      url: http://59.110.164.254:9999
+    reqtoken:
+      path: /**
+      service-id: auth-server 
+      strip-prefix: true   
+      custom-sensitive-headers: true  #http://blog.didispace.com/spring-cloud-zuul-cookie-redirect/ zuul授权码跳转问题
     auth:
-      sensitiveHeaders: Access-Control-Allow-Origin,Access-Control-Allow-Methods
       path: /api-auth/**
       service-id: auth-server 
       strip-prefix: true   
       custom-sensitive-headers: true  #http://blog.didispace.com/spring-cloud-zuul-cookie-redirect/ zuul授权码跳转问题
     user:
-      sensitiveHeaders: Access-Control-Allow-Origin,Access-Control-Allow-Methods
       path: /api-user/**
       service-id: user-center
       strip-prefix: true
       custom-sensitive-headers: true  #http://blog.didispace.com/spring-cloud-zuul-cookie-redirect/ zuul授权码跳转问题
     file:
-      sensitiveHeaders: Access-Control-Allow-Origin,Access-Control-Allow-Methods
       path: /api-file/**
       service-id: file-center  
       strip-prefix: true
     sms:
-      sensitiveHeaders: Access-Control-Allow-Origin,Access-Control-Allow-Methods
       path: /api-sms/**
       service-id: sms-center  
       strip-prefix: true
     eureka:
-      sensitiveHeaders: Access-Control-Allow-Origin,Access-Control-Allow-Methods
       path: /api-eureka/**
       service-id: eureka-server
       strip-prefix: true
     generator:
-      sensitiveHeaders: Access-Control-Allow-Origin,Access-Control-Allow-Methods
       path: /api-generator/**
       service-id: generator-center
       strip-prefix: true
