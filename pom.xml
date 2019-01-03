@@ -137,6 +137,7 @@
 					<include>**/*.wsdl</include>
 					<include>**/*.xsd</include>
 					<include>**/*.ftl</include>
+					<include>processes/*</include>
 				</includes>
 				<filtering>false</filtering>
 			</resource>
