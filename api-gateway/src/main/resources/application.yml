@@ -192,16 +192,26 @@ zuul:
 #    baidu:  
 #      path: /test163/**
 #      url: http://59.110.164.254:9999
-    reqtoken:
-      path: /**
-      service-id: auth-server 
-      strip-prefix: true   
-      custom-sensitive-headers: true  #http://blog.didispace.com/spring-cloud-zuul-cookie-redirect/ zuul授权码跳转问题
     auth:
       path: /api-auth/**
       service-id: auth-server 
       strip-prefix: true   
       custom-sensitive-headers: true  #http://blog.didispace.com/spring-cloud-zuul-cookie-redirect/ zuul授权码跳转问题
+    auth-login-page:
+      path: /login.html
+      service-id: auth-server
+      strip-prefix: true
+      custom-sensitive-headers: true
+    auth-login-process:
+      path: /user/login
+      service-id: auth-server
+      strip-prefix: true
+      custom-sensitive-headers: true
+    auth-login-authorize:
+      path: /oauth/authorize
+      service-id: auth-server
+      strip-prefix: true
+      custom-sensitive-headers: true
     user:
       path: /api-user/**
       service-id: user-center
