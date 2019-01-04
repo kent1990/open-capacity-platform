@@ -45,6 +45,14 @@
 			<artifactId>db-core</artifactId>
 			<version>${core.version}</version>
 		</dependency>
+		
+		<!-- 资源服务器 -->
+		<dependency>
+			<groupId>com.open.capacity</groupId>
+			<artifactId>security-core</artifactId>
+			<version>${core.version}</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>

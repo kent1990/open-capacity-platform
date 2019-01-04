@@ -103,12 +103,12 @@ mybatis:
 
 security:
   oauth2:
+    ignored: /doc.html, /document.html 
     token:
       store:
         type: redis
 
-permit:
-  urls: /doc.html, /document.html
+
 
 #设置最大超时时间
 ribbon:  

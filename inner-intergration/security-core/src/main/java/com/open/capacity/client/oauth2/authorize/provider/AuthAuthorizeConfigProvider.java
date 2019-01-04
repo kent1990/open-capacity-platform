@@ -27,7 +27,7 @@ public class AuthAuthorizeConfigProvider implements AuthorizeConfigProvider {
 	public boolean config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config) {
 
 		// 免token登录设置
-		config.antMatchers(permitUrlProperties.getOauth_urls()).permitAll();
+		config.antMatchers(permitUrlProperties.getIgnored()).permitAll();
 		//前后分离时需要带上
 		config.antMatchers(HttpMethod.OPTIONS).permitAll();
         

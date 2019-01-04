@@ -1,4 +1,4 @@
-package com.open.capacity.server.feign.config;
+package com.open.capacity.server.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

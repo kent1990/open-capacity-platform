@@ -1,4 +1,4 @@
-package com.open.capacity.client.oauth2.dao;
+package com.open.capacity.client.dao;
 
 import java.util.List;
 import java.util.Map;

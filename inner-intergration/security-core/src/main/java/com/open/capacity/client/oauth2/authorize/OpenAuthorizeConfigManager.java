@@ -7,6 +7,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 import org.springframework.stereotype.Component;
 
+import com.open.capacity.client.oauth2.service.RbacService;
+
 /** 
 * @author 作者 owen E-mail: 624191343@qq.com
 * @version 创建时间：2018年2月1日 下午9:50:27 
@@ -17,6 +19,9 @@ public class OpenAuthorizeConfigManager implements AuthorizeConfigManager {
 
 	@Autowired
 	private List<AuthorizeConfigProvider> authorizeConfigProviders;
+	
+	@Autowired(required=false)
+	private RbacService rbacService ;
 
 	/* (non-Javadoc)
 	 * @see com.imooc.security.core.authorize.AuthorizeConfigManager#config(org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer.ExpressionInterceptUrlRegistry)
@@ -32,10 +37,15 @@ public class OpenAuthorizeConfigManager implements AuthorizeConfigManager {
 		//token正确登录
 		config.anyRequest().authenticated() ;
 		
-//		放开则全部可以不需要认证访问
-//		config
-//		.anyRequest()
-//			.access("@rbacService.hasPermission(request, authentication)");
+		
+		if(rbacService!=null){
+// 			放开则全部可以不需要认证访问
+ 			config
+ 			.anyRequest()
+ 				.access("@rbacService.hasPermission(request, authentication)");
+		}
+		
+
 		
 		
 	}

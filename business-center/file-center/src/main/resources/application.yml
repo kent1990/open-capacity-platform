@@ -120,13 +120,11 @@ mybatis:
 
 security:
   oauth2:
+    ignored: /files-anon/**  , /doc.html  ,/upload.html , /uploads.html ,/js/** ,/document.html 
     token:
       store:
         type: redis
 
-permit:
-  http_urls:  /files-anon/**  , /doc.html  ,/upload.html , /uploads.html ,/js/** ,/document.html
-  oauth_urls: /files-anon/**  , /doc.html  ,/upload.html , /uploads.html ,/js/** ,/document.html
 
 #设置最大超时时间
 ribbon:  
@@ -156,7 +154,7 @@ hystrix:
 eureka:
   client:
     serviceUrl:
-      defaultZone:  http://127.0.0.1:1111/eureka  #http://130.75.131.241:8761/eureka,http://130.75.131.248:8762/eureka
+      defaultZone:  http://eureka-server:1111/eureka  #http://130.75.131.241:8761/eureka,http://130.75.131.248:8762/eureka
       #http://134.224.249.33:1111/eureka/  正式库
       #http://134.224.249.33:1111/eureka/  测试库
       #http://127.0.0.1:8761/eureka,http://127.0.0.1:8762/eureka

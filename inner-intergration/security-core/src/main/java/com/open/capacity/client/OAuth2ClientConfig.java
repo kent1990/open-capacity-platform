@@ -68,7 +68,7 @@ public class OAuth2ClientConfig extends ResourceServerConfigurerAdapter {
 	private PermitUrlProperties permitUrlProperties;
 
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers(permitUrlProperties.getHttp_urls());
+		web.ignoring().antMatchers(permitUrlProperties.getIgnored());
 	}
 
 	@Override

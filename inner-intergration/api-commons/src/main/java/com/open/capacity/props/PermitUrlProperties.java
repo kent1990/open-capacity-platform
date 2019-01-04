@@ -9,7 +9,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @author 作者 owen E-mail: 624191343@qq.com
  * @version 创建时间：2017年11月12日 上午22:57:51 url白名单处理 application.yml中配置需要放权的url白名单
  */
-@ConfigurationProperties(prefix = "permit")
+//@ConfigurationProperties(prefix = "permit")
+@ConfigurationProperties(prefix = "security.oauth2")
 public class PermitUrlProperties {
 
 	/**
@@ -24,45 +25,7 @@ public class PermitUrlProperties {
 			"/**/actuator/hystrix.stream","/**/actuator/hystrix.stream**/**", "/**/turbine.stream", "/**/turbine.stream**/**",
 			"/**/hystrix","/**/hystrix.stream", "/**/hystrix/**" ,"/**/hystrix/**/**" ,"/**/proxy.stream/**" ,"/**/favicon.ico" };
 
-	private String[] http_urls;
-
-	public String[] getHttp_urls() {
-		if (http_urls == null || http_urls.length == 0) {
-			return ENDPOINTS;
-		}
-
-		List<String> list = new ArrayList<>();
-		for (String url : ENDPOINTS) {
-			list.add(url);
-		}
-		for (String url : http_urls) {
-			list.add(url);
-		}
-
-		return list.toArray(new String[list.size()]);
-	}
-
-	public void setHttp_urls(String[] http_urls) {
-		this.http_urls = http_urls;
-	}
-
-	private String[] oauth_urls;
-
-	public String[] getOauth_urls() {
-		if (oauth_urls == null || oauth_urls.length == 0) {
-			return ENDPOINTS;
-		}
-
-		List<String> list = new ArrayList<>();
-		for (String url : ENDPOINTS) {
-			list.add(url);
-		}
-		for (String url : oauth_urls) {
-			list.add(url);
-		}
-
-		return list.toArray(new String[list.size()]);
-	}
+	private String[] ignored;
 
 	/**
 	 * 需要放开权限的url
@@ -71,9 +34,27 @@ public class PermitUrlProperties {
 	 *            自定义的url
 	 * @return 自定义的url和监控中心需要访问的url集合
 	 */
+	public String[] getIgnored() {
+		if (ignored == null || ignored.length == 0) {
+			return ENDPOINTS;
+		}
 
-	public void setOauth_urls(String[] oauth_urls) {
-		this.oauth_urls = oauth_urls;
+		List<String> list = new ArrayList<>();
+		for (String url : ENDPOINTS) {
+			list.add(url);
+		}
+		for (String url : ignored) {
+			list.add(url);
+		}
+
+		return list.toArray(new String[list.size()]);
 	}
+
+	public void setIgnored(String[] ignored) {
+		this.ignored = ignored;
+	}
+	
+	 
+ 
 
 }

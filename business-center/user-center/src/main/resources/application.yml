@@ -106,13 +106,10 @@ mybatis:
 
 security:
   oauth2:
+    ignored: /users-anon/**  , /doc.html   ,/document.html 
     token:
       store:
         type: redis
-
-permit:
-  http_urls:  /users-anon/**  , /doc.html   ,/document.html
-  oauth_urls: /users-anon/**  , /doc.html   ,/document.html
 
 #设置最大超时时间
 ribbon:  

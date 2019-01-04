@@ -1,4 +1,4 @@
-package com.open.capacity.gate.controller;
+package com.open.capacity.client.controller;
 
 import java.security.Principal;
 import java.util.HashMap;

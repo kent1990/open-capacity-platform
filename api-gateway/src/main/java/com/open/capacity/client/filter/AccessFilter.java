@@ -1,3 +1,4 @@
+package com.open.capacity.client.filter;
 //package com.open.capacity.client.oauth2.filter;
 //
 //import javax.servlet.http.HttpServletRequest;

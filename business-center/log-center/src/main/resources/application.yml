@@ -106,13 +106,10 @@ spring:
 
 security:
   oauth2:
+    ignored: /files-anon/**  , /doc.html  ,/upload.html , /uploads.html ,/js/** ,/document.html 
     token:
       store:
         type: redis
-
-permit:
-  http_urls:  /files-anon/**  , /doc.html  ,/upload.html , /uploads.html ,/js/** ,/document.html
-  oauth_urls: /files-anon/**  , /doc.html  ,/upload.html , /uploads.html ,/js/** ,/document.html
 
 #设置最大超时时间
 ribbon:  

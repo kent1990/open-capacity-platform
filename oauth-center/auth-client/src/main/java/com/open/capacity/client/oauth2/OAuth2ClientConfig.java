@@ -85,8 +85,7 @@ public class OAuth2ClientConfig extends ResourceServerConfigurerAdapter{
 
 			http.csrf().disable().exceptionHandling().authenticationEntryPoint(authenticationEntryPoint).and().formLogin()
 			// 对请求授权
-			.and().authorizeRequests()
-			.antMatchers(permitUrlProperties.getHttp_urls()).permitAll()
+			.and().authorizeRequests() 
 			.and().requestMatchers()
 			.and().authorizeRequests().anyRequest().authenticated().and().httpBasic();
 			

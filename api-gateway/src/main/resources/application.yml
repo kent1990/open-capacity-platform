@@ -112,15 +112,13 @@ mybatis:
 
 security:
   oauth2:
+    ignored:  /test163/** , /api-auth/** , /doc.html ,/test111 ,/api-user/users-anon/login,/user-center/users-anon/login,/document.html,**/v2/api-docs,/oauth/** ,/login.html ,/user/login,/**/**.css ,/**/**.js  
     token:
       store:
         type: redis
 
 
-permit:
-  http_urls:  /test163/** , /api-auth/** , /health ,/doc.html,/test111 ,/api-user/users-anon/login ,/user-center/users-anon/login,/document.html,**/v2/api-docs ,/oauth/** ,/login.html,/user/login,/**/**.css ,/**/**.js
-  oauth_urls: /test163/** , /api-auth/** , /doc.html ,/test111 ,/api-user/users-anon/login,/user-center/users-anon/login,/document.html,**/v2/api-docs,/oauth/** ,/login.html ,/user/login,/**/**.css ,/**/**.js 
-  
+ 
 
  
 

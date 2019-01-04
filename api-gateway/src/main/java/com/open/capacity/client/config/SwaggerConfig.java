@@ -1,4 +1,4 @@
-package com.open.capacity.client.swagger.config;
+package com.open.capacity.client.config;
 
 import org.springframework.context.annotation.Configuration;
 

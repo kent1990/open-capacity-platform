@@ -254,7 +254,7 @@ public class OAuth2ServerConfig {
 						}
 					}
 
-			).authorizeRequests().antMatchers(permitUrlProperties.getOauth_urls()).permitAll().anyRequest()
+			).authorizeRequests().antMatchers(permitUrlProperties.getIgnored()).permitAll().anyRequest()
 					.authenticated();
 		}
 

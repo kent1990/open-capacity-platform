@@ -1,4 +1,4 @@
-package com.open.capacity.client.rest.config;
+package com.open.capacity.client.config;
 
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;

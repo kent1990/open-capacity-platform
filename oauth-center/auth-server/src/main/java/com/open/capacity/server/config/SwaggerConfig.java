@@ -1,4 +1,4 @@
-package com.open.capacity.server.swagger.config;
+package com.open.capacity.server.config;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
