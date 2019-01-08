@@ -88,7 +88,7 @@
 					<imageName>${docker.image.prefix}/${project.artifactId}</imageName>
 					<dockerDirectory>src/main/docker</dockerDirectory>
 					<!-- docker远程服务器地址 -->
-					<dockerHost>http://130.75.131.245:5555</dockerHost>
+					<dockerHost>http://59.110.164.254:5555</dockerHost>
 					<resources>
 						<resource>
 							<targetPath>/</targetPath>
