@@ -25,17 +25,17 @@ zipkin:
   storage:
     type: elasticsearch
     elasticsearch:
-      hosts: http://elasticsearch:9200/  
+      hosts: http://35.192.230.214:9200/ 
       #      username: elastic
       #      password: changeme
-      cluster: elasticsearch
+      cluster: docker-cluster
       index: zipkin
       index-shards: 1
       index-replicas: 1
   collector:
     kafka:
-      bootstrap-servers: kafka-server:9092
-      zookeeper: zookeeper-server:2181
+      bootstrap-servers: 39.108.176.135:9092
+      zookeeper: 39.108.176.135:2181
       topic: zipkin
  
 

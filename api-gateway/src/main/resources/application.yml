@@ -13,8 +13,6 @@ server:
 
 
 spring:
-  application:
-    name: auth-gateway
   datasource:
     dynamic:
       enable: true

@@ -9,8 +9,6 @@ management:
     health:
       show-details: always 
 spring:
-  application:
-    name: auth-client
   datasource:
     dynamic:
       enable: true

@@ -10,8 +10,6 @@ management:
     health:
       show-details: always   
 spring:
-  application:
-    name: auth-server
   session:
     store-type: redis  
   datasource:

@@ -1,0 +1,4 @@
+spring:
+  #elasticsearch服务配置
+  application:
+    name: log-center

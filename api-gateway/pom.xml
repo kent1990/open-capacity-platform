@@ -33,6 +33,13 @@
 		</dependency>
 
 
+		<!-- 日志统一配置 -->
+		<dependency>
+			<groupId>com.open.capacity</groupId>
+			<artifactId>log-core</artifactId>
+			<version>${core.version}</version>
+		</dependency>
+
 		<!-- 公共实体类模块 -->
 		<dependency>
 			<groupId>com.open.capacity</groupId>

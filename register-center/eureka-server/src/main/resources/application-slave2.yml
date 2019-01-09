@@ -1,8 +1,6 @@
 server:
   port: 1112
-spring:
-  application:
-    name: eureka-server
+
 management:
   security:
     enabled: false   

@@ -32,5 +32,6 @@
   	<!-- Model层，和部分工具类 -->
   	<module>api-commons</module>
   	<module>security-core</module>
+  	<module>log-core</module>
   </modules>
 </project>

@@ -9,8 +9,6 @@ management:
     health:
       show-details: always  
 spring:
-  application:
-    name: generator-center
   datasource:
     dynamic:
       enable: true

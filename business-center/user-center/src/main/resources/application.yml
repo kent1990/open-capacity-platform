@@ -10,8 +10,6 @@ management:
     health:
       show-details: always  
 spring:
-  application:
-    name: user-center
   datasource:
     dynamic:
       enable: true

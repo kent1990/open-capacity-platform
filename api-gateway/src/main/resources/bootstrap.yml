@@ -1,3 +1,7 @@
+spring:
+  application:
+    name: auth-gateway
+
 management:
   endpoints:
     web:

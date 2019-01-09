@@ -11,8 +11,6 @@ management:
       show-details: always
 spring:
   #elasticsearch服务配置
-  application:
-    name: log-center
   datasource:  
     druid: 
       # JDBC 配置(驱动类自动从url的mysql识别,数据源类型自动识别)

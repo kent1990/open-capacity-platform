@@ -31,6 +31,13 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-zipkin</artifactId>
 		</dependency>
+		
+		<!-- 日志统一配置 -->
+		<dependency>
+			<groupId>com.open.capacity</groupId>
+			<artifactId>log-core</artifactId>
+			<version>${core.version}</version>
+		</dependency>
 
 		<!-- 关系型和非关系型数据库配置 -->
 		<dependency>

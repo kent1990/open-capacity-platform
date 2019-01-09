@@ -22,8 +22,6 @@ security:
  
  
 spring:
-  application:
-    name: auth-sso
   datasource:
       type: com.alibaba.druid.pool.DruidDataSource
 #      driver-class-name:  oracle.jdbc.OracleDriver
