@@ -158,7 +158,7 @@ ocp灰度发布功能(参考dev分支)
 容器化部署  
 
 主机管理  
-![](https://i.imgur.com/0uq6o9G.png)  
+![](https://i.imgur.com/Y8dc6Mp.png)
 ocp应用平台    
  ![](https://i.imgur.com/0A5z4MH.png)      
 

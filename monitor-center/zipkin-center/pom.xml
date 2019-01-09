@@ -10,7 +10,7 @@
 	<packaging>pom</packaging>
 	<modules>
 		<module>zipkin-center-native</module>
-		<module>zipkin-center-mysql</module>
+		<!-- <module>zipkin-center-mysql</module> -->
 		<module>zipkin-center-es</module>
 	</modules>
 </project>
