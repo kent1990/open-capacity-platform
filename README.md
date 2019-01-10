@@ -9,12 +9,12 @@
 
 <a target="_blank" href="https://jq.qq.com/?_wv=1027&k=5JSjd5D"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="open-capacity-platform交流" title="open-capacity-platform交流"></a>
 
-![](https://i.imgur.com/kxpc628.png) 
+![](https://images.gitee.com/uploads/images/2019/0110/231914_3b9c6b66_1441068.png) 
 
 ##   技术介绍 
-![](https://i.imgur.com/29QKUkG.png)  
+![](https://images.gitee.com/uploads/images/2019/0110/231913_de1b7eb6_1441068.png)  
 ##   框架设计
-![](https://i.imgur.com/vn03vIX.jpg)
+![](https://images.gitee.com/uploads/images/2019/0110/231913_3a1125be_1441068.jpeg)
 
 ## 开发环境  
 redis3.X  
@@ -33,7 +33,12 @@ http://59.110.164.254:8066/login.html 用户名/密码：admin/admin
 
 ##  ocp项目演示
  
-![](http://img1.ph.126.net/WAraEeweVw2SyTUSG1dT6Q==/3887169428474612491.gif) 
+
+
+
+![输入图片说明](https://note.youdao.com/yws/public/resource/51f4bb7cca8accee35bf03939cffb452/xmlnote/2FDF880460374EA3990AD60E617B2FB6/5490 "在这里输入图片标题")
+
+
 
 
 ## 阿波罗配置中心演示  
@@ -46,7 +51,7 @@ http://59.110.164.254:8066/login.html 用户名/密码：admin/admin
 ![](https://i.imgur.com/PwcuvoC.gif)
 
 ## 项目组织结构分析  
-![](https://i.imgur.com/AHNZKdr.png)
+![](https://images.gitee.com/uploads/images/2019/0110/231913_f9847750_1441068.png)
 
 
 
@@ -54,30 +59,30 @@ http://59.110.164.254:8066/login.html 用户名/密码：admin/admin
 ## 一. open-capacity-platform能力开放平台管理    
    
 01.用户登录
-![](https://i.imgur.com/4PKB9CF.png)
+![](https://images.gitee.com/uploads/images/2019/0110/231915_3ca22dbe_1441068.png)
 
 02.用户管理
-![](https://i.imgur.com/j4ThxL5.png)
+![](https://images.gitee.com/uploads/images/2019/0110/231916_74fcbc85_1441068.png)
 
 03.角色管理
 
-![](https://i.imgur.com/IrtLUDg.png)
+![](https://images.gitee.com/uploads/images/2019/0110/231918_c10b5124_1441068.png)
 
 04.菜单管理
-![](https://i.imgur.com/j269pA8.png)
+![](https://images.gitee.com/uploads/images/2019/0110/231924_0ab3f997_1441068.png)
 
 
 05.权限管理
 
-![](https://i.imgur.com/s6l27rb.png)
+![](https://images.gitee.com/uploads/images/2019/0110/231923_4e42ff5d_1441068.png)
 
 
 06.注册中心   
- ![](https://i.imgur.com/zwaKg01.png)
+ ![](https://images.gitee.com/uploads/images/2019/0110/231926_e8da388c_1441068.png)
 
 
 07.配置中心  
-![](https://i.imgur.com/jW0hugt.png)  
+![](https://images.gitee.com/uploads/images/2019/0110/231927_a081ed4b_1441068.png)  
 ![](https://i.imgur.com/F80zBA4.png)  
 
 
@@ -86,7 +91,7 @@ http://59.110.164.254:8066/login.html 用户名/密码：admin/admin
 ![](https://i.imgur.com/2ufms9u.png)
 
 09.应用管理  
-![](https://i.imgur.com/LC7UI5X.png)
+![](https://images.gitee.com/uploads/images/2019/0110/231932_6e2ce5f5_1441068.png)
 
 
 10.token管理
