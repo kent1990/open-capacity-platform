@@ -65,7 +65,8 @@ public class EsLogController {
 		}
 		// 分页参数
 		Pageable pageable = PageRequest.of(MapUtils.getInteger(params, "page")-1, MapUtils.getInteger(params, "limit")
-				, Sort.Direction.DESC,"timestamp");
+				//, Sort.Direction.DESC,"timestamp"
+				);
 		SearchQuery query = new NativeSearchQueryBuilder().withQuery(builder).withPageable(pageable).build();
 		Page<LogDocument> result = logDao.search(query);
 		return PageResult.<LogDocument>builder().data(result.getContent()).code(0).count(result.getTotalElements()).build();

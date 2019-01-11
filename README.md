@@ -98,7 +98,8 @@ http://59.110.164.254:8066/login.html 用户名/密码：admin/admin
 
 ![](https://i.imgur.com/Pg80eh1.png)
 
-
+11.日志中心  
+![](https://i.imgur.com/rn2XL4a.png)  
 
 
 

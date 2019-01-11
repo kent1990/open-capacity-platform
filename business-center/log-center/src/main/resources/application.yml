@@ -70,7 +70,7 @@ spring:
 ################### redis 单机版 start ########################## 
     host: 59.110.164.254
     port: 6379    
-    timeout: 3000
+    timeout: 6000
     database: 1
 ################### redis 单机版 end ##########################   
 #    cluster:
@@ -93,8 +93,12 @@ spring:
       cluster-nodes: 35.192.230.214:9300
       repositories:
         enabled: true
+      properties:
+        transport:
+          tcp:  
+            connect_timeout: 120s       
 # 设置连接超时时间
-#spring.data.elasticsearch.properties.transport.tcp.connect_timeout=120s
+##spring.data.elasticsearch.properties.transport.tcp.connect_timeout=120s
 #  http:
 #    multipart:
 #      enabled: true
