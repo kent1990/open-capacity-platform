@@ -18,7 +18,7 @@
     <!-- 彩色日志格式 -->
     <property name="CONSOLE_LOG_PATTERN"
               value="[${APP_NAME}:${ServerIP}:${ServerPort}] %clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%level){blue} %clr(${PID}){magenta} %clr([%thread]){orange} %clr(%logger){cyan} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}" />
-    <property name="CONSOLE_LOG_PATTERN_NO_COLOR" value="[${APP_NAME} - ${ServerIP} - ${ServerPort}] %d{yyyy-MM-dd HH:mm:ss.SSS} %level ${PID} [%thread] %logger %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}" />
+    <property name="CONSOLE_LOG_PATTERN_NO_COLOR" value="[${APP_NAME}-${ServerIP}-${ServerPort}] %d{yyyy-MM-dd HH:mm:ss.SSS} %level ${PID} [%thread] %logger %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}" />
 
     <!-- 控制台日志 -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
@@ -74,17 +74,17 @@
         </filter>
     </appender>
     
-
+	<!-- 
     <appender name="point_log" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_POINT_FILE}/point.log</file>
         <encoder>
             <pattern>%d{yyyy-MM-dd HH:mm:ss}|${APP_NAME}|%msg%n</pattern>
             <charset>UTF-8</charset>
         </encoder>
-        <!-- 基于时间的分包策略 -->
+         
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${LOG_POINT_FILE}/point.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
-            <!--保留时间,单位:天-->
+         
             <maxHistory>${LOG_FILEMAXDAY}</maxHistory>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>${LOG_MAXFILESIZE}</maxFileSize>
@@ -102,7 +102,7 @@
     <logger name="com.open.capacity.log.monitor" level="info" addtivity="false">
         <appender-ref ref="point_log_async" />
     </logger>
-
+	 -->
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="ERROR"/>

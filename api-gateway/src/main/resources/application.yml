@@ -259,6 +259,10 @@ zuul:
       path: /api-generator/**
       service-id: generator-center
       strip-prefix: true
+    log:
+      path: /api-log/**
+      service-id: log-center
+      strip-prefix: true  
   ssl-hostname-validation-enabled: false
 
 

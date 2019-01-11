@@ -60,7 +60,7 @@ CREATE TABLE `sys_service` (
   `sort` int(11) NOT NULL,
   `createTime` datetime NOT NULL,
   `updateTime` datetime NOT NULL,
-  `isMenu` int(11) DEFAULT NULL COMMENT '是否菜单 1 是 2 不是',
+  `isMenu` int(11) DEFAULT NULL COMMENT '是否服务 1 是 2 不是',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4;
 
@@ -68,4 +68,6 @@ CREATE TABLE `sys_service` (
 # Data for table "sys_service"
 #
 
-INSERT INTO `sys_service` VALUES (1,-1,'用户中心','javascript:;',NULL,'layui-icon-set',0,'2017-11-17 16:56:59','2018-08-20 10:20:42',1),(2,1,'用户管理','#!user','system/user.html','',2,'2017-11-17 16:56:59','2018-08-20 10:03:26',1),(3,1,'角色管理','#!role','system/role.html','',3,'2017-11-17 16:56:59','2018-08-20 10:03:35',1),(4,1,'菜单管理','#!menus','system/menus.html','',4,'2017-11-17 16:56:59','2018-08-20 10:03:40',1),(5,1,'权限管理','#!permissions','system/permissions.html','',5,'2017-11-17 16:56:59','2018-08-20 10:03:46',1),(7,-1,'注册中心','#!register','http://127.0.0.1:1111','layui-icon-engine',7,'2017-11-17 16:56:59','2018-08-20 11:50:29',1),(8,-1,'监控中心','#!monitor','http://127.0.0.1:9001/#/wallboard','layui-icon-util\r\n',8,'2017-11-17 16:56:59','2018-08-20 10:43:13',1),(9,-1,'文件中心','#!files','files/files.html','layui-icon-file',10,'2017-11-17 16:56:59','2018-08-23 17:43:14',1),(10,-1,'文档中心','#!swagger','http://127.0.0.1:9200/swagger-ui.html','layui-icon-app',9,'2017-11-17 16:56:59','2018-08-22 17:58:13',1),(11,1,'我的信息','#!myInfo','system/myInfo.html','',10,'2017-11-17 16:56:59','2018-08-21 11:56:12',1),(12,-1,'认证中心','javascript:;','','layui-icon-set',1,'2017-11-17 16:56:59','2018-08-21 12:48:13',1),(13,12,'token管理','#!token','attestation/token.html',NULL,10,'2017-11-17 16:56:59','2018-08-16 17:03:04',1),(35,12,'应用管理','#!app','attestation/app.html','',11,'2018-08-23 12:17:52','2018-08-23 12:17:52',1),(36,12,'服务管理','#!services','attestation/services.html','',10,'2018-08-23 16:42:22','2018-08-23 16:42:22',2);
+INSERT INTO `sys_service` VALUES (38,-1,'api-auth',NULL,'',NULL,1,'2019-01-10 09:01:57','2019-01-10 09:01:57',1),(39,-1,'api-user',NULL,'',NULL,2,'2019-01-10 09:02:19','2019-01-10 09:02:19',1),(40,-1,'api-file',NULL,'',NULL,3,'2019-01-10 09:02:34','2019-01-10 09:02:34',1),(41,38,'获取token',NULL,'/oauth/token',NULL,1,'2019-01-10 09:03:17','2019-01-10 09:03:17',2),(42,38,'获取授权码',NULL,'/oauth/authorize',NULL,2,'2019-01-10 09:04:02','2019-01-10 09:04:02',2),(43,38,'登录',NULL,'/user/login',NULL,3,'2019-01-10 09:05:33','2019-01-10 09:05:42',2),(44,38,'登录页面',NULL,'/login.html',NULL,3,'2019-01-10 09:20:26','2019-01-10 09:20:26',2);
+
+#

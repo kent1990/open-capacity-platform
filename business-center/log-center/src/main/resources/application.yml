@@ -89,7 +89,7 @@ spring:
     base-url: http://127.0.0.1:11008  
   data:
     elasticsearch:
-      cluster-name:  elasticsearch
+      cluster-name:  docker-cluster
       cluster-nodes: 35.192.230.214:9300
       repositories:
         enabled: true
