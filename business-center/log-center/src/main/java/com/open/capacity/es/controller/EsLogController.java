@@ -51,8 +51,8 @@ public class EsLogController {
 				builder.must(QueryBuilders.matchPhraseQuery(ES_PARAM_MESSAGE, searchValue));
 			}
 			if (ES_PARAM_LOG_LEVEL.equals(searchKey)) {
-				// 精准查询
-				builder.must(QueryBuilders.termQuery(ES_PARAM_LOG_LEVEL, searchValue));
+				// 模糊查询
+				builder.must(QueryBuilders.matchPhraseQuery(ES_PARAM_LOG_LEVEL, searchValue.toUpperCase()));
 			}
 			if (ES_PARAM_APP_NAME.equals(searchKey)) {
 				// 模糊查询

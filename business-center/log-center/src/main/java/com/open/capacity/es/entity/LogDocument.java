@@ -6,6 +6,8 @@ import org.springframework.data.elasticsearch.annotations.Document;
 
 import lombok.Data;
 
+import java.util.Date;
+
 /**
  * 日志对象
  *
@@ -16,7 +18,7 @@ import lombok.Data;
 public class LogDocument {
     @Id
     private String id;
-    private String timestamp;
+    private Date timestamp;
     private String message;
     private String threadName;
     private String serverPort;
