@@ -1,4 +1,4 @@
-package com.open.capacity.client.cors.config;
+package com.open.capacity.client.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

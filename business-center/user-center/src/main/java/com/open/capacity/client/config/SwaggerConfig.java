@@ -1,4 +1,4 @@
-package com.open.capacity.client.swagger.config;
+package com.open.capacity.client.config;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -32,6 +32,8 @@ public class SwaggerConfig implements WebMvcConfigurer {
 
 	@Bean
 	public Docket createRestApi() {
+		
+		
 		ParameterBuilder tokenPar = new ParameterBuilder();
 		List<Parameter> pars = new ArrayList<>();
 		tokenPar.name("Authorization").description("令牌").
@@ -43,10 +45,10 @@ public class SwaggerConfig implements WebMvcConfigurer {
 		return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo()).select()
 				// .apis(RequestHandlerSelectors.basePackage("com.open.capacity"))
 				.apis(RequestHandlerSelectors.any())
-//				.paths( input ->PathSelectors.regex("/user.*").apply(input) || PathSelectors.regex("/permissions.*").apply(input) 
-//						|| PathSelectors.regex("/roles.*").apply(input) || PathSelectors.regex("/test.*").apply(input)
-//				)
-				 .paths(PathSelectors.any())
+				.paths( input ->PathSelectors.regex("/user.*").apply(input) || PathSelectors.regex("/permissions.*").apply(input) 
+						|| PathSelectors.regex("/roles.*").apply(input) || PathSelectors.regex("/test.*").apply(input)
+				)
+				// .paths(PathSelectors.any())
 				.build().globalOperationParameters(pars);
 	}
 

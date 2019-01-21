@@ -1,4 +1,4 @@
-package com.open.capacity.client.swagger.config;
+package com.open.capacity.client.config;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -53,7 +53,7 @@ public class SwaggerConfig implements WebMvcConfigurer {
 	}
 
 	private ApiInfo apiInfo() {
-		return new ApiInfoBuilder().title("用户中心api").description("用户中心api").version("1.0").build();
+		return new ApiInfoBuilder().title("文件中心api").description("文件中心api").version("1.0").build();
 	}
 
 	@Bean

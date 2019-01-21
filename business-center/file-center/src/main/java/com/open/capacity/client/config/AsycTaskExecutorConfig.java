@@ -1,4 +1,4 @@
-package com.open.capacity.client.rest.config;
+package com.open.capacity.client.config;
 
 import java.util.concurrent.ThreadPoolExecutor;
 
