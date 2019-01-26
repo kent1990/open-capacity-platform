@@ -10,7 +10,7 @@
 <a target="_blank" href="https://jq.qq.com/?_wv=1027&k=5JSjd5D"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="open-capacity-platform交流" title="open-capacity-platform交流"></a>
 
 ![](https://images.gitee.com/uploads/images/2019/0110/231914_3b9c6b66_1441068.png) 
-
+![](https://images.gitee.com/uploads/images/2019/0126/125448_fefd894c_1147840.png "屏幕截图.png")
 ##   技术介绍 
 ![](https://images.gitee.com/uploads/images/2019/0110/231913_de1b7eb6_1441068.png)  
 ##   框架设计
@@ -46,9 +46,9 @@ http://59.110.164.254:8066/login.html 用户名/密码：admin/admin
 
 
 ## oauth认证方式    
-![](https://i.imgur.com/MUCa4x6.gif)
+![](https://images.gitee.com/uploads/images/2019/0126/125449_8e9c22b6_1147840.gif)
 ## oauth单点登录   
-![](https://i.imgur.com/PwcuvoC.gif)
+![](https://images.gitee.com/uploads/images/2019/0126/125449_8c311a21_1147840.gif)
 
 ## 项目组织结构分析  
 ![](https://images.gitee.com/uploads/images/2019/0110/231913_f9847750_1441068.png)
@@ -83,12 +83,12 @@ http://59.110.164.254:8066/login.html 用户名/密码：admin/admin
 
 07.配置中心  
 ![](https://images.gitee.com/uploads/images/2019/0110/231927_a081ed4b_1441068.png)  
-![](https://i.imgur.com/F80zBA4.png)  
+![](https://images.gitee.com/uploads/images/2019/0126/125449_9b960f05_1147840.png)  
 
 
 08.服务管理
 
-![](https://i.imgur.com/2ufms9u.png)
+![](https://images.gitee.com/uploads/images/2019/0126/125449_baa02383_1147840.png)
 
 09.应用管理  
 ![](https://images.gitee.com/uploads/images/2019/0110/231932_6e2ce5f5_1441068.png)
@@ -96,10 +96,10 @@ http://59.110.164.254:8066/login.html 用户名/密码：admin/admin
 
 10.token管理
 
-![](https://i.imgur.com/Pg80eh1.png)
+![](https://images.gitee.com/uploads/images/2019/0126/125449_7a3dec37_1147840.png)
 
 11.日志中心  
-![](https://i.imgur.com/rn2XL4a.png)  
+![](https://images.gitee.com/uploads/images/2019/0126/125450_75ac20ef_1147840.png)  
 
 
 
@@ -135,24 +135,24 @@ d.启动gray-center的discovery-console
 e.启动gray-center的discovery-console-desktop  
 
 ocp灰度发布功能(参考dev分支)    
-![](https://i.imgur.com/vgUAqoF.png)  
-![](https://i.imgur.com/jx7MvS6.png)  
-![](https://i.imgur.com/7qlO4XD.png)  
+![](https://images.gitee.com/uploads/images/2019/0126/125450_b42073c5_1147840.png)  
+![](https://images.gitee.com/uploads/images/2019/0126/125450_66e3a8db_1147840.png)  
+![](https://images.gitee.com/uploads/images/2019/0126/125451_28b1bc41_1147840.png)  
   
  
 灰度管理UI  
 用户名:admin      
 密码  :admin  
-![](https://i.imgur.com/QINO2jZ.png)
+![](https://images.gitee.com/uploads/images/2019/0126/125451_c3b6224d_1147840.png)
 
 页面   
-![](https://i.imgur.com/o4Lifbi.png)
+![](https://images.gitee.com/uploads/images/2019/0126/125452_3164c04c_1147840.png)
 
 基于版本的灰度发布
-![](https://i.imgur.com/nWEwwqv.png)
-![](https://i.imgur.com/7GeY6ws.png)
-![](https://i.imgur.com/jvLTe0N.png)
-![](https://i.imgur.com/LfrJKQH.png)
+![](https://images.gitee.com/uploads/images/2019/0126/125452_4b935973_1147840.png)
+![](https://images.gitee.com/uploads/images/2019/0126/125452_565e9022_1147840.png)
+![](https://images.gitee.com/uploads/images/2019/0126/125452_3f970930_1147840.png)
+![](https://images.gitee.com/uploads/images/2019/0126/125453_79912ce1_1147840.png)
 
 基于规则的灰度发布  
 【待续】
@@ -164,38 +164,38 @@ ocp灰度发布功能(参考dev分支)
 容器化部署  
 
 主机管理  
-![](https://i.imgur.com/Y8dc6Mp.png)
+![](https://images.gitee.com/uploads/images/2019/0126/125453_6682dba8_1147840.png)
 ocp应用平台    
- ![](https://i.imgur.com/0A5z4MH.png)      
+ ![](https://images.gitee.com/uploads/images/2019/0126/125453_3831567a_1147840.png)      
 
 注册中心    
-![](https://i.imgur.com/cS6Wp2D.png)    
-![](https://i.imgur.com/S6naIh3.png)  
-![](https://i.imgur.com/M3e8mIA.png)     
+![](https://images.gitee.com/uploads/images/2019/0126/125454_b04fbc0d_1147840.png)    
+![](https://images.gitee.com/uploads/images/2019/0126/125454_1f9ce4e8_1147840.png)  
+![](https://images.gitee.com/uploads/images/2019/0126/125454_3ece0005_1147840.png)     
 
 
 用户中心    
-![](https://i.imgur.com/yR5up2L.png)    
-![](https://i.imgur.com/iNgqpOn.png)   
+![](https://images.gitee.com/uploads/images/2019/0126/125454_272e0e79_1147840.png)    
+![](https://images.gitee.com/uploads/images/2019/0126/125455_0f0278dd_1147840.png)   
  
 
 认证中心   
-![](https://i.imgur.com/caCkRBk.png)    
-![](https://i.imgur.com/0gbdnTr.png)  
+![](https://images.gitee.com/uploads/images/2019/0126/125455_05a5b463_1147840.png)    
+![](https://images.gitee.com/uploads/images/2019/0126/125455_4827ecff_1147840.png)  
 
 api网关   
-![](https://i.imgur.com/mE2Jcl6.png)  
-![](https://i.imgur.com/Gzm9DRJ.png)
+![](https://images.gitee.com/uploads/images/2019/0126/125456_7cf25a83_1147840.png)  
+![](https://images.gitee.com/uploads/images/2019/0126/125456_bbac1fb9_1147840.png)
 
 负载均衡器  
-![](https://i.imgur.com/LtsAJ36.png)
+![](https://images.gitee.com/uploads/images/2019/0126/125456_5c697b5f_1147840.png)
 
 
 后台中心  
-![](https://i.imgur.com/LilbWW5.png)
-![](http://img0.ph.126.net/HHuE9XmggkqtsUAS3eiJxg==/6597926286217145493.png)
+![](https://images.gitee.com/uploads/images/2019/0126/125456_e21d4fb0_1147840.png)
+![](https://images.gitee.com/uploads/images/2019/0126/125456_18382021_1147840.jpeg)
 
 资源消耗情况
-![](https://i.imgur.com/qMvUVKH.png)
+![](https://images.gitee.com/uploads/images/2019/0126/125457_397161e8_1147840.png)
 
 
