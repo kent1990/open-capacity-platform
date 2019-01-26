@@ -10,7 +10,7 @@
 <a target="_blank" href="https://jq.qq.com/?_wv=1027&k=5JSjd5D"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="open-capacity-platform交流" title="open-capacity-platform交流"></a>
 
 ![1群](https://images.gitee.com/uploads/images/2019/0110/231914_3b9c6b66_1441068.png) 
-![2群](https://images.gitee.com/uploads/images/2019/0126/125647_ae5e15a7_1147840.png "屏幕截图.png")
+![2群](https://images.gitee.com/uploads/images/2019/0126/130006_e6933516_1147840.png)
 ##   技术介绍 
 ![](https://images.gitee.com/uploads/images/2019/0110/231913_de1b7eb6_1441068.png)  
 ##   框架设计
