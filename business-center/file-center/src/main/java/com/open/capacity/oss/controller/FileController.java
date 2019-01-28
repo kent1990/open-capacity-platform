@@ -3,6 +3,8 @@ package com.open.capacity.oss.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,9 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.open.capacity.annotation.log.LogAnnotation;
 import com.open.capacity.commons.PageResult;
 import com.open.capacity.commons.Result;
+import com.open.capacity.log.monitor.PointUtil;
 import com.open.capacity.oss.config.OssServiceFactory;
 import com.open.capacity.oss.model.FileInfo;
 import com.open.capacity.oss.model.FileType;
@@ -32,7 +37,8 @@ public class FileController {
 
 	@Autowired
 	private OssServiceFactory fileServiceFactory;
-
+	private static Logger log = LoggerFactory.getLogger(FileController.class);
+	private ObjectMapper objectMapper = new ObjectMapper();
 	/**
 	 * 文件上传
 	 * 根据fileType选择上传方式
@@ -43,6 +49,10 @@ public class FileController {
 	@LogAnnotation(module = "file-center:FileController:upload", recordRequestParam = false)
 	@PostMapping("/files-anon")
 	public FileInfo upload(@RequestParam("file") MultipartFile file) throws Exception {
+		
+		String num = PointUtil.getRandom();//生成日志随机数
+		log.info("FileController|upload|num:{}|input:{}",num ,objectMapper.writeValueAsString(file));
+		
 		String fileType = FileType.ALIYUN.toString();
 		FileService fileService = fileServiceFactory.getFileService(fileType);
 		return fileService.upload(file);
@@ -80,6 +90,8 @@ public class FileController {
 	public Result delete(@PathVariable String id) {
 
 		try{
+			String num = PointUtil.getRandom();//生成日志随机数
+			log.info("FileController|delete|num:{}|input:{}",num ,id);
 			FileInfo fileInfo = fileServiceFactory.getFileService(FileType.ALIYUN.toString()).getById(id);
 			if (fileInfo != null) {
 				FileService fileService = fileServiceFactory.getFileService(fileInfo.getSource());
@@ -96,11 +108,14 @@ public class FileController {
 	 * 文件查询
 	 * @param params
 	 * @return
+	 * @throws JsonProcessingException 
 	 */
 	@PreAuthorize("hasAuthority('file:query')")
 	@GetMapping("/files")
-	public PageResult<FileInfo> findFiles(@RequestParam Map<String, Object> params) {
+	public PageResult<FileInfo> findFiles(@RequestParam Map<String, Object> params) throws JsonProcessingException {
         
+		String num = PointUtil.getRandom();//生成日志随机数
+		log.info("FileController|upload|num:{}|input:{}",num ,objectMapper.writeValueAsString(params));
 		return  fileServiceFactory.getFileService(FileType.ALIYUN.toString()).findList(params);
 
 	}

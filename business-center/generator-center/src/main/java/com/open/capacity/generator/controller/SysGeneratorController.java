@@ -6,14 +6,19 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.open.capacity.commons.PageResult;
 import com.open.capacity.generator.service.SysGeneratorService;
+import com.open.capacity.log.monitor.PointUtil;
 
 import io.swagger.annotations.Api;
 
@@ -30,13 +35,20 @@ import io.swagger.annotations.Api;
 public class SysGeneratorController {
     @Autowired
     private SysGeneratorService sysGeneratorService;
+    
+    private static Logger log = LoggerFactory.getLogger(SysGeneratorController.class);
+	private ObjectMapper objectMapper = new ObjectMapper();
 
     /**
      * 列表
+     * @throws JsonProcessingException 
      */
     @ResponseBody
     @RequestMapping("/list")
-    public PageResult list(@RequestParam Map<String, Object> params){
+    public PageResult list(@RequestParam Map<String, Object> params) throws JsonProcessingException{
+    	
+    	String num = PointUtil.getRandom();//生成日志随机数
+		log.info("SysGeneratorController|list|num:{}|input:{}",num ,objectMapper.writeValueAsString(params));
         return sysGeneratorService.queryList(params);
     }
 
@@ -45,8 +57,12 @@ public class SysGeneratorController {
      */
     @RequestMapping("/code")
     public void code(String tables, HttpServletResponse response) throws IOException {
+    	
+    	
+    	String num = PointUtil.getRandom();//生成日志随机数
+		log.info("SysGeneratorController|code|num:{}|input:{}",num ,tables);
         byte[] data = sysGeneratorService.generatorCode(tables.split(","));
-
+        
         response.reset();
         response.setHeader("Content-Disposition", "attachment; filename=\"generator.zip\"");
         response.addHeader("Content-Length", "" + data.length);

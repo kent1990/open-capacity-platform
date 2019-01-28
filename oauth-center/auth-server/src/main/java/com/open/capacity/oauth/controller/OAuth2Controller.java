@@ -3,6 +3,7 @@ package com.open.capacity.oauth.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -16,9 +17,11 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.Cursor;
+import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisConnectionUtils;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ScanOptions;
@@ -77,10 +80,9 @@ public class OAuth2Controller {
 
 	@Autowired
 	private TokenStore tokenStore;
-	
+
 	@Autowired
-	private RedisTemplate<String,Object> redisTemplate ;
-	
+	private RedisTemplate<String, Object> redisTemplate;
 
 	@ApiOperation(value = "用户名密码获取token")
 	@PostMapping("/oauth/user/token")
@@ -162,10 +164,11 @@ public class OAuth2Controller {
 
 		}
 	}
-	@LogAnnotation(module = "oauth:/oauth/client/token",recordRequestParam=false)
+
+	@LogAnnotation(module = "oauth:/oauth/client/token", recordRequestParam = false)
 	@ApiOperation(value = "clientId获取token")
 	@PostMapping("/oauth/client/token")
-	public void getClientTokenInfo( HttpServletRequest request, HttpServletResponse response) {
+	public void getClientTokenInfo(HttpServletRequest request, HttpServletResponse response) {
 
 		String clientId = request.getHeader("client_id");
 		String clientSecret = request.getHeader("client_secret");
@@ -234,50 +237,45 @@ public class OAuth2Controller {
 
 		}
 	}
-	
-	
+
 	@ApiOperation(value = "access_token刷新token")
 	@PostMapping(value = "/oauth/refresh/token", params = "access_token")
-	public void refreshTokenInfo(String access_token ,HttpServletRequest request, HttpServletResponse response) {
-		
-		//拿到当前用户信息
-    	try {
-			Authentication user = SecurityContextHolder.getContext()
-			        .getAuthentication();
-			
-			if(user!=null){
-				if(user instanceof OAuth2Authentication){
-					Authentication athentication = (Authentication)user;
-					OAuth2AuthenticationDetails details = (OAuth2AuthenticationDetails) athentication.getDetails() ;
+	public void refreshTokenInfo(String access_token, HttpServletRequest request, HttpServletResponse response) {
+
+		// 拿到当前用户信息
+		try {
+			Authentication user = SecurityContextHolder.getContext().getAuthentication();
+
+			if (user != null) {
+				if (user instanceof OAuth2Authentication) {
+					Authentication athentication = (Authentication) user;
+					OAuth2AuthenticationDetails details = (OAuth2AuthenticationDetails) athentication.getDetails();
 				}
-				
+
 			}
 			OAuth2AccessToken accessToken = tokenStore.readAccessToken(access_token);
-			OAuth2Authentication  auth =(OAuth2Authentication ) user ;
+			OAuth2Authentication auth = (OAuth2Authentication) user;
 			RedisClientDetailsService clientDetailsService = SpringUtil.getBean(RedisClientDetailsService.class);
-			
-			
-			ClientDetails clientDetails = clientDetailsService.loadClientByClientId(auth.getOAuth2Request().getClientId());
-			
-			
+
+			ClientDetails clientDetails = clientDetailsService
+					.loadClientByClientId(auth.getOAuth2Request().getClientId());
+
 			AuthorizationServerTokenServices authorizationServerTokenServices = SpringUtil
 					.getBean("defaultAuthorizationServerTokenServices", AuthorizationServerTokenServices.class);
 			OAuth2RequestFactory requestFactory = new DefaultOAuth2RequestFactory(clientDetailsService);
-			
-			
-			RefreshTokenGranter refreshTokenGranter = new RefreshTokenGranter( authorizationServerTokenServices, clientDetailsService, requestFactory );
-			
+
+			RefreshTokenGranter refreshTokenGranter = new RefreshTokenGranter(authorizationServerTokenServices,
+					clientDetailsService, requestFactory);
+
 			Map<String, String> map = new HashMap<>();
 			map.put("grant_type", "refresh_token");
 			map.put("refresh_token", accessToken.getRefreshToken().getValue());
-			TokenRequest tokenRequest = new TokenRequest(map, auth.getOAuth2Request().getClientId(), auth.getOAuth2Request().getScope()  , "refresh_token");
-			
-			
-			OAuth2AccessToken oAuth2AccessToken = refreshTokenGranter.grant("refresh_token",
-					tokenRequest);
-			
+			TokenRequest tokenRequest = new TokenRequest(map, auth.getOAuth2Request().getClientId(),
+					auth.getOAuth2Request().getScope(), "refresh_token");
+
+			OAuth2AccessToken oAuth2AccessToken = refreshTokenGranter.grant("refresh_token", tokenRequest);
+
 			tokenStore.removeAccessToken(accessToken);
-			
 
 			response.setContentType("application/json;charset=UTF-8");
 			response.getWriter().write(objectMapper.writeValueAsString(oAuth2AccessToken));
@@ -302,28 +300,27 @@ public class OAuth2Controller {
 				e1.printStackTrace();
 			}
 		}
-		
-		
-	 
+
 	}
+
 	/**
 	 * 移除access_token和refresh_token
+	 * 
 	 * @param access_token
 	 */
 	@ApiOperation(value = "移除token")
 	@PostMapping(value = "/oauth/remove/token", params = "access_token")
 	public void removeToken(String access_token) {
-		
-		//拿到当前用户信息
-    	Authentication user = SecurityContextHolder.getContext()
-                .getAuthentication();
-		
-		if(user!=null){
-			if(user instanceof OAuth2Authentication){
-				Authentication athentication = (Authentication)user;
-				OAuth2AuthenticationDetails details = (OAuth2AuthenticationDetails) athentication.getDetails() ;
+
+		// 拿到当前用户信息
+		Authentication user = SecurityContextHolder.getContext().getAuthentication();
+
+		if (user != null) {
+			if (user instanceof OAuth2Authentication) {
+				Authentication athentication = (Authentication) user;
+				OAuth2AuthenticationDetails details = (OAuth2AuthenticationDetails) athentication.getDetails();
 			}
-			
+
 		}
 		OAuth2AccessToken accessToken = tokenStore.readAccessToken(access_token);
 		if (accessToken != null) {
@@ -338,34 +335,31 @@ public class OAuth2Controller {
 		}
 	}
 
-	
 	@ApiOperation(value = "获取token信息")
 	@PostMapping(value = "/oauth/get/token", params = "access_token")
 	public OAuth2AccessToken getTokenInfo(String access_token) {
-		
-		//拿到当前用户信息
-    	Authentication user = SecurityContextHolder.getContext()
-                .getAuthentication();
-		
-		if(user!=null){
-			if(user instanceof OAuth2Authentication){
-				Authentication athentication = (Authentication)user;
-				OAuth2AuthenticationDetails details = (OAuth2AuthenticationDetails) athentication.getDetails() ;
+
+		// 拿到当前用户信息
+		Authentication user = SecurityContextHolder.getContext().getAuthentication();
+
+		if (user != null) {
+			if (user instanceof OAuth2Authentication) {
+				Authentication athentication = (Authentication) user;
+				OAuth2AuthenticationDetails details = (OAuth2AuthenticationDetails) athentication.getDetails();
 			}
-			
+
 		}
 		OAuth2AccessToken accessToken = tokenStore.readAccessToken(access_token);
-		
-		return accessToken ;
-		
+
+		return accessToken;
+
 	}
 
-	
-	
 	/**
 	 * 当前登陆用户信息
 	 * security获取当前登录用户的方法是SecurityContextHolder.getContext().getAuthentication()
 	 * 这里的实现类是org.springframework.security.oauth2.provider.OAuth2Authentication
+	 * 
 	 * @return
 	 */
 	@ApiOperation(value = "当前登陆用户信息")
@@ -375,80 +369,76 @@ public class OAuth2Controller {
 		userInfo.put("user", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 		logger.debug("认证详细信息:" + SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString());
 
-
-
-		List<SysPermission>  permissions = new ArrayList<>();
+		List<SysPermission> permissions = new ArrayList<>();
 
 		new ArrayList(SecurityContextHolder.getContext().getAuthentication().getAuthorities()).forEach(o -> {
-				SysPermission sysPermission = new SysPermission();
-				sysPermission.setPermission(o.toString());
-				permissions.add(sysPermission);
-			}
-		);
-//		userInfo.put("authorities", AuthorityUtils.authorityListToSet(SecurityContextHolder.getContext().getAuthentication().getAuthorities()) );
+			SysPermission sysPermission = new SysPermission();
+			sysPermission.setPermission(o.toString());
+			permissions.add(sysPermission);
+		});
+		// userInfo.put("authorities",
+		// AuthorityUtils.authorityListToSet(SecurityContextHolder.getContext().getAuthentication().getAuthorities())
+		// );
 		userInfo.put("permissions", permissions);
 
-		userInfo.put("resp_code","200");
+		userInfo.put("resp_code", "200");
 
-		logger.info("返回信息:{}",userInfo);
+		logger.info("返回信息:{}", userInfo);
 
 		return userInfo;
 	}
-	
+
 	@ApiOperation(value = "token列表")
 	@PostMapping("/oauth/token/list")
-	public PageResult<HashMap<String, String>> getUserTokenInfo(@RequestParam Map<String, Object> params) throws Exception {
+	public PageResult<HashMap<String, String>> getUserTokenInfo(@RequestParam Map<String, Object> params)
+			throws Exception {
 		List<HashMap<String, String>> list = new ArrayList<>();
 
-		Set<String> keys = redisTemplate.keys("access:" + "*") ;
-		//根据分页参数获取对应数据
-		List<String> pages = findKeysForPage("access:" + "*", MapUtils.getInteger(params, "page"),MapUtils.getInteger(params, "limit"));
+		Set<String> keys = redisTemplate.keys("access:" + "*");
+		// 根据分页参数获取对应数据
+		List<String> pages = findKeysForPage("access:" + "*", MapUtils.getInteger(params, "page"),
+				MapUtils.getInteger(params, "limit"));
 
-		for (String page: pages) {
+		for (String page : pages) {
 			String key = page;
 
 			String accessToken = StringUtils.substringAfter(key, "access:");
 
 			OAuth2AccessToken token = tokenStore.readAccessToken(accessToken);
 			HashMap<String, String> map = new HashMap<String, String>();
-			 
-			
-			 
-			
+
 			try {
 				map.put("token_type", token.getTokenType());
 				map.put("token_value", token.getValue());
-				map.put("expires_in", token.getExpiresIn()+"");
+				map.put("expires_in", token.getExpiresIn() + "");
 			} catch (Exception e) {
-				 
+
 			}
-			
-			
+
 			OAuth2Authentication oAuth2Auth = tokenStore.readAuthentication(token);
 			Authentication authentication = oAuth2Auth.getUserAuthentication();
 
 			map.put("client_id", oAuth2Auth.getOAuth2Request().getClientId());
 			map.put("grant_type", oAuth2Auth.getOAuth2Request().getGrantType());
-			
+
 			if (authentication instanceof UsernamePasswordAuthenticationToken) {
 				UsernamePasswordAuthenticationToken authenticationToken = (UsernamePasswordAuthenticationToken) authentication;
-			
-				if(authenticationToken.getPrincipal() instanceof LoginAppUser ){
+
+				if (authenticationToken.getPrincipal() instanceof LoginAppUser) {
 					LoginAppUser user = (LoginAppUser) authenticationToken.getPrincipal();
-					map.put("user_id", user.getId()+"");
-					map.put("user_name", user.getUsername()+"");
-					map.put("user_head_imgurl", user.getHeadImgUrl()+"");
+					map.put("user_id", user.getId() + "");
+					map.put("user_name", user.getUsername() + "");
+					map.put("user_head_imgurl", user.getHeadImgUrl() + "");
 				}
-				
-				
-			}else if (authentication instanceof PreAuthenticatedAuthenticationToken ){
-				//刷新token方式
+
+			} else if (authentication instanceof PreAuthenticatedAuthenticationToken) {
+				// 刷新token方式
 				PreAuthenticatedAuthenticationToken authenticationToken = (PreAuthenticatedAuthenticationToken) authentication;
-				if(authenticationToken.getPrincipal() instanceof LoginAppUser ){
+				if (authenticationToken.getPrincipal() instanceof LoginAppUser) {
 					LoginAppUser user = (LoginAppUser) authenticationToken.getPrincipal();
-					map.put("user_id", user.getId()+"");
-					map.put("user_name", user.getUsername()+"");
-					map.put("user_head_imgurl", user.getHeadImgUrl()+"");
+					map.put("user_id", user.getId() + "");
+					map.put("user_name", user.getUsername() + "");
+					map.put("user_head_imgurl", user.getHeadImgUrl() + "");
 				}
 
 			}
@@ -456,46 +446,46 @@ public class OAuth2Controller {
 
 		}
 
-		return PageResult.<HashMap<String, String>>builder().data(list).code(0).count((long) keys.size()).build() ;
+		return PageResult.<HashMap<String, String>>builder().data(list).code(0).count((long) keys.size()).build();
 
 	}
 
 	public List<String> findKeysForPage(String patternKey, int pageNum, int pageSize) {
-		ScanOptions options = ScanOptions.scanOptions().match(patternKey).build();
-		RedisConnectionFactory factory = redisTemplate.getConnectionFactory();
-		RedisConnection rc = factory.getConnection();
-		Cursor<byte[]> cursor = rc.scan(options);
+
+		Set<String> execute = redisTemplate.execute(new RedisCallback<Set<String>>() {
+
+			@Override
+			public Set<String> doInRedis(RedisConnection connection) throws DataAccessException {
+
+				Set<String> binaryKeys = new HashSet<>();
+
+				Cursor<byte[]> cursor = connection
+						.scan(new ScanOptions.ScanOptionsBuilder().match(patternKey).count(1000).build());
+				int tmpIndex = 0;
+				int startIndex = (pageNum - 1) * pageSize;
+				int end = pageNum * pageSize;
+				while (cursor.hasNext()) {
+					if (tmpIndex >= startIndex && tmpIndex < end) {
+						binaryKeys.add(new String(cursor.next()));
+						tmpIndex++;
+						continue;
+					}
+
+					// 获取到满足条件的数据后,就可以退出了
+					if (tmpIndex >= end) {
+						break;
+					}
+
+					tmpIndex++;
+					cursor.next();
+				}
+				connection.close();
+				return binaryKeys;
+			}
+		});
+
 		List<String> result = new ArrayList<String>(pageSize);
-		int tmpIndex = 0;
-		int startIndex = (pageNum - 1) * pageSize;
-		int end = pageNum * pageSize;
-		while (cursor.hasNext()) {
-			if (tmpIndex >= startIndex && tmpIndex < end) {
-				result.add(new String(cursor.next()));
-				tmpIndex++;
-				continue;
-			}
-
-			// 获取到满足条件的数据后,就可以退出了
-			if(tmpIndex >=end) {
-				break;
-			}
-
-			tmpIndex++;
-			cursor.next();
-		}
-
-		try {
-			// cursor.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		try {
-			RedisConnectionUtils.releaseConnection(rc, factory);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		result.addAll(execute);
 		return result;
 	}
 
