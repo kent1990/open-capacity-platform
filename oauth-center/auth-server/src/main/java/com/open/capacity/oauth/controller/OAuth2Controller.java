@@ -394,57 +394,61 @@ public class OAuth2Controller {
 			throws Exception {
 		List<HashMap<String, String>> list = new ArrayList<>();
 
-		Set<String> keys = redisTemplate.keys("access:" + "*");
-		// 根据分页参数获取对应数据
-		List<String> pages = findKeysForPage("access:" + "*", MapUtils.getInteger(params, "page"),
-				MapUtils.getInteger(params, "limit"));
+		Set<String> keys = redisTemplate.keys("access:" + "*") ;
+//        Object key1 = keys.toArray()[0];
+//        Object token1 = redisTemplate.opsForValue().get(key1);
+		//根据分页参数获取对应数据
+	//	List<String> pages = findKeysForPage("access:" + "*", MapUtils.getInteger(params, "page"),MapUtils.getInteger(params, "limit"));
 
-		for (String page : pages) {
-			String key = page;
-
-			String accessToken = StringUtils.substringAfter(key, "access:");
-
-			OAuth2AccessToken token = tokenStore.readAccessToken(accessToken);
+		for (Object key: keys.toArray()) {
+//			String key = page;
+//			String accessToken = StringUtils.substringAfter(key, "access:");
+//			OAuth2AccessToken token = tokenStore.readAccessToken(accessToken);
+            OAuth2AccessToken token = (OAuth2AccessToken)redisTemplate.opsForValue().get(key);
 			HashMap<String, String> map = new HashMap<String, String>();
 
 			try {
 				map.put("token_type", token.getTokenType());
 				map.put("token_value", token.getValue());
-				map.put("expires_in", token.getExpiresIn() + "");
+				map.put("expires_in", token.getExpiresIn()+"");
 			} catch (Exception e) {
-
+				 
 			}
-
+			
+			
 			OAuth2Authentication oAuth2Auth = tokenStore.readAuthentication(token);
 			Authentication authentication = oAuth2Auth.getUserAuthentication();
 
 			map.put("client_id", oAuth2Auth.getOAuth2Request().getClientId());
 			map.put("grant_type", oAuth2Auth.getOAuth2Request().getGrantType());
-
+			
 			if (authentication instanceof UsernamePasswordAuthenticationToken) {
 				UsernamePasswordAuthenticationToken authenticationToken = (UsernamePasswordAuthenticationToken) authentication;
-
-				if (authenticationToken.getPrincipal() instanceof LoginAppUser) {
+			
+				if(authenticationToken.getPrincipal() instanceof LoginAppUser ){
 					LoginAppUser user = (LoginAppUser) authenticationToken.getPrincipal();
-					map.put("user_id", user.getId() + "");
-					map.put("user_name", user.getUsername() + "");
-					map.put("user_head_imgurl", user.getHeadImgUrl() + "");
+					map.put("user_id", user.getId()+"");
+					map.put("user_name", user.getUsername()+"");
+					map.put("user_head_imgurl", user.getHeadImgUrl()+"");
 				}
-
-			} else if (authentication instanceof PreAuthenticatedAuthenticationToken) {
-				// 刷新token方式
+				
+				
+			}else if (authentication instanceof PreAuthenticatedAuthenticationToken ){
+				//刷新token方式
 				PreAuthenticatedAuthenticationToken authenticationToken = (PreAuthenticatedAuthenticationToken) authentication;
-				if (authenticationToken.getPrincipal() instanceof LoginAppUser) {
+				if(authenticationToken.getPrincipal() instanceof LoginAppUser ){
 					LoginAppUser user = (LoginAppUser) authenticationToken.getPrincipal();
-					map.put("user_id", user.getId() + "");
-					map.put("user_name", user.getUsername() + "");
-					map.put("user_head_imgurl", user.getHeadImgUrl() + "");
+					map.put("user_id", user.getId()+"");
+					map.put("user_name", user.getUsername()+"");
+					map.put("user_head_imgurl", user.getHeadImgUrl()+"");
 				}
 
 			}
 			list.add(map);
 
 		}
+
+
 
 		return PageResult.<HashMap<String, String>>builder().data(list).code(0).count((long) keys.size()).build();
 
