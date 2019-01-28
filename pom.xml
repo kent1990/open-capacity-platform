@@ -17,7 +17,6 @@
 		developer nor the names of its ~ contributors may be used to endorse or promote 
 		products derived from ~ this software without specific prior written permission. 
 		~ Author: owen gitgeek (624191343@qq.com) ~ -->
-
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
