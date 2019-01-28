@@ -10,6 +10,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang.ObjectUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.CollectionUtils;
@@ -21,8 +23,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.open.capacity.commons.PageResult;
 import com.open.capacity.commons.Result;
+import com.open.capacity.log.monitor.PointUtil;
 import com.open.capacity.model.system.LoginAppUser;
 import com.open.capacity.model.system.SysMenu;
 import com.open.capacity.model.system.SysRole;
@@ -39,6 +44,8 @@ public class SysMenuController {
 
 	@Autowired
 	private SysMenuService menuService;
+	private static Logger log = LoggerFactory.getLogger(SysMenuController.class);
+	private ObjectMapper objectMapper = new ObjectMapper();
 
 	// <!--  -->
 	/**
@@ -51,6 +58,9 @@ public class SysMenuController {
 	public Result delete(@PathVariable Long id) {
 
 		try {
+			
+			String num = PointUtil.getRandom();//生成日志随机数
+			log.info("SysMenuController|delete|num:{}|input:{}",num ,id);
 			menuService.delete(id);
 			return Result.succeed("操作成功");
 		}catch (Exception ex){
@@ -64,6 +74,10 @@ public class SysMenuController {
 	@ApiOperation(value = "根据roleId获取对应的菜单")
 	@GetMapping("/{roleId}/menus")
 	public List<Map<String, Object>> findMenusByRoleId(@PathVariable Long roleId) {
+		
+		
+		String num = PointUtil.getRandom();//生成日志随机数
+		log.info("SysMenuController|findMenusByRoleId|num:{}|input:{}",num ,roleId);
 		Set<Long> roleIds = new HashSet<Long>() {{ add(roleId); }};
 		List<SysMenu> roleMenus = menuService.findByRoles(roleIds); 		//获取该角色对应的菜单
 		List<SysMenu> allMenus = menuService.findAll();						//全部的菜单列表
@@ -93,10 +107,16 @@ public class SysMenuController {
 	@ApiOperation(value = "角色分配菜单")
 	@PostMapping("/granted")
 	public Result setMenuToRole(@RequestBody SysMenu sysMenu) {
-		System.out.println(sysMenu);
-		menuService.setMenuToRole(sysMenu.getRoleId(), sysMenu.getMenuIds());
+		
+		try {
+			String num = PointUtil.getRandom();//生成日志随机数
+			log.info("SysMenuController|setMenuToRole|num:{}|input:{}",num ,objectMapper.writeValueAsString(sysMenu));
+			menuService.setMenuToRole(sysMenu.getRoleId(), sysMenu.getMenuIds());
 
-		return Result.succeed("操作成功");
+			return Result.succeed("操作成功");
+		} catch (JsonProcessingException e) {
+			return Result.failed("操作失败");
+		}
 	}
 
 
@@ -104,6 +124,10 @@ public class SysMenuController {
 	@ApiOperation(value = "查询所有菜单")
 	@GetMapping("/findAlls")
 	public PageResult<SysMenu> findAlls() {
+		
+		String num = PointUtil.getRandom();//生成日志随机数
+		log.info("SysMenuController|findAlls|num:{}|input:{}",num ,"");
+		
 		List<SysMenu> list = menuService.findAll();
 
 		return PageResult.<SysMenu>builder().data(list).code(0).count((long)list.size()).build() ;
@@ -113,6 +137,8 @@ public class SysMenuController {
 	@GetMapping("/findOnes")
 	@PreAuthorize("hasAuthority('menu:get/menus/findOnes')")
 	public PageResult<SysMenu> findOnes(){
+		String num = PointUtil.getRandom();//生成日志随机数
+		log.info("SysMenuController|findOnes|num:{}|input:{}",num ,"");
 		List<SysMenu> list = menuService.findOnes();
 		return PageResult.<SysMenu>builder().data(list).code(0).count((long)list.size()).build() ;
 	}
@@ -128,6 +154,8 @@ public class SysMenuController {
 	public Result saveOrUpdate(@RequestBody SysMenu menu) {
 
 		try{
+			String num = PointUtil.getRandom();//生成日志随机数
+			log.info("SysMenuController|saveOrUpdate|num:{}|input:{}",num ,objectMapper.writeValueAsString(menu));
 			if (menu.getId() != null){
 				menuService.update(menu);
 			}else {
@@ -149,6 +177,9 @@ public class SysMenuController {
 	@GetMapping("/current")
 	@ApiOperation(value = "查询当前用户菜单")
 	public List<SysMenu> findMyMenu() {
+		
+		String num = PointUtil.getRandom();//生成日志随机数
+		log.info("SysMenuController|findMyMenu|num:{}|input:{}",num ,"");
 		LoginAppUser loginAppUser = SysUserUtil.getLoginAppUser();
 		Set<SysRole> roles = loginAppUser.getSysRoles();
 		if (CollectionUtils.isEmpty(roles)) {
@@ -170,6 +201,7 @@ public class SysMenuController {
 	 * @return
 	 */
 	public static List<SysMenu> TreeBuilder(List<SysMenu> sysMenus){
+		
 		List<SysMenu> menus = new ArrayList<SysMenu>();
 		for (SysMenu sysMenu : sysMenus){
 			if (ObjectUtils.equals(-1L,sysMenu.getParentId())){

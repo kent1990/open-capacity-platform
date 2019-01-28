@@ -2,6 +2,8 @@ package com.open.capacity.user.controller;
 
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.open.capacity.commons.PageResult;
 import com.open.capacity.commons.Result;
+import com.open.capacity.log.monitor.PointUtil;
 import com.open.capacity.model.system.SysRole;
 import com.open.capacity.user.service.SysRoleService;
 
@@ -31,6 +36,8 @@ public class SysRoleController {
 
 	@Autowired
 	private SysRoleService sysRoleService;
+	private static Logger log = LoggerFactory.getLogger(SysRoleController.class);
+	private ObjectMapper objectMapper = new ObjectMapper();
 
 
 //	<!-- -->
@@ -38,11 +45,14 @@ public class SysRoleController {
 	 * 后台管理查询角色
 	 * @param params
 	 * @return
+	 * @throws JsonProcessingException 
 	 */
 	@PreAuthorize("hasAuthority('role:get/roles')")
 	@ApiOperation(value = "后台管理查询角色")
 	@GetMapping("/roles")
-	public PageResult<SysRole> findRoles(@RequestParam Map<String, Object> params) {
+	public PageResult<SysRole> findRoles(@RequestParam Map<String, Object> params) throws JsonProcessingException {
+		String num = PointUtil.getRandom();//生成日志随机数
+		log.info("SysRoleController|findRoles|num:{}|input:{}",num ,objectMapper.writeValueAsString(params));
 		return sysRoleService.findRoles(params);
 	}
 
@@ -50,10 +60,13 @@ public class SysRoleController {
 	 * 角色新增或者更新
 	 * @param sysRole
 	 * @return
+	 * @throws JsonProcessingException 
 	 */
 	@PreAuthorize("hasAnyAuthority('role:post/roles','role:put/roles')")
 	@PostMapping("/roles/saveOrUpdate")
-	public Result saveOrUpdate(@RequestBody SysRole sysRole) {
+	public Result saveOrUpdate(@RequestBody SysRole sysRole) throws JsonProcessingException {
+		String num = PointUtil.getRandom();//生成日志随机数
+		log.info("SysRoleController|saveOrUpdate|num:{}|input:{}",num ,objectMapper.writeValueAsString(sysRole));
 		return sysRoleService.saveOrUpdate(sysRole);
 	}
 
@@ -67,6 +80,8 @@ public class SysRoleController {
 	@DeleteMapping("/roles/{id}")
 	public Result deleteRole(@PathVariable Long id) {
 		try {
+			String num = PointUtil.getRandom();//生成日志随机数
+			log.info("SysRoleController|saveOrUpdate|num:{}|input:{}",num , id );
 			if (id == 1L){
 				return Result.failed("管理员不可以删除");
 			}

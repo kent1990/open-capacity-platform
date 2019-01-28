@@ -1,5 +1,7 @@
 package com.open.capacity.log.monitor;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -23,4 +25,19 @@ public class PointUtil {
     public static void info(String id, String type, String message) {
         log.info(id + SPLIT + type + SPLIT + message);
     }
+    /**
+	 * 生成日志随机数
+	 * 
+	 * @return
+	 */
+	public static String getRandom() {
+		int i = 0;
+		StringBuilder st = new StringBuilder();
+		while (i < 5) {
+			i++;
+			st.append(ThreadLocalRandom.current().nextInt(10));
+		}
+		return st.toString() + System.currentTimeMillis();
+	}
+	 
 }

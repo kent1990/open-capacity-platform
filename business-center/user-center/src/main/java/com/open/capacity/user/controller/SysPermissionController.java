@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,8 +20,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.open.capacity.commons.PageResult;
 import com.open.capacity.commons.Result;
+import com.open.capacity.log.monitor.PointUtil;
 import com.open.capacity.model.system.SysPermission;
 import com.open.capacity.user.service.SysPermissionService;
 
@@ -41,6 +46,8 @@ public class SysPermissionController {
 	@Autowired
 	private SysPermissionService sysPermissionService;
 
+	private static Logger log = LoggerFactory.getLogger(SysPermissionController.class);
+	private ObjectMapper objectMapper = new ObjectMapper();
 	/**
 	 * 删除权限标识
 	 * 参考 /permissions/1
@@ -52,6 +59,8 @@ public class SysPermissionController {
 	public Result delete(@PathVariable Long id) {
 
 		try{
+			String num = PointUtil.getRandom();//生成日志随机数
+			log.info("SysPermissionController|delete|num:{}|input:{}",num ,id);
 			sysPermissionService.delete(id);
 			return  Result.succeed("操作成功");
 		}catch (Exception ex){
@@ -66,6 +75,7 @@ public class SysPermissionController {
 	 * 查询所有的权限标识
 	 * 参考 ?start=0&length=10
 	 * @return
+	 * @throws JsonProcessingException 
 	 */
 	@PreAuthorize("hasAuthority('permission:get/permissions')")
 	@ApiOperation(value = "后台管理查询所有的权限标识")
@@ -74,7 +84,10 @@ public class SysPermissionController {
         @ApiImplicitParam(name = "limit",value = "分页结束位置", required = true, dataType = "Integer")
     })
 	@GetMapping("/permissions")
-	public PageResult<SysPermission> findPermissions(@RequestParam Map<String, Object> params) {
+	public PageResult<SysPermission> findPermissions(@RequestParam Map<String, Object> params) throws JsonProcessingException {
+		
+		String num = PointUtil.getRandom();//生成日志随机数
+		log.info("SysPermissionController|findPermissions|num:{}|input:{}",num ,objectMapper.writeValueAsString(params));
 		return sysPermissionService.findPermissions(params);
 	}
 
@@ -87,6 +100,8 @@ public class SysPermissionController {
 	@PostMapping("/permissions/saveOrUpdate")
 	public Result saveOrUpdate(@RequestBody SysPermission sysPermission) {
 		try{
+			String num = PointUtil.getRandom();//生成日志随机数
+			log.info("SysPermissionController|saveOrUpdate|num:{}|input:{}",num ,objectMapper.writeValueAsString(sysPermission));
 			if (sysPermission.getId()!=null){
 				sysPermissionService.update(sysPermission);
 			}else {
@@ -102,6 +117,9 @@ public class SysPermissionController {
 	@ApiOperation(value = "根据roleId获取对应的权限")
 	@GetMapping("/permissions/{roleId}/permissions")
 	public List<Map<String, Object>> findAuthByRoleId(@PathVariable Long roleId) {
+		
+		String num = PointUtil.getRandom();//生成日志随机数
+		log.info("SysPermissionController|findAuthByRoleId|num:{}|input:{}",num ,roleId);
 		List<Map<String, Object>> authTrees = new ArrayList<>();
 		Set<Long> roleIds = new HashSet<Long>() {{ add(roleId); }};
 		Set<SysPermission> roleAuths = sysPermissionService.findByRoleIds(roleIds);//根据roleId获取对应的权限
@@ -126,12 +144,14 @@ public class SysPermissionController {
 	}
 	/**
 	 * 给角色分配权限
+	 * @throws JsonProcessingException 
 	 */
 	@PreAuthorize("hasAuthority('permission:post/permissions/granted')")
 	@ApiOperation(value = "角色分配权限")
 	@PostMapping("/permissions/granted")
-	public Result setAuthToRole(@RequestBody SysPermission sysPermission) {
-		System.out.println(sysPermission);
+	public Result setAuthToRole(@RequestBody SysPermission sysPermission) throws JsonProcessingException {
+		String num = PointUtil.getRandom();//生成日志随机数
+		log.info("SysPermissionController|setAuthToRole|num:{}|input:{}",num ,objectMapper.writeValueAsString(sysPermission));
 		sysPermissionService.setAuthToRole(sysPermission.getRoleId(),sysPermission.getAuthIds());
 		return Result.succeed("操作成功");
 	}
