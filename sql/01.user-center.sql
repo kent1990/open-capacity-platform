@@ -147,7 +147,7 @@ CREATE TABLE `sys_user` (
 INSERT INTO `sys_user` VALUES (1,'admin','$2a$10$Wtw81uu43fGKw9lkOr1RAOTNWxQIZBsB3YDwc/5yDnr/yeG5x92EG','管理员','http://payo7kq4i.bkt.clouddn.com/耳机.jpg','13106975707',1,1,'BACKEND','2017-11-17 16:56:59','2018-09-15 03:12:44'),(2,'owen','$2a$10$4WkpmB1jHncBCrzJ7hJRq.SsiEFiyE/FdgPF26hLs8vzPyoNpZjta','欧文','http://payo7kq4i.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720180819191900.jpg','18579068166',1,0,'APP','2017-11-17 16:56:59','2018-09-12 06:00:31'),(3,'user','$2a$10$fL/AfD4RDS0LxLJS7zpaZ.YUMfjNWKVvUn7oiA75L1K6PXazSTJPi','体验用户','http://payo7kq4i.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720180819191900.jpg',NULL,1,0,'APP','2017-11-17 16:56:59','2018-09-07 13:38:34'),(4,'test','$2a$10$RD18sHNphJMmcuLuUX/Np.IV/7Ngbjd3Jtj3maFLpwaA6KaHVqPtq','测试账户','http://payo7kq4i.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720180819191900.jpg','13851539156',0,0,'APP','2017-11-17 16:56:59','2018-09-07 03:27:40'),(7,'useruser','$2a$10$IcsVUMlsZtOljOSrCKhx5.JA5vj/x8XiN6XJDwj4al5NKFU/KwdeO','useruser',NULL,'18571111111',1,0,'APP','2018-09-03 09:57:12','2018-09-05 12:57:14'),(8,'abc','$2a$10$RII9blAhenwoFLjL1Y7kNOgq8xqUR/.o6SCDmfPbb6IAnZng/HsKa','abc',NULL,'13322332123',0,0,'APP','2018-09-03 03:32:52','2018-09-11 13:55:24'),(9,'jay','$2a$10$og3NMep2E4sJF90IzoyVre53A37APaNvbXXTJDhcjQkDuTHIe.wvO','jay',NULL,'15151515151',0,0,'APP','2018-09-06 02:30:51','2018-09-13 07:21:33'),(10,'testpre','$2a$10$m7vrMB.xq/k3Xq4EJ/p84eV33DOKtGDZ1pL8/jsegDH3FoUz1BUXa','testpre',NULL,'17791907897',0,1,'APP','2018-09-07 02:48:44','2018-09-16 08:29:17'),(11,'1','$2a$10$lQ5w8eRYFx4JYfS/zV6OM.IzIRf0rbyevUHFu.xQJtL7Bobc8AuY.','1',NULL,'13530151800',1,1,'APP','2018-09-07 14:20:51','2018-09-14 06:49:59'),(12,'12','$2a$10$cgRGZ0uuIAoKuwBoTWmz7eJzP4RUEr688VlnpZ4BTCz2RZEt0jrIe','12',NULL,'17587132062',0,1,'APP','2018-09-08 04:52:25','2018-09-16 01:48:00'),(13,'abc1','$2a$10$pzvn4TfBh2oFZJbtagovFe56ZTUlTaawPnx0Yz2PeqGex0xbddAGu','abc',NULL,'12345678901',0,1,'APP','2018-09-11 08:02:25','2018-09-14 06:49:54'),(14,'ceshis','$2a$10$wh0d8dn67WXCH6oNeDW3Q.NnJHiVUjEvLBOVUqjA2F/pn7cIpfjLG','ceshis',NULL,'12345643456',0,1,'APP','2018-09-12 13:50:57','2018-09-14 06:49:53'),(15,'w2121','$2a$10$C2TNbguxyfqlDUgB6/44XesmYeX5JMmWU5x4DsWrGU3bdgl6E3ei.','122',NULL,'15854556993',0,1,'APP','2018-09-13 09:35:15','2018-09-17 00:38:25');
 
 
-drop function currval ;
+DROP FUNCTION IF EXISTS `currval`;
 
 CREATE DEFINER=`root`@`%` FUNCTION `currval`(v_seq_name VARCHAR(50)) RETURNS int(11)
 begin        
@@ -157,7 +157,7 @@ begin
    return value;   
 end;
 
-drop function nextval ;
+DROP FUNCTION IF EXISTS `nextval`;
 
 CREATE DEFINER=`root`@`%` FUNCTION `nextval`(v_seq_name VARCHAR(50)) RETURNS int(11)
 begin  
@@ -176,7 +176,7 @@ end;
 #
 # Structure for table "order_seq"
 #
-
+DROP TABLE IF EXISTS `order_seq`;
 CREATE TABLE `order_seq` (
   `seq_name` varchar(50) NOT NULL,
   `current_val` int(11) NOT NULL,
