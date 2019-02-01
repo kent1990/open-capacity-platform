@@ -40,7 +40,8 @@ http://59.110.164.254:8066/login.html 用户名/密码：admin/admin
 
 如果图片不能正常显示，请移步百度网盘下载高清大图 ：链接：https://pan.baidu.com/s/1LoLxN1Psq8q1HU0tU5m0DA 提取码：v2sk 
 
-
+## 技术文档   ##
+https://www.kancloud.cn/owenwangwen/open-capacity-platform    
 
 ## 阿波罗配置中心演示  
 ![](http://img2.ph.126.net/-cKtj6Wia_q6YiZKV-IOsQ==/295548725646480248.gif)
