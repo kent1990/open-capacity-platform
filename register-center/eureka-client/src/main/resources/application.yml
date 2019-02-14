@@ -52,7 +52,7 @@ eureka:
 
 logging:
   level:
-    root: INFO
+    com.open.capacity: INFO 
     org.hibernate: INFO
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
     org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
