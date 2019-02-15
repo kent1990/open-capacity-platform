@@ -190,6 +190,7 @@
 		<module>new-api-gateway</module>
 
 		<module>mq-center</module>
+		<module>dubbo-center</module>
 	</modules>
 	<developers>
 		 
