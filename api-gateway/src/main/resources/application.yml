@@ -111,7 +111,10 @@ spring:
 docker:
   ipAddress: 59.110.164.254
 
-mybatis:
+#mybatis:
+mybatis-plus:        
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl 
   config-location: classpath:mybatis.cfg.xml
   mapper-locations: classpath*:com/open/**/dao/*.xml  
 
