@@ -102,7 +102,8 @@ spring:
 #        min-idle: 2    # 连接池中的最小空闲连接 ，默认值也是0
 #      shutdown-timeout: 100ms
 
-mybatis:
+#mybatis:
+mybatis-plus:        
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl 
   config-location: classpath:mybatis.cfg.xml
