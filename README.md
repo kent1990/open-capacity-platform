@@ -200,4 +200,8 @@ api网关
 资源消耗情况
 ![](https://images.gitee.com/uploads/images/2019/0126/125457_397161e8_1147840.png)
 
-
+链路跟踪
+![](https://i.imgur.com/S3RvjFc.png)
+![](https://i.imgur.com/1VFd9vx.png)
+![](https://i.imgur.com/03Yq5ov.png)
+![](https://i.imgur.com/drPeW4E.png)
