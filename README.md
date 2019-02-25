@@ -23,10 +23,13 @@ MySQL Server 5.6
 maven3.3.9  
 sts-3.8.0.RELEASE  
 
-##  框架使用资料   
-链接：https://pan.baidu.com/s/10Kae9_YotU5GnneaCk_p5Q 
-密码：xqjb
+## 技术文档   ##
+https://www.kancloud.cn/owenwangwen/open-capacity-platform  
 
+## 项目组织结构分析  
+![](https://i.imgur.com/GEmNF0q.png)
+
+  
 
 ##  项目地址
 http://59.110.164.254:8066/login.html 用户名/密码：admin/admin
@@ -40,8 +43,7 @@ http://59.110.164.254:8066/login.html 用户名/密码：admin/admin
 
 如果图片不能正常显示，请移步百度网盘下载高清大图 ：链接：https://pan.baidu.com/s/1LoLxN1Psq8q1HU0tU5m0DA 提取码：v2sk 
 
-## 技术文档   ##
-https://www.kancloud.cn/owenwangwen/open-capacity-platform    
+
 
 ## 阿波罗配置中心演示  
 ![](http://img2.ph.126.net/-cKtj6Wia_q6YiZKV-IOsQ==/295548725646480248.gif)
@@ -52,8 +54,6 @@ https://www.kancloud.cn/owenwangwen/open-capacity-platform
 ## oauth单点登录   
 ![](https://images.gitee.com/uploads/images/2019/0126/125449_8c311a21_1147840.gif)
 
-## 项目组织结构分析  
-![](https://images.gitee.com/uploads/images/2019/0110/231913_f9847750_1441068.png)
 
 
 
