@@ -49,10 +49,9 @@ http://59.110.164.254:8066/login.html 用户名/密码：admin/admin
 ![](http://img2.ph.126.net/-cKtj6Wia_q6YiZKV-IOsQ==/295548725646480248.gif)
 
 
-## oauth认证方式    
-![](https://images.gitee.com/uploads/images/2019/0126/125449_8e9c22b6_1147840.gif)
-## oauth单点登录   
-![](https://images.gitee.com/uploads/images/2019/0126/125449_8c311a21_1147840.gif)
+ 
+## oauth流程演示  
+![](https://i.imgur.com/E0w4r2t.gif)
 
 
 
