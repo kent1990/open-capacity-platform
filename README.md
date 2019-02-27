@@ -24,7 +24,8 @@ maven3.3.9
 sts-3.8.0.RELEASE  
 
 ## 技术文档   ##
-https://www.kancloud.cn/owenwangwen/open-capacity-platform  
+https://www.kancloud.cn/owenwangwen/open-capacity-platform/content
+
 
 ## 项目组织结构分析  
 ![](https://i.imgur.com/GEmNF0q.png)
