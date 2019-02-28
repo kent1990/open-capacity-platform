@@ -17,6 +17,8 @@ import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
+import com.baomidou.mybatisplus.core.MybatisConfiguration;
+import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import com.open.capacity.db.config.util.DataSourceKey;
 import com.open.capacity.db.config.util.DynamicDataSource;
 
@@ -79,21 +81,22 @@ public class DataSourceConfig {
     @Bean(name = "sqlSessionFactory")
     public SqlSessionFactory sqlSessionFactory(@Qualifier("dataSource") DataSource dataSource)
             throws Exception {
-        SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
-        bean.setDataSource(dataSource);
+    	MybatisSqlSessionFactoryBean sqlSessionFactory = new MybatisSqlSessionFactoryBean();
+		sqlSessionFactory.setDataSource(dataSource);
+		sqlSessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath*:com/open/**/dao/*.xml"));
 
-        //加载mybatis配置文件
-        bean.setConfigLocation(new ClassPathResource("mybatis.cfg.xml"));
-
-        // 添加XML目录
-        ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        try {
-            bean.setMapperLocations(resolver.getResources("classpath*:com/central/**/dao/*.xml"));
-            return bean.getObject();
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
+		MybatisConfiguration configuration = new MybatisConfiguration();
+		// configuration.setDefaultScriptingLanguage(MybatisXMLLanguageDriver.class);
+		configuration.setLogImpl(org.apache.ibatis.logging.stdout.StdOutImpl.class);
+		configuration.setMapUnderscoreToCamelCase(true);
+		configuration.setCacheEnabled(false);
+		sqlSessionFactory.setConfiguration(configuration);
+		// sqlSessionFactory.setPlugins(new Interceptor[]{
+		// //PerformanceInterceptor(),OptimisticLockerInterceptor()
+		// paginationInterceptor() //添加分页功能
+		// });
+		// sqlSessionFactory.setGlobalConfig(globalConfiguration());
+		return sqlSessionFactory.getObject();
     }
 
     

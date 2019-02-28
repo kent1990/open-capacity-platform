@@ -37,20 +37,21 @@
                                class="layui-input">
                     </div>
                 </div>
-                <!--<div class="layui-form-item">-->
-                    <!--<label class="layui-form-label"><i class="layui-icon layui-icon-vercode"></i></label>-->
-                    <!--<div class="layui-input-block">-->
-                        <!--<div class="layui-row inline-block">-->
-                            <!--<div class="layui-col-xs7">-->
-                                <!--<input name="code" type="text" lay-verify="required" placeholder="验证码"-->
-                                       <!--class="layui-input">-->
-                            <!--</div>-->
-                            <!--<div class="layui-col-xs5" style="padding-left: 10px;">-->
-                                <!--<img class="login-captcha" src="https://www.oschina.net/action/user/captcha">-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><i class="layui-icon layui-icon-vercode"></i></label>
+                    <div class="layui-input-block">
+                        <div class="layui-row inline-block">
+                            <div class="layui-col-xs7">
+                                <input name="validCode" style="width:170px" type="text" lay-verify="required" placeholder="验证码" class="layui-input">
+                                <input name="deviceId" type="hidden"/>
+                            </div>
+                            <div class="layui-col-xs5" style="padding-left: 10px;">
+                                <img class="login-captcha" src="#" style="display:none">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 
                 <div class="layui-form-item">
                     <button lay-filter="login-submit" class="layui-btn layui-btn-fluid" lay-submit>登 录</button>
                 </div>
@@ -69,12 +70,18 @@
 <script type="text/javascript" src="assets/libs/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="assets/libs/layui/layui.js"></script>
 <script type="text/javascript" src="assets/libs/login.js"></script>
-
+<script type="text/javascript" src="module/Math.uuid.js"></script>
 <script>
 layui.config({
     base: 'module/'
 }).use(['config', 'form'], function () {
+
+	let uuid = Math.uuid();
+	
     var $ = layui.jquery;
+    
+    $("input[name='deviceId']").val(uuid);
+    
     var form = layui.form;
     var config = layui.config;
 
@@ -114,7 +121,10 @@ layui.config({
                 layer.closeAll('loading');
                 if (xhr.status == 400) {
                     layer.msg('账号或密码错误', {icon: 5, time: 500});
-                }else if( xhr.status  == 500){
+                }else if( xhr.status  == 401){
+                    layer.msg('验证码异常', {icon: 5, time: 500});
+                }
+                else if( xhr.status  == 500){
                     layer.msg('服务器异常,请联系管理员', {icon: 5, time: 500});
                 }else if( xhr.status  == 0){
                     layer.msg('网关异常,请联系管理员', {icon: 5, time: 900});
@@ -125,9 +135,14 @@ layui.config({
     });
 
     // 图形验证码
-    // $('.login-captcha').click(function () {
-    //     this.src = this.src + '?t=' + (new Date).getTime();
-    // });
+    $('.login-captcha').attr("src", config.base_server + "api-auth/validata/code/"+uuid);
+    $('.login-captcha').attr("style", "");
+
+    // 图形验证码
+    $('.login-captcha').click(function () {
+            this.src = this.src + '?timestamp=' + (new Date).getTime();
+    });
+     
 });
 </script>
 <script type='text/javascript'>

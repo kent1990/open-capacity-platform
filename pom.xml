@@ -25,6 +25,7 @@
 		<java.version>1.8</java.version>
 		<sharding-jdbc>2.0.3</sharding-jdbc>
 		<hutool.version>4.1.13</hutool.version>
+		<kaptcha.version>0.0.9</kaptcha.version>
 		<swagger.version>2.9.2</swagger.version>
 		<core.version>1.0.1</core.version>
 		<disruptor.version>3.4.1</disruptor.version>

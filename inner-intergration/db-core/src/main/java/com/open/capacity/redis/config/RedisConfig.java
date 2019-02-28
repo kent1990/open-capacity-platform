@@ -41,6 +41,7 @@ public class RedisConfig {
 		redisTemplate.setKeySerializer(stringSerializer); // key的序列化类型
 		redisTemplate.setHashKeySerializer(stringSerializer);
 		redisTemplate.setValueSerializer(redisObjectSerializer); // value的序列化类型
+		redisTemplate.setHashValueSerializer(redisObjectSerializer); // value的序列化类型
 		redisTemplate.afterPropertiesSet();
 
 		redisTemplate.opsForValue().set("hello", "wolrd");
@@ -52,9 +53,11 @@ public class RedisConfig {
 	@ConditionalOnProperty(name = "spring.redis.host", matchIfMissing = true)
 	public RedisTemplate<String, Object> getSingleRedisTemplate( ) {
 		RedisTemplate<String, Object> redisTemplate = new RedisTemplate<String, Object>();
+		RedisSerializer redisObjectSerializer = new RedisObjectSerializer();
 		redisTemplate.setConnectionFactory(lettuceConnectionFactory);
 		redisTemplate.setKeySerializer(new StringRedisSerializer()); // key的序列化类型
-		redisTemplate.setValueSerializer(new RedisObjectSerializer()); // value的序列化类型
+		redisTemplate.setValueSerializer(redisObjectSerializer); // value的序列化类型
+		redisTemplate.setHashValueSerializer(redisObjectSerializer); 
 		redisTemplate.afterPropertiesSet();
 		return redisTemplate;
 	}

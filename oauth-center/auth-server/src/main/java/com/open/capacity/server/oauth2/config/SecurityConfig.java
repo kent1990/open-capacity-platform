@@ -51,6 +51,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private PermitUrlProperties permitUrlProperties ;
 	
+	@Autowired
+	private ValidateCodeSecurityConfig validateCodeSecurityConfig ;
+	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring().antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources", "/configuration/security",
@@ -63,6 +66,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		web.ignoring().antMatchers("/index.html");
 		web.ignoring().antMatchers("/oauth/user/token");
 		web.ignoring().antMatchers("/oauth/client/token");
+		web.ignoring().antMatchers("/validata/code/**");
+		
 	}
 	/**
 	 * 认证管理
@@ -100,6 +105,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler())
 				.addLogoutHandler(oauthLogoutHandler).clearAuthentication(true);
 
+		//增加验证码处理
+		http.apply(validateCodeSecurityConfig) ;
 		// http.logout().logoutUrl("/logout").logoutSuccessHandler(logoutSuccessHandler);
 		// 解决不允许显示在iframe的问题
 		http.headers().frameOptions().disable();
