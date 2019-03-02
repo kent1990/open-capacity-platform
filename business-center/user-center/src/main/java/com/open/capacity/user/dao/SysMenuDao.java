@@ -20,7 +20,7 @@ public interface SysMenuDao {
 			+ "values (#{parentId}, #{name}, #{url} , #{path} , #{css}, #{sort}, #{createTime}, #{updateTime},#{isMenu},#{hidden})")
 	int save(SysMenu menu);
 
-	int update(SysMenu menu);
+	int updateByOps(SysMenu menu);
 
 	@Select("select * from sys_menu t where t.id = #{id}")
 	SysMenu findById(Long id);

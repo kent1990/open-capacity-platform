@@ -25,7 +25,7 @@ public interface SysRoleDao {
 	int save(SysRole sysRole);
 
 	@Update("update sys_role t set t.name = #{name} ,t.updateTime = #{updateTime} where t.id = #{id}")
-	int update(SysRole sysRole);
+	int updateByOps(SysRole sysRole);
 
 	@Select("select * from sys_role t where t.id = #{id}")
 	SysRole findById(Long id);

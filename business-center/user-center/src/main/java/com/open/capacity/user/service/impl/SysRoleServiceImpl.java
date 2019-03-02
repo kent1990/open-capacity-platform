@@ -63,7 +63,7 @@ public class SysRoleServiceImpl implements SysRoleService {
 	public void update(SysRole sysRole) {
 		sysRole.setUpdateTime(new Date());
 
-		sysRoleDao.update(sysRole);
+		sysRoleDao.updateByOps(sysRole);
 		log.info("修改角色：{}", sysRole);
 	}
 
@@ -157,7 +157,7 @@ public class SysRoleServiceImpl implements SysRoleService {
 			i = sysRoleDao.save(sysRole);
 		}else {
 			sysRole.setUpdateTime(new Date());
-			i = sysRoleDao.update(sysRole);
+			i = sysRoleDao.updateByOps(sysRole);
 		}
 		return i>0?Result.succeed("操作成功"):Result.failed("操作失败");
 	}

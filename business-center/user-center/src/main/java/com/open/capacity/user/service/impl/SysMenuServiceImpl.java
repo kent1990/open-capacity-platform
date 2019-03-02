@@ -40,7 +40,7 @@ public class SysMenuServiceImpl implements SysMenuService {
 	public void update(SysMenu menu) {
 		menu.setUpdateTime(new Date());
 
-		menuDao.update(menu);
+		menuDao.updateByOps(menu);
 		log.info("修改菜单：{}", menu);
 	}
 

@@ -23,7 +23,7 @@ public interface SysUserDao {
 			+ "values(#{username}, #{password}, #{nickname}, #{headImgUrl}, #{phone}, #{sex}, #{enabled}, #{type}, #{createTime}, #{updateTime})")
 	int save(SysUser sysUser);
 
-	int update(SysUser sysUser);
+	int updateByOps(SysUser sysUser);
 
 	@Select("select * from sys_user t where t.username = #{username}")
 	SysUser findByUsername(String username);

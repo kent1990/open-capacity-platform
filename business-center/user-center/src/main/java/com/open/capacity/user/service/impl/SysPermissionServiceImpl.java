@@ -57,7 +57,7 @@ public class SysPermissionServiceImpl implements SysPermissionService {
 	@Override
 	public void update(SysPermission sysPermission) {
 		sysPermission.setUpdateTime(new Date());
-		sysPermissionDao.update(sysPermission);
+		sysPermissionDao.updateByOps(sysPermission);
 		log.info("修改权限标识：{}", sysPermission);
 	}
 

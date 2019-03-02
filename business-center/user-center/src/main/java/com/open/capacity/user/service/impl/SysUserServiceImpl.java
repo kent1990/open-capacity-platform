@@ -171,7 +171,7 @@ public class SysUserServiceImpl implements SysUserService {
 			}
 		}
 
-		sysUserDao.update(sysUser);
+		sysUserDao.updateByOps(sysUser);
 		log.info("修改用户：{}", sysUser);
 		return sysUser;
 	}
@@ -289,7 +289,7 @@ public class SysUserServiceImpl implements SysUserService {
 		appUser.setEnabled(enabled);
 		appUser.setUpdateTime(new Date());
 
-		int i = sysUserDao.update(appUser);
+		int i = sysUserDao.updateByOps(appUser);
 		log.info("修改用户：{}", appUser);
 
 		return i > 0 ? Result.succeed(appUser, "更新成功") : Result.failed("更新失败");
@@ -343,7 +343,7 @@ public class SysUserServiceImpl implements SysUserService {
 			i = sysUserDao.save(sysUser);
 		} else {
 			sysUser.setUpdateTime(new Date());
-			i = sysUserDao.update(sysUser);
+			i = sysUserDao.updateByOps(sysUser);
 		}
 
 		userRoleDao.deleteUserRole(sysUser.getId(), null);

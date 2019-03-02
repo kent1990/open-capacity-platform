@@ -25,7 +25,7 @@ public interface SysPermissionDao {
 	int save(SysPermission sysPermission);
 
 	@Update("update sys_permission t set t.name = #{name}, t.permission = #{permission}, t.updateTime = #{updateTime} where t.id = #{id}")
-	int update(SysPermission sysPermission);
+	int updateByOps(SysPermission sysPermission);
 
 	@Delete("delete from sys_permission where id = #{id}")
 	int delete(Long id);
