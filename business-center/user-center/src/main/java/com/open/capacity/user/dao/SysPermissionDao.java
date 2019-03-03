@@ -29,7 +29,7 @@ public interface SysPermissionDao  extends BaseMapper<SysPermission> {
 	int updateByOps(SysPermission sysPermission);
 
 	@Delete("delete from sys_permission where id = #{id}")
-	int delete(Long id);
+	int deleteOps(Long id);
 
 	@Select("select * from sys_permission t where t.id = #{id}")
 	SysPermission findById(Long id);

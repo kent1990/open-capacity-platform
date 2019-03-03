@@ -69,7 +69,7 @@ public class SysPermissionServiceImpl implements SysPermissionService {
 			throw new IllegalArgumentException("权限标识不存在");
 		}
 
-		sysPermissionDao.delete(id);
+		sysPermissionDao.deleteOps(id);
 		rolePermissionDao.deleteRolePermission(null, id);
 		log.info("删除权限标识：{}", permission);
 	}
