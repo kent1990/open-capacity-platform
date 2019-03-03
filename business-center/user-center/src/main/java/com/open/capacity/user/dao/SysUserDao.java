@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.open.capacity.model.system.SysPermission;
 import com.open.capacity.model.system.SysUser;
 
 /**
@@ -16,7 +18,7 @@ import com.open.capacity.model.system.SysUser;
  * 用户管理
  */
 @Mapper
-public interface SysUserDao {
+public interface SysUserDao  extends BaseMapper<SysUser> {
 
 	@Options(useGeneratedKeys = true, keyProperty = "id")
 	@Insert("insert into sys_user(username, password, nickname, headImgUrl, phone, sex, enabled, type, createTime, updateTime) "

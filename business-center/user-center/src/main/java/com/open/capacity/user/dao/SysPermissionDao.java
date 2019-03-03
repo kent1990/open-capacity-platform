@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.open.capacity.model.system.SysPermission;
 
 /**
@@ -18,7 +19,7 @@ import com.open.capacity.model.system.SysPermission;
  * 权限
  */
 @Mapper
-public interface SysPermissionDao {
+public interface SysPermissionDao  extends BaseMapper<SysPermission> {
 
 	@Options(useGeneratedKeys = true, keyProperty = "id")
 	@Insert("insert into sys_permission(permission, name, createTime, updateTime) values(#{permission}, #{name}, #{createTime}, #{createTime})")

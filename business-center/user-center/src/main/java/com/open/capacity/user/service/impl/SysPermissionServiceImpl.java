@@ -49,7 +49,7 @@ public class SysPermissionServiceImpl implements SysPermissionService {
 		sysPermission.setCreateTime(new Date());
 		sysPermission.setUpdateTime(sysPermission.getCreateTime());
 
-		sysPermissionDao.save(sysPermission);
+		sysPermissionDao.insert(sysPermission);
 		log.info("保存权限标识：{}", sysPermission);
 	}
 

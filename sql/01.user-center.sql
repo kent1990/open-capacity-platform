@@ -32,7 +32,7 @@ INSERT INTO `sys_menu` VALUES (2,12,'用户管理','#!user','system/user.html','
 
 DROP TABLE IF EXISTS `sys_permission`;
 CREATE TABLE `sys_permission` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `permission` varchar(50) NOT NULL,
   `name` varchar(50) NOT NULL,
   `createTime` datetime NOT NULL,
@@ -92,7 +92,7 @@ INSERT INTO `sys_role_menu` VALUES (1,2),(1,3),(1,4),(1,5),(1,7),(1,8),(1,9),(1,
 DROP TABLE IF EXISTS `sys_role_permission`;
 CREATE TABLE `sys_role_permission` (
   `roleId` int(11) NOT NULL,
-  `permissionId` int(11) NOT NULL,
+  `permissionId` bigint(20) NOT NULL,
   PRIMARY KEY (`roleId`,`permissionId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -108,7 +108,7 @@ INSERT INTO `sys_role_permission` VALUES (1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(1,
 
 DROP TABLE IF EXISTS `sys_role_user`;
 CREATE TABLE `sys_role_user` (
-  `userId` int(11) NOT NULL,
+  `userId` bigint(20) NOT NULL,
   `roleId` int(11) NOT NULL,
   PRIMARY KEY (`userId`,`roleId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -125,7 +125,7 @@ INSERT INTO `sys_role_user` VALUES (1,1),(2,1),(4,1),(7,1),(8,1),(9,1),(10,1),(1
 
 DROP TABLE IF EXISTS `sys_user`;
 CREATE TABLE `sys_user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `username` varchar(50) NOT NULL,
   `password` varchar(60) NOT NULL,
   `nickname` varchar(255) DEFAULT NULL,

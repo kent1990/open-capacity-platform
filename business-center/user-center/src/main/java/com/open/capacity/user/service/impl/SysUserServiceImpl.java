@@ -340,7 +340,7 @@ public class SysUserServiceImpl implements SysUserService {
 				return Result.failed("用户名已存在");
 			}
 			sysUser.setUpdateTime(sysUser.getCreateTime());
-			i = sysUserDao.save(sysUser);
+			i = sysUserDao.insert(sysUser);
 		} else {
 			sysUser.setUpdateTime(new Date());
 			i = sysUserDao.updateByOps(sysUser);
