@@ -63,13 +63,22 @@ public class SysUserController {
      * 当前登录用户 LoginAppUser
      *
      * @return
+     * @throws JsonProcessingException 
      */
     @ApiOperation(value = "根据access_token当前登录用户")
     @GetMapping("/users/current")
-    public LoginAppUser getLoginAppUser() {
+    public LoginAppUser getLoginAppUser()   {
     	String num = PointUtil.getRandom();//生成日志随机数
 		log.info("SysUserController|getLoginAppUser|num:{}|input:{}",num , "" );
-        return SysUserUtil.getLoginAppUser();
+		LoginAppUser loginUser = null ;
+		try {
+			loginUser = SysUserUtil.getLoginAppUser() ;
+			log.info("SysUserController|getLoginAppUser|num:{}|output:{}",num ,objectMapper.writeValueAsString(loginUser) );
+		} catch (Exception e) {
+			log.info("SysUserController|getLoginAppUser|num:{}|exception:{}",num , e.getMessage());
+		}
+		
+        return loginUser ;
     }
     
     @GetMapping(value = "/users-anon/login", params = "username")

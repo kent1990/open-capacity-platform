@@ -131,8 +131,87 @@ layui.define(['config', 'layer'], function (exports) {
                 }
             });
         },
+        asyncReq: function (url, data, success, method) {
+            if ('put' == method.toLowerCase()) {
+                // method = 'POST';
+                // data._method = 'PUT';
+                method = 'PUT';
+            } else if ('delete' == method.toLowerCase()) {
+                // method = 'POST';
+                // data._method = 'DELETE';
+                method = 'DELETE';
+            }
+            var token = config.getToken();
+            if (token) {
+                data.access_token = token.access_token;
+            }
+            //add by owen ajax 执行前置处理器  
+            admin.asyncajax({
+                url: config.base_server + url,
+                data: data,
+                type: method,
+                dataType: 'json',
+                contentType: "application/json",
+                success: success,
+                beforeSend: function (xhr) {
+                    var token = config.getToken();
+                    if (token) {
+                        // xhr.setRequestHeader('Authorization', 'Basic ' + token.access_token);
+                        xhr.setRequestHeader('Authorization', 'bearer ' + token.access_token);
+                    }
 
-        // 封装ajax请求
+//                    此时发送一个refresh_token
+//                    if (access_token != null && access_token.trim().length != 0) {
+//                		$.ajax({
+//                			type : 'get',
+//                			url : domainName + '/api-u/users/current?access_token=' + access_token,
+//                			success : function(data) {
+//                				location.href = 'index.html';
+//                			},
+//                			error : function(xhr, textStatus, errorThrown) {
+//                				if (xhr.status == 401) {
+//                					localStorage.removeItem("access_token");
+//                				}
+//                			}
+//                		});
+//                	}
+                }
+            });
+        },
+        // 封装异步ajax请求
+        asyncAjax: function (param) {
+            var successCallback = param.success;
+            param.success = function (result, status, xhr) {
+                // 判断登录过期和没有权限
+                var jsonRs;
+                if ('json' == param.dataType.toLowerCase()) {
+                    jsonRs = result;
+                } else if ('html' == param.dataType.toLowerCase() || 'text' == param.dataType.toLowerCase()) {
+                    jsonRs = admin.parseJSON(result);
+                }
+                if (jsonRs) {
+                    if (jsonRs.code == 401) {
+                        config.removeToken();
+                        layer.msg('登录过期', {icon: 2, time: 1500}, function () {
+                            location.replace('/login.html');
+                        }, 1000);
+                        return;
+                    } else if (jsonRs.code == 403) {
+                        layer.msg('没有权限', {icon: 2});
+                        return;
+                    }
+                }
+                successCallback(result, status, xhr);
+            };
+            param.error = function (xhr) {
+                param.success({code: xhr.status, msg: xhr.statusText});
+            };
+            //发送异步ajax请求
+            param.async = true;
+            console.log(param);
+            $.ajax(param);
+        },
+        // 封装同步ajax请求
         ajax: function (param) {
             var successCallback = param.success;
             param.success = function (result, status, xhr) {

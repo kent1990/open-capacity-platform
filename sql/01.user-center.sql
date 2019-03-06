@@ -149,7 +149,7 @@ INSERT INTO `sys_user` VALUES (1,'admin','$2a$10$Wtw81uu43fGKw9lkOr1RAOTNWxQIZBs
 
 DROP FUNCTION IF EXISTS `currval`;
 
-CREATE DEFINER=`root`@`%` FUNCTION `currval`(v_seq_name VARCHAR(50)) RETURNS int(11)
+CREATE  FUNCTION `currval`(v_seq_name VARCHAR(50)) RETURNS int(11)
 begin        
     declare value integer;         
     set value = 0;         
@@ -159,7 +159,7 @@ end;
 
 DROP FUNCTION IF EXISTS `nextval`;
 
-CREATE DEFINER=`root`@`%` FUNCTION `nextval`(v_seq_name VARCHAR(50)) RETURNS int(11)
+CREATE   FUNCTION `nextval`(v_seq_name VARCHAR(50)) RETURNS int(11)
 begin  
 		declare max integer;
 		select max_val into max from order_seq where seq_name = v_seq_name; 

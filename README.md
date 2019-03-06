@@ -12,10 +12,8 @@
 ![1群](https://images.gitee.com/uploads/images/2019/0110/231914_3b9c6b66_1441068.png) 
 ![2群](https://images.gitee.com/uploads/images/2019/0126/130006_e6933516_1147840.png)
 ##   技术介绍 
-![](https://images.gitee.com/uploads/images/2019/0110/231913_de1b7eb6_1441068.png)  
-##   框架设计
-![](https://images.gitee.com/uploads/images/2019/0110/231913_3a1125be_1441068.jpeg)
-
+ ![](https://i.imgur.com/pnJWnA9.png)
+ 
 ## 开发环境  
 redis3.X  
 jdk1.8  
@@ -24,7 +22,9 @@ maven3.3.9
 sts-3.8.0.RELEASE  
 
 ## 技术文档   ##
+[在线阅读](https://www.kancloud.cn/owenwangwen/open-capacity-platform/content)  
 https://www.kancloud.cn/owenwangwen/open-capacity-platform/content
+
 
 
 ## 项目组织结构分析  
