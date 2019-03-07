@@ -52,7 +52,15 @@ public class ValidateCodeFilter extends OncePerRequestFilter {
 		// 登录提交的时候验证验证码
 		if (pathMatcher.match("/oauth/token", request.getRequestURI())) {
 
-			return false;
+			 if (request.getParameter("grant_type")!=null){
+				//密码模式需要验证码
+				 if("password".toUpperCase().equals(request.getParameter("grant_type").toUpperCase())){
+					 return false;
+				 }
+				 
+			 }
+			
+			
 		}
 		return true;
 	}
