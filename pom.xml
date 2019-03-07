@@ -33,6 +33,7 @@
 		<docker.image.prefix>owenwangwen</docker.image.prefix>
 		<docker.host>http://59.110.164.254:5555</docker.host>
 		<spring-boot.version>2.0.4.RELEASE</spring-boot.version>
+		 <net-devh-grpc.version>2.0.1.RELEASE</net-devh-grpc.version>
 		<spring-platform.version>Cairo-SR3</spring-platform.version>
 		<spring-security.version>5.1.1.RELEASE</spring-security.version>
 		<security-oauth2.version>2.3.4.RELEASE</security-oauth2.version>
@@ -155,6 +156,14 @@
 				<directory>src/main/view</directory>
 				<includes>
 					<include>**/*.*</include>
+				</includes>
+				<filtering>false</filtering>
+			</resource>
+			
+			<resource>
+				<directory>src/main/proto</directory>
+				<includes>
+					<include>**/*.proto</include>
 				</includes>
 				<filtering>false</filtering>
 			</resource>

@@ -177,6 +177,9 @@ hystrix:
  
 zuul:
   ribbon-isolation-strategy: thread       # 提高吞吐量
+  host:
+    max-per-route-connections: 60000      # 适用于ApacheHttpClient，如果是okhttp无效。每个服务的http客户端连接池最大连接，默认是200
+    max-total-connections: 60000          # 适用于ApacheHttpClient，如果是okhttp无效。每个route可用的最大连接数，默认值是20
   ribbon:
     eager-load:
       enabled: true

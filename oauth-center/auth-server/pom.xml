@@ -65,8 +65,17 @@
 			<artifactId>spring-cloud-starter-openfeign</artifactId>
 		</dependency>
 
-
-
+		<!-- grpc通信模块 -->
+		<dependency>
+			<groupId>com.open.capacity</groupId>
+			<artifactId>api-grpc</artifactId>
+			<version>${core.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>net.devh</groupId>
+			<artifactId>grpc-client-spring-boot-starter</artifactId>
+			<version>${net-devh-grpc.version}</version>
+		</dependency>
 	</dependencies>
 
 	<!-- 形成带第三方jar包的可执行jar包，jar包目录结构如下 application.properties lib META-INF mybatis 

@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import io.grpc.StatusRuntimeException;
+
 
 /**
  * @author 作者 owen E-mail: 624191343@qq.com
@@ -48,4 +50,34 @@ public class ExceptionHandlerAdvice {
 
 		return data;
 	}
+	@ExceptionHandler({ StatusRuntimeException.class })
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	public Map<String, Object> badRequestException(StatusRuntimeException exception) {
+		Map<String, Object> data = new HashMap<>();
+		data.put("resp_code", HttpStatus.INTERNAL_SERVER_ERROR.value());
+		data.put("resp_msg", exception.getMessage());
+
+		return data;
+	}
+	 /**
+     * 所有异常统一处理
+     * 返回状态码:500
+     */
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(Exception.class)
+    public  Map<String, Object> handleException(Exception e) {
+    	Map<String, Object> data = new HashMap<>();
+		data.put("resp_code", HttpStatus.INTERNAL_SERVER_ERROR.value());
+		data.put("resp_msg",  "未知异常");
+		return data;
+    }
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(RuntimeException.class)
+    public  Map<String, Object> handleException(RuntimeException e) {
+    	Map<String, Object> data = new HashMap<>();
+		data.put("resp_code", HttpStatus.INTERNAL_SERVER_ERROR.value());
+		data.put("resp_msg",  "运行时异常");
+		return data;
+    }
+    
 }

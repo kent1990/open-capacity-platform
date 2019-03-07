@@ -133,6 +133,20 @@
 			<artifactId>swagger-mg-ui</artifactId>
 			<version>${swagger.m.version}</version>
 		</dependency>
+ 
+
+		<!-- grpc通信模块 -->
+		<dependency>
+			<groupId>com.open.capacity</groupId>
+			<artifactId>api-grpc</artifactId>
+			<version>${core.version}</version>
+		</dependency>
+
+		<dependency>
+            <groupId>net.devh</groupId>
+            <artifactId>grpc-server-spring-boot-starter</artifactId>
+            <version>${net-devh-grpc.version}</version>
+        </dependency>
 
 
 		<dependency>
