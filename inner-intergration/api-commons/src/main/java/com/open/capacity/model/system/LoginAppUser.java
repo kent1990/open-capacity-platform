@@ -58,6 +58,17 @@ public class LoginAppUser extends SysUser implements UserDetails {
 		return collection;
 	}
 
+	
+	@JsonIgnore
+	public Collection<? extends GrantedAuthority> putAll( Collection<GrantedAuthority> collections) {
+		Collection<GrantedAuthority> collection = new HashSet<>();
+		 
+		collection.addAll(collections) ;
+
+		return collection;
+	}
+
+	
 	@Override
 	public boolean isAccountNonExpired() {
 		return true;

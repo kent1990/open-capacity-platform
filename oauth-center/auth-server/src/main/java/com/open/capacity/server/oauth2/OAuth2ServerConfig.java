@@ -55,7 +55,6 @@ public class OAuth2ServerConfig {
 	private RedisTemplate<String, Object> redisTemplate;
 
 	@Bean // 声明 ClientDetails实现
-	@ConditionalOnProperty(prefix = "security.oauth2.token.store", name = "type", havingValue = "redis", matchIfMissing = true)
 	public RedisClientDetailsService clientDetailsService() {
 		RedisClientDetailsService clientDetailsService = new RedisClientDetailsService(dataSource);
 		clientDetailsService.setRedisTemplate(redisTemplate);
