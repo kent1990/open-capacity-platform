@@ -26,12 +26,12 @@
 -->
   <dependencies>
 
-		<!-- 服务追踪 -->
+		<!-- 服务追踪 
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-zipkin</artifactId>
 		</dependency>
-		
+		-->
 		<!-- 日志统一配置 -->
 		<dependency>
 			<groupId>com.open.capacity</groupId>

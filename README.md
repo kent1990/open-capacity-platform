@@ -6,13 +6,16 @@
 ### 欢迎进群（群内领资料）
 
 `一键加群`
-
 <a target="_blank" href="https://jq.qq.com/?_wv=1027&k=5JSjd5D"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="open-capacity-platform交流" title="open-capacity-platform交流"></a>
 
 ![1群](https://images.gitee.com/uploads/images/2019/0110/231914_3b9c6b66_1441068.png) 
 ![2群](https://images.gitee.com/uploads/images/2019/0126/130006_e6933516_1147840.png)
+
+##  项目地址
+http://59.110.164.254:8066/login.html 用户名/密码：admin/admin
+
 ##   技术介绍 
- ![](https://i.imgur.com/pnJWnA9.png)
+ ![](https://i.imgur.com/Ncp3Esz.png)
  
 ## 开发环境  
 redis3.X  
@@ -22,39 +25,10 @@ maven3.3.9
 sts-3.8.0.RELEASE  
 
 ## 技术文档   ##
-[在线阅读](https://www.kancloud.cn/owenwangwen/open-capacity-platform/content)  
-https://www.kancloud.cn/owenwangwen/open-capacity-platform/content
-
-
+[正式文档](https://www.kancloud.cn/owenwangwen/open-capacity-platform)  
 
 ## 项目组织结构分析  
 ![](https://i.imgur.com/GEmNF0q.png)
-
-  
-
-##  项目地址
-http://59.110.164.254:8066/login.html 用户名/密码：admin/admin
-
-##  ocp项目演示
- 
-
-
-
-![输入图片说明](https://note.youdao.com/yws/public/resource/6cd1fec4aff3aa11412cbb98918e1643/xmlnote/36942CACA2A9446ABED08145E2FA0F43/7704 "在这里输入图片标题")
-
-如果图片不能正常显示，请移步百度网盘下载高清大图 ：链接：https://pan.baidu.com/s/1LoLxN1Psq8q1HU0tU5m0DA 提取码：v2sk 
-
-
-
-## 阿波罗配置中心演示  
-![](http://img2.ph.126.net/-cKtj6Wia_q6YiZKV-IOsQ==/295548725646480248.gif)
-
-
- 
-## oauth流程演示  
-![](https://i.imgur.com/E0w4r2t.gif)
-
-
 
 
 

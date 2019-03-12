@@ -76,8 +76,8 @@ spring:
       # Spring监控配置，说明请参考Druid Github Wiki，配置_Druid和Spring关联监控配置
       #aop-patterns= # Spring监控AOP切入点，如x.y.z.service.*,配置多个英文逗号分隔
 ################### mysq end ##########################
-  zipkin:
-    base-url: http://127.0.0.1:11008
+#  zipkin:
+#    base-url: http://127.0.0.1:11008
   redis:
 ################### redis 单机版 start ########################## 
     host: 59.110.164.254

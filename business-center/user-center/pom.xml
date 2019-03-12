@@ -148,12 +148,12 @@
             <version>${net-devh-grpc.version}</version>
         </dependency>
 
-
+		<!--
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-zipkin</artifactId>
 		</dependency>
-
+		 -->
 	</dependencies>
 
 	<!-- 形成带第三方jar包的可执行jar包，jar包目录结构如下 application.properties lib META-INF mybatis 
