@@ -33,7 +33,7 @@
 		<docker.image.prefix>owenwangwen</docker.image.prefix>
 		<docker.host>http://59.110.164.254:5555</docker.host>
 		<spring-boot.version>2.0.4.RELEASE</spring-boot.version>
-		 <net-devh-grpc.version>2.0.1.RELEASE</net-devh-grpc.version>
+		<net-devh-grpc.version>2.0.1.RELEASE</net-devh-grpc.version>
 		<spring-platform.version>Cairo-SR3</spring-platform.version>
 		<spring-security.version>5.1.1.RELEASE</spring-security.version>
 		<security-oauth2.version>2.3.4.RELEASE</security-oauth2.version>
@@ -66,13 +66,13 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
-		
-		<!-- Micrometer Prometheus registry  -->
+
+		<!-- Micrometer Prometheus registry -->
 		<dependency>
-		    <groupId>io.micrometer</groupId>
-		    <artifactId>micrometer-registry-prometheus</artifactId>
+			<groupId>io.micrometer</groupId>
+			<artifactId>micrometer-registry-prometheus</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -102,6 +102,11 @@
 				<version>${spring-cloud-dependencies.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.security.oauth</groupId>
+				<artifactId>spring-security-oauth2</artifactId>
+				<version>${security-oauth2.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -166,7 +171,7 @@
 				</includes>
 				<filtering>false</filtering>
 			</resource>
-			
+
 			<resource>
 				<directory>src/main/proto</directory>
 				<includes>
@@ -195,12 +200,8 @@
 		<module>soap-center</module>
 		<!-- 任务中心 -->
 		<module>job-center</module>
-		<!-- 灰度发布中心
-		<module>gray-center</module>
-		 -->
-		<!-- 调优中心 
-		<module>tuning-center</module>
-		-->
+		<!-- 灰度发布中心 <module>gray-center</module> -->
+		<!-- 调优中心 <module>tuning-center</module> -->
 		<!-- 监控中心 -->
 		<module>monitor-center</module>
 		<!-- spring cloud gateway -->
@@ -210,7 +211,7 @@
 		<module>dubbo-center</module>
 	</modules>
 	<developers>
-		 
+
 		<developer>
 			<id>01</id>
 			<name>gitgeek</name>
@@ -256,6 +257,6 @@
 			<name>573059382</name>
 			<email>573059382@qq.com</email>
 		</developer>
-		
+
 	</developers>
 </project>
