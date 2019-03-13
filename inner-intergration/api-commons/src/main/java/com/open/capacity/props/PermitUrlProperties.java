@@ -9,21 +9,19 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @author 作者 owen E-mail: 624191343@qq.com
  * @version 创建时间：2017年11月12日 上午22:57:51 url白名单处理 application.yml中配置需要放权的url白名单
  */
-//@ConfigurationProperties(prefix = "permit")
+// @ConfigurationProperties(prefix = "permit")
 @ConfigurationProperties(prefix = "security.oauth2")
 public class PermitUrlProperties {
 
 	/**
 	 * 监控中心和swagger需要访问的url
 	 */
-	private static final String[] ENDPOINTS = { "/**/actuator/health", "/**/actuator/env", "/**/actuator/metrics/**",
-			"/**/actuator/trace", "/**/actuator/dump", "/**/actuator/jolokia", "/**/actuator/info",
-			"/**/actuator/logfile", "/**/actuator/refresh", "/**/actuator/flyway", "/**/actuator/liquibase",
-			"/**/actuator/heapdump", "/**/actuator/loggers", "/**/actuator/auditevents", "/**/actuator/env/PID",
-			"/**/actuator/jolokia/**", "/**/actuator/archaius/**", "/**/actuator/beans/**", "/**/actuator/httptrace",
-			"/**/v2/api-docs/**", "/**/swagger-ui.html", "/**/swagger-resources/**", "/**/webjars/**", "/**/druid/**",
-			"/**/actuator/hystrix.stream","/**/actuator/hystrix.stream**/**", "/**/turbine.stream", "/**/turbine.stream**/**",
-			"/**/hystrix","/**/hystrix.stream", "/**/hystrix/**" ,"/**/hystrix/**/**" ,"/**/proxy.stream/**" ,"/**/favicon.ico" };
+	private static final String[] ENDPOINTS = { 
+			"/**/actuator/**" , "/**/actuator/**/**" ,  //断点监控
+			"/**/v2/api-docs/**", "/**/swagger-ui.html", "/**/swagger-resources/**", "/**/webjars/**", //swagger
+			"/**/turbine.stream","/**/turbine.stream**/**", "/**/hystrix", "/**/hystrix.stream", "/**/hystrix/**", "/**/hystrix/**/**",	"/**/proxy.stream/**" , //熔断监控
+			"/**/druid/**", "/**/favicon.ico", "/**/prometheus" 
+	};
 
 	private String[] ignored;
 
@@ -53,8 +51,5 @@ public class PermitUrlProperties {
 	public void setIgnored(String[] ignored) {
 		this.ignored = ignored;
 	}
-	
-	 
- 
 
 }
