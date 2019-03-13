@@ -77,6 +77,14 @@ sts-3.8.0.RELEASE
 11.日志中心  
 ![](https://images.gitee.com/uploads/images/2019/0126/125450_75ac20ef_1147840.png)  
 
+11.prometheus监控  
+![](https://i.imgur.com/8GAR0MR.png)  
+
+12.spring boot admin 监控  
+![](https://i.imgur.com/stvC8OU.png)
+![](https://i.imgur.com/S7f655G.png)
+
+
 
 
 ## 部署 
