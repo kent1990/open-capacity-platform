@@ -16,6 +16,7 @@ http://59.110.164.254:8066/login.html 用户名/密码：admin/admin
 
 ##   技术介绍 
  ![](https://i.imgur.com/Ncp3Esz.png)
+![](https://i.imgur.com/fE7nLvt.png)
  
 ## 开发环境  
 redis3.X  
