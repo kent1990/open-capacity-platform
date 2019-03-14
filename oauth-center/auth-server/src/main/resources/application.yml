@@ -114,9 +114,9 @@ mybatis-plus:
 
 
 security:
-  ignored: /oauth/user/token , /oauth/client/token , /login  ,  /user/login ,/oauth/authorize , /doc.html ,/user/logout ,/document.html
+  ignored: /oauth/user/token , /oauth/client/token , /login  ,  /user/login   , /doc.html ,/user/logout ,/document.html
   oauth2:
-    ignored: /oauth/user/token , /oauth/client/token  ,/oauth/authorize ,/user/logout ,/document.html 
+    ignored: /oauth/user/token , /oauth/client/token   ,/user/logout ,/document.html 
     resource:
       filter-order: 3
     token:

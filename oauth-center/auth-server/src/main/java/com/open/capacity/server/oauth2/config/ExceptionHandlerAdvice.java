@@ -59,25 +59,6 @@ public class ExceptionHandlerAdvice {
 
 		return data;
 	}
-	 /**
-     * 所有异常统一处理
-     * 返回状态码:500
-     */
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    @ExceptionHandler(Exception.class)
-    public  Map<String, Object> handleException(Exception e) {
-    	Map<String, Object> data = new HashMap<>();
-		data.put("resp_code", HttpStatus.INTERNAL_SERVER_ERROR.value());
-		data.put("resp_msg",  "未知异常");
-		return data;
-    }
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    @ExceptionHandler(RuntimeException.class)
-    public  Map<String, Object> handleException(RuntimeException e) {
-    	Map<String, Object> data = new HashMap<>();
-		data.put("resp_code", HttpStatus.INTERNAL_SERVER_ERROR.value());
-		data.put("resp_msg",  "运行时异常");
-		return data;
-    }
+ 
     
 }
