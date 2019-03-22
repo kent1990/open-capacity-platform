@@ -32,7 +32,6 @@
 		<swagger.m.version>1.0.6</swagger.m.version>
 		<docker.image.prefix>owenwangwen</docker.image.prefix>
 		<docker.host>http://59.110.164.254:5555</docker.host>
-		<spring-boot.version>2.1.2.RELEASE</spring-boot.version>
 		<net-devh-grpc.version>2.0.1.RELEASE</net-devh-grpc.version>
 		<spring-platform.version>Cairo-SR3</spring-platform.version>
 		<spring-security.version>5.1.1.RELEASE</spring-security.version>
