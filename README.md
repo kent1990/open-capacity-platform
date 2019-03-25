@@ -34,6 +34,23 @@ sts-3.8.0.RELEASE
 ![输入图片说明](https://images.gitee.com/uploads/images/2019/0325/202632_d6e2e2ad_869801.png "屏幕截图.png")
 
 
+1.下载代码
+
+```
+ git clone  https://gitee.com/owenwangwen/open-capacity-platform.git
+```
+
+2.启动对应的服务
+
+a.先启动 register-center 注册中心的 eureka-server 注册服务
+
+b.在启动 api-gateway 网关服务
+
+c.再启动 oauth-center 认证中心 oauth-server 认证服务
+
+d.在启动 business-center 业务中心的 对应服务 file-center user-center back-center
+
+e.启动 monitor-center 监控中心 admin-server zipkin-center
 
 ## 一. open-capacity-platform能力开放平台管理    
    
@@ -90,65 +107,9 @@ sts-3.8.0.RELEASE
 
 
 
-## 部署 
-
-1.下载代码
-
-```
- git clone  https://gitee.com/owenwangwen/open-capacity-platform.git
-```
-
-2.启动对应的服务
-
-a.先启动 register-center 注册中心的 eureka-server 注册服务
-
-b.在启动 api-gateway 网关服务
-
-c.再启动 oauth-center 认证中心 oauth-server 认证服务
-
-d.在启动 business-center 业务中心的 对应服务 file-center user-center back-center
-
-e.启动 monitor-center 监控中心 admin-server zipkin-center
-
-
-  
-
-灰度发布功能演示  
-军哥的项目【[https://github.com/Nepxion/Discovery](https://github.com/Nepxion/Discovery):4.8.0-RC1】  
-a.先启动 register-center 注册中心的 eureka-server 注册服务  
-b.启动gray-center的zuul-server  
-c.启动gray-center中的original-service的【DiscoveryApplicationA1】，【DiscoveryApplicationA2】，【DiscoveryApplicationB1】，【DiscoveryApplicationB2】，【DiscoveryApplicationC1】，【DiscoveryApplicationC2】，【DiscoveryApplicationC3】  
-d.启动gray-center的discovery-console  
-e.启动gray-center的discovery-console-desktop  
-
-ocp灰度发布功能(参考dev分支)    
-![](https://images.gitee.com/uploads/images/2019/0126/125450_b42073c5_1147840.png)  
-![](https://images.gitee.com/uploads/images/2019/0126/125450_66e3a8db_1147840.png)  
-![](https://images.gitee.com/uploads/images/2019/0126/125451_28b1bc41_1147840.png)  
-  
- 
-灰度管理UI  
-用户名:admin      
-密码  :admin  
-![](https://images.gitee.com/uploads/images/2019/0126/125451_c3b6224d_1147840.png)
-
-页面   
-![](https://images.gitee.com/uploads/images/2019/0126/125452_3164c04c_1147840.png)
-
-基于版本的灰度发布
-![](https://images.gitee.com/uploads/images/2019/0126/125452_4b935973_1147840.png)
-![](https://images.gitee.com/uploads/images/2019/0126/125452_565e9022_1147840.png)
-![](https://images.gitee.com/uploads/images/2019/0126/125452_3f970930_1147840.png)
-![](https://images.gitee.com/uploads/images/2019/0126/125453_79912ce1_1147840.png)
-
-基于规则的灰度发布  
-【待续】
-
-请参考
-[https://github.com/Nepxion/Docs/blob/master/discovery-doc/README_QUICK_START.md](https://github.com/Nepxion/Docs/blob/master/discovery-doc/README_QUICK_START.md)，感谢军哥分享  
 
  
-容器化部署  
+# 容器化部署  # 
 
 主机管理  
 ![](https://images.gitee.com/uploads/images/2019/0126/125453_6682dba8_1147840.png)
@@ -185,17 +146,50 @@ api网关
 资源消耗情况
 ![](https://images.gitee.com/uploads/images/2019/0126/125457_397161e8_1147840.png)
 
-api-gateway vs new-api-gateway
-
-api-gateway
+# api-gateway vs new-api-gateway #
+内网
+## api-gateway ##
 ![输入图片说明](https://images.gitee.com/uploads/images/2019/0325/202215_3a48f2a3_869801.png "111.png")
 ![输入图片说明](https://images.gitee.com/uploads/images/2019/0325/202224_919bf508_869801.png "222.png")
 ![输入图片说明](https://images.gitee.com/uploads/images/2019/0325/202234_2519a41e_869801.png "333.png")
-new-api-gateway
+## new-api-gateway ##
 ![输入图片说明](https://images.gitee.com/uploads/images/2019/0325/202046_fa2a6db5_869801.png "111.png")
 ![输入图片说明](https://images.gitee.com/uploads/images/2019/0325/202102_77b82f4b_869801.png "222.png")
 ![输入图片说明](https://images.gitee.com/uploads/images/2019/0325/202112_c5ac37ee_869801.png "333.png")
 
+## 灰度发布功能演示  ##  
+ 
+ocp灰度发布功能(参考dev分支) 
+a.先启动 register-center 注册中心的 eureka-server 注册服务  
+b.在启动 api-gateway 网关服务 
+c.再启动 oauth-center 认证中心 oauth-server 认证服务 
+d.在启动 business-center 业务中心的 对应服务 user-center 
+d.启动gray-center的discovery-console  
+e.启动gray-center的discovery-console-desktop    
+![](https://images.gitee.com/uploads/images/2019/0126/125450_b42073c5_1147840.png)  
+![](https://images.gitee.com/uploads/images/2019/0126/125450_66e3a8db_1147840.png)  
+![](https://images.gitee.com/uploads/images/2019/0126/125451_28b1bc41_1147840.png)  
+  
+ 
+灰度管理UI  
+用户名:admin      
+密码  :admin  
+![](https://images.gitee.com/uploads/images/2019/0126/125451_c3b6224d_1147840.png)
+
+页面   
+![](https://images.gitee.com/uploads/images/2019/0126/125452_3164c04c_1147840.png)
+
+基于版本的灰度发布
+![](https://images.gitee.com/uploads/images/2019/0126/125452_4b935973_1147840.png)
+![](https://images.gitee.com/uploads/images/2019/0126/125452_565e9022_1147840.png)
+![](https://images.gitee.com/uploads/images/2019/0126/125452_3f970930_1147840.png)
+![](https://images.gitee.com/uploads/images/2019/0126/125453_79912ce1_1147840.png)
+
+基于规则的灰度发布  
+【待续】
+
+请参考
+[https://github.com/Nepxion/Docs/blob/master/discovery-doc/README_QUICK_START.md](https://github.com/Nepxion/Docs/blob/master/discovery-doc/README_QUICK_START.md)，感谢军哥分享  
 
 链路跟踪
 ![](https://i.imgur.com/S3RvjFc.png)
