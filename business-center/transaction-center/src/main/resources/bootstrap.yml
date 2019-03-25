@@ -1,0 +1,5 @@
+server:
+   port: 7970 #随机端口
+spring:
+  application:
+    name: tx-manager

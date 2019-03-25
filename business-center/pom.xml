@@ -34,5 +34,6 @@
   	<module>log-center</module>
   	<module>batch-center</module>
   	<!-- <module>sms-center</module> -->
+  	<module>transaction-center</module>
   </modules>
 </project>

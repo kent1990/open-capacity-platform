@@ -11,25 +11,27 @@
 ![1群](https://images.gitee.com/uploads/images/2019/0110/231914_3b9c6b66_1441068.png) 
 ![2群](https://images.gitee.com/uploads/images/2019/0126/130006_e6933516_1147840.png)
 
-##  项目地址
+# **项目地址** #
 http://59.110.164.254:8066/login.html 用户名/密码：admin/admin
 
-##   技术介绍 
- ![](https://i.imgur.com/Ncp3Esz.png)
-![](https://i.imgur.com/fE7nLvt.png)
+# 技术介绍  #
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0325/201938_48f25b7d_869801.png "01.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0325/201950_44da7587_869801.png "02.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0325/202000_dad634f9_869801.png "03.png")
  
-## 开发环境  
+# 开发环境   #
 redis3.X  
 jdk1.8  
 MySQL Server 5.6  
 maven3.3.9  
 sts-3.8.0.RELEASE  
 
-## 技术文档   ##
+# 技术文档 #
+[试读](https://www.kancloud.cn/owenwangwen/open-capacity-platform/content)
 [正式文档](https://www.kancloud.cn/owenwangwen/open-capacity-platform)  
 
-## 项目组织结构分析  
-![](https://i.imgur.com/GEmNF0q.png)
+# 项目组织结构分析   #
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0325/202632_d6e2e2ad_869801.png "屏幕截图.png")
 
 
 
@@ -182,6 +184,18 @@ api网关
 
 资源消耗情况
 ![](https://images.gitee.com/uploads/images/2019/0126/125457_397161e8_1147840.png)
+
+api-gateway vs new-api-gateway
+
+api-gateway
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0325/202215_3a48f2a3_869801.png "111.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0325/202224_919bf508_869801.png "222.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0325/202234_2519a41e_869801.png "333.png")
+new-api-gateway
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0325/202046_fa2a6db5_869801.png "111.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0325/202102_77b82f4b_869801.png "222.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0325/202112_c5ac37ee_869801.png "333.png")
+
 
 链路跟踪
 ![](https://i.imgur.com/S3RvjFc.png)
