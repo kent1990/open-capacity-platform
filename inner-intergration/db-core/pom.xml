@@ -16,11 +16,24 @@
 			<artifactId>spring-boot-starter-data-redis</artifactId>
 		</dependency>
 
+		
+		<!-- 分布式缓存 -->
+		<dependency>
+			<groupId>com.hazelcast</groupId>
+			<artifactId>hazelcast</artifactId>
+			<version>3.11.1</version>
+		</dependency> 
+		<dependency>
+			<groupId>com.hazelcast</groupId>
+			<artifactId>hazelcast-spring</artifactId>
+			<version>3.11.1</version>
+		</dependency> 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-cache</artifactId>
 		</dependency>
-
+		
+		
 		<!-- mybatis的分页插件 -->
 		<dependency>
 			<groupId>com.github.pagehelper</groupId>

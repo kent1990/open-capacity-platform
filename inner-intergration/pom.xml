@@ -33,6 +33,6 @@
   	<module>api-commons</module>
   	<module>security-core</module>
   	<module>log-core</module>
-  	<module>api-grpc</module>
+  	<module>grpc-lib</module>
   </modules>
 </project>

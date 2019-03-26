@@ -138,7 +138,7 @@
 		<!-- grpc通信模块 -->
 		<dependency>
 			<groupId>com.open.capacity</groupId>
-			<artifactId>api-grpc</artifactId>
+			<artifactId>grpc-lib</artifactId>
 			<version>${core.version}</version>
 		</dependency>
 

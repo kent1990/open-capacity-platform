@@ -5,7 +5,7 @@
     <artifactId>inner-intergration</artifactId>
     <version>1.0.1</version>
   </parent>
-  <artifactId>api-grpc</artifactId>
+  <artifactId>grpc-lib</artifactId>
   
    <properties>
         <os.plugin.version>1.6.0</os.plugin.version>
