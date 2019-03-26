@@ -27,13 +27,18 @@
 -->
   <packaging>pom</packaging>
   <modules>
+  	<!-- 用户中心 -->
   	<module>user-center</module>
+  	<!-- 后台中心 -->
   	<module>back-center</module>
+  	<!-- 文件中心 -->
   	<module>file-center</module>
+  	<!-- 代码生成器 -->
   	<module>generator-center</module>
+  	<!-- 日志中心 -->
   	<module>log-center</module>
-  	<module>batch-center</module>
   	<!-- <module>sms-center</module> -->
+  	<!-- 事物中心 -->
   	<module>transaction-center</module>
   </modules>
 </project>

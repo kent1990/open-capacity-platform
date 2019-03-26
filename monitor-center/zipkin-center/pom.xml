@@ -9,8 +9,7 @@
 	<artifactId>zipkin-center</artifactId>
 	<packaging>pom</packaging>
 	<modules>
-		<module>zipkin-center-native</module>
-		<!-- <module>zipkin-center-mysql</module> -->
+		<!-- zipkin + kafka + es -->
 		<module>zipkin-center-es</module>
 	</modules>
 </project>

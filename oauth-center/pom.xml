@@ -136,6 +136,5 @@
 	<modules>
 		<module>auth-server</module>
 		<module>auth-sso</module>
-		<module>auth-client</module>
 	</modules>
 </project>

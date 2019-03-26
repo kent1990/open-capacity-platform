@@ -211,8 +211,6 @@
 		<module>api-gateway</module>
 		<!-- 业务中心 -->
 		<module>business-center</module>
-		<!-- soap cxf wsdl -->
-		<module>soap-center</module>
 		<!-- 任务中心 -->
 		<module>job-center</module>
 		<!-- 灰度发布中心 <module>gray-center</module> -->
@@ -221,9 +219,9 @@
 		<module>monitor-center</module>
 		<!-- spring cloud gateway -->
 		<module>new-api-gateway</module>
-
-		<module>mq-center</module>
+		<!--
 		<module>dubbo-center</module>
+		 -->
 	</modules>
 	<developers>
 
