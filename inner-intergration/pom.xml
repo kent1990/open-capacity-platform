@@ -34,5 +34,6 @@
   	<module>security-core</module>
   	<module>log-core</module>
   	<module>grpc-lib</module>
+  	<module>lock-core</module>
   </modules>
 </project>
