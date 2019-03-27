@@ -109,41 +109,41 @@ e.启动 monitor-center 监控中心 admin-server zipkin-center
 
 
  
-# 容器化部署  # 
+# 容器化部署   
 
-主机管理  
+## 主机管理   
 ![](https://images.gitee.com/uploads/images/2019/0126/125453_6682dba8_1147840.png)
-ocp应用平台    
+## ocp应用平台     
  ![](https://images.gitee.com/uploads/images/2019/0126/125453_3831567a_1147840.png)      
 
-注册中心    
+## 注册中心    
 ![](https://images.gitee.com/uploads/images/2019/0126/125454_b04fbc0d_1147840.png)    
 ![](https://images.gitee.com/uploads/images/2019/0126/125454_1f9ce4e8_1147840.png)  
 ![](https://images.gitee.com/uploads/images/2019/0126/125454_3ece0005_1147840.png)     
 
 
-用户中心    
+## 用户中心    
 ![](https://images.gitee.com/uploads/images/2019/0126/125454_272e0e79_1147840.png)    
 ![](https://images.gitee.com/uploads/images/2019/0126/125455_0f0278dd_1147840.png)   
  
 
-认证中心   
+## 认证中心    
 ![](https://images.gitee.com/uploads/images/2019/0126/125455_05a5b463_1147840.png)    
 ![](https://images.gitee.com/uploads/images/2019/0126/125455_4827ecff_1147840.png)  
 
-api网关   
+## api网关    
 ![](https://images.gitee.com/uploads/images/2019/0126/125456_7cf25a83_1147840.png)  
 ![](https://images.gitee.com/uploads/images/2019/0126/125456_bbac1fb9_1147840.png)
 
-负载均衡器  
+## 负载均衡器   
 ![](https://images.gitee.com/uploads/images/2019/0126/125456_5c697b5f_1147840.png)
 
 
-后台中心  
+## 后台中心   
 ![](https://images.gitee.com/uploads/images/2019/0126/125456_e21d4fb0_1147840.png)
 ![](https://images.gitee.com/uploads/images/2019/0126/125456_18382021_1147840.jpeg)
 
-资源消耗情况
+## 资源消耗情况 
 ![](https://images.gitee.com/uploads/images/2019/0126/125457_397161e8_1147840.png)
 
 # api-gateway vs new-api-gateway #
@@ -158,7 +158,7 @@ api网关
 ![输入图片说明](https://images.gitee.com/uploads/images/2019/0327/100005_d7861ff6_869801.png "gateway02.png")
 ![输入图片说明](https://images.gitee.com/uploads/images/2019/0327/100014_8528653c_869801.png "gateway03.png")
 ![输入图片说明](https://images.gitee.com/uploads/images/2019/0327/100021_7933cefd_869801.png "gateway04.png")
-## 灰度发布功能演示  ##  
+#  灰度发布功能演示   
  
 ocp灰度发布功能(参考dev分支) 
 a.先启动 register-center 注册中心的 eureka-server 注册服务  
@@ -192,7 +192,7 @@ e.启动gray-center的discovery-console-desktop
 请参考
 [https://github.com/Nepxion/Docs/blob/master/discovery-doc/README_QUICK_START.md](https://github.com/Nepxion/Docs/blob/master/discovery-doc/README_QUICK_START.md)，感谢军哥分享  
 
-## 链路跟踪 ##
+#   链路跟踪 
 ![](https://i.imgur.com/S3RvjFc.png)
 ![](https://i.imgur.com/1VFd9vx.png)
 ![](https://i.imgur.com/03Yq5ov.png)
