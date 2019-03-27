@@ -23,6 +23,17 @@ import org.springframework.web.server.WebFilterChain;
 
 import reactor.core.publisher.Mono;
 
+/**
+ * * 程序名 : CorsConfig
+ * 建立日期: 2018-09-09
+ * 作者 : someday
+ * 模块 : 网关
+ * 描述 : 跨域
+ * 备注 : version20180909001
+ * <p>
+ * 修改历史
+ * 序号 	       日期 		        修改人 		         修改原因
+ */
 @Configuration
 public class CorsConfig {
 	private static final String ALL = "*";

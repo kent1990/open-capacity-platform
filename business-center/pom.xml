@@ -40,5 +40,6 @@
   	<!-- <module>sms-center</module> -->
   	<!-- 事物中心 -->
   	<module>transaction-center</module>
+  	<module>sms-center</module>
   </modules>
 </project>

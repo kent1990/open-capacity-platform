@@ -276,7 +276,7 @@ zuul:
     log:
       path: /api-log/**
       service-id: log-center
-      strip-prefix: true  
+      strip-prefix: true     
   ssl-hostname-validation-enabled: false
   ratelimit:
     enabled: false  #默认不限流
