@@ -16,7 +16,6 @@ target/
 bin/
 NewCustServSer/
 SrenewSer/
-sms-center/
 sms-drugstore/
 04.sms-center.sql
 
