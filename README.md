@@ -147,16 +147,17 @@ api网关
 ![](https://images.gitee.com/uploads/images/2019/0126/125457_397161e8_1147840.png)
 
 # api-gateway vs new-api-gateway #
-内网
-## api-gateway ##
-![输入图片说明](https://images.gitee.com/uploads/images/2019/0325/202215_3a48f2a3_869801.png "111.png")
-![输入图片说明](https://images.gitee.com/uploads/images/2019/0325/202224_919bf508_869801.png "222.png")
-![输入图片说明](https://images.gitee.com/uploads/images/2019/0325/202234_2519a41e_869801.png "333.png")
-## new-api-gateway ##
-![输入图片说明](https://images.gitee.com/uploads/images/2019/0325/202046_fa2a6db5_869801.png "111.png")
-![输入图片说明](https://images.gitee.com/uploads/images/2019/0325/202102_77b82f4b_869801.png "222.png")
-![输入图片说明](https://images.gitee.com/uploads/images/2019/0325/202112_c5ac37ee_869801.png "333.png")
-
+内网测试网关/api-user/users/current
+## zuul-->api-gateway ##
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0327/095846_3bf37b11_869801.png "zuul01.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0327/095928_f0e7d48e_869801.png "zuul02.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0327/095938_bc868c69_869801.png "zuul03.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0327/095946_a0c5542c_869801.png "zuul04.png")
+## spring cloud gateway -->new-api-gateway ##
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0327/095957_d3cbdeb3_869801.png "gateway01.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0327/100005_d7861ff6_869801.png "gateway02.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0327/100014_8528653c_869801.png "gateway03.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0327/100021_7933cefd_869801.png "gateway04.png")
 ## 灰度发布功能演示  ##  
  
 ocp灰度发布功能(参考dev分支) 
@@ -191,7 +192,7 @@ e.启动gray-center的discovery-console-desktop
 请参考
 [https://github.com/Nepxion/Docs/blob/master/discovery-doc/README_QUICK_START.md](https://github.com/Nepxion/Docs/blob/master/discovery-doc/README_QUICK_START.md)，感谢军哥分享  
 
-链路跟踪
+## 链路跟踪 ##
 ![](https://i.imgur.com/S3RvjFc.png)
 ![](https://i.imgur.com/1VFd9vx.png)
 ![](https://i.imgur.com/03Yq5ov.png)
