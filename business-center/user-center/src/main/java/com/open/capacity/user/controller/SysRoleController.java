@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.open.capacity.annotation.log.LogAnnotation;
 import com.open.capacity.commons.PageResult;
 import com.open.capacity.commons.Result;
 import com.open.capacity.log.monitor.PointUtil;
@@ -50,9 +51,8 @@ public class SysRoleController {
 	@PreAuthorize("hasAuthority('role:get/roles')")
 	@ApiOperation(value = "后台管理查询角色")
 	@GetMapping("/roles")
+	@LogAnnotation(module="user-center",recordRequestParam=false)
 	public PageResult<SysRole> findRoles(@RequestParam Map<String, Object> params) throws JsonProcessingException {
-		String num = PointUtil.getRandom();//生成日志随机数
-		log.info("SysRoleController|findRoles|num:{}|input:{}",num ,objectMapper.writeValueAsString(params));
 		return sysRoleService.findRoles(params);
 	}
 
@@ -64,9 +64,8 @@ public class SysRoleController {
 	 */
 	@PreAuthorize("hasAnyAuthority('role:post/roles','role:put/roles')")
 	@PostMapping("/roles/saveOrUpdate")
+	@LogAnnotation(module="user-center",recordRequestParam=false)
 	public Result saveOrUpdate(@RequestBody SysRole sysRole) throws JsonProcessingException {
-		String num = PointUtil.getRandom();//生成日志随机数
-		log.info("SysRoleController|saveOrUpdate|num:{}|input:{}",num ,objectMapper.writeValueAsString(sysRole));
 		return sysRoleService.saveOrUpdate(sysRole);
 	}
 
@@ -78,10 +77,9 @@ public class SysRoleController {
 	@PreAuthorize("hasAuthority('role:delete/roles/{id}')")
 	@ApiOperation(value = "后台管理删除角色")
 	@DeleteMapping("/roles/{id}")
+	@LogAnnotation(module="user-center",recordRequestParam=false)
 	public Result deleteRole(@PathVariable Long id) {
 		try {
-			String num = PointUtil.getRandom();//生成日志随机数
-			log.info("SysRoleController|saveOrUpdate|num:{}|input:{}",num , id );
 			if (id == 1L){
 				return Result.failed("管理员不可以删除");
 			}

@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.open.capacity.annotation.log.LogAnnotation;
 import com.open.capacity.commons.PageResult;
 import com.open.capacity.commons.Result;
 import com.open.capacity.log.monitor.PointUtil;
@@ -56,11 +57,10 @@ public class SysPermissionController {
 	@PreAuthorize("hasAuthority('permission:delete/permissions/{id}')")
 	@ApiOperation(value = "后台管理删除权限标识")
 	@DeleteMapping("/permissions/{id}")
+	@LogAnnotation(module="user-center",recordRequestParam=false)
 	public Result delete(@PathVariable Long id) {
 
 		try{
-			String num = PointUtil.getRandom();//生成日志随机数
-			log.info("SysPermissionController|delete|num:{}|input:{}",num ,id);
 			sysPermissionService.delete(id);
 			return  Result.succeed("操作成功");
 		}catch (Exception ex){
@@ -83,11 +83,10 @@ public class SysPermissionController {
         @ApiImplicitParam(name = "page", value = "分页起始位置", required = true, dataType = "Integer"),
         @ApiImplicitParam(name = "limit",value = "分页结束位置", required = true, dataType = "Integer")
     })
+	@LogAnnotation(module="user-center",recordRequestParam=false)
 	@GetMapping("/permissions")
 	public PageResult<SysPermission> findPermissions(@RequestParam Map<String, Object> params) throws JsonProcessingException {
 		
-		String num = PointUtil.getRandom();//生成日志随机数
-		log.info("SysPermissionController|findPermissions|num:{}|input:{}",num ,objectMapper.writeValueAsString(params));
 		return sysPermissionService.findPermissions(params);
 	}
 
@@ -98,10 +97,9 @@ public class SysPermissionController {
 	 */
 	@PreAuthorize("hasAnyAuthority('permission:put/permissions','permission:post/permissions')")
 	@PostMapping("/permissions/saveOrUpdate")
+	@LogAnnotation(module="user-center",recordRequestParam=false)
 	public Result saveOrUpdate(@RequestBody SysPermission sysPermission) {
 		try{
-			String num = PointUtil.getRandom();//生成日志随机数
-			log.info("SysPermissionController|saveOrUpdate|num:{}|input:{}",num ,objectMapper.writeValueAsString(sysPermission));
 			if (sysPermission.getId()!=null){
 				sysPermissionService.update(sysPermission);
 			}else {
@@ -116,10 +114,9 @@ public class SysPermissionController {
 	@PreAuthorize("hasAuthority('permission:get/permissions/{roleId}/permissions')")
 	@ApiOperation(value = "根据roleId获取对应的权限")
 	@GetMapping("/permissions/{roleId}/permissions")
+	@LogAnnotation(module="user-center",recordRequestParam=false)
 	public List<Map<String, Object>> findAuthByRoleId(@PathVariable Long roleId) {
 		
-		String num = PointUtil.getRandom();//生成日志随机数
-		log.info("SysPermissionController|findAuthByRoleId|num:{}|input:{}",num ,roleId);
 		List<Map<String, Object>> authTrees = new ArrayList<>();
 		Set<Long> roleIds = new HashSet<Long>() {{ add(roleId); }};
 		Set<SysPermission> roleAuths = sysPermissionService.findByRoleIds(roleIds);//根据roleId获取对应的权限
@@ -149,9 +146,8 @@ public class SysPermissionController {
 	@PreAuthorize("hasAuthority('permission:post/permissions/granted')")
 	@ApiOperation(value = "角色分配权限")
 	@PostMapping("/permissions/granted")
+	@LogAnnotation(module="user-center",recordRequestParam=false)
 	public Result setAuthToRole(@RequestBody SysPermission sysPermission) throws JsonProcessingException {
-		String num = PointUtil.getRandom();//生成日志随机数
-		log.info("SysPermissionController|setAuthToRole|num:{}|input:{}",num ,objectMapper.writeValueAsString(sysPermission));
 		sysPermissionService.setAuthToRole(sysPermission.getRoleId(),sysPermission.getAuthIds());
 		return Result.succeed("操作成功");
 	}

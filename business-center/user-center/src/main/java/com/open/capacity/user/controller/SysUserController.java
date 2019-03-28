@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.open.capacity.annotation.log.LogAnnotation;
 import com.open.capacity.commons.PageResult;
 import com.open.capacity.commons.Result;
 import com.open.capacity.easypoi.user.SysUserExcel;
@@ -67,15 +68,12 @@ public class SysUserController {
      */
     @ApiOperation(value = "根据access_token当前登录用户")
     @GetMapping("/users/current")
+    @LogAnnotation(module="user-center",recordRequestParam=false)
     public LoginAppUser getLoginAppUser()   {
-    	String num = PointUtil.getRandom();//生成日志随机数
-		log.info("SysUserController|getLoginAppUser|num:{}|input:{}",num , "" );
 		LoginAppUser loginUser = null ;
 		try {
 			loginUser = SysUserUtil.getLoginAppUser() ;
-			log.info("SysUserController|getLoginAppUser|num:{}|output:{}",num ,objectMapper.writeValueAsString(loginUser) );
 		} catch (Exception e) {
-			log.info("SysUserController|getLoginAppUser|num:{}|exception:{}",num , e.getMessage());
 		}
 		
         return loginUser ;
@@ -83,9 +81,8 @@ public class SysUserController {
     
     @GetMapping(value = "/users-anon/login", params = "username")
     @ApiOperation(value = "根据用户名查询用户")
+    @LogAnnotation(module="user-center",recordRequestParam=false)
     public LoginAppUser findByUsername(String username) {
-    	String num = PointUtil.getRandom();//生成日志随机数
-		log.info("SysUserController|findByUsername|num:{}|input:{}",num , username );
         return appUserService.findByUsername(username);
     }
 
@@ -93,9 +90,8 @@ public class SysUserController {
 
     @PreAuthorize("hasAuthority('user:get/users/{id}')")
     @GetMapping("/users/{id}")
+    @LogAnnotation(module="user-center",recordRequestParam=false)
     public SysUser findUserById(@PathVariable Long id) {
-    	String num = PointUtil.getRandom();//生成日志随机数
-		log.info("SysUserController|findUserById|num:{}|input:{}",num , id );
         return appUserService.findById(id);
     }
 
@@ -107,9 +103,8 @@ public class SysUserController {
      */
     @PreAuthorize("hasAnyAuthority('user:put/users/password','user:post/users/{id}/resetPassword')")
     @PutMapping(value = "/users/{id}/password", params = {"newPassword"})
+    @LogAnnotation(module="user-center",recordRequestParam=false)
     public void resetPassword(@PathVariable Long id, String newPassword) {
-    	String num = PointUtil.getRandom();//生成日志随机数
-		log.info("SysUserController|resetPassword|num:{}|input:{}",num , id+ "&"+newPassword);
         appUserService.updatePassword(id, null, newPassword);
     }
 
@@ -121,9 +116,8 @@ public class SysUserController {
      */
     @PreAuthorize("hasAuthority('user:put/users/me')")
     @PutMapping("/users")
+    @LogAnnotation(module="user-center",recordRequestParam=false)
     public void updateSysUser(@RequestBody SysUser sysUser) throws JsonProcessingException {
-    	String num = PointUtil.getRandom();//生成日志随机数
-		log.info("SysUserController|updateSysUser|num:{}|input:{}",num , objectMapper.writeValueAsString(sysUser));
         appUserService.updateSysUser(sysUser);
     }
 
@@ -136,9 +130,8 @@ public class SysUserController {
      */
     @PreAuthorize("hasAuthority('user:post/users/{id}/roles')")
     @PostMapping("/users/{id}/roles")
+    @LogAnnotation(module="user-center",recordRequestParam=false)
     public void setRoleToUser(@PathVariable Long id, @RequestBody Set<Long> roleIds) throws JsonProcessingException {
-    	String num = PointUtil.getRandom();//生成日志随机数
-		log.info("SysUserController|setRoleToUser|num:{}|input:{}",num , id+"&"+ objectMapper.writeValueAsString(roleIds));
         appUserService.setRoleToUser(id, roleIds);
     }
 
@@ -150,9 +143,8 @@ public class SysUserController {
      */
     @PreAuthorize("hasAnyAuthority('user:get/users/{id}/roles')")
     @GetMapping("/users/{id}/roles")
+    @LogAnnotation(module="user-center",recordRequestParam=false)
     public Set<SysRole> findRolesByUserId(@PathVariable Long id) {
-    	String num = PointUtil.getRandom();//生成日志随机数
-		log.info("SysUserController|findRolesByUserId|num:{}|input:{}",num , id );
         return appUserService.findRolesByUserId(id);
     }
 
@@ -172,10 +164,9 @@ public class SysUserController {
             @ApiImplicitParam(name = "limit",value = "分页结束位置", required = true, dataType = "Integer")
     })
     @GetMapping("/users")
+    @LogAnnotation(module="user-center",recordRequestParam=false)
 //  searchKey=username, searchValue=as
     public PageResult<SysUser> findUsers(@RequestParam Map<String, Object> params) throws JsonProcessingException {
-    	String num = PointUtil.getRandom();//生成日志随机数
-		log.info("SysUserController|findUsers|num:{}|input:{}",num , objectMapper.writeValueAsString(params) );
         return appUserService.findUsers(params);
     }
 
@@ -187,12 +178,11 @@ public class SysUserController {
      * @throws JsonProcessingException 
      */
     @PutMapping("/users/me")
+    @LogAnnotation(module="user-center",recordRequestParam=false)
     @PreAuthorize("hasAnyAuthority('user:put/users/me','user:post/users/saveOrUpdate')")
     public Result updateMe(@RequestBody SysUser sysUser) throws JsonProcessingException {
 //        SysUser user = SysUserUtil.getLoginAppUser();
 //        sysUser.setId(user.getId());
-    	String num = PointUtil.getRandom();//生成日志随机数
-		log.info("SysUserController|findUsers|num:{}|input:{}",num , objectMapper.writeValueAsString(sysUser) );
         SysUser user = appUserService.updateSysUser(sysUser);
 
         return Result.succeed(user,"操作成功");
@@ -206,9 +196,8 @@ public class SysUserController {
      */
     @PutMapping(value = "/users/password")
     @PreAuthorize("hasAuthority('user:put/users/password')")
+    @LogAnnotation(module="user-center",recordRequestParam=false)
     public Result updatePassword(@RequestBody SysUser sysUser) throws JsonProcessingException {
-    	String num = PointUtil.getRandom();//生成日志随机数
-		log.info("SysUserController|findUsers|num:{}|input:{}",num , objectMapper.writeValueAsString(sysUser) );
         if (StringUtils.isBlank(sysUser.getOldPassword())) {
             throw new IllegalArgumentException("旧密码不能为空");
         }
@@ -235,6 +224,7 @@ public class SysUserController {
             @ApiImplicitParam(name = "id", value = "用户id", required = true, dataType = "Integer"),
             @ApiImplicitParam(name = "enabled",value = "是否启用", required = true, dataType = "Boolean")
     })
+    @LogAnnotation(module="user-center",recordRequestParam=false)
     @PreAuthorize("hasAnyAuthority('user:get/users/updateEnabled' ,'user:put/users/me')")
     public Result updateEnabled(@RequestParam Map<String, Object> params){
         Long id = MapUtils.getLong(params, "id");
@@ -251,6 +241,7 @@ public class SysUserController {
      */
     @PreAuthorize("hasAuthority('user:post/users/{id}/resetPassword' )")
     @PostMapping(value = "/users/{id}/resetPassword")
+    @LogAnnotation(module="user-center",recordRequestParam=false)
     public Result resetPassword(@PathVariable Long id) {
         if (id == 1L){
             return Result.failed("超级管理员不给予修改");
@@ -267,6 +258,7 @@ public class SysUserController {
      */
     @PostMapping("/users/saveOrUpdate")
     @PreAuthorize("hasAnyAuthority('user:post/users/saveOrUpdate')")
+    @LogAnnotation(module="user-center",recordRequestParam=false)
     public Result saveOrUpdate(@RequestBody SysUser sysUser) {
         return  appUserService.saveOrUpdate(sysUser);
     }

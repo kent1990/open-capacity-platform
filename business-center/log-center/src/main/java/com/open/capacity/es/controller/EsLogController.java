@@ -54,8 +54,6 @@ public class EsLogController {
 	@GetMapping(value="/sysLog")
 	public PageResult<LogDocument> getPage(@RequestParam Map<String, Object> params) throws JsonProcessingException {
 		
-		String num = PointUtil.getRandom();//生成日志随机数
-		log.info("EsLogController|getPage|num:{}|input:{}",num ,objectMapper.writeValueAsString(params));
 		BoolQueryBuilder builder = QueryBuilders.boolQuery();
 		String searchKey = (String)params.get("searchKey");
 		String searchValue = (String)params.get("searchValue");

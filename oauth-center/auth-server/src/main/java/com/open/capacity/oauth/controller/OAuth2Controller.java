@@ -165,9 +165,10 @@ public class OAuth2Controller {
 		}
 	}
 
-	@LogAnnotation(module = "oauth:/oauth/client/token", recordRequestParam = false)
+	
 	@ApiOperation(value = "clientId获取token")
 	@PostMapping("/oauth/client/token")
+	@LogAnnotation(module = "auth-server", recordRequestParam = false)
 	public void getClientTokenInfo(HttpServletRequest request, HttpServletResponse response) {
 
 		String clientId = request.getHeader("client_id");

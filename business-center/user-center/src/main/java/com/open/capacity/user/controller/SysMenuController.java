@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.open.capacity.annotation.log.LogAnnotation;
 import com.open.capacity.commons.PageResult;
 import com.open.capacity.commons.Result;
 import com.open.capacity.log.monitor.PointUtil;
@@ -47,23 +48,22 @@ public class SysMenuController {
 	private static Logger log = LoggerFactory.getLogger(SysMenuController.class);
 	private ObjectMapper objectMapper = new ObjectMapper();
 
-	// <!--  -->
+	// <!-- -->
 	/**
 	 * 删除菜单
+	 * 
 	 * @param id
 	 */
 	@PreAuthorize("hasAuthority('menu:delete/menus/{id}')")
 	@ApiOperation(value = "删除菜单")
 	@DeleteMapping("/{id}")
+	@LogAnnotation(module="user-center",recordRequestParam=false)
 	public Result delete(@PathVariable Long id) {
 
 		try {
-			
-			String num = PointUtil.getRandom();//生成日志随机数
-			log.info("SysMenuController|delete|num:{}|input:{}",num ,id);
 			menuService.delete(id);
 			return Result.succeed("操作成功");
-		}catch (Exception ex){
+		} catch (Exception ex) {
 			ex.printStackTrace();
 			return Result.failed("操作失败");
 		}
@@ -73,26 +73,29 @@ public class SysMenuController {
 	@PreAuthorize("hasAuthority('menu:get/menus/{roleId}/menus')")
 	@ApiOperation(value = "根据roleId获取对应的菜单")
 	@GetMapping("/{roleId}/menus")
+	@LogAnnotation(module="user-center",recordRequestParam=false)
 	public List<Map<String, Object>> findMenusByRoleId(@PathVariable Long roleId) {
-		
-		
-		String num = PointUtil.getRandom();//生成日志随机数
-		log.info("SysMenuController|findMenusByRoleId|num:{}|input:{}",num ,roleId);
-		Set<Long> roleIds = new HashSet<Long>() {{ add(roleId); }};
-		List<SysMenu> roleMenus = menuService.findByRoles(roleIds); 		//获取该角色对应的菜单
-		List<SysMenu> allMenus = menuService.findAll();						//全部的菜单列表
+
+		Set<Long> roleIds = new HashSet<Long>() {
+			{
+				add(roleId);
+			}
+		};
+		List<SysMenu> roleMenus = menuService.findByRoles(roleIds); // 获取该角色对应的菜单
+		List<SysMenu> allMenus = menuService.findAll(); // 全部的菜单列表
 		List<Map<String, Object>> authTrees = new ArrayList<>();
 
-		Map<Long,SysMenu> roleMenusMap = roleMenus.stream().collect(Collectors.toMap(SysMenu::getId,SysMenu->SysMenu));
+		Map<Long, SysMenu> roleMenusMap = roleMenus.stream()
+				.collect(Collectors.toMap(SysMenu::getId, SysMenu -> SysMenu));
 
 		for (SysMenu sysMenu : allMenus) {
 			Map<String, Object> authTree = new HashMap<>();
-			authTree.put("id",sysMenu.getId());
-			authTree.put("name",sysMenu.getName());
-			authTree.put("pId",sysMenu.getParentId());
-			authTree.put("open",true);
+			authTree.put("id", sysMenu.getId());
+			authTree.put("name", sysMenu.getName());
+			authTree.put("pId", sysMenu.getParentId());
+			authTree.put("open", true);
 			authTree.put("checked", false);
-			if (roleMenusMap.get(sysMenu.getId())!=null){
+			if (roleMenusMap.get(sysMenu.getId()) != null) {
 				authTree.put("checked", true);
 			}
 			authTrees.add(authTree);
@@ -106,63 +109,54 @@ public class SysMenuController {
 	@PreAuthorize("hasAuthority('menu:post/menus/granted')")
 	@ApiOperation(value = "角色分配菜单")
 	@PostMapping("/granted")
+	@LogAnnotation(module="user-center",recordRequestParam=false)
 	public Result setMenuToRole(@RequestBody SysMenu sysMenu) {
-		
-		try {
-			String num = PointUtil.getRandom();//生成日志随机数
-			log.info("SysMenuController|setMenuToRole|num:{}|input:{}",num ,objectMapper.writeValueAsString(sysMenu));
-			menuService.setMenuToRole(sysMenu.getRoleId(), sysMenu.getMenuIds());
 
-			return Result.succeed("操作成功");
-		} catch (JsonProcessingException e) {
-			return Result.failed("操作失败");
-		}
+		menuService.setMenuToRole(sysMenu.getRoleId(), sysMenu.getMenuIds());
+
+		return Result.succeed("操作成功");
+
 	}
-
 
 	@PreAuthorize("hasAuthority('menu:get/menus/findAlls')")
 	@ApiOperation(value = "查询所有菜单")
 	@GetMapping("/findAlls")
+	@LogAnnotation(module="user-center",recordRequestParam=false)
 	public PageResult<SysMenu> findAlls() {
-		
-		String num = PointUtil.getRandom();//生成日志随机数
-		log.info("SysMenuController|findAlls|num:{}|input:{}",num ,"");
-		
+
 		List<SysMenu> list = menuService.findAll();
 
-		return PageResult.<SysMenu>builder().data(list).code(0).count((long)list.size()).build() ;
+		return PageResult.<SysMenu>builder().data(list).code(0).count((long) list.size()).build();
 	}
 
 	@ApiOperation(value = "获取菜单以及顶级菜单")
 	@GetMapping("/findOnes")
 	@PreAuthorize("hasAuthority('menu:get/menus/findOnes')")
-	public PageResult<SysMenu> findOnes(){
-		String num = PointUtil.getRandom();//生成日志随机数
-		log.info("SysMenuController|findOnes|num:{}|input:{}",num ,"");
+	public PageResult<SysMenu> findOnes() {
 		List<SysMenu> list = menuService.findOnes();
-		return PageResult.<SysMenu>builder().data(list).code(0).count((long)list.size()).build() ;
+		return PageResult.<SysMenu>builder().data(list).code(0).count((long) list.size()).build();
 	}
 
 	/**
 	 * 添加菜单 或者 更新
+	 * 
 	 * @param menu
 	 * @return
 	 */
 	@PreAuthorize("hasAnyAuthority('menu:post/menus','menu:put/menus')")
 	@ApiOperation(value = "新增菜单")
 	@PostMapping("saveOrUpdate")
+	@LogAnnotation(module="user-center",recordRequestParam=false)
 	public Result saveOrUpdate(@RequestBody SysMenu menu) {
 
-		try{
-			String num = PointUtil.getRandom();//生成日志随机数
-			log.info("SysMenuController|saveOrUpdate|num:{}|input:{}",num ,objectMapper.writeValueAsString(menu));
-			if (menu.getId() != null){
+		try {
+			if (menu.getId() != null) {
 				menuService.update(menu);
-			}else {
+			} else {
 				menuService.save(menu);
 			}
 			return Result.succeed("操作成功");
-		}catch (Exception ex){
+		} catch (Exception ex) {
 			ex.printStackTrace();
 			return Result.failed("操作失败");
 		}
@@ -171,15 +165,15 @@ public class SysMenuController {
 
 	/**
 	 * 当前登录用户的菜单
+	 * 
 	 * @return
 	 */
 	@PreAuthorize("hasAuthority('menu:get/menus/current')")
 	@GetMapping("/current")
 	@ApiOperation(value = "查询当前用户菜单")
+	@LogAnnotation(module="user-center",recordRequestParam=false)
 	public List<SysMenu> findMyMenu() {
-		
-		String num = PointUtil.getRandom();//生成日志随机数
-		log.info("SysMenuController|findMyMenu|num:{}|input:{}",num ,"");
+
 		LoginAppUser loginAppUser = SysUserUtil.getLoginAppUser();
 		Set<SysRole> roles = loginAppUser.getSysRoles();
 		if (CollectionUtils.isEmpty(roles)) {
@@ -189,7 +183,6 @@ public class SysMenuController {
 		List<SysMenu> menus = menuService
 				.findByRoles(roles.parallelStream().map(SysRole::getId).collect(Collectors.toSet()));
 
-
 		List<SysMenu> sysMenus = TreeBuilder(menus);
 
 		return sysMenus;
@@ -197,19 +190,20 @@ public class SysMenuController {
 
 	/**
 	 * 两层循环实现建树
+	 * 
 	 * @param sysMenus
 	 * @return
 	 */
-	public static List<SysMenu> TreeBuilder(List<SysMenu> sysMenus){
-		
+	public static List<SysMenu> TreeBuilder(List<SysMenu> sysMenus) {
+
 		List<SysMenu> menus = new ArrayList<SysMenu>();
-		for (SysMenu sysMenu : sysMenus){
-			if (ObjectUtils.equals(-1L,sysMenu.getParentId())){
+		for (SysMenu sysMenu : sysMenus) {
+			if (ObjectUtils.equals(-1L, sysMenu.getParentId())) {
 				menus.add(sysMenu);
 			}
-			for (SysMenu menu :sysMenus){
-				if (menu.getParentId().equals(sysMenu.getId())){
-					if (sysMenu.getSubMenus() == null){
+			for (SysMenu menu : sysMenus) {
+				if (menu.getParentId().equals(sysMenu.getId())) {
+					if (sysMenu.getSubMenus() == null) {
 						sysMenu.setSubMenus(new ArrayList<>());
 					}
 					sysMenu.getSubMenus().add(menu);

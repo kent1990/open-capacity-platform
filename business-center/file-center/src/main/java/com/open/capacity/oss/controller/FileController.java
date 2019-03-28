@@ -46,12 +46,9 @@ public class FileController {
 	 * @return
 	 * @throws Exception
 	 */
-	@LogAnnotation(module = "file-center:FileController:upload", recordRequestParam = false)
+	@LogAnnotation(module = "file-center", recordRequestParam = false)
 	@PostMapping("/files-anon")
 	public FileInfo upload(@RequestParam("file") MultipartFile file) throws Exception {
-		
-		String num = PointUtil.getRandom();//生成日志随机数
-		log.info("FileController|upload|num:{}|input:{}",num ,objectMapper.writeValueAsString(file));
 		
 		String fileType = FileType.ALIYUN.toString();
 		FileService fileService = fileServiceFactory.getFileService(fileType);
@@ -64,7 +61,7 @@ public class FileController {
 	 * @return
 	 * @throws Exception
 	 */
-	@LogAnnotation(module = "file-center:FileController:uploadLayui", recordRequestParam = false)
+	@LogAnnotation(module = "file-center", recordRequestParam = false)
 	@PostMapping("/files/layui")
 	public Map<String, Object> uploadLayui(@RequestParam("file") MultipartFile file )
 			throws Exception {
@@ -84,14 +81,12 @@ public class FileController {
 	 * 文件删除
 	 * @param id
 	 */
-	@LogAnnotation(module = "")
+	@LogAnnotation(module = "file-center", recordRequestParam = false)
 	@PreAuthorize("hasAuthority('file:del')") 
 	@DeleteMapping("/files/{id}")
 	public Result delete(@PathVariable String id) {
 
 		try{
-			String num = PointUtil.getRandom();//生成日志随机数
-			log.info("FileController|delete|num:{}|input:{}",num ,id);
 			FileInfo fileInfo = fileServiceFactory.getFileService(FileType.ALIYUN.toString()).getById(id);
 			if (fileInfo != null) {
 				FileService fileService = fileServiceFactory.getFileService(fileInfo.getSource());
@@ -114,8 +109,6 @@ public class FileController {
 	@GetMapping("/files")
 	public PageResult<FileInfo> findFiles(@RequestParam Map<String, Object> params) throws JsonProcessingException {
         
-		String num = PointUtil.getRandom();//生成日志随机数
-		log.info("FileController|upload|num:{}|input:{}",num ,objectMapper.writeValueAsString(params));
 		return  fileServiceFactory.getFileService(FileType.ALIYUN.toString()).findList(params);
 
 	}

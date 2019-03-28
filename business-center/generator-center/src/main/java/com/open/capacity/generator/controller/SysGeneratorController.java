@@ -47,8 +47,6 @@ public class SysGeneratorController {
     @RequestMapping("/list")
     public PageResult list(@RequestParam Map<String, Object> params) throws JsonProcessingException{
     	
-    	String num = PointUtil.getRandom();//生成日志随机数
-		log.info("SysGeneratorController|list|num:{}|input:{}",num ,objectMapper.writeValueAsString(params));
         return sysGeneratorService.queryList(params);
     }
 
@@ -59,8 +57,6 @@ public class SysGeneratorController {
     public void code(String tables, HttpServletResponse response) throws IOException {
     	
     	
-    	String num = PointUtil.getRandom();//生成日志随机数
-		log.info("SysGeneratorController|code|num:{}|input:{}",num ,tables);
         byte[] data = sysGeneratorService.generatorCode(tables.split(","));
         
         response.reset();
