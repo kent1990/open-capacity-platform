@@ -74,8 +74,7 @@ e.启动 monitor-center 监控中心 admin-server zipkin-center
 
 
 06.注册中心   
- ![](https://images.gitee.com/uploads/images/2019/0110/231926_e8da388c_1441068.png)
-
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0329/212209_2ba53e32_869801.png "服务治理.png")
 
 07.配置中心  
 ![](https://images.gitee.com/uploads/images/2019/0110/231927_a081ed4b_1441068.png)  
@@ -98,11 +97,10 @@ e.启动 monitor-center 监控中心 admin-server zipkin-center
 ![](https://images.gitee.com/uploads/images/2019/0126/125450_75ac20ef_1147840.png)  
 
 11.prometheus监控  
-![](https://i.imgur.com/8GAR0MR.png)  
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0329/212515_6b74c76a_869801.png "屏幕截图.png")
 
 12.spring boot admin 监控  
-![](https://i.imgur.com/stvC8OU.png)
-![](https://i.imgur.com/S7f655G.png)
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0329/212356_27ecb030_869801.png "111.png")
 
 
 
@@ -119,32 +117,7 @@ e.启动 monitor-center 监控中心 admin-server zipkin-center
 ## 注册中心    
 ![](https://images.gitee.com/uploads/images/2019/0126/125454_b04fbc0d_1147840.png)    
 ![](https://images.gitee.com/uploads/images/2019/0126/125454_1f9ce4e8_1147840.png)  
-![](https://images.gitee.com/uploads/images/2019/0126/125454_3ece0005_1147840.png)     
-
-
-## 用户中心    
-![](https://images.gitee.com/uploads/images/2019/0126/125454_272e0e79_1147840.png)    
-![](https://images.gitee.com/uploads/images/2019/0126/125455_0f0278dd_1147840.png)   
- 
-
-## 认证中心    
-![](https://images.gitee.com/uploads/images/2019/0126/125455_05a5b463_1147840.png)    
-![](https://images.gitee.com/uploads/images/2019/0126/125455_4827ecff_1147840.png)  
-
-## api网关    
-![](https://images.gitee.com/uploads/images/2019/0126/125456_7cf25a83_1147840.png)  
-![](https://images.gitee.com/uploads/images/2019/0126/125456_bbac1fb9_1147840.png)
-
-## 负载均衡器   
-![](https://images.gitee.com/uploads/images/2019/0126/125456_5c697b5f_1147840.png)
-
-
-## 后台中心   
-![](https://images.gitee.com/uploads/images/2019/0126/125456_e21d4fb0_1147840.png)
-![](https://images.gitee.com/uploads/images/2019/0126/125456_18382021_1147840.jpeg)
-
-## 资源消耗情况 
-![](https://images.gitee.com/uploads/images/2019/0126/125457_397161e8_1147840.png)
+    
 
 # api-gateway vs new-api-gateway #
 内网测试网关/api-user/users/current
@@ -167,27 +140,17 @@ c.再启动 oauth-center 认证中心 oauth-server 认证服务
 d.在启动 business-center 业务中心的 对应服务 user-center 
 d.启动gray-center的discovery-console  
 e.启动gray-center的discovery-console-desktop    
-![](https://images.gitee.com/uploads/images/2019/0126/125450_b42073c5_1147840.png)  
-![](https://images.gitee.com/uploads/images/2019/0126/125450_66e3a8db_1147840.png)  
-![](https://images.gitee.com/uploads/images/2019/0126/125451_28b1bc41_1147840.png)  
-  
  
 灰度管理UI  
 用户名:admin      
 密码  :admin  
+
 ![](https://images.gitee.com/uploads/images/2019/0126/125451_c3b6224d_1147840.png)
+![](https://images.gitee.com/uploads/images/2019/0126/125450_b42073c5_1147840.png)  
+![](https://images.gitee.com/uploads/images/2019/0126/125450_66e3a8db_1147840.png)  
+![](https://images.gitee.com/uploads/images/2019/0126/125451_28b1bc41_1147840.png)  
+  
 
-页面   
-![](https://images.gitee.com/uploads/images/2019/0126/125452_3164c04c_1147840.png)
-
-基于版本的灰度发布
-![](https://images.gitee.com/uploads/images/2019/0126/125452_4b935973_1147840.png)
-![](https://images.gitee.com/uploads/images/2019/0126/125452_565e9022_1147840.png)
-![](https://images.gitee.com/uploads/images/2019/0126/125452_3f970930_1147840.png)
-![](https://images.gitee.com/uploads/images/2019/0126/125453_79912ce1_1147840.png)
-
-基于规则的灰度发布  
-【待续】
 
 请参考
 [https://github.com/Nepxion/Docs/blob/master/discovery-doc/README_QUICK_START.md](https://github.com/Nepxion/Docs/blob/master/discovery-doc/README_QUICK_START.md)，感谢军哥分享  

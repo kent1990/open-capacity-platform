@@ -1,9 +1,4 @@
-server:
-  port: 9200
-
 spring:
-  application:
-      name: new-api-gateway
   cloud:
      gateway:
        discovery:
