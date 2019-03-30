@@ -12,9 +12,6 @@ http://59.110.164.254:8066/login.html 用户名/密码：admin/admin
 
 # 技术介绍  #
 
-# 技术文档 #
-[试读](https://www.kancloud.cn/owenwangwen/open-capacity-platform/content)
-[正式文档](https://www.kancloud.cn/owenwangwen/open-capacity-platform) 
 
 <table>
 	<tr>
@@ -24,10 +21,15 @@ http://59.110.164.254:8066/login.html 用户名/密码：admin/admin
     </tr>
 </table>
 
+# 技术文档 #
+[试读](https://www.kancloud.cn/owenwangwen/open-capacity-platform/content)
+[正式文档](https://www.kancloud.cn/owenwangwen/open-capacity-platform) 
+
+
 ### 欢迎进群（群内领资料）
 
 `一键加群`
-<a target="_blank" href="https://jq.qq.com/?_wv=1027&k=5JSjd5D"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="open-capacity-platform交流" title="open-capacity-platform交流"></a>
+<a target="_blank" href="https://jq.qq.com/?_wv=1027&k=5JSjd5D"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="open-capacity-platform交流" title="open-capacity-platform交流"></a>        
 
 <table>
 	<tr>
@@ -35,9 +37,6 @@ http://59.110.164.254:8066/login.html 用户名/密码：admin/admin
         
     </tr>
 </table>
-
-
-
 
  
 # 开发环境   #
