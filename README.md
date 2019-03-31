@@ -33,9 +33,8 @@ http://59.110.164.254:8066/login.html 用户名/密码：admin/admin
 
 <table>
 	<tr>
-        <td><img src="https://images.gitee.com/uploads/images/2019/0330/111355_2a8db09a_869801.png "屏幕截图.png"/></td>
-        
-    </tr>
+            <td><img src="https://images.gitee.com/uploads/images/2019/0330/111355_2a8db09a_869801.png "屏幕截图.png"/></td>
+        </tr>
 </table>
 
  
@@ -193,4 +192,9 @@ e.启动gray-center的discovery-console-desktop
     </tr>
      
 </table>
+#用户权益
+- 允许免费用于学习、毕设、公司项目、私活等。
 
+# 禁止事项 #
+- 代码50%以上相似度的二次开源。
+- 注意：若禁止条款被发现有权追讨9999的授权费。
