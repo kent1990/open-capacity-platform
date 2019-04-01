@@ -16,7 +16,7 @@ http://59.110.164.254:8066/login.html 用户名/密码：admin/admin
 <table>
 	<tr>
         <td><img src="https://images.gitee.com/uploads/images/2019/0325/201938_48f25b7d_869801.png "01.png"/></td>
-        <td><img src="https://images.gitee.com/uploads/images/2019/0325/201950_44da7587_869801.png "02.png"/></td>
+        <td><img src="https://images.gitee.com/uploads/images/2019/0401/113333_30799dba_869801.png "屏幕截图.png"/></td>
 		<td><img src="https://images.gitee.com/uploads/images/2019/0325/202000_dad634f9_869801.png "03.png"/></td>
     </tr>
 </table>
@@ -33,8 +33,7 @@ http://59.110.164.254:8066/login.html 用户名/密码：admin/admin
 
 <table>
 	<tr>
-            <td><img src="https://images.gitee.com/uploads/images/2019/0330/111355_2a8db09a_869801.png "屏幕截图.png"/></td>
-        </tr>
+            <td><img src="https://images.gitee.com/uploads/images/2019/0401/230052_c897f4c5_869801.png "屏幕截图.png
 </table>
 
  
@@ -114,7 +113,22 @@ e.启动 monitor-center 监控中心 admin-server zipkin-center
         <td><img src="https://images.gitee.com/uploads/images/2019/0126/125454_b04fbc0d_1147840.png"/></td>
         <td><img src="https://images.gitee.com/uploads/images/2019/0126/125454_1f9ce4e8_1147840.png"/></td>
     </tr>
-     
+	<tr>
+        <td><img src="https://images.gitee.com/uploads/images/2019/0126/125454_272e0e79_1147840.png"/></td>
+        <td><img src="https://images.gitee.com/uploads/images/2019/0126/125455_0f0278dd_1147840.png"/></td>
+    </tr>
+	<tr>
+        <td><img src="https://images.gitee.com/uploads/images/2019/0126/125455_05a5b463_1147840.png"/></td>
+        <td><img src="https://images.gitee.com/uploads/images/2019/0126/125455_4827ecff_1147840.png"/></td>
+    </tr>
+    <tr>
+        <td><img src="https://images.gitee.com/uploads/images/2019/0126/125456_7cf25a83_1147840.png"/></td>
+        <td><img src="https://images.gitee.com/uploads/images/2019/0126/125456_bbac1fb9_1147840.png"/></td>
+    </tr>
+	<tr>
+        <td><img src="https://images.gitee.com/uploads/images/2019/0126/125456_5c697b5f_1147840.png"/></td>
+        <td><img src="https://images.gitee.com/uploads/images/2019/0126/125457_397161e8_1147840.png"/></td>
+    </tr> 
 </table>
  
 
@@ -192,8 +206,20 @@ e.启动gray-center的discovery-console-desktop
     </tr>
      
 </table>
-#用户权益
+
+# 系统监控 #
+<table>
+	<tr>
+        <td><img src="https://images.gitee.com/uploads/images/2019/0401/230332_f777ea8d_869801.png "屏幕截图.png"/></td>
+        <td><img src="https://images.gitee.com/uploads/images/2019/0401/230430_3eb6b5e0_869801.png "屏幕截图.png"/></td>
+    </tr>
+</table>
+
+# 用户权益 #
 - 允许免费用于学习、毕设、公司项目、私活等。
+
+
+
 
 # 禁止事项 #
 - 代码50%以上相似度的二次开源。

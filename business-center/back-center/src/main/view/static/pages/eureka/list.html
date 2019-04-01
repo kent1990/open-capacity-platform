@@ -72,21 +72,11 @@
 		var tableObj =   [ ]  ;
 		
 		 admin.req('api-eureka/eureka/apps', {}, function (data) {
-                var applications = new Array();
                 for (var i = 0; i <  data.applications.application.length; i++) {
-                    var instances = data.applications.application[i].instance;
                     var temp ={};
                     temp.id = data.applications.application[i].name ; 
                     temp.title = data.applications.application[i].name ;
-                    temp[name] = [];
-                    for (var j = 0; j < instances.length; j++ ){
-                        var instance = instances[j];
-                        applications.push(instance);
-                        
-                        temp[name].push(instance)
-                      
-                        tableObj.push(temp);
-                    }
+                    tableObj.push(temp);
                 }
                 // console.log(applications);
  
