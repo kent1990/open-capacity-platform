@@ -55,6 +55,23 @@
 			<version>${core.version}</version>
 		</dependency>
 
+	
+
+		<!-- grpc通信模块 -->
+		<dependency>
+			<groupId>com.open.capacity</groupId>
+			<artifactId>grpc-lib</artifactId>
+			<version>${core.version}</version>
+		</dependency>
+		
+		
+		<!-- swagger -->
+		<dependency>
+			<groupId>com.open.capacity</groupId>
+			<artifactId>swagger-core</artifactId>
+			<version>${core.version}</version>
+		</dependency> 
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -101,43 +118,7 @@
 			<optional>true</optional>
 		</dependency>
 
-
-
-		<!-- swagger -->
-		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger2</artifactId>
-			<version>${swagger.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-bean-validators</artifactId>
-			<version>${swagger.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger-ui</artifactId>
-			<version>${swagger.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.github.xiaoymin</groupId>
-			<artifactId>swagger-bootstrap-ui</artifactId>
-			<version>1.6</version>
-		</dependency>
-		<dependency>
-			<groupId>com.zyplayer</groupId>
-			<artifactId>swagger-mg-ui</artifactId>
-			<version>${swagger.m.version}</version>
-		</dependency>
- 
-
-		<!-- grpc通信模块 -->
-		<dependency>
-			<groupId>com.open.capacity</groupId>
-			<artifactId>grpc-lib</artifactId>
-			<version>${core.version}</version>
-		</dependency>
+		
 
 		<dependency>
             <groupId>net.devh</groupId>

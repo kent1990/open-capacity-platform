@@ -35,5 +35,6 @@
   	<module>log-core</module>
   	<module>grpc-lib</module>
   	<module>lock-core</module>
+  	<module>swagger-core</module>
   </modules>
 </project>
