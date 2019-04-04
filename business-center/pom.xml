@@ -37,9 +37,11 @@
   	<module>generator-center</module>
   	<!-- 日志中心 -->
   	<module>log-center</module>
-  	<!-- <module>sms-center</module> -->
   	<!-- 事物中心 -->
   	<module>transaction-center</module>
+  	<!-- 短信中心 -->
   	<module>sms-center</module>
+  	<!-- soap cxf webservice 框架中心 -->
+  	<module>soap-center</module>
   </modules>
 </project>

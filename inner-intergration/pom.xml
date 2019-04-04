@@ -31,10 +31,15 @@
   	<module>db-core</module>
   	<!-- Model层，和部分工具类 -->
   	<module>api-commons</module>
+  	<!-- 资源服务器 -->
   	<module>security-core</module>
+  	<!-- 日志格式-->
   	<module>log-core</module>
+  	<!-- grpc引用 -->
   	<module>grpc-lib</module>
+  	<!-- 分布式锁 -->
   	<module>lock-core</module>
+  	<!-- swagger引用 -->
   	<module>swagger-core</module>
   </modules>
 </project>

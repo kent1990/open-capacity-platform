@@ -227,9 +227,9 @@
 		<module>monitor-center</module>
 		<!-- spring cloud gateway -->
 		<module>new-api-gateway</module>
-		<!--
+		<!--dubbo rpc-->
 		<module>dubbo-center</module>
-		 -->
+		 
 	</modules>
 	<developers>
 

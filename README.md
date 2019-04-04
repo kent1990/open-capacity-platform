@@ -1,4 +1,4 @@
-# [![Fork me on Gitee](https://gitee.com/owenwangwen/open-capacity-platform/widgets/widget_5.svg)](https://gitee.com/owenwangwen/open-capacity-platform)open-capacity-platform 微服务能力开发平台 
+# [![Fork me on Gitee](https://gitee.com/owenwangwen/open-capacity-platform/widgets/widget_5.svg)](https://gitee.com/owenwangwen/open-capacity-platform)open-capacity-platform 微服务能力开放平台 
 [![star](https://gitee.com/owenwangwen/open-capacity-platform/badge/star.svg?theme=white)](https://gitee.com/owenwangwen/open-capacity-platform/stargazers)
 [![Fork me on Gitee](https://gitee.com/owenwangwen/open-capacity-platform/widgets/widget_6.svg)](https://gitee.com/owenwangwen/open-capacity-platform)
 [![fork](https://gitee.com/owenwangwen/open-capacity-platform/badge/fork.svg?theme=white)](https://gitee.com/owenwangwen/open-capacity-platform/members)
@@ -12,14 +12,20 @@ http://59.110.164.254:8066/login.html 用户名/密码：admin/admin
 
 # 技术介绍  #
 
-
 <table>
 	<tr>
-        <td><img src="https://images.gitee.com/uploads/images/2019/0325/201938_48f25b7d_869801.png "01.png"/></td>
         <td><img src="https://images.gitee.com/uploads/images/2019/0401/113333_30799dba_869801.png "屏幕截图.png"/></td>
 		<td><img src="https://images.gitee.com/uploads/images/2019/0325/202000_dad634f9_869801.png "03.png"/></td>
     </tr>
 </table>
+
+- 基于layui前后端分离的企业级微服务架构
+- 兼容spring cloud netflix & spring cloud alibaba
+- 优化Spring Security内部实现，实现API调用的统一出口和权限认证授权中心
+- 提供完善的企业微服务流量监控，日志监控能力 
+- 提供完善的压力测试方案
+- 提供完善的灰度发布方案
+- 提供完善的微服务部署方案，支持shell部署和docker两种方式
 
 # 技术文档 #
 [试读](https://www.kancloud.cn/owenwangwen/open-capacity-platform/content)
@@ -37,38 +43,14 @@ http://59.110.164.254:8066/login.html 用户名/密码：admin/admin
 </table>
 
  
-# 开发环境   #
-redis3.X  
-jdk1.8  
-MySQL Server 5.6  
-maven3.3.9  
-sts-3.8.0.RELEASE  
+
+# 项目组织结构分析   #
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0404/093918_92bdb980_869801.png "屏幕截图.png")
+
 
  
 
-# 项目组织结构分析   #
-![输入图片说明](https://images.gitee.com/uploads/images/2019/0325/202632_d6e2e2ad_869801.png "屏幕截图.png")
-
-
-1.下载代码
-
-```
- git clone  https://gitee.com/owenwangwen/open-capacity-platform.git
-```
-
-2.启动对应的服务
-
-a.先启动 register-center 注册中心的 eureka-server 注册服务
-
-b.在启动 api-gateway 网关服务
-
-c.再启动 oauth-center 认证中心 oauth-server 认证服务
-
-d.在启动 business-center 业务中心的 对应服务 file-center user-center back-center
-
-e.启动 monitor-center 监控中心 admin-server zipkin-center
-
-## 一. open-capacity-platform能力开放平台管理    
+## open-capacity-platform能力开放平台管理    
 
 <table>
 	<tr>
