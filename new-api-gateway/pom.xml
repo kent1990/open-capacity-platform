@@ -9,6 +9,15 @@
 	<artifactId>new-api-gateway</artifactId>
 
 	<dependencies>
+	
+	
+		<!-- 日志统一配置 -->
+		<dependency>
+			<groupId>com.open.capacity</groupId>
+			<artifactId>log-core</artifactId>
+			<version>${core.version}</version>
+		</dependency>
+		
 		<!-- 关系型和非关系型数据库配置 -->
 		<dependency>
 			<groupId>com.open.capacity</groupId>
@@ -28,35 +37,38 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-gateway</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
+
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+		</dependency>
+
 		<!-- swagger -->
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
 			<version>${swagger.version}</version>
 		</dependency>
-		 
+
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>${swagger.version}</version>
 		</dependency>
-		 
-		<!-- 选用eureka时打开-->
+
+		<!-- 选用eureka时打开 -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
-		 
-		<!-- 选用nacos时打开
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-		</dependency> 
-		 -->
+
+		<!-- 选用nacos时打开 <dependency> <groupId>org.springframework.cloud</groupId> 
+			<artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId> </dependency> -->
 	</dependencies>
 </project>

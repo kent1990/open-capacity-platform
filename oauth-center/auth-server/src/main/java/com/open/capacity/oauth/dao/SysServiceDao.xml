@@ -12,8 +12,8 @@
 			<if test="name != null and name != ''">
 				name = #{name,jdbcType=VARCHAR},
 			</if>
-			<if test="url != null and url != ''">
-				url = #{url,jdbcType=VARCHAR},
+			<if test="path != null and path != ''">
+				url = #{path,jdbcType=VARCHAR},
 			</if>
 			<if test="css != null">
 				css = #{css,jdbcType=VARCHAR},

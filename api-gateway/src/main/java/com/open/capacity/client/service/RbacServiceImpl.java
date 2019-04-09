@@ -67,7 +67,7 @@ package com.open.capacity.client.service;
 //                    for (Iterator<Map> it = list.iterator(); it.hasNext(); ) {
 //                        Map temp = it.next();
 //
-//                        if (antPathMatcher.match(request.getRequestURI(), String.valueOf(temp.get("href")))) {
+//                        if (antPathMatcher.match(request.getRequestURI(), String.valueOf(temp.get("path")))) {
 //                            return true;
 //                        }
 //                    }
