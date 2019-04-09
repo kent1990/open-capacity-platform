@@ -13,7 +13,7 @@
 				name = #{name,jdbcType=VARCHAR},
 			</if>
 			<if test="path != null and path != ''">
-				url = #{path,jdbcType=VARCHAR},
+				path = #{path,jdbcType=VARCHAR},
 			</if>
 			<if test="css != null">
 				css = #{css,jdbcType=VARCHAR},

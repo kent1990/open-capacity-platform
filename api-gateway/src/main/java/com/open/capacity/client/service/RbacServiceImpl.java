@@ -1,8 +1,7 @@
-package com.open.capacity.client.service;
+//package com.open.capacity.client.service;
 ///**
 // * 
 // */
-//package com.open.capacity.client.oauth2.service.impl;
 //
 //import java.util.Iterator;
 //import java.util.List;
@@ -17,7 +16,7 @@ package com.open.capacity.client.service;
 //import org.springframework.stereotype.Service;
 //import org.springframework.util.AntPathMatcher;
 //
-//import com.open.capacity.client.oauth2.dao.ServiceDao;
+//import com.open.capacity.client.dao.ServiceDao;
 //import com.open.capacity.client.oauth2.service.RbacService;
 //
 ///**
@@ -46,7 +45,9 @@ package com.open.capacity.client.service;
 //
 //        Authentication user = SecurityContextHolder.getContext()
 //                .getAuthentication();
-//
+//        
+//        //TODO 目前都是true
+//        boolean hasPermission = false;
 //
 //        if (user != null) {
 //
@@ -67,7 +68,7 @@ package com.open.capacity.client.service;
 //                    for (Iterator<Map> it = list.iterator(); it.hasNext(); ) {
 //                        Map temp = it.next();
 //
-//                        if (antPathMatcher.match(request.getRequestURI(), String.valueOf(temp.get("path")))) {
+//                        if (antPathMatcher.match( String.valueOf(temp.get("path")),request.getRequestURI())) {
 //                            return true;
 //                        }
 //                    }
@@ -80,8 +81,7 @@ package com.open.capacity.client.service;
 //        }
 //
 //
-//        //TODO 目前都是true
-//        boolean hasPermission = true;
+//       
 //
 //		
 //		
