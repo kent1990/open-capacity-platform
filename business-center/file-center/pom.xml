@@ -126,18 +126,13 @@
 			<version>[7.2.0, 7.2.99]</version>
 		</dependency>
 		
-		<!-- 选用eureka时打开-->
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-		</dependency>
 		 
-		<!-- 选用nacos时打开
+		<!-- 选用nacos时打开 -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
 		</dependency> 
-		 -->
+		
 
 
 	</dependencies>

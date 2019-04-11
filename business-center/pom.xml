@@ -43,5 +43,7 @@
   	<module>sms-center</module>
   	<!-- soap cxf webservice 框架中心 -->
   	<module>soap-center</module>
+  	<!--dubbo rpc-->
+	  <module>dubbo-center</module>
   </modules>
 </project>

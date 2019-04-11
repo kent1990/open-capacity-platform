@@ -23,6 +23,5 @@
 		~ Author: owen gitgeek (624191343@qq.com) ~ -->
 	<modules>
 		<module>admin-server</module>
-		<module>zipkin-center</module>
 	</modules>
 </project>

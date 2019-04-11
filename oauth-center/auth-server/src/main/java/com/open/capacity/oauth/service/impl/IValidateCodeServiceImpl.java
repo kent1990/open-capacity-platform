@@ -46,7 +46,7 @@ public class IValidateCodeServiceImpl implements IValidateCodeService {
 
 				// redis info
 				connection.set(buildKey(deviceId).getBytes(), imageCode.getBytes());
-				connection.expire(buildKey(deviceId).getBytes(), 60);
+				connection.expire(buildKey(deviceId).getBytes(), 60*5);
 				connection.close();
 
 				return "";
