@@ -45,7 +45,7 @@ http://59.110.164.254:8066/login.html 用户名/密码：admin/admin
  
 
 # 项目组织结构分析   #
-![输入图片说明](https://gitee.com/uploads/images/2019/0409/110332_2aabb2d3_869801.png "屏幕截图.png")
+![输入图片说明](https://gitee.com/uploads/images/2019/0411/143954_34271c24_869801.png "屏幕截图.png")
 
 
  

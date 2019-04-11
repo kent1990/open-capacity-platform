@@ -6,10 +6,7 @@ server:
 spring:
   application:
     name: auth-sso
-  cloud:
-    nacos:
-      discovery:
-        server-addr:  127.0.0.1:8848  
+  
 #eureka client配置
 eureka:
   client:
