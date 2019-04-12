@@ -11,10 +11,10 @@
 http://59.110.164.254:8066/login.html 用户名/密码：admin/admin
 
 # 技术介绍  #
-
+ 
 <table>
 	<tr>
-        <td><img src="https://images.gitee.com/uploads/images/2019/0401/113333_30799dba_869801.png "屏幕截图.png"/></td>
+        <td><img src="https://gitee.com/uploads/images/2019/0412/094738_cf70b705_869801.png "屏幕截图.png"/></td>
 		<td><img src="https://images.gitee.com/uploads/images/2019/0325/202000_dad634f9_869801.png "03.png"/></td>
     </tr>
 </table>
