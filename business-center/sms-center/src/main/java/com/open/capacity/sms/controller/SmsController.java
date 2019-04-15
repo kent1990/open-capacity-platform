@@ -14,7 +14,7 @@ import com.open.capacity.sms.model.Sms;
 import com.open.capacity.sms.model.SmsCode;
 import com.open.capacity.sms.service.SmsCodeService;
 import com.open.capacity.sms.service.SmsService;
-import com.open.capacity.utils.PhoneUtil;
+import com.open.capacity.utils.ValidatorUtil;
 
 /**
  * * 程序名 : SmsController
@@ -44,7 +44,7 @@ public class SmsController {
 	 */
 	@PostMapping(value = "/sms-internal/codes", params = { "phone" })
 	public SmsCode sendSmsCode(String phone) {
-		if (!PhoneUtil.checkPhone(phone)) {
+		if (!ValidatorUtil.checkPhone(phone)) {
 			throw new IllegalArgumentException("手机号格式不正确");
 		}
 

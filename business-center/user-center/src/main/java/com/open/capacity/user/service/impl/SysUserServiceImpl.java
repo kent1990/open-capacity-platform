@@ -39,7 +39,7 @@ import com.open.capacity.user.dao.SysUserRoleDao;
 import com.open.capacity.user.service.SysPermissionService;
 import com.open.capacity.user.service.SysUserService;
 import com.open.capacity.utils.PageUtil;
-import com.open.capacity.utils.PhoneUtil;
+import com.open.capacity.utils.ValidatorUtil;
 import com.open.capacity.utils.SysUserUtil;
 
 import lombok.extern.slf4j.Slf4j;
@@ -72,7 +72,7 @@ public class SysUserServiceImpl implements SysUserService {
 			throw new IllegalArgumentException("用户名不能为空");
 		}
 
-		if (PhoneUtil.checkPhone(username)) {// 防止用手机号直接当用户名，手机号要发短信验证
+		if (ValidatorUtil.checkPhone(username)) {// 防止用手机号直接当用户名，手机号要发短信验证
 			throw new IllegalArgumentException("用户名要包含英文字符");
 		}
 
@@ -304,7 +304,7 @@ public class SysUserServiceImpl implements SysUserService {
 			return Result.failed("用户名不能为空");
 		}
 
-		if (PhoneUtil.checkPhone(username)) {// 防止用手机号直接当用户名，手机号要发短信验证
+		if (ValidatorUtil.checkPhone(username)) {// 防止用手机号直接当用户名，手机号要发短信验证
 			//throw new IllegalArgumentException("用户名要包含英文字符");
 			return Result.failed("用户名要包含英文字符");
 		}
@@ -324,8 +324,19 @@ public class SysUserServiceImpl implements SysUserService {
 		}
 
 		if (StringUtils.isBlank(sysUser.getType())) {
-			sysUser.setType(UserType.APP.name());
+			sysUser.setType(UserType.BACKEND.name());
 		}
+		
+		if (!StringUtils.isBlank(sysUser.getPhone())) {
+			
+			if (!ValidatorUtil.checkPhone(sysUser.getPhone())) {// 防止用手机号直接当用户名，手机号要发短信验证
+				//throw new IllegalArgumentException("用户名要包含英文字符");
+				return Result.failed("手机号格式不正确");
+			}
+			
+		}
+		
+		
 
 		sysUser.setPassword(passwordEncoder.encode("123456"));
 		sysUser.setEnabled(Boolean.TRUE);
