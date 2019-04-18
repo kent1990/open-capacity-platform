@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace必须是接口的全类名 -->
+<mapper namespace="com.open.capacity.dao.DeliverPostDao">
+
+
+	<insert id="batchInsert" parameterType="java.util.List">
+
+		INSERT INTO  oc_deliver_post_detail_t (
+		order_id, post_id, isArrived )
+		<foreach collection="list" item="item" index="index"
+			separator=" union all ">
+			SELECT #{item.orderId,jdbcType=VARCHAR}, #{item.postId,jdbcType=VARCHAR},#{item.isArrived,jdbcType=VARCHAR} 
+			FROM DUAL
+		</foreach>
+
+	</insert>
+	 
+</mapper>
