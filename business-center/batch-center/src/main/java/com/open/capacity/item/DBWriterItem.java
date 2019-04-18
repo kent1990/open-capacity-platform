@@ -11,7 +11,7 @@ import com.open.capacity.dao.DeliverPostDao;
 import com.open.capacity.entity.DeliverPost;
 
 /**
- * @create 2019年4月2日
+ * @create Created by kl 2019年4月2日
  * Content :数据输出item
  */
 @Component

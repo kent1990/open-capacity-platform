@@ -16,7 +16,7 @@ import com.open.capacity.support.BatchIncrementer;
 import com.open.capacity.support.JobListener;
 
 /**
- * @create 2019年4月2日
+ * @create Created by kl 2019年4月2日
  * Content :Master节点，派发分片任务到从节点
  */
 @Configuration

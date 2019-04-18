@@ -20,7 +20,7 @@ import com.open.capacity.item.DBWriterItem;
 import com.open.capacity.item.DeliverPostProcessorItem;
 
 /**
- * @create 2019年4月2日
+ * @create Created by kl 2019年4月2日
  * Content :Slave从节点，真实业务处理
  */
 @Configuration

@@ -8,7 +8,7 @@ import org.springframework.batch.core.JobExecutionListener;
 import com.open.capacity.dao.DeliverPostDao;
  
 /**
- * @create 2019年4月2日
+ * @create Created by kl 2019年4月2日
  * Content :job执行监听器
  */
 public class JobListener implements JobExecutionListener {

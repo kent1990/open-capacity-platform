@@ -1,7 +1,7 @@
 package com.open.capacity.entity;
 
 /**
- * @create 2019年4月2日
+ * @create Created by kl 2019年4月2日
  * Content :快递单号实体
  */
 
