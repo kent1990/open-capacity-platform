@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk-alpine
+FROM frolvlad/alpine-oraclejdk8:slim
 VOLUME /tmp
 ADD auth-server.jar app.jar
 RUN sh -c 'touch /app.jar'
