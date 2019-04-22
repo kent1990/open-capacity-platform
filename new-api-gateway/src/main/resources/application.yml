@@ -14,10 +14,6 @@ spring:
           - Path=/api-eureka/**
           filters:
           - StripPrefix=1   
-          - name: Hystrix
-            args:
-              name : default
-              fallbackUri: 'forward:/defaultfallback'
         - id: api-user
           uri: lb://user-center
           order: 8001
@@ -26,10 +22,6 @@ spring:
           filters:
           - GwSwaggerHeaderFilter
           - StripPrefix=1 
-          - name: Hystrix
-            args:
-              name : default
-              fallbackUri: 'forward:/defaultfallback'
         - id: api-auth
           uri: lb://auth-server
           order: 8002
@@ -38,10 +30,6 @@ spring:
           filters:
           - GwSwaggerHeaderFilter
           - StripPrefix=1
-          - name: Hystrix
-            args:
-              name : default
-              fallbackUri: 'forward:/defaultfallback'
         - id: api-file
           uri: lb://file-center
           order: 8003
@@ -49,10 +37,6 @@ spring:
           - Path=/api-file/**
           filters:
           - StripPrefix=1
-          - name: Hystrix
-            args:
-              name : default
-              fallbackUri: 'forward:/defaultfallback'
         - id: api-generator
           uri: lb://generator-center
           order: 8004
@@ -60,10 +44,6 @@ spring:
           - Path=/api-generator/**
           filters:
           - StripPrefix=1      
-          - name: Hystrix
-            args:
-              name : default
-              fallbackUri: 'forward:/defaultfallback'
         - id: api-baidu
           uri: http://www.163.com
           order: 8005
@@ -129,7 +109,7 @@ spring:
     host: 59.110.164.254
     port: 6379
     timeout: 6000
-    database: 1
+    database: 2
     lettuce:
       pool:
         max-active: 10 # 连接池最大连接数（使用负值表示没有限制）,如果赋值为-1，则表示不限制；如果pool已经分配了maxActive个jedis实例，则此时pool的状态为exhausted(耗尽)

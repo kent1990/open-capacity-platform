@@ -13,10 +13,8 @@ import org.springframework.http.codec.ServerCodecConfigurer;
 import org.springframework.http.codec.support.DefaultServerCodecConfigurer;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.cors.reactive.CorsUtils;
-import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.filter.reactive.HiddenHttpMethodFilter;
 import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.WebFilter;
 import org.springframework.web.server.WebFilterChain;
@@ -39,6 +37,9 @@ public class CorsConfig {
 	private static final String ALL = "*";
 	private static final String MAX_AGE = "18000L";
 
+	/**
+     * 如果使用了注册中心（如：Eureka），进行控制则需要增加如下配置
+     */
 	@Bean
 	public RouteDefinitionLocator discoveryClientRouteDefinitionLocator(DiscoveryClient discoveryClient,
 			DiscoveryLocatorProperties properties) {
@@ -76,4 +77,15 @@ public class CorsConfig {
 			return chain.filter(ctx);
 		};
 	}
+	
+	 @Bean
+	    public HiddenHttpMethodFilter hiddenHttpMethodFilter() {
+	        return new HiddenHttpMethodFilter() {
+	            @Override
+	            public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
+	                return chain.filter(exchange);
+	            }
+	        };
+	    }
+ 
 }

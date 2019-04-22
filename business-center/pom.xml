@@ -44,6 +44,8 @@
   	<!-- soap cxf webservice 框架中心 -->
   	<module>soap-center</module>
   	<!--dubbo rpc-->
-	  <module>dubbo-center</module>
+	<module>dubbo-center</module>
+	<!--批处理-->
+	<module>batch-center</module>
   </modules>
 </project>

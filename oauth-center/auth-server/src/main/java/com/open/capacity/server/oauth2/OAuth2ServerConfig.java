@@ -1,4 +1,3 @@
-
 package com.open.capacity.server.oauth2;
 
 import com.open.capacity.props.PermitUrlProperties;
