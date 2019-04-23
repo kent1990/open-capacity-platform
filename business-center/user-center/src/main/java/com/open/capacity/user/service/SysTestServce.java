@@ -26,8 +26,8 @@ public class SysTestServce {
 	}
 	@Transactional
 	public void save2(){
- 
-	 
+
+
 		DataSourceHolder.setDataSourceKey(DataSourceKey.log);
 		sysTes2tDao.save(null);
 		

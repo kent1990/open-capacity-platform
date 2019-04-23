@@ -125,13 +125,23 @@
 			<artifactId>qiniu-java-sdk</artifactId>
 			<version>[7.2.0, 7.2.99]</version>
 		</dependency>
-		
-		 
-		<!-- 选用nacos时打开 -->
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-		</dependency> 
+
+
+	  <!-- 选用nacos时打开-->
+	  <dependency>
+		  <groupId>org.springframework.cloud</groupId>
+		  <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+	  </dependency>
+	  <!--alibaba nacos config-->
+	  <dependency>
+		  <groupId>org.springframework.cloud</groupId>
+		  <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+	  </dependency>
+	  <!--alibaba sentinel-->
+	  <dependency>
+		  <groupId>org.springframework.cloud</groupId>
+		  <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+	  </dependency>
 		
 
 

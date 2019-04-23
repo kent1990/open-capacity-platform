@@ -83,13 +83,23 @@
             <groupId>com.codingapi.txlcn</groupId>
             <artifactId>txlcn-tm</artifactId>
         </dependency>
-        
-		 
-		<!-- 选用nacos时打开 -->
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-		</dependency> 
+
+
+	   <!-- 选用nacos时打开-->
+	   <dependency>
+		   <groupId>org.springframework.cloud</groupId>
+		   <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+	   </dependency>
+	   <!--alibaba nacos config-->
+	   <dependency>
+		   <groupId>org.springframework.cloud</groupId>
+		   <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+	   </dependency>
+	   <!--alibaba sentinel-->
+	   <dependency>
+		   <groupId>org.springframework.cloud</groupId>
+		   <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+	   </dependency>
 		
 	</dependencies>
 

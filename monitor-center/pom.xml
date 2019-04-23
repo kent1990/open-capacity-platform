@@ -23,5 +23,6 @@
 		~ Author: owen gitgeek (624191343@qq.com) ~ -->
 	<modules>
 		<module>admin-server</module>
-	</modules>
+        <module>sentinel-dashboard</module>
+    </modules>
 </project>

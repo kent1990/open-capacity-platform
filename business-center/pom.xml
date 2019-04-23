@@ -46,6 +46,6 @@
   	<!--dubbo rpc-->
 	<module>dubbo-center</module>
 	<!--批处理-->
-	<module>batch-center</module>
+<!--	<module>batch-center</module>-->
   </modules>
 </project>

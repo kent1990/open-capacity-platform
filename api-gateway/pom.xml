@@ -137,13 +137,23 @@
             <artifactId>spring-cloud-zuul-ratelimit</artifactId>
             <version>2.2.3.RELEASE</version>
         </dependency>
-		
-		
-		<!-- 选用nacos时打开 -->
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-		</dependency>
+
+
+	  <!-- 选用nacos时打开-->
+	  <dependency>
+		  <groupId>org.springframework.cloud</groupId>
+		  <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+	  </dependency>
+	  <!--alibaba nacos config-->
+	  <dependency>
+		  <groupId>org.springframework.cloud</groupId>
+		  <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+	  </dependency>
+	  <!--alibaba sentinel-->
+	  <dependency>
+		  <groupId>org.springframework.cloud</groupId>
+		  <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+	  </dependency>
 		
 	</dependencies>
 
