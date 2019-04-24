@@ -1,8 +1,8 @@
-package ${package}.${moduleName}.service;
+package ${package}.${tableName}.service;
 
-import ${package}.${moduleName}.entity.${className};
+import ${package}.${tableName}.entity.${className};
 
-import com.open.capacity.model.common.PageResult;
+import com.open.capacity.commons.PageResult;
 
 import java.util.Map;
 

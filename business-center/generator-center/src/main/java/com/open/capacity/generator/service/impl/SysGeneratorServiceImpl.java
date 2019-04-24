@@ -1,27 +1,26 @@
 package com.open.capacity.generator.service.impl;
 
-import java.io.ByteArrayOutputStream;
-import java.util.List;
-import java.util.Map;
-import java.util.zip.ZipOutputStream;
-
-import org.apache.commons.collections4.MapUtils;
-import org.apache.commons.io.IOUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.open.capacity.commons.PageResult;
 import com.open.capacity.generator.dao.SysGeneratorDao;
 import com.open.capacity.generator.service.SysGeneratorService;
 import com.open.capacity.generator.utils.GenUtils;
+import org.apache.commons.collections4.MapUtils;
+import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.io.ByteArrayOutputStream;
+import java.util.List;
+import java.util.Map;
+import java.util.zip.ZipOutputStream;
 
 /**
- * @Author: [zhangzhiguang]
- * @Date: [2018-09-05 12:20]
+ * @Author: [dawei QQ:64738479]
+ * @Date: [2019-04-25 21:48]
  * @Description: [ ]
- * @Version: [1.0.0]
+ * @Version: [1.0.1]
  * @Copy: [com.zzg]
  */
 @Service

@@ -1,17 +1,7 @@
 package com.open.capacity.generator.utils;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
-
+import com.open.capacity.generator.model.ColumnEntity;
+import com.open.capacity.generator.model.TableEntity;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
@@ -22,15 +12,20 @@ import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 
-import com.open.capacity.generator.model.ColumnEntity;
-import com.open.capacity.generator.model.TableEntity;
+import java.io.File;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.util.*;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 /**
  * 代码生成器   工具类
- *
- * @author chenshun
- * @email sunlightcs@gmail.com
- * @date 2016年12月19日 下午11:40:24
+ * @Author: [dawei QQ:64738479]
+ * @Date: [2019-04-25 21:48]
+ * @Description: [ ]
+ * @Version: [1.0.1]
+ * @Copy: [com.zzg]
  */
 public class GenUtils {
 
@@ -133,7 +128,7 @@ public class GenUtils {
 
             try {
                 //添加到zip
-                zip.putNextEntry(new ZipEntry(getFileName(template, tableEntity.getClassName(), config.getString("package" ), config.getString("moduleName" ))));
+                zip.putNextEntry(new ZipEntry(getFileName(template, tableEntity.getClassName(), config.getString("package" ), tableEntity.getTableName())));
                 IOUtils.write(sw.toString(), zip, "UTF-8" );
                 IOUtils.closeQuietly(sw);
                 zip.closeEntry();
@@ -175,10 +170,11 @@ public class GenUtils {
     /**
      * 获取文件名
      */
-    public static String getFileName(String template, String className, String packageName, String moduleName) {
+    public static String getFileName(String template, String className, String packageName, String tableName) {
         String packagePath = "main" + File.separator + "java" + File.separator;
+        tableName=tableName.replace("-", "" ).replace("_", "").toLowerCase();
         if (StringUtils.isNotBlank(packageName)) {
-            packagePath += packageName.replace(".", File.separator) + File.separator + moduleName + File.separator;
+            packagePath += packageName.replace(".", File.separator) + File.separator + tableName + File.separator;
         }
 
         if (template.contains("Entity.java.vm" )) {
@@ -211,7 +207,7 @@ public class GenUtils {
 
         if (template.contains("index.html.vm" )) {
             return "main" + File.separator + "view" + File.separator + "pages"  +
-                    File.separator + moduleName + File.separator  + "index.html";
+                    File.separator + tableName + File.separator  + tableName+".html";
         }
 
         return null;

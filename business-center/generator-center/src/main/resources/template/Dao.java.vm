@@ -1,6 +1,6 @@
-package ${package}.${moduleName}.dao;
+package ${package}.${tableName}.dao;
 
-import ${package}.${moduleName}.entity.${className};
+import ${package}.${tableName}.entity.${className};
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

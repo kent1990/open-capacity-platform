@@ -1,8 +1,8 @@
-package ${package}.${moduleName}.service.impl;
+package ${package}.${tableName}.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.open.capacity.model.common.PageResult;
+import com.open.capacity.commons.PageResult;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
@@ -10,9 +10,9 @@ import java.util.List;
 import java.util.Map;
 import org.apache.commons.collections4.MapUtils;
 
-import ${package}.${moduleName}.entity.${className};
-import ${package}.${moduleName}.dao.${className}Dao;
-import ${package}.${moduleName}.service.${className}Service;
+import ${package}.${tableName}.entity.${className};
+import ${package}.${tableName}.dao.${className}Dao;
+import ${package}.${tableName}.service.${className}Service;
 
 
 @Service

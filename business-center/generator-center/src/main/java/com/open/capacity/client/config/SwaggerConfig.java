@@ -24,7 +24,13 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * @Author: [dawei QQ:64738479]
+ * @Date: [2019-04-25 21:48]
+ * @Description: [ ]
+ * @Version: [1.0.1]
+ * @Copy: [com.zzg]
+ */
 @Component
 @Configuration
 @EnableSwagger2
