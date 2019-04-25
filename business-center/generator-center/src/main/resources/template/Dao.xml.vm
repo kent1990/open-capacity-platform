@@ -42,7 +42,7 @@
         where id = #{id}
     </update>
 
-    <delete id="delete" parameterType="int" flushCache="true">
+    <delete id="delete" parameterType="long" flushCache="true">
         delete from ${tableName} where id = #{id}
     </delete>
 
