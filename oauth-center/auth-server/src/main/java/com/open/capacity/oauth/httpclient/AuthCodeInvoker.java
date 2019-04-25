@@ -25,7 +25,7 @@
 //* 类说明
 //*  http 授权码模式认证服务器的token
 //*/
-//public class AuthorizationCodeInvoker {
+//public class AuthCodeInvoker {
 //	
 //	private static final String BASE_URL="http://106.13.3.200/api-user/users?page=1&limit=10";
 //	private static final String AUTHORIZE_URL = "http://106.13.3.200/oauth/authorize?client_id=owen&redirect_uri=http://127.0.0.1:9997/dashboard/login&state=abc&scope=app&response_type=code";
@@ -113,7 +113,7 @@
 //	 
 //	
 //	public static void main(String[] args) throws Exception {
-//		new AuthorizationCodeInvoker().start();
+//		new AuthCodeInvoker().start();
 //
 //	}
 //	
