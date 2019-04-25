@@ -1,6 +1,6 @@
-package ${package}.${tableName}.service;
+package ${package}.${pkgName}.service;
 
-import ${package}.${tableName}.entity.${className};
+import ${package}.${pkgName}.entity.${className};
 
 import com.open.capacity.commons.PageResult;
 

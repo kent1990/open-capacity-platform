@@ -1,4 +1,4 @@
-package ${package}.${tableName}.entity;
+package ${package}.${pkgName}.entity;
 
 import lombok.Data;
 import lombok.Getter;
