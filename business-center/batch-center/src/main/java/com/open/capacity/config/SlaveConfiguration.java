@@ -44,7 +44,7 @@ public class SlaveConfiguration {
 
 
 
-
+    //作业步 ,作为masterStep的一个分片处理作业步
     @Bean("slaveStep")
     public Step slaveStep(DeliverPostProcessorItem processorItem,
     		JdbcCursorItemReader reader) {

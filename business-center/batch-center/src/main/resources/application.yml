@@ -1,9 +1,10 @@
 server:
-#  port: 5000    #固定端口
-   port: 5009 #随机端口
+  port: 5446
+
  
 aop:
-  url: http://xxxxxxxxx:80/test      
+  url: http://xxxxx:80/test
+  cron: 0 0/1 * * * ?       
  
 platform: mysql     
 spring:
@@ -22,7 +23,6 @@ spring:
       min-idle: 1
       # 配置获取连接等待超时的时间
       max-wait: 60000
-      default-auto-commit: true
       #打开PSCache，并且指定每个连接上PSCache的大小
       pool-prepared-statements: true
       max-pool-prepared-statement-per-connection-size: 20

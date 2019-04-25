@@ -30,6 +30,7 @@ public class MasterConfiguration {
     @Autowired
     DeliverPostDao deliverPostDao ;
  
+    //作业
     @Bean
     public Job job(@Qualifier("masterStep") Step masterStep) {
     	
@@ -42,13 +43,14 @@ public class MasterConfiguration {
                 .listener(jobListener)
                 .build();
     }
-
+    
+    //作业步 ，job的一个执行环节
     @Bean("masterStep")
     public Step masterStep(@Qualifier("slaveStep") Step slaveStep,
                            PartitionHandler partitionHandler,
                            DataSource dataSource) {
-        return stepBuilderFactory.get("masterStep")
-                .partitioner(slaveStep.getName(), new ColumnRangePartitioner(dataSource))
+        return stepBuilderFactory.get("masterStep")			
+                .partitioner(slaveStep.getName(), new ColumnRangePartitioner(dataSource)) //设置分区
                 .step(slaveStep)
                 .partitionHandler(partitionHandler)
                 .build();
