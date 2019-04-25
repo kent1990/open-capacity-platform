@@ -68,7 +68,7 @@ spring:
     schema: classpath:org/springframework/batch/core/schema-@@platform@@.sql
     initialize-schema: always
     job:
-      enabled: true
+      enabled: false
     table-prefix: BATCH_   
           
  
