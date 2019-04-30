@@ -70,13 +70,13 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
-		<!-- owen增加oracle的支持 -->
+		<!-- owen增加oracle的支持 
 		<dependency>
 			<groupId>com.oracle</groupId>
 			<artifactId>ojdbc6</artifactId>
 			<version>11.2.0.3</version>
 		</dependency>
-
+		-->
 
 		<!-- druid 官方 starter -->
 		<dependency>
