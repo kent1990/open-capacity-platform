@@ -28,4 +28,5 @@ public class GwSwaggerHeaderFilter extends AbstractGatewayFilterFactory {
             return chain.filter(newExchange);
         };
     }
+ 
 }

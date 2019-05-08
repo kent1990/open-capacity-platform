@@ -28,7 +28,5 @@
   <modules>
   	<!-- eureka 服务端 -->
   	<module>eureka-server</module>
-  	<!-- eureka 客户端样例 -->
-  	<module>eureka-client</module>
   </modules>
 </project>

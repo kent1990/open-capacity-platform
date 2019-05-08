@@ -29,8 +29,7 @@
   <modules>
   	<!-- 用户中心 -->
   	<module>user-center</module>
-  	<!-- 后台中心 -->
-  	<module>back-center</module>
+  	
   	<!-- 文件中心 -->
   	<module>file-center</module>
   	<!-- 代码生成器 -->

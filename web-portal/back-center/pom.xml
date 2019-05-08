@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>com.open.capacity</groupId>
-    <artifactId>business-center</artifactId>
+    <artifactId>web-portal</artifactId>
     <version>1.0.1</version>
   </parent>
   <artifactId>back-center</artifactId>
