@@ -7,17 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.security.oauth2.provider.token.DefaultUserAuthenticationConverter;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.util.Assert;
 
-import com.open.capacity.server.oauth2.token.store.MemoryJwtAccessTokenConverter;
-import com.open.capacity.server.oauth2.token.store.MemoryJwtAccessTokenConverter.JwtUserAuthenticationConverter;
 import com.open.capacity.server.oauth2.token.store.RedisTemplateTokenStore;
+import com.open.capacity.server.oauth2.token.store.ResJwtAccessTokenConverter;
 
 /** 
 * @author owen 624191343@qq.com
@@ -69,7 +66,7 @@ public class TokenStoreConfig  {
 		
 		@Bean
 		public JwtAccessTokenConverter jwtAccessTokenConverter(){
-			JwtAccessTokenConverter accessTokenConverter = new MemoryJwtAccessTokenConverter();
+			JwtAccessTokenConverter accessTokenConverter = new ResJwtAccessTokenConverter();
 			accessTokenConverter.setSigningKey("neusoft");
 			return accessTokenConverter ;
 		}

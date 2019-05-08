@@ -16,10 +16,10 @@ import com.open.capacity.model.system.SysRole;
 
 import cn.hutool.core.bean.BeanUtil;
 
-public class MemoryJwtAccessTokenConverter extends JwtAccessTokenConverter{
+public class ResJwtAccessTokenConverter extends JwtAccessTokenConverter{
 	
 	
-	public MemoryJwtAccessTokenConverter() {
+	public ResJwtAccessTokenConverter() {
 		super();
 		super.setAccessTokenConverter(new JwtUserAuthenticationConverter());
 	}
