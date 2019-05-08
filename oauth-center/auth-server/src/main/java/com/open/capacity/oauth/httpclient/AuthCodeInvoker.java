@@ -21,14 +21,15 @@
 //
 //import com.alibaba.fastjson.JSONObject;
 ///** 
-//* @author 作者 owen E-mail: wang.wen@neusoft.com
 //* @version 创建时间：2017年12月14日 上午11:13:53 
-//* 类说明 http访问拿认证服务器的token
+//* 类说明
+//*  http 授权码模式认证服务器的token
 //*/
-//public class HttpAuthInvoker {
+//public class AuthCodeInvoker {
 //	
-//	private static final String BASE_URL="http://127.0.0.1:8000/users";
-//	private static final String TOKEN_URL = "http://127.0.0.1:8000/oauth/token";
+//	private static final String BASE_URL="http://106.13.3.200/api-user/users?page=1&limit=10";
+//	private static final String AUTHORIZE_URL = "http://106.13.3.200/oauth/authorize?client_id=owen&redirect_uri=http://127.0.0.1:9997/dashboard/login&state=abc&scope=app&response_type=code";
+//	private static final String TOKEN_URL = "http://106.13.3.200/oauth/token?grant_type=authorization_code&code=%s&client_id=%s&client_secret=%s&redirect_uri=%s" ;
 //	public static String access_token;
 //
 //	private HttpClientBuilder httpClientBuilder;
@@ -41,23 +42,12 @@
 //		// CloseableHttpClient httpClient = HttpClients.createDefault();
 //		// http POST
 //		// HttpClientBuilder httpClientBuilder = HttpClientBuilder.create();
-//		HttpPost httpPost = new HttpPost(TOKEN_URL);
+//		
+//		String RealTOKEN_URL = String.format(TOKEN_URL, "nqYtqx", "owen" ,"owen","http://127.0.0.1:9997/dashboard/login") ;
+//		
+//		HttpPost httpPost = new HttpPost(RealTOKEN_URL);
 //		// HttpGet httpGet = new HttpGet(url);
-//		// httpPost.addHeader("Authorization", "Basic cGljYzpzZWNyZXQ=");//
-//		CredentialsProvider provider = new BasicCredentialsProvider();
 //
-//		AuthScope scope = new AuthScope(AuthScope.ANY_HOST, AuthScope.ANY_PORT, AuthScope.ANY_REALM);
-//		UsernamePasswordCredentials credentials = new UsernamePasswordCredentials("webApp", "webApp");
-//		provider.setCredentials(scope, credentials);
-//
-//		List<NameValuePair> formParams = new ArrayList<NameValuePair>();
-//		formParams.add(new BasicNameValuePair("grant_type", "password"));
-//		formParams.add(new BasicNameValuePair("scope", "app"));
-//		formParams.add(new BasicNameValuePair("username", "admin"));
-//		formParams.add(new BasicNameValuePair("password", "admin"));
-//		HttpEntity entity = new UrlEncodedFormEntity(formParams, "UTF-8");
-//		httpPost.setEntity(entity);
-//		httpClientBuilder.setDefaultCredentialsProvider(provider);
 //		httpClient = httpClientBuilder.build();
 //		CloseableHttpResponse response = null;
 //		try {
@@ -78,8 +68,10 @@
 //
 //		}
 //		
-////		String content = doAnotherGet(access_token);
-////		System.out.println(content);
+//
+//		
+//		String content = doAnotherGet(access_token);
+//		System.out.println(content);
 //
 //	}
 //
@@ -121,7 +113,7 @@
 //	 
 //	
 //	public static void main(String[] args) throws Exception {
-//		new HttpAuthInvoker().start();
+//		new AuthCodeInvoker().start();
 //
 //	}
 //	

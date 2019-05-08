@@ -4,11 +4,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * 日期处理
- * 
- * @author chenshun
- * @email sunlightcs@gmail.com
- * @date 2016年12月21日 下午12:53:33
+ * 时间工具类
+ *
+ * @Author: [dawei QQ:64738479]
+ * @Date: [2019-04-25 21:48]
+ * @Description: [ ]
+ * @Version: [1.0.1]
+ * @Copy: [com.zzg]
  */
 public class DateUtils {
 	/** 时间格式(yyyy-MM-dd) */

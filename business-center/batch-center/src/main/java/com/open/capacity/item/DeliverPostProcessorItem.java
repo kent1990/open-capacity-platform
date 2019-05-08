@@ -37,7 +37,7 @@ public class DeliverPostProcessorItem implements ItemProcessor<DeliverPost, Deli
 	@Autowired
 	private ThirdServiceProp thirdServiceProp;
 	
-	
+	//在item写入数据源时数据清洗
 	@Override
 	public DeliverPost process(DeliverPost deliverPost) throws Exception {
 		logger.info("订单号：【{}】经过处理器 ", deliverPost.getOrderId());

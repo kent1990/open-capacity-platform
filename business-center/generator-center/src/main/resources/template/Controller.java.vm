@@ -1,8 +1,8 @@
-package ${package}.${moduleName}.controller;
+package ${package}.${pkgName}.controller;
 
 import java.util.Map;
 
-import com.open.capacity.model.common.Result;
+import com.open.capacity.commons.Result;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.security.access.prepost.PreAuthorize;
-import ${package}.${moduleName}.entity.${className};
-import ${package}.${moduleName}.service.${className}Service;
+import ${package}.${pkgName}.entity.${className};
+import ${package}.${pkgName}.service.${className}Service;
 
-import com.open.capacity.model.common.PageResult;
+import com.open.capacity.commons.PageResult;
 
 /**
  * ${comments}
@@ -35,7 +35,7 @@ public class ${className}Controller {
      * 列表
      */
     @RequestMapping("/list")
-    @PreAuthorize("hasAnyAuthority('${moduleName}:${pathName}:list')")
+    @PreAuthorize("hasAnyAuthority('${tableName}:${pathName}:list')")
     public PageResult list(@RequestParam Map<String, Object> params){
         PageResult pageResult = ${classname}Service.findAll(params);
         return pageResult;
@@ -50,7 +50,7 @@ public class ${className}Controller {
     public Result save(@RequestBody ${className} ${classname}){
 			${classname}Service.save(${classname});
 
-        return Result.succeed("");
+        return Result.succeed("保存成功");
     }
 
     /**
@@ -61,17 +61,17 @@ public class ${className}Controller {
     public Result update(@RequestBody ${className} ${classname}){
 			${classname}Service.update(${classname});
 
-        return Result.succeed("");
+        return Result.succeed("修改成功");
     }
 
     /**
      * 删除
      */
-    @RequestMapping("/delete")
+    @RequestMapping("/delete/{id}")
     @PreAuthorize("hasAnyAuthority('generator:sysroleuser:delete')")
-    public Result delete(@RequestBody Long ${pk.attrname}){
+    public Result delete(@PathVariable Long  ${pk.attrname}){
 			${classname}Service.delete(${pk.attrname});
-        return Result.succeed("");
+        return Result.succeed("删除成功");
     }
 
 }

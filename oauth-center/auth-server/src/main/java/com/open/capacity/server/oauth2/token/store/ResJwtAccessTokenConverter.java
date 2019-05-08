@@ -4,15 +4,14 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.oauth2.provider.token.DefaultAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.DefaultUserAuthenticationConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
-public class MemoryJwtAccessTokenConverter extends JwtAccessTokenConverter{
+public class ResJwtAccessTokenConverter extends JwtAccessTokenConverter{
 	
 	
-	public MemoryJwtAccessTokenConverter() {
+	public ResJwtAccessTokenConverter() {
 		super();
 		super.setAccessTokenConverter(new JwtUserAuthenticationConverter());
 	}

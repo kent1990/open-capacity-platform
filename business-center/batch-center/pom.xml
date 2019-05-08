@@ -16,6 +16,12 @@
 			<artifactId>log-core</artifactId>
 			<version>${core.version}</version>
 		</dependency>
+		<!-- 分布式锁 -->
+		<dependency>
+			<groupId>com.open.capacity</groupId>
+			<artifactId>lock-core</artifactId>
+			<version>${core.version}</version>
+		</dependency>
 		<!-- 关系型和非关系型数据库配置 -->
 		<dependency>
 			<groupId>com.open.capacity</groupId>
@@ -64,10 +70,7 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
         </dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
+		
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -79,7 +82,11 @@
 			<optional>true</optional>
 		</dependency>
 
-
+		<!-- Spring Boot web启动器 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency> 		
 
 		
 		 

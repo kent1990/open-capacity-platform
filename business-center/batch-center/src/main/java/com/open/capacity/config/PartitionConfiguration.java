@@ -61,18 +61,19 @@ public class PartitionConfiguration {
     private Step slaveStep ;
 
      
-
+    //指定分区处理器
     @Bean
     public PartitionHandler partitionHandler() throws Exception {
     	TaskExecutorPartitionHandler partitionHandler = new TaskExecutorPartitionHandler();
         partitionHandler.setStep(slaveStep);
         partitionHandler.setGridSize(GRID_SIZE);
+        //简单的异步任务支持限流
         SimpleAsyncTaskExecutor taskExecutor = new SimpleAsyncTaskExecutor();
         taskExecutor.setConcurrencyLimit(10);
         partitionHandler.setTaskExecutor(taskExecutor);
         return partitionHandler;
     }
-
+    //从数据源读取item
     @Bean(destroyMethod = "")
     @StepScope
     public JdbcCursorItemReader<DeliverPost> JdbcCursorItemReader(

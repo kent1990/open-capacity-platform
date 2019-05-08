@@ -1,4 +1,4 @@
-package com.open.capacity.client.oauth2.token.store;
+package com.open.capacity.server.oauth2.token.store;
 ///*
 // * Copyright 2013-2014 the original author or authors.
 // *

@@ -21,6 +21,7 @@ public class DBWriterItem<T> implements ItemWriter<T> {
 	@Autowired
 	private DeliverPostDao deliverPostDao ;
 	
+	////将item批量写入数据源
     @Override
     public void write(List<? extends T> list) throws Exception {
     	
