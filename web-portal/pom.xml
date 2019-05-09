@@ -9,7 +9,9 @@
   <packaging>pom</packaging>
   
   
-  <!-- 后台中心 -->
-  <module>back-center</module>
-  
+ 
+  <modules>
+  	<!-- 鍚庡彴涓績-->
+   	<module>back-center</module>
+  </modules>
 </project>
