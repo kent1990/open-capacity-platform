@@ -76,11 +76,9 @@ public class SysMenuController {
 	@LogAnnotation(module="user-center",recordRequestParam=false)
 	public List<Map<String, Object>> findMenusByRoleId(@PathVariable Long roleId) {
 
-		Set<Long> roleIds = new HashSet<Long>() {
-			{
-				add(roleId);
-			}
-		};
+		Set<Long> roleIds = new HashSet<Long>()  ;
+		//初始化角色
+		roleIds.add(roleId) ;
 		List<SysMenu> roleMenus = menuService.findByRoles(roleIds); // 获取该角色对应的菜单
 		List<SysMenu> allMenus = menuService.findAll(); // 全部的菜单列表
 		List<Map<String, Object>> authTrees = new ArrayList<>();

@@ -132,7 +132,7 @@ public class SmsCodeServiceImpl implements SmsCodeService {
 					redisTemplate.delete(key);
 				}
 
-				if (delete == Boolean.FALSE && second != null && second > 0) {
+				if (Boolean.FALSE.equals(delete)  && second != null && second > 0) {
 					redisTemplate.expire(key, second, TimeUnit.SECONDS);
 				}
 

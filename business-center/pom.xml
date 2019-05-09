@@ -29,7 +29,6 @@
   <modules>
   	<!-- 用户中心 -->
   	<module>user-center</module>
-  	
   	<!-- 文件中心 -->
   	<module>file-center</module>
   	<!-- 代码生成器 -->
@@ -40,10 +39,6 @@
   	<module>transaction-center</module>
   	<!-- 短信中心 -->
   	<module>sms-center</module>
-  	<!-- soap cxf webservice 框架中心 -->
-  	<module>soap-center</module>
-  	<!--dubbo rpc-->
-	<module>dubbo-center</module>
 	<!--批处理-->
 	<module>batch-center</module>
   </modules>

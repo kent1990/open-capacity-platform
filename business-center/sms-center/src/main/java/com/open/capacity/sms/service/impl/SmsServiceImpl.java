@@ -53,6 +53,7 @@ public class SmsServiceImpl implements SmsService {
 	private SmsDao smsDao;
 
 	@Override
+	@Transactional
 	public SendSmsResponse sendSmsMsg(Sms sms) {
 		if (sms.getSignName() == null) {
 			sms.setSignName(this.signName);
@@ -92,7 +93,7 @@ public class SmsServiceImpl implements SmsService {
 		return response;
 	}
 
-	@Transactional
+	
 	@Override
 	public void save(Sms sms, Map<String, String> params) {
 		if (!CollectionUtils.isEmpty(params)) {
