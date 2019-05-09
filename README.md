@@ -29,11 +29,11 @@ http://59.110.164.254:8066/login.html 用户名/密码：admin/admin
 
 # 技术文档 #
 
-### 试读
+### 试读 :
 (https://www.kancloud.cn/owenwangwen/open-capacity-platform/content)
 
 
-### 正式文档
+### 正式文档 :
 (https://www.kancloud.cn/owenwangwen/open-capacity-platform) 
 
 
