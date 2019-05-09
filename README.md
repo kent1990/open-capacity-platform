@@ -28,8 +28,13 @@ http://59.110.164.254:8066/login.html 用户名/密码：admin/admin
 - 提供完善的微服务部署方案，支持shell部署和docker两种方式
 
 # 技术文档 #
-[试读](https://www.kancloud.cn/owenwangwen/open-capacity-platform/content)
-[正式文档](https://www.kancloud.cn/owenwangwen/open-capacity-platform) 
+
+### 试读 :
+(https://www.kancloud.cn/owenwangwen/open-capacity-platform/content)
+
+
+### 正式文档 :
+(https://www.kancloud.cn/owenwangwen/open-capacity-platform) 
 
 
 ### 欢迎进群（群内领资料）
