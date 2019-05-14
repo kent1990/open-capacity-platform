@@ -30,6 +30,11 @@ spring:
             args:
               name : default
               fallbackUri: 'forward:/defaultfallback'
+          - name: RequestRateLimiter
+            args:
+              redis-rate-limiter.replenishRate: 1  # 令牌桶的容积
+              redis-rate-limiter.burstCapacity: 3  # 流速 每秒
+              key-resolver: "#{@ipAddressKeyResolver}" #SPEL表达式去的对应的bean
         - id: api-auth
           uri: lb://auth-server
           order: 8002
@@ -42,6 +47,11 @@ spring:
             args:
               name : default
               fallbackUri: 'forward:/defaultfallback'
+          - name: RequestRateLimiter
+            args:
+              redis-rate-limiter.replenishRate: 1  # 令牌桶的容积
+              redis-rate-limiter.burstCapacity: 3  # 流速 每秒
+              key-resolver: "#{@ipAddressKeyResolver}" #SPEL表达式去的对应的bean
         - id: api-file
           uri: lb://file-center
           order: 8003
@@ -53,6 +63,11 @@ spring:
             args:
               name : default
               fallbackUri: 'forward:/defaultfallback'
+          - name: RequestRateLimiter
+            args:
+              redis-rate-limiter.replenishRate: 1  # 令牌桶的容积
+              redis-rate-limiter.burstCapacity: 3  # 流速 每秒
+              key-resolver: "#{@ipAddressKeyResolver}" #SPEL表达式去的对应的bean
         - id: api-generator
           uri: lb://generator-center
           order: 8004
@@ -64,6 +79,11 @@ spring:
             args:
               name : default
               fallbackUri: 'forward:/defaultfallback'
+          - name: RequestRateLimiter
+            args:
+              redis-rate-limiter.replenishRate: 1  # 令牌桶的容积
+              redis-rate-limiter.burstCapacity: 3  # 流速 每秒
+              key-resolver: "#{@ipAddressKeyResolver}" #SPEL表达式去的对应的bean
         - id: api-baidu
           uri: http://www.163.com
           order: 8005
