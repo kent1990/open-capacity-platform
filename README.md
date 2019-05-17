@@ -197,6 +197,10 @@ e.启动gray-center的discovery-console-desktop
 # 系统监控 #
 <table>
 	<tr>
+		<td><img src="https://images.gitee.com/uploads/images/2019/0517/181956_166d0ea3_869801.png "屏幕截图.png"/></td>
+		<td><img src="https://images.gitee.com/uploads/images/2019/0517/182057_c5ab0c9e_869801.png "屏幕截图.png"/></td>
+	</tr>
+    <tr>
         <td><img src="https://images.gitee.com/uploads/images/2019/0401/230332_f777ea8d_869801.png "屏幕截图.png"/></td>
         <td><img src="https://images.gitee.com/uploads/images/2019/0401/230430_3eb6b5e0_869801.png "屏幕截图.png"/></td>
     </tr>
