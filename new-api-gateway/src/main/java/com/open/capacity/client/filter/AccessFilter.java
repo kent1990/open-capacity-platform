@@ -57,21 +57,21 @@ public class AccessFilter implements GlobalFilter ,Ordered{
 		}
 		
 		if(!pathMatcher.match("/api-auth/**",exchange.getRequest().getPath().value())){
-			if (accessToken == null) {
-				exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
-				return exchange.getResponse().setComplete();
-			}else{
-				try {
-					Map<String, Object> params =  (Map<String, Object>) redisTemplate.opsForValue().get("token:" + accessToken) ;
-					if(params.isEmpty()){
-						exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
-						return exchange.getResponse().setComplete();
-					}
-				} catch (Exception e) {
-					exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
-					return exchange.getResponse().setComplete();
-				} 
-			}
+//			if (accessToken == null) {
+//				exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+//				return exchange.getResponse().setComplete();
+//			}else{
+//				try {
+//					Map<String, Object> params =  (Map<String, Object>) redisTemplate.opsForValue().get("token:" + accessToken) ;
+//					if(params.isEmpty()){
+//						exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+//						return exchange.getResponse().setComplete();
+//					}
+//				} catch (Exception e) {
+//					exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+//					return exchange.getResponse().setComplete();
+//				}
+//			}
 		}
 		
 		

@@ -9,7 +9,13 @@
 	<artifactId>new-api-gateway</artifactId>
 
 	<dependencies>
-	
+
+		<dependency>
+			<groupId>ma.glasnost.orika</groupId>
+			<artifactId>orika-core</artifactId>
+			<version>1.5.2</version>
+		</dependency>
+
 	
 		<!-- 日志统一配置 -->
 		<dependency>
