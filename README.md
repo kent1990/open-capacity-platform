@@ -14,8 +14,7 @@ http://59.110.164.254:8066/login.html 用户名/密码：admin/admin
  
 <table>
 	<tr>
-        <td><img src="https://gitee.com/uploads/images/2019/0412/094738_cf70b705_869801.png "屏幕截图.png"/></td>
-		<td><img src="https://images.gitee.com/uploads/images/2019/0325/202000_dad634f9_869801.png "03.png"/></td>
+		<td><img src="https://images.gitee.com/uploads/images/2019/0521/120030_a88af2ff_869801.png "屏幕截图.png" ></td>
     </tr>
 </table>
 
