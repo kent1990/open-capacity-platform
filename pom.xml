@@ -220,8 +220,6 @@
 		<module>inner-intergration</module>
 		<!-- 注册中心 -->
 		<module>register-center</module>
-		<!-- 阿波罗配置中心1.2.0 -->
-		<module>config-center</module>
 		<!-- 认证中心 -->
 		<module>oauth-center</module>
 		<!-- 业务网关 -->
