@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
@@ -32,7 +33,7 @@ import com.open.capacity.props.PermitUrlProperties;
 @Configuration
 @EnableResourceServer
 // 开启spring security 注解
-// @EnableGlobalMethodSecurity(prePostEnabled = true)
+ @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableConfigurationProperties(PermitUrlProperties.class)
 public class OAuth2ClientConfig extends ResourceServerConfigurerAdapter {
 

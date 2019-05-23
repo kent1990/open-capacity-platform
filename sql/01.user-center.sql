@@ -1,4 +1,4 @@
-# 导出 user-center 的数据库结构
+#导出 user-center 的数据库结构
 CREATE DATABASE IF NOT EXISTS `user-center` DEFAULT CHARACTER SET = utf8mb4;
 Use `user-center`;
 
@@ -46,8 +46,44 @@ CREATE TABLE `sys_permission` (
 #
 # Data for table "sys_permission"
 #
-
-INSERT INTO `sys_permission` VALUES (1,'permission:post/permissions','保存权限标识','2018-01-18 17:06:39','2018-01-18 17:06:42'),(2,'permission:put/permissions','修改权限标识','2018-01-18 17:06:39','2018-01-18 17:06:42'),(3,'permission:delete/permissions/{id}','删除权限标识','2018-01-18 17:06:39','2018-01-18 17:06:42'),(4,'permission:get/permissions','查询权限标识','2018-01-18 17:06:39','2018-01-18 17:06:42'),(5,'role:post/roles','添加角色','2018-01-18 17:06:39','2018-01-18 17:06:42'),(6,'role:put/roles','修改角色','2018-01-18 17:06:39','2018-01-18 17:06:42'),(7,'role:delete/roles/{id}','删除角色','2018-01-18 17:06:39','2018-01-18 17:06:42'),(8,'role:post/roles/{id}/permissions','给角色分配权限','2018-01-18 17:06:39','2018-01-18 17:06:42'),(9,'role:get/roles','查询角色','2018-01-18 17:06:39','2018-01-18 17:06:42'),(10,'role:get/roles/{id}/permissions','获取角色的权限','2018-01-18 17:06:39','2018-01-18 17:06:42'),(11,'user:post/users/{id}/roles','给用户分配角色','2018-01-18 17:06:39','2018-01-18 17:06:42'),(12,'user:post/users/{id}/resetPassword','用户重置密码','2018-01-18 17:06:39','2018-01-18 17:06:42'),(13,'user:get/users','用户查询','2018-01-18 17:12:00','2018-01-18 17:12:05'),(14,'user:put/users/me','修改用户','2018-01-18 17:06:39','2018-01-18 17:06:42'),(15,'user:get/users/{id}/roles','获取用户的角色','2018-01-18 17:06:39','2018-01-18 17:06:42'),(16,'user:post/users/saveOrUpdate','新增用户','2018-01-18 17:06:39','2018-01-18 17:06:42'),(17,'user:post/users/exportUser','导出用户','2018-01-18 17:06:39','2018-01-18 17:06:42'),(18,'user:get/users/updateEnabled','用户状态修改','2018-01-18 17:06:39','2018-01-18 17:06:42'),(19,'user:put/users/password','修改密码','2018-01-18 17:06:39','2018-01-18 17:06:39'),(20,'menu:get/menus/all','查询菜单','2018-01-18 17:06:39','2018-01-18 17:06:42'),(21,'menu:post/menus/granted','给角色分配菜单','2018-01-18 17:06:39','2018-01-18 17:06:42'),(22,'menu:get/menus/tree','树形显示','2018-01-18 17:06:39','2018-01-18 17:06:39'),(23,'menu:get/menus/{roleId}/menus','获取角色的菜单','2018-01-18 17:06:39','2018-01-18 17:06:42'),(24,'menu:post/menus','添加菜单','2018-01-18 17:06:39','2018-09-04 07:35:29'),(25,'menu:put/menus','修改菜单','2018-01-18 17:06:39','2018-01-18 17:06:42'),(26,'menu:delete/menus/{id}','删除菜单','2018-01-18 17:06:39','2018-01-18 17:06:42'),(27,'menu:get/menus/current','当前用户菜单','2018-01-18 17:06:39','2018-01-18 17:06:42'),(29,'menu:get/menus/findAlls','所有菜单','2018-01-18 17:06:39','2018-01-18 17:06:39'),(30,'client:post/clients','保存应用','2018-01-18 17:06:39','2018-01-18 17:06:39'),(31,'client:get/clients','应用列表','2018-01-18 17:06:39','2018-01-18 17:06:39'),(32,'client:get/clients/{id}','根据id获取应用','2018-01-18 17:06:39','2018-01-18 17:06:39'),(33,'clientdelete/clients','删除应用','2018-01-18 17:06:39','2018-01-18 17:06:42'),(34,'service:get/service/findAlls','查询所有服务','2018-01-18 17:06:39','2018-09-03 08:05:09'),(35,'service:get/service/findOnes','服务树','2018-01-18 17:06:39','2018-09-08 03:23:28');
+INSERT INTO `sys_permission` VALUES (1, 'permission:post/permissions', '保存权限标识', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
+INSERT INTO `sys_permission` VALUES (2, 'permission:put/permissions', '修改权限标识', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
+INSERT INTO `sys_permission` VALUES (3, 'permission:delete/permissions/{id}', '删除权限标识', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
+INSERT INTO `sys_permission` VALUES (4, 'permission:get/permissions', '查询权限标识', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
+INSERT INTO `sys_permission` VALUES (5, 'role:post/roles', '添加角色', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
+INSERT INTO `sys_permission` VALUES (6, 'role:put/roles', '修改角色', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
+INSERT INTO `sys_permission` VALUES (7, 'role:delete/roles/{id}', '删除角色', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
+INSERT INTO `sys_permission` VALUES (8, 'role:post/roles/{id}/permissions', '给角色分配权限', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
+INSERT INTO `sys_permission` VALUES (9, 'role:get/roles', '查询角色', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
+INSERT INTO `sys_permission` VALUES (10, 'role:get/roles/{id}/permissions', '获取角色的权限', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
+INSERT INTO `sys_permission` VALUES (11, 'user:post/users/{id}/roles', '给用户分配角色', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
+INSERT INTO `sys_permission` VALUES (12, 'user:post/users/{id}/resetPassword', '用户重置密码', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
+INSERT INTO `sys_permission` VALUES (13, 'user:get/users', '用户查询', '2018-01-18 17:12:00', '2018-01-18 17:12:05');
+INSERT INTO `sys_permission` VALUES (14, 'user:put/users/me', '修改用户', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
+INSERT INTO `sys_permission` VALUES (15, 'user:get/users/{id}/roles', '获取用户的角色', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
+INSERT INTO `sys_permission` VALUES (16, 'user:post/users/saveOrUpdate', '新增用户', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
+INSERT INTO `sys_permission` VALUES (17, 'user:post/users/exportUser', '导出用户', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
+INSERT INTO `sys_permission` VALUES (18, 'user:get/users/updateEnabled', '用户状态修改', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
+INSERT INTO `sys_permission` VALUES (19, 'user:put/users/password', '修改密码', '2018-01-18 17:06:39', '2018-01-18 17:06:39');
+INSERT INTO `sys_permission` VALUES (20, 'menu:get/menus/all', '查询菜单', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
+INSERT INTO `sys_permission` VALUES (21, 'menu:post/menus/granted', '给角色分配菜单', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
+INSERT INTO `sys_permission` VALUES (22, 'menu:get/menus/tree', '树形显示', '2018-01-18 17:06:39', '2018-01-18 17:06:39');
+INSERT INTO `sys_permission` VALUES (23, 'menu:get/menus/{roleId}/menus', '获取角色的菜单', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
+INSERT INTO `sys_permission` VALUES (24, 'menu:post/menus', '添加菜单', '2018-01-18 17:06:39', '2018-09-04 07:35:29');
+INSERT INTO `sys_permission` VALUES (25, 'menu:put/menus', '修改菜单', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
+INSERT INTO `sys_permission` VALUES (26, 'menu:delete/menus/{id}', '删除菜单', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
+INSERT INTO `sys_permission` VALUES (27, 'menu:get/menus/current', '当前用户菜单', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
+INSERT INTO `sys_permission` VALUES (29, 'menu:get/menus/findAlls', '所有菜单', '2018-01-18 17:06:39', '2018-01-18 17:06:39');
+INSERT INTO `sys_permission` VALUES (30, 'client:post/clients', '保存应用', '2018-01-18 17:06:39', '2018-01-18 17:06:39');
+INSERT INTO `sys_permission` VALUES (31, 'client:get/clients', '应用列表', '2018-01-18 17:06:39', '2018-01-18 17:06:39');
+INSERT INTO `sys_permission` VALUES (32, 'client:get/clients/{id}', '根据id获取应用', '2018-01-18 17:06:39', '2018-01-18 17:06:39');
+INSERT INTO `sys_permission` VALUES (33, 'clientdelete/clients', '删除应用', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
+INSERT INTO `sys_permission` VALUES (34, 'service:get/service/findAlls', '查询所有服务', '2018-01-18 17:06:39', '2018-09-03 08:05:09');
+INSERT INTO `sys_permission` VALUES (35, 'service:get/service/findOnes', '服务树', '2018-01-18 17:06:39', '2018-09-08 03:23:28');
+INSERT INTO `sys_permission` VALUES (36, 'menu:get/menus/findOnes', '获取菜单以及顶层菜单', '2019-05-09 23:48:13', '2019-05-09 23:48:13');
+INSERT INTO `sys_permission` VALUES (37, 'permission:get/permissions/{roleId}/permissions', '根据roleId获取权限', '2019-05-10 00:02:23', '2019-05-10 00:02:23');
+INSERT INTO `sys_permission` VALUES (38, 'file:query', '获取文件列表', '2019-05-17 21:34:05', '2019-05-17 21:34:08');
+INSERT INTO `sys_permission` VALUES (39, 'file:del', '删除文件', '2019-05-17 21:36:46', '2019-05-17 21:36:48');
 
 #
 # Structure for table "sys_role"
@@ -102,7 +138,8 @@ CREATE TABLE `sys_role_permission` (
 # Data for table "sys_role_permission"
 #
 
-INSERT INTO `sys_role_permission` VALUES (1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(1,7),(1,8),(1,9),(1,10),(1,11),(1,12),(1,13),(1,14),(1,15),(1,16),(1,17),(1,18),(1,19),(1,20),(1,21),(1,22),(1,23),(1,24),(1,25),(1,26),(1,27),(1,29),(1,30),(1,31),(1,32),(1,33),(1,34),(1,35);
+INSERT INTO `sys_role_permission` (`roleId`,`permissionId`) VALUES (1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(1,7),(1,8),(1,9),(1,10),(1,11),(1,12),(1,13),(1,14),(1,15),(1,16),(1,17),(1,18),(1,19),(1,20),(1,21),(1,22),(1,23),(1,24),(1,25),(1,26),(1,27),(1,29),(1,30),(1,31),(1,32),(1,33),(1,34),(1,35),(1,36),(1,37),(1,38),(1,39);
+
 
 #
 # Structure for table "sys_role_user"
