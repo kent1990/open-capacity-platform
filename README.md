@@ -14,8 +14,10 @@ http://59.110.164.254:8066/login.html 用户名/密码：admin/admin
  
 <table>
 	<tr>
+		<td><img src="https://images.gitee.com/uploads/images/2019/0523/091013_fffdcf8b_869801.png "屏幕截图.png"></td>
 		<td><img src="https://images.gitee.com/uploads/images/2019/0521/120030_a88af2ff_869801.png "屏幕截图.png" ></td>
     </tr>
+	
 </table>
 
 - 基于layui前后端分离的企业级微服务架构
@@ -24,7 +26,44 @@ http://59.110.164.254:8066/login.html 用户名/密码：admin/admin
 - 提供完善的企业微服务流量监控，日志监控能力 
 - 提供完善的压力测试方案
 - 提供完善的灰度发布方案
-- 提供完善的微服务部署方案，支持shell部署和docker两种方式
+- 提供完善的微服务部署方案
+
+
+# **功能介绍** #
+- 统一安全认证中心
+	- 支持oauth的四种模式登录
+	- 支持用户名、密码加图形验证码登录
+	- 支持第三方系统单点登录
+- 微服务架构基础支撑
+	- 服务注册发现、路由与负载均衡
+	- 服务降级与熔断 
+	- 服务限流
+	- 统一配置中心
+	- 统一日志中心
+	- 分布式锁
+	- 分布式任务调度器
+- 系统服务监控中心
+	- 服务调用链监控 
+	- 应用吞吐量监控 
+	- 服务降级、熔断监控
+	- 微服务服务监控
+- 能力开放平台业务支撑
+	- 网关基于应用方式API接口隔离
+	- 下游服务基于RBAC权限管理，实现细粒度控制
+	- 代码生成器中心  
+	- 网关聚合服务内部Swagger接口文档
+	- 统一跨域处理
+	- 统一异常处理
+- docker容器化部署
+	- 基于rancher的容器化部署
+	- 基于docker的elk日志监控
+	- 基于docker的服务动态扩容 
+
+ 
+
+# 项目组织结构分析   #
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0509/110555_5f9dd329_869801.png "屏幕截图.png")
+
 
 # 技术文档 #
 
@@ -36,20 +75,8 @@ http://59.110.164.254:8066/login.html 用户名/密码：admin/admin
 (https://www.kancloud.cn/owenwangwen/open-capacity-platform) 
 
 
-### 欢迎进群（群内领资料）
 
-`一键加群`
-<a target="_blank" href="https://jq.qq.com/?_wv=1027&k=5JSjd5D"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="open-capacity-platform交流" title="open-capacity-platform交流"></a>        
 
-<table>
-	<tr>
-            <td><img src="https://images.gitee.com/uploads/images/2019/0401/230052_c897f4c5_869801.png "屏幕截图.png
-</table>
-
- 
-
-# 项目组织结构分析   #
-![输入图片说明](https://images.gitee.com/uploads/images/2019/0509/110555_5f9dd329_869801.png "屏幕截图.png")
 
 
  
@@ -180,7 +207,7 @@ e.启动gray-center的discovery-console-desktop
 请参考
 [https://github.com/Nepxion/Docs/blob/master/discovery-doc/README_QUICK_START.md](https://github.com/Nepxion/Docs/blob/master/discovery-doc/README_QUICK_START.md)，感谢军哥分享  
 
-#   链路跟踪 
+#  APM监控
 <table>
 	<tr>
         <td><img src="https://images.gitee.com/uploads/images/2019/0330/105610_52def254_869801.png "屏幕截图.png"/></td>
@@ -196,10 +223,7 @@ e.启动gray-center的discovery-console-desktop
 # 系统监控 #
 <table>
 	<tr>
-		<td><img src="https://images.gitee.com/uploads/images/2019/0517/181956_166d0ea3_869801.png "屏幕截图.png"/></td>
-		<td><img src="https://images.gitee.com/uploads/images/2019/0517/182057_c5ab0c9e_869801.png "屏幕截图.png"/></td>
-	</tr>
-    <tr>
+		<td><img src="https://images.gitee.com/uploads/images/2019/0523/085501_ee047496_869801.png "屏幕截图.png""/></td>
         <td><img src="https://images.gitee.com/uploads/images/2019/0401/230332_f777ea8d_869801.png "屏幕截图.png"/></td>
         <td><img src="https://images.gitee.com/uploads/images/2019/0401/230430_3eb6b5e0_869801.png "屏幕截图.png"/></td>
     </tr>
@@ -214,3 +238,20 @@ e.启动gray-center的discovery-console-desktop
 # 禁止事项 #
 - 代码50%以上相似度的二次开源。
 - 注意：若禁止条款被发现有权追讨9999的授权费。
+
+
+# Spring Cloud Alibaba 初探
+https://gitee.com/owenwangwen/open-capacity-platform/tree/alibaba
+
+
+### 欢迎进群（群内领资料）
+
+`一键加群`
+<a target="_blank" href="https://jq.qq.com/?_wv=1027&k=5JSjd5D"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="open-capacity-platform交流" title="open-capacity-platform交流"></a>        
+
+<table>
+	<tr>
+            <td><img src=https://images.gitee.com/uploads/images/2019/0401/230052_c897f4c5_869801.png "屏幕截图.png"/>
+			</td>
+	</tr>
+</table>
