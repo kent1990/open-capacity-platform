@@ -10,6 +10,19 @@
 # **项目地址** #
 http://59.110.164.254:8066/login.html 用户名/密码：admin/admin
 
+### 欢迎进群（群内领资料）
+
+`一键加群`
+<a target="_blank" href="https://jq.qq.com/?_wv=1027&k=5JSjd5D"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="open-capacity-platform交流" title="open-capacity-platform交流"></a>        
+
+<table>
+	<tr>
+            <td><img src=https://images.gitee.com/uploads/images/2019/0401/230052_c897f4c5_869801.png "屏幕截图.png"/>
+			</td>
+	</tr>
+</table>
+
+
 # 技术介绍  #
  
 <table>
@@ -145,36 +158,7 @@ http://59.110.164.254:8066/login.html 用户名/密码：admin/admin
 </table>
  
 
-# api-gateway vs new-api-gateway #
-内网测试网关/api-user/users/current
-## zuul-->api-gateway ##
 
-<table>
-	<tr>
-        <td><img src="https://images.gitee.com/uploads/images/2019/0327/095846_3bf37b11_869801.png "zuul01.png"/></td>
-        <td><img src="https://images.gitee.com/uploads/images/2019/0327/095928_f0e7d48e_869801.png "zuul02.png"/></td>
-    </tr>
-	<tr>
-        <td><img src="https://images.gitee.com/uploads/images/2019/0327/095938_bc868c69_869801.png "zuul03.png"/></td>
-        <td><img src="https://images.gitee.com/uploads/images/2019/0327/095946_a0c5542c_869801.png "zuul04.png"/></td>
-    </tr>
-     
-</table>
- 
-## spring cloud gateway -->new-api-gateway ##
-
-
-<table>
-	<tr>
-        <td><img src="https://images.gitee.com/uploads/images/2019/0327/095957_d3cbdeb3_869801.png "gateway01.png"/></td>
-        <td><img src="https://images.gitee.com/uploads/images/2019/0327/100005_d7861ff6_869801.png "gateway02.png"/></td>
-    </tr>
-	<tr>
-        <td><img src="https://images.gitee.com/uploads/images/2019/0327/100014_8528653c_869801.png "gateway03.png"/></td>
-        <td><img src="https://images.gitee.com/uploads/images/2019/0327/100021_7933cefd_869801.png "gateway04.png"/></td>
-    </tr>
-     
-</table> 
 
 #  灰度发布功能演示   
  
@@ -229,6 +213,15 @@ e.启动gray-center的discovery-console-desktop
     </tr>
 </table>
 
+# 阿波罗配置中心
+Apollo（阿波罗）是携程框架部研发并开源的一款生产级的配置中心产品，它能够集中管理应用在不同环境、不同集群的配置，配置修改后能够实时推送到应用端，并且具备规范的权限、流程治理等特性，适用于微服务配置管理场景。  
+集成方案  
+https://gitee.com/owenwangwen/config-center  
+功能图  
+![](https://oscimg.oschina.net/oscnet/79e8a3ad08e082b13d3abb899d26171efc8.jpg)   
+阿波罗官方地址   
+https://github.com/ctripcorp/apollo  
+
 # 用户权益 #
 - 允许免费用于学习、毕设、公司项目、私活等。
 
@@ -244,14 +237,3 @@ e.启动gray-center的discovery-console-desktop
 https://gitee.com/owenwangwen/open-capacity-platform/tree/alibaba
 
 
-### 欢迎进群（群内领资料）
-
-`一键加群`
-<a target="_blank" href="https://jq.qq.com/?_wv=1027&k=5JSjd5D"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="open-capacity-platform交流" title="open-capacity-platform交流"></a>        
-
-<table>
-	<tr>
-            <td><img src=https://images.gitee.com/uploads/images/2019/0401/230052_c897f4c5_869801.png "屏幕截图.png"/>
-			</td>
-	</tr>
-</table>
