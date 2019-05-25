@@ -10,17 +10,6 @@
 # **项目地址** #
 http://59.110.164.254:8066/login.html 用户名/密码：admin/admin
 
-### 欢迎进群（群内领资料）
-
-`一键加群`
-<a target="_blank" href="https://jq.qq.com/?_wv=1027&k=5JSjd5D"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="open-capacity-platform交流" title="open-capacity-platform交流"></a>        
-
-<table>
-	<tr>
-            <td><img src=https://images.gitee.com/uploads/images/2019/0401/230052_c897f4c5_869801.png "屏幕截图.png"/>
-			</td>
-	</tr>
-</table>
 
 
 # 技术介绍  #
@@ -41,6 +30,17 @@ http://59.110.164.254:8066/login.html 用户名/密码：admin/admin
 - 提供完善的灰度发布方案
 - 提供完善的微服务部署方案
 
+### 欢迎进群（群内领资料）
+
+`一键加群`
+<a target="_blank" href="https://jq.qq.com/?_wv=1027&k=5JSjd5D"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="open-capacity-platform交流" title="open-capacity-platform交流"></a>        
+
+<table>
+	<tr>
+            <td><img src=https://images.gitee.com/uploads/images/2019/0401/230052_c897f4c5_869801.png "屏幕截图.png"/>
+			</td>
+	</tr>
+</table>
 
 # **功能介绍** #
 - 统一安全认证中心
@@ -218,7 +218,7 @@ Apollo（阿波罗）是携程框架部研发并开源的一款生产级的配�
 集成方案  
 https://gitee.com/owenwangwen/config-center  
 功能图  
-![](https://oscimg.oschina.net/oscnet/79e8a3ad08e082b13d3abb899d26171efc8.jpg)   
+![](https://images.gitee.com/uploads/images/2019/0525/185527_3e2e61a9_1441068.jpeg)   
 阿波罗官方地址   
 https://github.com/ctripcorp/apollo  
 
