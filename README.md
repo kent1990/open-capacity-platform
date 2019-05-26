@@ -11,11 +11,17 @@
 - 提供完善的压力测试方案
 - 提供完善的灰度发布方案
 - 提供完善的微服务部署方案  
-技术交流群 <a target="_blank" href="https://jq.qq.com/?_wv=1027&k=5JSjd5D">483725710</a>   <a target="_blank" href="https://www.kancloud.cn/owenwangwen/open-capacity-platform/1048256">**开发手册**</a>   <a target="_blank" href="http://59.110.164.254:8066/login.html">**项目地址**</a>   
+技术交流群 <a target="_blank" href="https://jq.qq.com/?_wv=1027&k=5JSjd5D">483725710</a>   
 
 
 
+# **项目地址** #
+http://59.110.164.254:8066/login.html 用户名/密码：admin/admin
 
+
+<a target="_blank" href="106.13.3.200/verynginx/index.html#">**实时监控**</a> 用户名/密码：verynginx/verynginx     
+<a target="_blank" href="http://106.13.3.200:3000/#">**grafana监控**</a> 用户名/密码：admin/1q2w3e4r    
+<a target="_blank" href="https://www.kancloud.cn/owenwangwen/open-capacity-platform/1048256">**开发手册**</a>     
  
 # 技术介绍  #
  
