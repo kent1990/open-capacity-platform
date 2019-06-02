@@ -28,7 +28,7 @@ http://59.110.164.254:8066/login.html 用户名/密码：admin/admin
 <table>
 	<tr>
 		<td><img src="https://images.gitee.com/uploads/images/2019/0523/091013_fffdcf8b_869801.png "屏幕截图.png"></td>
-		<td><img src="https://images.gitee.com/uploads/images/2019/0521/120030_a88af2ff_869801.png "屏幕截图.png" ></td>
+		<td><img src="https://images.gitee.com/uploads/images/2019/0531/151440_a763b84e_869801.png "屏幕截图.png" ></td>
     </tr>
 	
 </table>
@@ -188,18 +188,16 @@ https://gitee.com/owenwangwen/config-center
 阿波罗官方地址   
 https://github.com/ctripcorp/apollo  
 
+
+# Spring Cloud Alibaba 初探
+https://gitee.com/owenwangwen/open-capacity-platform/tree/alibaba
+
+
 # 用户权益 #
 - 允许免费用于学习、毕设、公司项目、私活等。
-
-
-
 
 # 禁止事项 #
 - 代码50%以上相似度的二次开源。
 - 注意：若禁止条款被发现有权追讨9999的授权费。
-
-
-# Spring Cloud Alibaba 初探
-https://gitee.com/owenwangwen/open-capacity-platform/tree/alibaba
 
 

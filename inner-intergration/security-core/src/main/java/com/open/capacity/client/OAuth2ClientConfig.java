@@ -33,7 +33,7 @@ import com.open.capacity.props.PermitUrlProperties;
 @Configuration
 @EnableResourceServer
 // 开启spring security 注解
- @EnableGlobalMethodSecurity(prePostEnabled = true)
+// @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableConfigurationProperties(PermitUrlProperties.class)
 public class OAuth2ClientConfig extends ResourceServerConfigurerAdapter {
 

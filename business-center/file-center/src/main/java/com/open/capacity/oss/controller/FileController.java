@@ -50,7 +50,7 @@ public class FileController {
 	@PostMapping("/files-anon")
 	public FileInfo upload(@RequestParam("file") MultipartFile file) throws Exception {
 		
-		String fileType = FileType.ALIYUN.toString();
+		String fileType = FileType.QINIU.toString();
 		FileService fileService = fileServiceFactory.getFileService(fileType);
 		return fileService.upload(file);
 	}
@@ -87,7 +87,7 @@ public class FileController {
 	public Result delete(@PathVariable String id) {
 
 		try{
-			FileInfo fileInfo = fileServiceFactory.getFileService(FileType.ALIYUN.toString()).getById(id);
+			FileInfo fileInfo = fileServiceFactory.getFileService(FileType.QINIU.toString()).getById(id);
 			if (fileInfo != null) {
 				FileService fileService = fileServiceFactory.getFileService(fileInfo.getSource());
 				fileService.delete(fileInfo);
@@ -109,7 +109,7 @@ public class FileController {
 	@GetMapping("/files")
 	public PageResult<FileInfo> findFiles(@RequestParam Map<String, Object> params) throws JsonProcessingException {
         
-		return  fileServiceFactory.getFileService(FileType.ALIYUN.toString()).findList(params);
+		return  fileServiceFactory.getFileService(FileType.QINIU.toString()).findList(params);
 
 	}
 }
