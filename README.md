@@ -4,27 +4,29 @@
 [![fork](https://gitee.com/owenwangwen/open-capacity-platform/badge/fork.svg?theme=white)](https://gitee.com/owenwangwen/open-capacity-platform/members)
 
 简称ocp是基于layui+springcloud的企业级微服务框架(用户权限管理，配置中心管理，应用管理，....),其核心的设计目标是分离前后端，快速开发部署，学习简单，功能强大，提供快速接入核心接口能力，其目标是帮助企业搭建一套类似百度能力开放平台的框架；  
-- 基于layui前后端分离的企业级微服务架构
-- 兼容spring cloud netflix & spring cloud alibaba
-- 优化Spring Security内部实现，实现API调用的统一出口和权限认证授权中心
-- 提供完善的企业微服务流量监控，日志监控能力 
-- 提供完善的压力测试方案
-- 提供完善的灰度发布方案
-- 提供完善的微服务部署方案  
-技术交流群 <a target="_blank" href="https://jq.qq.com/?_wv=1027&k=5JSjd5D">483725710</a>   
+- 基于layui前后端分离的企业级微服务架构  
+- 兼容spring cloud netflix & spring cloud alibaba  
+- 优化Spring Security内部实现，实现API调用的统一出口和权限认证授权中心  
+- 提供完善的企业微服务流量监控，日志监控能力   
+- 提供完善的压力测试方案  
+- 提供完善的灰度发布方案  
+- 提供完善的微服务部署方案       
 
-
-
-# **项目地址** #
-http://59.110.164.254:8066/login.html 用户名/密码：admin/admin
-
-
-<a target="_blank" href="http://106.13.3.200/verynginx/index.html">**实时监控**</a> 用户名/密码：verynginx/verynginx     
+# **演示地址** #
+http://59.110.164.254:8066/login.html   
+<a target="_blank" href="http://106.13.3.200/verynginx/index.html">**实时监控**</a> 用户名/密码：verynginx/verynginx       
 <a target="_blank" href="http://106.13.3.200:3000/#">**grafana监控**</a> 用户名/密码：admin/1q2w3e4r    
-<a target="_blank" href="https://www.kancloud.cn/owenwangwen/open-capacity-platform/1048256">**开发手册**</a>     
- 
+开发手册  [http://https://www.kancloud.cn/owenwangwen/open-capacity-platform/content](http://https://www.kancloud.cn/owenwangwen/open-capacity-platform/content)  
+
+### 欢迎进群（大佬云集）
+`一键加群`
+<a target="_blank" href="https://jq.qq.com/?_wv=1027&k=5JSjd5D"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="open-capacity-platform交流" title="open-capacity-platform交流"></a>        
+<table>
+	<tr>
+            <td><img src=https://images.gitee.com/uploads/images/2019/0604/143151_36a5c07e_869801.png "屏幕截图.png" />
+	</tr>
+</table>
 # 技术介绍  #
- 
 <table>
 	<tr>
 		<td><img src="https://images.gitee.com/uploads/images/2019/0523/091013_fffdcf8b_869801.png "屏幕截图.png"></td>
@@ -32,13 +34,6 @@ http://59.110.164.254:8066/login.html 用户名/密码：admin/admin
     </tr>
 	
 </table>
-
-
-
- 
-
- 
-
 # **功能介绍** #
 - 统一安全认证中心
 	- 支持oauth的四种模式登录
@@ -68,8 +63,6 @@ http://59.110.164.254:8066/login.html 用户名/密码：admin/admin
 	- 基于docker的elk日志监控
 	- 基于docker的服务动态扩容 
 
- 
- 
 ## 能力开放管理平台   
 
 <table>
@@ -92,13 +85,7 @@ http://59.110.164.254:8066/login.html 用户名/密码：admin/admin
         <td><img src="https://images.gitee.com/uploads/images/2019/0329/212356_27ecb030_869801.png "111.png"/></td>
     </tr>
 </table>
-
-
-
- 
 # 容器化部署   
-
-
 <table>
 	<tr>
         <td><img src="https://images.gitee.com/uploads/images/2019/0126/125453_6682dba8_1147840.png"/></td>
@@ -120,9 +107,6 @@ http://59.110.164.254:8066/login.html 用户名/密码：admin/admin
     </tr>
 </table>
  
-
-
-
 #  APM监控
 <table>
 	<tr>
@@ -145,9 +129,6 @@ http://59.110.164.254:8066/login.html 用户名/密码：admin/admin
     </tr>
 </table>
 
-
-
-
 #  灰度发布功能演示   
  
 ocp灰度发布功能(参考dev分支) 
@@ -162,7 +143,6 @@ e.启动gray-center的discovery-console-desktop
 用户名:admin      
 密码  :admin  
 
-
 <table>
 	<tr>
         <td><img src="https://images.gitee.com/uploads/images/2019/0126/125451_c3b6224d_1147840.png"/></td>
@@ -174,7 +154,6 @@ e.启动gray-center的discovery-console-desktop
     </tr>
      
 </table>
-
 
 请参考
 [https://github.com/Nepxion/Docs/blob/master/discovery-doc/README_QUICK_START.md](https://github.com/Nepxion/Docs/blob/master/discovery-doc/README_QUICK_START.md)，感谢军哥分享  
@@ -188,10 +167,8 @@ https://gitee.com/owenwangwen/config-center
 阿波罗官方地址   
 https://github.com/ctripcorp/apollo  
 
-
 # Spring Cloud Alibaba 初探
 https://gitee.com/owenwangwen/open-capacity-platform/tree/alibaba
-
 
 # 用户权益 #
 - 允许免费用于学习、毕设、公司项目、私活等。
