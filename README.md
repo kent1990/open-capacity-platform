@@ -13,7 +13,10 @@
 - 提供完善的微服务部署方案       
 
 # **演示地址** #
-http://59.110.164.254:8066/login.html   
+http://59.110.164.254:8066/login.html   admin/admin   
+
+
+# **监控演示** #
 <a target="_blank" href="http://106.13.3.200/verynginx/index.html">**实时监控**</a> 用户名/密码：verynginx/verynginx       
 <a target="_blank" href="http://106.13.3.200:3000/#">**grafana监控**</a> 用户名/密码：admin/1q2w3e4r    
 开发手册  [http://https://www.kancloud.cn/owenwangwen/open-capacity-platform/content](http://https://www.kancloud.cn/owenwangwen/open-capacity-platform/content)  
@@ -35,7 +38,7 @@ http://59.110.164.254:8066/login.html
 	
 </table>
 
-# **功能介绍** #
+# **功能介绍** #  
 - 统一安全认证中心
 	- 支持oauth的四种模式登录
 	- 支持用户名、密码加图形验证码登录
@@ -86,7 +89,8 @@ http://59.110.164.254:8066/login.html
         <td><img src="https://images.gitee.com/uploads/images/2019/0329/212356_27ecb030_869801.png "111.png"/></td>
     </tr>
 </table>
-# 容器化部署   
+
+# 容器化部署     
 <table>
 	<tr>
         <td><img src="https://images.gitee.com/uploads/images/2019/0126/125453_6682dba8_1147840.png"/></td>
