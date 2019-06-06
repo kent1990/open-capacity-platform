@@ -13,13 +13,15 @@
 - 提供完善的微服务部署方案       
 
 # **演示地址** #
-http://47.99.88.28:8066  admin/admin   
+http://59.110.164.254:8066/login.html  admin/admin   
 
 
 # **监控演示** #
 <a target="_blank" href="http://106.13.3.200/verynginx/index.html">**实时监控**</a> 用户名/密码：verynginx/verynginx       
 <a target="_blank" href="http://106.13.3.200:3000/#">**grafana监控**</a> 用户名/密码：admin/1q2w3e4r    
-开发手册  [http://https://www.kancloud.cn/owenwangwen/open-capacity-platform/content](http://https://www.kancloud.cn/owenwangwen/open-capacity-platform/content)  
+
+# 开发手册  
+ [https://www.kancloud.cn/owenwangwen/open-capacity-platform/content](https://www.kancloud.cn/owenwangwen/open-capacity-platform/content)
 
 ### 欢迎进群（大佬云集）
 `一键加群`
