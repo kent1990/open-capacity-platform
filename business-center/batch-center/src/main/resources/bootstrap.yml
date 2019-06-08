@@ -1,0 +1,16 @@
+server:
+  port: 5446
+
+spring:
+  application:
+    name: batch-center
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always        
+      

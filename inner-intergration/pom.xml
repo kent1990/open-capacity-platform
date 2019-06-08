@@ -35,8 +35,6 @@
   	<module>security-core</module>
   	<!-- 日志格式-->
   	<module>log-core</module>
-  	<!-- grpc引用 -->
-  	<module>grpc-lib</module>
   	<!-- 分布式锁 -->
   	<module>lock-core</module>
   	<!-- swagger引用 -->

@@ -118,7 +118,9 @@ public class SysPermissionController {
 	public List<Map<String, Object>> findAuthByRoleId(@PathVariable Long roleId) {
 		
 		List<Map<String, Object>> authTrees = new ArrayList<>();
-		Set<Long> roleIds = new HashSet<Long>() {{ add(roleId); }};
+		Set<Long> roleIds = new HashSet<Long>();
+		//初始化角色
+		roleIds.add(roleId);
 		Set<SysPermission> roleAuths = sysPermissionService.findByRoleIds(roleIds);//根据roleId获取对应的权限
 		PageResult<SysPermission> allAuths = sysPermissionService.findPermissions(null);//根据roleId获取对应的权限
 

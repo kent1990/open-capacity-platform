@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.open.capacity.client.oauth2.token.store.RedisTemplateTokenStore;
+import com.open.capacity.client.oauth2.token.RedisTemplateTokenStore;
 
 /**
  * @author 作者 owen E-mail: 624191343@qq.com

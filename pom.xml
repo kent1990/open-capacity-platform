@@ -223,8 +223,9 @@
 		<!-- 调优中心 <module>tuning-center</module> -->
 		<!-- 监控中心 -->
 		<module>monitor-center</module>
-		<!-- spring cloud gateway -->
-		<module>new-api-gateway</module>
+		 
+		<module>web-portal</module>
+		
 		 
 	</modules>
 	<developers>

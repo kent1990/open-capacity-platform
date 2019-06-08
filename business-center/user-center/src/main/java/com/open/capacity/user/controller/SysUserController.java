@@ -283,8 +283,10 @@ public class SysUserController {
             throw new RuntimeException("系统异常");
         } finally {
             try {
-                ouputStream.flush();
-                ouputStream.close();
+            	if(ouputStream!=null){
+            		ouputStream.flush();
+            		ouputStream.close();
+            	}
             } catch (Exception e) {
                 throw new RuntimeException("系统异常");
             }

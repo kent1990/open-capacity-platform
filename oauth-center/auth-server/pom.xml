@@ -63,19 +63,6 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-openfeign</artifactId>
 		</dependency>
-
-		<!-- grpc通信模块 --> 
-		<dependency>
-			<groupId>com.open.capacity</groupId>
-			<artifactId>grpc-lib</artifactId>
-			<version>${core.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>net.devh</groupId>
-			<artifactId>grpc-client-spring-boot-starter</artifactId>
-			<version>${net-devh-grpc.version}</version>
-		</dependency>
-		
 		 
 		<!-- 选用nacos时打开-->
 		<dependency>
