@@ -145,3 +145,43 @@ CREATE TABLE `sys_service` (
 
 
 INSERT INTO `sys_service` VALUES (74,-1,'认证中心',NULL,'/api-auth',NULL,1,'2019-04-09 12:37:57','2019-04-09 12:37:57',1),(75,74,'应用管理',NULL,'/api-user/client**/**',NULL,1,'2019-04-09 12:38:54','2019-04-09 12:38:54',1),(76,74,'认证管理',NULL,'/api-auth/oauth**/**',NULL,2,'2019-04-09 12:39:21','2019-04-09 12:39:21',1),(77,74,'redis监控',NULL,'/api-auth/redis**/**',NULL,3,'2019-04-09 12:40:10','2019-04-09 12:40:10',1),(78,74,'服务管理',NULL,'/api-auth/services**/**',NULL,4,'2019-04-09 12:40:41','2019-04-09 12:40:41',1),(79,-1,'用户中心',NULL,'/api-user',NULL,2,'2019-04-09 12:41:43','2019-04-09 12:41:43',1),(80,79,'用户管理',NULL,'/api-user/users**/**',NULL,1,'2019-04-09 12:42:21','2019-04-09 12:42:21',1),(81,79,'角色管理',NULL,'/api-user/roles**/**',NULL,2,'2019-04-09 12:42:57','2019-04-09 12:42:57',1),(82,79,'菜单管理',NULL,'/api-user/menus**/**',NULL,3,'2019-04-09 12:43:25','2019-04-09 12:43:25',1),(83,79,'权限管理',NULL,'/api-user/permissions**/**',NULL,4,'2019-04-09 12:43:57','2019-04-09 12:43:57',1),(84,-1,'文件中心',NULL,'/api-file',NULL,3,'2019-04-09 12:44:22','2019-04-09 12:44:22',1),(85,84,'文件管理',NULL,'/api-file/files**/**',NULL,1,'2019-04-09 12:45:17','2019-04-09 12:45:17',1),(86,-1,'短信中心',NULL,'/api/sms',NULL,4,'2019-04-09 12:45:40','2019-04-09 12:45:40',1),(87,86,'短信管理',NULL,'/api/sms/sms**/**',NULL,1,'2019-04-09 12:46:28','2019-04-09 12:46:28',1),(88,-1,'日志中心',NULL,'/api-log',NULL,5,'2019-04-09 12:47:11','2019-04-09 12:47:11',1),(89,88,'日志管理',NULL,'/api-log/sysLog**/**',NULL,1,'2019-04-09 12:47:31','2019-04-09 12:47:31',1),(90,-1,'注册中心',NULL,'/api-eureka',NULL,6,'2019-04-09 21:25:10','2019-04-09 21:25:10',1),(91,90,'服务治理','/api-eureka/eureka**/**','/api-eureka/eureka**/**',NULL,1,'2019-04-09 21:25:53','2019-04-09 21:29:53',1);
+
+#
+# Structure for table "sys_gateway_routes"
+#
+
+DROP TABLE IF EXISTS sys_gateway_routes;
+CREATE TABLE sys_gateway_routes
+(
+  `id`            char(32) NOT NULL COMMENT 'id',
+  `uri`           VARCHAR(100) NOT NULL COMMENT 'uri路径',
+  `predicates`    VARCHAR(1000) COMMENT '判定器',
+  `filters`       VARCHAR(1000) COMMENT '过滤器',
+  `order`         INT COMMENT '排序',
+  `description`   VARCHAR(500) COMMENT '描述',
+  `delFlag`       int(11) DEFAULT '0' COMMENT '删除标志 0 不删除 1 删除',
+  `createTime`    datetime NOT NULL,
+  `updateTime`    datetime NOT NULL,
+   PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COMMENT '服务网关路由表';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
