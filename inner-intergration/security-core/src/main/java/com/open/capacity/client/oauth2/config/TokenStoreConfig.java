@@ -66,7 +66,7 @@ public class TokenStoreConfig {
 		@Bean
 		public JwtAccessTokenConverter jwtAccessTokenConverter(){
 			JwtAccessTokenConverter accessTokenConverter = new ResJwtAccessTokenConverter();
-			accessTokenConverter.setSigningKey("neusoft");
+			accessTokenConverter.setSigningKey("ocp");
 			return accessTokenConverter ;
 		}
 	}
