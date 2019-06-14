@@ -1,4 +1,4 @@
-package com.open.capacity.swagger.filter;
+package com.open.capacity.client.filter;
 
 
 import org.springframework.cloud.gateway.filter.GatewayFilter;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.server.ServerWebExchange;
 
-import com.open.capacity.swagger.config.GatewaySwaggerProvider;
+import com.open.capacity.client.config.GatewaySwaggerProvider;
 
 @Component
 public class GwSwaggerHeaderFilter extends AbstractGatewayFilterFactory {

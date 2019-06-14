@@ -1,14 +1,12 @@
 package com.open.capacity.client.routes;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.google.common.collect.Lists;
-import com.open.capacity.client.dto.GatewayRouteDefinition;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.route.RouteDefinition;
 import org.springframework.cloud.gateway.route.RouteDefinitionRepository;
-import org.springframework.data.redis.core.RedisOperations;
+import org.springframework.data.redis.core.BoundHashOperations;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -16,7 +14,9 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -41,13 +41,29 @@ public class RedisRouteDefinitionRepository implements RouteDefinitionRepository
         /**
          * 从redis 中 获取 全部路由,因为保存在redis ,mysql 中 频繁读取mysql 有可能会带来不必要的问题
          */
-//        Set<String> gatewayKeys = redisTemplate.keys(GATEWAY_ROUTES_PREFIX + "*");
-        String routes = redisTemplate.opsForValue().get(GATEWAY_ROUTES_PREFIX);
-        List<String> definitions = JSONArray.parseArray(routes, String.class);
-        if (!CollectionUtils.isEmpty(definitions)) {
-            definitions
-                    .forEach(routeDefinition -> routeDefinitions.add(JSON.parseObject(routeDefinition, RouteDefinition.class)));
-        }
+//        Set<String> gatewayKeys =  redisTemplate.boundHashOps(GATEWAY_ROUTES_PREFIX)   ;
+//        if (!CollectionUtils.isEmpty(gatewayKeys)) {
+//            List<String> gatewayRoutes = Optional.ofNullable(redisTemplate.opsForValue().multiGet(gatewayKeys)).orElse(Lists.newArrayList());
+//            gatewayRoutes
+//                    .forEach(routeDefinition -> routeDefinitions.add(JSON.parseObject(routeDefinition, RouteDefinition.class)));
+//        }
+//        return Flux.fromIterable(routeDefinitions);
+        
+        
+        BoundHashOperations<String, String, String> boundHashOperations = redisTemplate.boundHashOps(GATEWAY_ROUTES_PREFIX);  
+        
+        
+        Map<String ,String> map =  boundHashOperations.entries() ;
+        
+       
+        Iterator<Map.Entry<String, String>> it = map.entrySet().iterator();    
+        while (it.hasNext()) {    
+        	Map.Entry<String, String> entry = it.next();    
+        	routeDefinitions.add(JSON.parseObject(entry.getValue(), RouteDefinition.class));
+        	
+        }    
+     
+        
         return Flux.fromIterable(routeDefinitions);
     }
 

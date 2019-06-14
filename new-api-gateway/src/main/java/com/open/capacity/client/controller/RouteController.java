@@ -3,7 +3,7 @@ package com.open.capacity.client.controller;
 import com.open.capacity.client.commons.PageResult;
 import com.open.capacity.client.commons.Result;
 import com.open.capacity.client.dto.GatewayRouteDefinition;
-import com.open.capacity.client.service.IDynamicRouteService;
+import com.open.capacity.client.service.DynamicRouteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +14,7 @@ import java.util.Map;
 public class RouteController {
 
     @Autowired
-    private IDynamicRouteService dynamicRouteService;
+    private DynamicRouteService dynamicRouteService;
 
     //增加路由
     @PostMapping("/add")

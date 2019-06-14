@@ -1,4 +1,4 @@
-package com.open.capacity.swagger.handler;
+package com.open.capacity.client.handler;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Optional;

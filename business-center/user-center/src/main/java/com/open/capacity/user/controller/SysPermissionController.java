@@ -129,7 +129,7 @@ public class SysPermissionController {
 
 		for (SysPermission sysPermission : allAuths.getData() ){
 			Map<String, Object> authTree = new HashMap<>();
-			authTree.put("id",sysPermission.getId());
+			authTree.put("id",sysPermission.getId() + "");
 			authTree.put("name",sysPermission.getName());
 			authTree.put("open",true);
 			authTree.put("checked", false);

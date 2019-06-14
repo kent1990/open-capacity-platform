@@ -1,4 +1,4 @@
-package com.open.capacity.swagger.config;
+package com.open.capacity.client.config;
 
 
 import java.util.ArrayList;

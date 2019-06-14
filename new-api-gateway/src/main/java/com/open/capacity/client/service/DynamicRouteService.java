@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * 操作 路由 Service
  */
-public interface IDynamicRouteService {
+public interface DynamicRouteService {
 
     /**
      * 新增路由
