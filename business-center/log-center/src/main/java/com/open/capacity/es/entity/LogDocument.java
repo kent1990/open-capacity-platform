@@ -14,7 +14,7 @@ import java.util.Date;
  * @author zlt
  */
 @Data
-@Document(indexName = "filebeat-sys-log", type = "doc")
+@Document(indexName = "ocp-log-*", type = "doc")
 public class LogDocument {
     @Id
     private String id;
