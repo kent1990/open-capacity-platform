@@ -29,7 +29,7 @@
         // 渲染表格
         table.render({
             elem: '#slowQueryLog-table',
-            url: config.base_server + 'api-log/slowQueryLog?data='+new Date(),
+            url: config.base_server + 'api-log/slowQueryLog?data='+new Date().getTime() ,
             method: 'GET',
             where: {
                 access_token: config.getToken().access_token
@@ -42,7 +42,7 @@
                         return util.toDateString(d.timestamp, 'yyyy-MM-dd HH:mm:ss');
                     }, title: '日志时间'
                 },
-                {field: 'query', sort: true, title: '查询语句', width: 410},
+                {field: 'query', sort: true, title: '查询语句'},
                 {field: 'query_time', sort: true, title: '查询时间(ms)', width: 120},
                 {field: 'lock_time', sort: true, title: '锁等待时间(ms)', width: 140},
                 {field: 'rows_sent', sort: true, title: '返回行数', width: 110},

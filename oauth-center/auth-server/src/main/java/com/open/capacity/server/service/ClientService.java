@@ -13,7 +13,6 @@ public interface ClientService {
 	
 	Client getById(Long id) ;
 	 
-    void saveClient(ClientDto clientDto);
 
     Result saveOrUpdate(ClientDto clientDto);
 
