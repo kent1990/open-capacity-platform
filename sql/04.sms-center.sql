@@ -24,5 +24,5 @@ CREATE TABLE `sys_sms` (
 ) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COMMENT='发短信记录';
 
 #
-# Data for table "sys_sms"
+# Data for table "sys_sms" ada
 # 
