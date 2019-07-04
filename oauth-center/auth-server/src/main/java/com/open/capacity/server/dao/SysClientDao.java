@@ -11,30 +11,35 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-import com.open.capacity.server.model.Client;
+import com.open.capacity.server.model.SysClient;
 
 @Mapper
 public interface SysClientDao {
 
     @Options(useGeneratedKeys = true, keyProperty = "id")
-    @Insert("insert into oauth_client_details(client_id, resource_ids, client_secret,client_secret_str, scope, authorized_grant_types, web_server_redirect_uri, authorities, access_token_validity, refresh_token_validity, additional_information, autoapprove) values(#{clientId}, #{resourceIds}, #{clientSecret},#{clientSecretStr}, #{scope}, #{authorizedGrantTypes}, #{webServerRedirectUri}, #{authorities}, #{accessTokenValidity}, #{refreshTokenValidity}, #{additionalInformation}, #{autoapprove})")
-    int save(Client client);
+    @Insert("insert into oauth_client_details(client_id, resource_ids, client_secret,client_secret_str, scope, "
+    		+ " authorized_grant_types, web_server_redirect_uri, authorities, access_token_validity, refresh_token_validity, "
+    		+ " additional_information, autoapprove, `status`) "
+    		+ " values(#{clientId}, #{resourceIds}, #{clientSecret},#{clientSecretStr}, #{scope}, "
+    		+ " #{authorizedGrantTypes}, #{webServerRedirectUri}, #{authorities}, #{accessTokenValidity}, #{refreshTokenValidity}, "
+    		+ " #{additionalInformation}, #{autoapprove} ,0 )")
+    int save(SysClient client);
 
     int count(@Param("params") Map<String, Object> params);
 
-    List<Client> findList(@Param("params") Map<String, Object> params );
+    List<SysClient> findList(@Param("params") Map<String, Object> params );
 
-    @Select("select id id , client_id clientId , resource_ids resourceIds ,client_secret clientSecret ,web_server_redirect_uri webServerRedirectUri  from oauth_client_details t where t.id = #{id}")
-    Client getById(Long id);
+    @Select("select id id , client_id clientId , resource_ids resourceIds ,client_secret clientSecret ,web_server_redirect_uri webServerRedirectUri  from oauth_client_details t where t.id = #{id}  ")
+    SysClient getById(Long id);
 
-    @Select("select * from oauth_client_details t where t.client_id = #{clientId}")
-    Client getClient(String clientId);
+    @Select("select * from oauth_client_details t where t.client_id = #{clientId}  ")
+    SysClient getClient(String clientId);
 
-    @Update("update oauth_client_details t set t.client_secret = #{clientSecret},t.client_secret_str = #{clientSecretStr}  where t.id = #{id}")
-    int update(Client client);
+    @Update("update oauth_client_details t set t.client_secret = #{clientSecret},t.client_secret_str = #{clientSecretStr} ,t.`status` = #{status} where t.id = #{id}")
+    int update(SysClient client);
 
     @Select("select * from sys_role r inner join sys_role_user ru on r.id = ru.roleId where ru.userId = #{userId}")
-    List<Client> listByUserId(Long userId);
+    List<SysClient> listByUserId(Long userId);
 
 
 

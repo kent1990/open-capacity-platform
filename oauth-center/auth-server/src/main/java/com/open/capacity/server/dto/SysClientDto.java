@@ -3,12 +3,12 @@ package com.open.capacity.server.dto;
 import java.util.List;
 import java.util.Set;
 
-import com.open.capacity.server.model.Client;
+import com.open.capacity.server.model.SysClient;
 
 import lombok.Data;
 
 @Data
-public class ClientDto extends Client {
+public class SysClientDto extends SysClient {
 
     private static final long serialVersionUID = 1475637288060027265L;
 

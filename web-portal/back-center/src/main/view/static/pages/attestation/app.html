@@ -18,6 +18,12 @@
     </div>
 </div>
 
+<!-- 表格状态列 -->
+<script type="text/html" id="client-tpl-state">
+    <input type="checkbox" lay-filter="client-tpl-state" value="{{d.id}}" lay-skin="switch" lay-text="正常|锁定"
+            {{d.status==true?'checked':''}}/>
+</script>
+
 <!-- 表格操作列 -->
 <script type="text/html" id="app-table-bar">
     <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit">修改</a>
@@ -83,6 +89,7 @@
                 {field: 'clientSecretStr', width:180, sort: true, title: '应用密钥'},
                 {field: 'webServerRedirectUri',sort: true, title: '回调地址'},
                 {field: 'authorizedGrantTypes', sort: true, title: 'oauth授权方式'},
+                {field: 'enabled', sort: true, templet: '#client-tpl-state', title: '状态',width: 150},
                 {align: 'center',width:250, toolbar: '#app-table-bar', title: '操作'}
             ]]
         });
@@ -166,6 +173,28 @@
             }, $('#app-form').attr('method'));
             return false;
         });
+
+		// 修改应用状态
+        form.on('switch(client-tpl-state)', function (obj) {
+        	debugger ;
+        	var reqData = {
+                id: obj.elem.value,
+                status: obj.elem.checked ? true : false
+            } ;
+            layer.load(2);
+            admin.req('api-auth/clients/updateEnabled',JSON.stringify(reqData) , function (data) {
+                layer.closeAll('loading');
+                if (data.resp_code == 0) {
+                    layer.msg(data.resp_msg, {icon: 1, time: 500});
+                    //table.reload('table-user', {});
+                } else {
+                    layer.msg(data.resp_msg, {icon: 2, time: 500});
+                    $(obj.elem).prop('checked', !obj.elem.checked);
+                    form.render('checkbox');
+                }
+            }, 'PUT');
+        });
+
 
         // 服务管理
         var showServicesDialog = function (clientId) {

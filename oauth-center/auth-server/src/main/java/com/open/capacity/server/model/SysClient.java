@@ -5,7 +5,7 @@ import java.io.Serializable;
 import lombok.Data;
 
 @Data
-public class Client implements Serializable{
+public class SysClient implements Serializable{
 	/**
     *
     */
@@ -23,5 +23,6 @@ public class Client implements Serializable{
    private Integer refreshTokenValidity = 18000;
    private String additionalInformation = "{}";
    private String autoapprove = "true";
+   private Boolean status ;
    
 }

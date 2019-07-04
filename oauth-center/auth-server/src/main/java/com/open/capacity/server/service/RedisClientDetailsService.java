@@ -18,36 +18,49 @@ import org.springframework.util.CollectionUtils;
 import com.alibaba.fastjson.JSONObject;
 
 
-/** 
-* @author owen 624191343@qq.com
-* @version 创建时间：2017年11月12日 上午22:57:51
-* 类说明 
-* 将oauth_client_details表数据缓存到redis，这里做个缓存优化
-* layui模块中有对oauth_client_details的crud， 注意同步redis的数据 
-* 注意对oauth_client_details清楚redis db部分数据的清空
-*/
- 
+/**
+ * @author owen 624191343@qq.com
+ * @version 创建时间：2017年11月12日 上午22:57:51
+ * 类说明
+ * 将oauth_client_details表数据缓存到redis，这里做个缓存优化
+ * layui模块中有对oauth_client_details的crud， 注意同步redis的数据
+ * 注意对oauth_client_details清楚redis db部分数据的清空
+ */
+
 public class RedisClientDetailsService extends JdbcClientDetailsService {
-	
+
+
+    // 扩展 默认的 ClientDetailsService, 增加逻辑删除判断( status = 1)
+    private static final String SELECT_CLIENT_DETAILS_SQL = "select client_id, client_secret, resource_ids, scope, authorized_grant_types, " +
+            "web_server_redirect_uri, authorities, access_token_validity, refresh_token_validity, additional_information, autoapprove " +
+            "from oauth_client_details where client_id = ? and `status` = 1 ";
+
+
+    private static final String SELECT_FIND_STATEMENT = "select client_id, client_secret,resource_ids, scope, "
+            + "authorized_grant_types, web_server_redirect_uri, authorities, access_token_validity, "
+            + "refresh_token_validity, additional_information, autoapprove   from oauth_client_details where `status` = 1 order by client_id " ;
+
     /**
      * 缓存client的redis key，这里是hash结构存储
      */
     private static final String CACHE_CLIENT_KEY = "oauth_client_details";
-    
+
     private Logger logger =LoggerFactory.getLogger(RedisClientDetailsService.class) ;
 
     private RedisTemplate<String,Object> redisTemplate ;
-    
+
     public RedisTemplate<String, Object> getRedisTemplate() {
-		return redisTemplate;
-	}
+        return redisTemplate;
+    }
 
-	public void setRedisTemplate(RedisTemplate<String, Object> redisTemplate) {
-		this.redisTemplate = redisTemplate;
-	}
+    public void setRedisTemplate(RedisTemplate<String, Object> redisTemplate) {
+        this.redisTemplate = redisTemplate;
+    }
 
-	public RedisClientDetailsService(DataSource dataSource) {
+    public RedisClientDetailsService(DataSource dataSource) {
         super(dataSource);
+        setSelectClientDetailsSql(SELECT_CLIENT_DETAILS_SQL) ;
+        setFindClientDetailsSql(SELECT_FIND_STATEMENT) ;
     }
 
 
@@ -76,19 +89,19 @@ public class RedisClientDetailsService extends JdbcClientDetailsService {
     private ClientDetails cacheAndGetClient(String clientId) {
         // 从数据库读取
         ClientDetails clientDetails = null ;
-		try {
-			clientDetails = super.loadClientByClientId(clientId);
-			if (clientDetails != null) {            
-				// 写入redis缓存
-				redisTemplate.boundHashOps(CACHE_CLIENT_KEY).put(clientId, JSONObject.toJSONString(clientDetails));
-			    logger.info("缓存clientId:{},{}", clientId, clientDetails);
-			}
-		}catch (NoSuchClientException e){
-			logger.info("clientId:{},{}", clientId, clientId );
-		}catch (InvalidClientException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        try {
+            clientDetails = super.loadClientByClientId(clientId);
+            if (clientDetails != null) {
+                // 写入redis缓存
+                redisTemplate.boundHashOps(CACHE_CLIENT_KEY).put(clientId, JSONObject.toJSONString(clientDetails));
+                logger.info("缓存clientId:{},{}", clientId, clientDetails);
+            }
+        }catch (NoSuchClientException e){
+            logger.info("clientId:{},{}", clientId, clientId );
+        }catch (InvalidClientException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
         return clientDetails;
     }
@@ -117,7 +130,7 @@ public class RedisClientDetailsService extends JdbcClientDetailsService {
      * @param clientId
      */
     private void removeRedisCache(String clientId) {
-    	redisTemplate.boundHashOps(CACHE_CLIENT_KEY).delete(clientId);
+        redisTemplate.boundHashOps(CACHE_CLIENT_KEY).delete(clientId);
     }
 
     /**
@@ -131,12 +144,12 @@ public class RedisClientDetailsService extends JdbcClientDetailsService {
 
         List<ClientDetails> list = super.listClientDetails();
         if (CollectionUtils.isEmpty(list)) {
-        	logger.error("oauth_client_details表数据为空，请检查");
+            logger.error("oauth_client_details表数据为空，请检查");
             return;
         }
 
         list.parallelStream().forEach(client -> {
-        	redisTemplate.boundHashOps(CACHE_CLIENT_KEY).put(client.getClientId(), JSONObject.toJSONString(client));
+            redisTemplate.boundHashOps(CACHE_CLIENT_KEY).put(client.getClientId(), JSONObject.toJSONString(client));
         });
     }
 }

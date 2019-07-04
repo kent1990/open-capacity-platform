@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.open.capacity.commons.PageResult;
 import com.open.capacity.commons.Result;
-import com.open.capacity.server.dto.ClientDto;
+import com.open.capacity.server.dto.SysClientDto;
 import com.open.capacity.server.model.SysService;
 import com.open.capacity.server.service.SysServiceService;
 
@@ -134,7 +134,7 @@ public class SysServiceController {
     }
 
     @PostMapping("/granted")
-    public Result setMenuToClient(@RequestBody ClientDto clientDto) {
+    public Result setMenuToClient(@RequestBody SysClientDto clientDto) {
         sysServiceService.setMenuToClient(clientDto.getId(), clientDto.getServiceIds());
 
         return Result.succeed("操作成功");
