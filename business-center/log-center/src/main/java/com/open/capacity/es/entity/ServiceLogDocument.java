@@ -1,12 +1,12 @@
 package com.open.capacity.es.entity;
 
 
+import java.util.Date;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import lombok.Data;
-
-import java.util.Date;
 
 /**
  * 日志对象
@@ -15,7 +15,7 @@ import java.util.Date;
  */
 @Data
 @Document(indexName = "ocp-log-*", type = "doc")
-public class LogDocument {
+public class ServiceLogDocument {
     @Id
     private String id;
     private Date timestamp;

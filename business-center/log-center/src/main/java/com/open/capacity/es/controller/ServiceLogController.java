@@ -20,9 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.open.capacity.commons.PageResult;
-import com.open.capacity.es.dao.EsLogDao;
-import com.open.capacity.es.entity.LogDocument;
-import com.open.capacity.log.monitor.PointUtil;
+import com.open.capacity.es.dao.ServiceLogDao;
+import com.open.capacity.es.entity.ServiceLogDocument;
 
 import cn.hutool.core.util.StrUtil;
 import io.swagger.annotations.ApiImplicitParam;
@@ -32,10 +31,10 @@ import io.swagger.annotations.ApiOperation;
  * @author zlt
  */
 @RestController
-public class EsLogController {
+public class ServiceLogController {
 	
 	
-	private static Logger log = LoggerFactory.getLogger(EsLogController.class);
+	private static Logger log = LoggerFactory.getLogger(ServiceLogController.class);
 	private ObjectMapper objectMapper = new ObjectMapper();
 
 	private static final String ES_PARAM_MESSAGE = "message";
@@ -44,7 +43,7 @@ public class EsLogController {
 	private static final String ES_PARAM_CLASSNAME = "classname";
 
 	@Autowired
-	public EsLogDao logDao;
+	public ServiceLogDao serviceLogDao;
 
 	@ApiOperation(value = "系统日志查询列表")
 	@ApiImplicitParams({
@@ -52,7 +51,7 @@ public class EsLogController {
 			@ApiImplicitParam(name = "limit", value = "分页结束位置", required = true, dataType = "Integer")
 	})
 	@GetMapping(value="/sysLog")
-	public PageResult<LogDocument> getPage(@RequestParam Map<String, Object> params) throws JsonProcessingException {
+	public PageResult<ServiceLogDocument> getPage(@RequestParam Map<String, Object> params) throws JsonProcessingException {
 		
 		BoolQueryBuilder builder = QueryBuilders.boolQuery();
 		String searchKey = (String)params.get("searchKey");
@@ -80,7 +79,7 @@ public class EsLogController {
 				//, Sort.Direction.DESC,"timestamp"
 				);
 		SearchQuery query = new NativeSearchQueryBuilder().withQuery(builder).withPageable(pageable).build();
-		Page<LogDocument> result = logDao.search(query);
-		return PageResult.<LogDocument>builder().data(result.getContent()).code(0).count(result.getTotalElements()).build();
+		Page<ServiceLogDocument> result = serviceLogDao.search(query);
+		return PageResult.<ServiceLogDocument>builder().data(result.getContent()).code(0).count(result.getTotalElements()).build();
 	}
 }
