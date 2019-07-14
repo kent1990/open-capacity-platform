@@ -3,6 +3,7 @@
  */
 package com.open.capacity;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -22,7 +23,9 @@ import com.open.capacity.autoconfigure.port.PortApplicationEnvironmentPreparedEv
 @EnableDiscoveryClient
 @SpringBootApplication
 public class UserCenterApp {
-	
+
+
+
 	public static void main(String[] args) {
 //		固定端口启动
 //		SpringApplication.run(UserCenterApp.class, args);

@@ -1,16 +1,16 @@
-server:
-  port: 5446
 
+#服务名称
 spring:
   application:
     name: batch-center
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-  endpoint:
-    health:
-      show-details: always        
-      
+  cloud:
+    nacos:
+      discovery:
+        server-addr:  119.27.173.249:8848
+      config:
+        file-extension: yaml
+        server-addr: 119.27.173.249:8848
+    sentinel:
+      transport:
+        port: 8719
+        dashboard: 127.0.0.1:8989

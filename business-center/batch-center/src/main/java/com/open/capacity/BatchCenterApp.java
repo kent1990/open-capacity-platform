@@ -4,6 +4,7 @@ import org.springframework.batch.core.configuration.annotation.EnableBatchProces
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
@@ -12,6 +13,7 @@ import com.open.capacity.support.ThirdServiceProp;
 @EnableScheduling
 @SpringBootApplication
 @EnableBatchProcessing
+@EnableDiscoveryClient
 @EnableConfigurationProperties(ThirdServiceProp.class)
 public class BatchCenterApp {
 	public static void main(String[] args) {

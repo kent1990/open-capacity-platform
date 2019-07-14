@@ -1,6 +1,4 @@
-#端口配置
-server:
-  port: 7000   #固定端口
+
 #  port: ${randomServerPort.value[7000,7005]}  #随机端口
 grpc:         #随机端口
   server:
@@ -12,10 +10,10 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr:  127.0.0.1:8848
+        server-addr:  119.27.173.249:8848
       config:
         file-extension: yaml
-        server-addr: 127.0.0.1:8848
+        server-addr: 119.27.173.249:8848
     sentinel:
       transport:
         port: 8719
@@ -28,4 +26,4 @@ management:
         include: "*"
   endpoint:
     health:
-      show-details: always  
+      show-details: always
