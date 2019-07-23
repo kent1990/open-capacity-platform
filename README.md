@@ -31,16 +31,16 @@ http://59.110.164.254:8066/login.html  admin/admin
             <td><img src=https://images.gitee.com/uploads/images/2019/0604/143151_36a5c07e_869801.png "屏幕截图.png" />
 	</tr>
 </table>
-# 技术介绍  #
+# 技术介绍 
 <table>
 	<tr>
 		<td><img src="https://images.gitee.com/uploads/images/2019/0523/091013_fffdcf8b_869801.png "屏幕截图.png"></td>
-		<td><img src="https://images.gitee.com/uploads/images/2019/0531/151440_a763b84e_869801.png "屏幕截图.png" ></td>
+		<td><img src="https://images.gitee.com/uploads/images/2019/0531/151440_a763b84e_869801.png "屏幕截图.png"></td>
     </tr>
 	
 </table>
 
-# **功能介绍** #  
+# **功能介绍** 
 - 统一安全认证中心
 	- 支持oauth的四种模式登录
 	- 支持用户名、密码加图形验证码登录
@@ -68,6 +68,11 @@ http://59.110.164.254:8066/login.html  admin/admin
 	- 基于rancher的容器化部署
 	- 基于docker的elk日志监控
 	- 基于docker的服务动态扩容 
+   
+   
+## 代码结构  
+    
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0722/163117_e4acc5ed_869801.png "屏幕截图.png") 
 
 ## 能力开放管理平台   
 
@@ -133,6 +138,11 @@ http://59.110.164.254:8066/login.html  admin/admin
 		<td><img src="https://images.gitee.com/uploads/images/2019/0523/085501_ee047496_869801.png "屏幕截图.png""/></td>
         <td><img src="https://images.gitee.com/uploads/images/2019/0401/230332_f777ea8d_869801.png "屏幕截图.png"/></td>
         <td><img src="https://images.gitee.com/uploads/images/2019/0401/230430_3eb6b5e0_869801.png "屏幕截图.png"/></td>
+    </tr>
+	<tr>
+		<td><img src="https://images.gitee.com/uploads/images/2019/0722/164150_6c0ce093_869801.png "屏幕截图.png"/></td>
+		<td><img src="https://images.gitee.com/uploads/images/2019/0722/163241_9b29852f_869801.png "屏幕截图.png""/></td>
+        <td><img src="https://images.gitee.com/uploads/images/2019/0722/163356_08ec244d_869801.png "屏幕截图.png"/></td>
     </tr>
 </table>
 

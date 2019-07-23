@@ -1,4 +1,4 @@
-﻿# 导出 oauth-center 的数据库结构
+# 导出 oauth-center 的数据库结构
 CREATE DATABASE IF NOT EXISTS `oauth-center` DEFAULT CHARACTER SET = utf8mb4;
 Use `oauth-center`;
 #
@@ -9,6 +9,7 @@ Use `oauth-center`;
 # Structure for table "oauth_client_details"
 #
 
+DROP TABLE IF EXISTS `oauth_client_details`;
 CREATE TABLE `oauth_client_details` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `client_id` varchar(48) NOT NULL COMMENT '应用标识',
@@ -32,6 +33,10 @@ CREATE TABLE `oauth_client_details` (
 #
 
 INSERT INTO `oauth_client_details` VALUES (1,'app',NULL,'$2a$10$i3F515wEDiB4Gvj9ym9Prui0dasRttEUQ9ink4Wpgb4zEDCAlV8zO',NULL,'app','password,refresh_token',NULL,NULL,180000,NULL,'{}','true',0),(2,'mobile','mobile,test','$2a$10$ULxRssv/4NWOc388lZFbyus3IFfsbcpG/BZOq4TRxDhsx5HHIR7Jm',NULL,'all','password,refresh_token',NULL,NULL,180000,NULL,'{}','true',1),(4,'webApp',NULL,'$2a$10$06msMGYRH8nrm4iVnKFNKOoddB8wOwymVhbUzw/d3ZixD7Nq8ot72',NULL,'app','authorization_code,password,refresh_token,client_credentials',NULL,NULL,180000,NULL,'{}','true',1),(5,'beck','','$2a$10$56LGyH.2wOFNNp3ScUkspOMdyRnenYhnWEnfI0itIFfsXsd5ZhKh.',NULL,'all','authorization_code,password,refresh_token,client_credentials','http://www.baidu.com','',180000,NULL,'{}','true',1),(6,'owen',NULL,'$2a$10$a1ZEXiZQr604LN.wVxet.etPm6RvDs.HIaXP48J2HKRaEnZORTVwe',NULL,'app','authorization_code,password,refresh_token,client_credentials','http://127.0.0.1:9997/dashboard/login',NULL,180000,NULL,'{}','true',1),(8,'testOne','','$2a$10$nI9kx19HHJTkJq0kMRPZ6uu/4uW7J9kPIpZ8YjFmbUlvwJmorc5Qa',NULL,'all','authorization_code,password,refresh_token,client_credentials','http://bai.com','',18000,18000,'{}','true',0),(9,'gwapi','','$2a$10$l7plpxQk42cuKbB8tbNe8eAA6v2xA6xkPXsjGEezago239102LRL2',NULL,'all','authorization_code,password,refresh_token,client_credentials','https://www.baidu.co','',18000,18000,'{}','true',1),(10,'testtwo','','$2a$10$49ESIYmzu1n.cGzwMLRgleQMk0.kBTMOYnW4WUBDKwu9V23qOBovG',NULL,'all','authorization_code,password,refresh_token,client_credentials','locahost:9090/test','',18000,18000,'{}','true',1),(11,'uc-app','','$2a$10$8UxEUaT2D2vSTJvTA/7YbODgCbK44bozsNA1kvMFSz8R153Xat7UO',NULL,'all','authorization_code,password,refresh_token,client_credentials','www.baidu.com','',18000,18000,'{}','true',1),(12,'testtwo4','','$2a$10$ZHvart9oufCEiuzACIL4ke4AvD0SVZr6JD2yjZGbfVvrRKygL9n3a',NULL,'all','authorization_code,password,refresh_token,client_credentials','locahost:9090/test','',18000,18000,'{}','true',1);
+
+ALTER TABLE oauth_client_details ADD COLUMN if_limit INT NOT NULL  DEFAULT 0 ;
+
+ALTER TABLE oauth_client_details ADD COLUMN limit_count INT NOT NULL  DEFAULT 10000 ;
 
 #
 # Structure for table "sys_client_service"

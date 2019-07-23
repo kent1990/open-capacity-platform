@@ -313,7 +313,7 @@ swagger:
   butler:
     api-docs-path:  v2/api-docs
     auto-generate-from-zuul-routes: true
-    ignore-routes: auth-login-page,auth-login-process,auth-login-token,auth-login-authorize,auth-check-process,auth-css-process01,auth-css-process02,auth-js-process01,auth-js-process02
+    ignore-routes:  eureka , eureka-server ,user-center,auth-server ,auth-login-page ,auth-js-process01,auth-js-process02,auth-css-process01,auth-css-process02,auth-login-process,auth-login-token,auth-login-authorize,auth-check-process
       
 #  generate-routes: auth-server, auth-client 
 

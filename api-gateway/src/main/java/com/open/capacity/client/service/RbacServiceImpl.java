@@ -16,7 +16,8 @@
 //import org.springframework.stereotype.Service;
 //import org.springframework.util.AntPathMatcher;
 //
-//import com.open.capacity.client.dao.ServiceDao;
+//import com.open.capacity.client.dao.SysClientDao;
+//import com.open.capacity.client.dao.SysServiceDao;
 //import com.open.capacity.client.oauth2.service.RbacService;
 //
 ///**
@@ -31,7 +32,10 @@
 //public class RbacServiceImpl implements RbacService {
 //
 //    @Resource
-//    private ServiceDao serviceDao;
+//    private SysServiceDao sysServiceDao;
+//    
+//    @Resource
+//    private SysClientDao sysClientDao;
 //
 //    private AntPathMatcher antPathMatcher = new AntPathMatcher();
 //
@@ -57,12 +61,12 @@
 //
 //                String clientId = athentication.getOAuth2Request().getClientId();
 //
-//                Map map = serviceDao.getClient(clientId);
+//                Map map = sysClientDao.getClient(clientId);
 //
 //                if (map == null) {
 //                    return false;
 //                } else {
-//                    List<Map> list = serviceDao.listByClientId(Long.valueOf(String.valueOf(map.get("id"))));
+//                    List<Map> list = sysServiceDao.listByClientId(Long.valueOf(String.valueOf(map.get("id"))));
 //                    ;
 //
 //                    for (Iterator<Map> it = list.iterator(); it.hasNext(); ) {
