@@ -10,6 +10,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 import com.open.capacity.annotation.EnableLogging;
 import com.open.capacity.autoconfigure.port.PortApplicationEnvironmentPreparedEventListener;
+import com.open.capacity.server.config.GolbalFeignConfig;
 
 /** 
 * @author owen 624191343@qq.com
@@ -17,9 +18,9 @@ import com.open.capacity.autoconfigure.port.PortApplicationEnvironmentPreparedEv
 * 类说明 
 */
 @EnableLogging
-@EnableFeignClients
 @EnableDiscoveryClient
 @SpringBootApplication
+@EnableFeignClients(defaultConfiguration=GolbalFeignConfig.class)
 public class AuthServerApp {
 	
 	public static void main(String[] args) {

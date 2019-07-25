@@ -17,7 +17,7 @@ import feign.RequestTemplate;
  * feign拦截器
  */
 @Configuration
-public class FeignInterceptorConf {
+public class FeignInterceptorConfig {
 
 	/**
 	 * 使用feign client访问别的微服务时，将access_token放入参数或者header ，Authorization:Bearer xxx

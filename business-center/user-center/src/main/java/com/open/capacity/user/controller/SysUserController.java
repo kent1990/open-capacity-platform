@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -165,7 +166,7 @@ public class SysUserController {
     @GetMapping("/users")
     @LogAnnotation(module="user-center",recordRequestParam=false)
 //  searchKey=username, searchValue=as
-    public PageResult<SysUser> findUsers(@RequestParam Map<String, Object> params) throws JsonProcessingException {
+    public PageResult<SysUser> findUsers(@RequestHeader(name="trace_id",required=false) String traceId ,  @RequestParam Map<String, Object> params) throws JsonProcessingException {
         return appUserService.findUsers(params);
     }
 

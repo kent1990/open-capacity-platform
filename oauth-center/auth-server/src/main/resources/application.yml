@@ -116,6 +116,8 @@ security:
 
 #设置最大超时时间
 ribbon:  
+  eager-load:
+    enabled: true 
   ServerListRefreshInterval: 10  #刷新服务列表源的间隔时间
   OkToRetryOnAllOperations: true
   MaxAutoRetries: 1
@@ -136,13 +138,17 @@ hystrix:
 
 ##feign参数优化
 feign:
-   compression:
-     request:
-       enabled: true
-       mine-types: text/xml,application/xml,application/json  
-       min-request-size: 2048
-     response:
-       enabled: true                    
+  client:
+    config: 
+      default:  
+        loggerLevel: full  ## 配合logging.level=trace debug用于开发调式日志
+  compression:
+    request:
+      enabled: true
+      mine-types: text/xml,application/xml,application/json  
+      min-request-size: 2048
+    response:
+      enabled: true                    
 
  
   
