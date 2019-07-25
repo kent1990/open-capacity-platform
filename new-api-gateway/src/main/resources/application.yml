@@ -176,7 +176,9 @@ mybatis:
   mapper-locations: classpath*:com/open/**/dao/*.xml  
 
 
-
+auth:
+  ignored:  /test163/** , /api-auth/** , /doc.html ,/test111 ,/api-user/users-anon/login,/user-center/users-anon/login,/document.html,**/v2/api-docs,/oauth/** ,/login.html ,/user/login,/**/**.css ,/**/**.js  
+    
  
 
 ribbon:
