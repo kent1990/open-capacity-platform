@@ -43,6 +43,7 @@
 		<txlcn.version>5.0.2.RELEASE</txlcn.version>
 		<spring-boot.version>2.0.4.RELEASE</spring-boot.version>
 		<spring-cloud-dependencies.version>Finchley.SR2</spring-cloud-dependencies.version>
+		<spring.social.version>1.1.6.RELEASE</spring.social.version>
 	</properties>
 
 

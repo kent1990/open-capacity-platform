@@ -41,5 +41,6 @@
   	<module>lock-core</module>
   	<!-- swagger引用 -->
   	<module>swagger-core</module>
+      <module>social-core</module>
   </modules>
 </project>
