@@ -6,113 +6,134 @@
           <a><cite>用户分布图</cite></a>
         </span>
     </div>
-    <div class="layui-body" style="left:0px;height: 90%" id="map"  ></div>
+    <div class="layui-body" style="left:0px;height: 90%" id="map"></div>
 </div>
 <!-- js部分 -->
 
-    
+
 <script>
-      layui.use(['form', 'table', 'util', 'config', 'admin'], function () {
-			var $ = layui.jquery;
-    var layer = layui.layer;
-    var element = layui.element;
-    var config = layui.config;
-    var index = layui.index;
-    var admin = layui.admin;
-    var laytpl = layui.laytpl;
+    layui.use(['form', 'table', 'util', 'config', 'admin'], function () {
+        var $ = layui.jquery;
+        var layer = layui.layer;
+        var element = layui.element;
+        var config = layui.config;
+        var index = layui.index;
+        var admin = layui.admin;
+        var laytpl = layui.laytpl;
 
-    
-    
-    layer.load(2);
-    
-    
- // 百度地图API功能
-    var map = new BMap.Map("map", {
-        enableMapClick: false
-    });    // 创建Map实例
-    map.centerAndZoom(new BMap.Point(105.403119, 38.028658), 5);  // 初始化地图,设置中心点坐标和地图级别
-    map.enableScrollWheelZoom(true); // 开启鼠标滚轮缩放
+		debugger ;
 
-    map.setMapStyle({
-        style: 'light'
-    });
+        // layer.load(2);
+        //地图
+        var map = new ol.Map({
+            layers: [
+                new ol.layer.Tile({
+                    source: new ol.source.XYZ({
+                        url:'http://mt3.google.cn/maps/vt?lyrs=y@189&gl=cn&x={x}&y={y}&z={z}'
+                    })
+                })
+
+            ],
+            target: 'map',
+            view: new ol.View({
+                center: [96.51, 19.55],
+                projection: 'EPSG:4326',
+                zoom: 4
+            }),
+            controls: ol.control.defaults().extend([
+                new ol.control.MousePosition()
+            ]),
+
+        });
 
 
-    var data = [];
+           layer.load(2);
+           var source,clusterSource,styleCache = {},clusters ;
+           var features = new Array();
+           $.ajax({
+               url: config.base_server + 'api-log/nginxLog?access_token='+config.getToken().access_token ,
+               type : 'get',
+               async: false,//使用同步的方式,true为异步方式
+               data : { },//这里使用json对象
+               success : function(resp){
+                   layer.closeAll('loading');
+                   if (resp.code == 0) {
+                       // debugger ;
+                       for (i = 0; i < resp.data.length; i++) {
+                            var item = resp.data[i];
+                           if(item != null && typeof(item) !=undefined) {
+                               var coordinates = [Number(item.geoip.longitude),Number(item.geoip.latitude)];
+                               features.push( new ol.Feature(new ol.geom.Point(coordinates)));
+                           }
+                       }
+                       debugger ;
+                       //适量数据源
+                       source = new ol.source.Vector({
+                           //要素
+                           features: features
+                       });
+                       //聚合数据源
+                       clusterSource = new ol.source.Cluster({
+                           //标注元素之间的间距
+                           distance: 40,
+                           //数据源
+                           source: source
+                       });
+                       //矢量图层
+                       clusters = new ol.layer.Vector({
+                           //数据源
+                           source: clusterSource,
+                           //样式
+                           style: function (feature, resolution) {
 
-    
-    layer.load(2);
-    $.ajax({
-		url: config.base_server + 'api-log/nginxLog?access_token='+config.getToken().access_token ,
-    	type : 'get',
-    	async: false,//使用同步的方式,true为异步方式
-    	data : { },//这里使用json对象
-    	success : function(resp){
-    		layer.closeAll('loading');
-    		
-    		
-          if (resp.code == 0) {
-      	        debugger ;
-      	      
-      	        $.each(resp.data,function(index,item){
-      		
-      	        	
-      	        		
-      	        		
-      	        		if(typeof(item.nginx.access.geoip) !=undefined) {
-      	      	        	
-    	      	        	data.push(
-    	      	        	    {
-    	      	        	    	geometry: {
-    	      	        	        type: 'Point',
-    	                            coordinates: [item.nginx.access.geoip.location.lon ,item.nginx.access.geoip.location.lat]
-    	      	        		},
-    	      	        	    count: 10
-    	      	        	});
-          	        	}
-      	        		
-      	        	
-      	        	
-      		
-      		
-      	        }) ;
-          }
-    		
-    		
-    	},
-    	fail:function(){
-    	//code here...
-    	}
-    });
-    
-    layer.closeAll('loading');
-    var dataSet = new mapv.DataSet(data);
+                               //当前聚合标注数据源的要素大小
+                               var size = feature.get('features').length;
+                               //定义样式
+                               var style = styleCache[size];
+                               //如果当前样式不存在则创建
+                               if (!style) {
+                                   style = [
+                                       //初始化样式
+                                       new ol.style.Style({
+                                           //点样式
+                                           image: new ol.style.Circle({
+                                               //点的半径
+                                               radius: 12,
+                                               //笔触
+                                               stroke: new ol.style.Stroke({
+                                                   color: '#00FF00'
+                                               }),
+                                               //填充
+                                               fill: new ol.style.Fill({
+                                                   color: '#00FF00'
+                                               })
+                                           }),
+                                           //文本样式
+                                           text: new ol.style.Text({
+                                               //文本内容
+                                               text: size.toString(),
+                                               //填充
+                                               fill: new ol.style.Fill({
+                                                   color: '#FF0000'
+                                               })
+                                           })
+                                       })
+                                   ];
+                                   styleCache[size] = style;
+                               }
+                               return style;
+                           }
+                       });
+                       //将聚合标注图层添加到map中
+                       map.addLayer(clusters);
 
-    var options = {
-        fillStyle: 'rgba(255, 50, 50, 0.6)',
-        shadowColor: 'rgba(255, 50, 50, 1)',
-        shadowBlur: 30,
-        globalCompositeOperation: 'lighter',
-        methods: {
-            click: function (item) {
-                console.log(item);
-            }
-        },
-        size: 5,
-        draw: 'simple'
-    }
+                   }
+               },
+               fail:function(){
+                   //code here...
+               }
+           });
 
-    var mapvLayer = new mapv.baiduMapLayer(map, dataSet, options);
-
-    // dataSet.set(data); // 修改数据
-
-    // mapvLayer.show(); // 显示图层
-    // mapvLayer.hide(); // 删除图层
-    
-    
- 
-             
-             
     });
 </script>
                     

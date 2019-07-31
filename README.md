@@ -31,7 +31,8 @@ http://59.110.164.254:8066/login.html  admin/admin
             <td><img src=https://images.gitee.com/uploads/images/2019/0604/143151_36a5c07e_869801.png "屏幕截图.png" />
 	</tr>
 </table>
-# 技术介绍 
+
+# 技术介绍
 <table>
 	<tr>
 		<td><img src="https://images.gitee.com/uploads/images/2019/0523/091013_fffdcf8b_869801.png "屏幕截图.png"></td>
@@ -92,8 +93,14 @@ http://59.110.164.254:8066/login.html  admin/admin
     <tr>
         <td><img src="https://images.gitee.com/uploads/images/2019/0110/231932_6e2ce5f5_1441068.png"/></td>
         <td><img src="https://images.gitee.com/uploads/images/2019/0126/125449_7a3dec37_1147840.png"/></td>
-        <td><img src="https://images.gitee.com/uploads/images/2019/0329/212515_6b74c76a_869801.png "屏幕截图.png"/></td>
+		<td><img src=https://images.gitee.com/uploads/images/2019/0731/144605_a6abd629_869801.png "屏幕截图.png" /></td>
+        <td><img src=https://images.gitee.com/uploads/images/2019/0731/144758_1090d7d4_869801.png "屏幕截图.png"/></td>
+    </tr>
+	<tr>
+		<td><img src="https://images.gitee.com/uploads/images/2019/0329/212515_6b74c76a_869801.png "屏幕截图.png"/></td>
         <td><img src="https://images.gitee.com/uploads/images/2019/0329/212356_27ecb030_869801.png "111.png"/></td>
+        <td><img src=https://images.gitee.com/uploads/images/2019/0731/144404_6e9f86e3_869801.png "屏幕截图.png"/></td>
+        <td><img src=https://images.gitee.com/uploads/images/2019/0731/144523_c4c5d0e6_869801.png "屏幕截图.png"/></td>
     </tr>
 </table>
 
