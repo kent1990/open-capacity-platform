@@ -33,10 +33,6 @@
   	<module>file-center</module>
   	<!-- 代码生成器 -->
   	<module>generator-center</module>
-  	<!-- 日志中心 -->
-  	<module>log-center</module>
-  	<!-- 事物中心 -->
-  	<module>transaction-center</module>
   	<!-- 短信中心 -->
   	<module>sms-center</module>
 	<!--批处理-->

@@ -2,30 +2,13 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>com.open.capacity</groupId>
-    <artifactId>business-center</artifactId>
+    <artifactId>monitor-center</artifactId>
     <version>1.0.1</version>
   </parent>
-  <artifactId>log-center</artifactId>
-  <!--
-  ~
-  ~  Copyright (c) 2018-2025, open-capacity-platform All rights reserved.
-  ~
-  ~  Redistribution and use in source and binary forms, with or without
-  ~  modification, are permitted provided that the following conditions are met:
-  ~
-  ~ Redistributions of source code must retain the above copyright notice,
-  ~  this list of conditions and the following disclaimer.
-  ~  Redistributions in binary form must reproduce the above copyright
-  ~  notice, this list of conditions and the following disclaimer in the
-  ~  documentation and/or other materials provided with the distribution.
-  ~  Neither the name of the open-capacity-platform developer nor the names of its
-  ~  contributors may be used to endorse or promote products derived from
-  ~  this software without specific prior written permission.
-  ~  Author: owen gitgeek (624191343@qq.com)
-  ~
--->
+  <artifactId>transaction-center</artifactId>
   
-  <dependencies>
+  
+   <dependencies>
 
 
 
@@ -33,43 +16,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-elasticsearch</artifactId>
-		</dependency>
-
-
-		<!-- 服务追踪
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-zipkin</artifactId>
-		</dependency>
-		 -->
-
-		<!-- 日志统一配置 -->
-		<dependency>
-			<groupId>com.open.capacity</groupId>
-			<artifactId>log-core</artifactId>
-			<version>${core.version}</version>
-		</dependency>
-		
-		<!-- 公共实体类模块 -->
-		<dependency>
-			<groupId>com.open.capacity</groupId>
-			<artifactId>api-commons</artifactId>
-			<version>${core.version}</version>
-		</dependency>
-		<!-- 资源服务器 -->
-		<dependency>
-			<groupId>com.open.capacity</groupId>
-			<artifactId>security-core</artifactId>
-			<version>${core.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-
 
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -94,35 +40,56 @@
 		</dependency>
 
 
+		
+		<!-- 服务追踪
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-zipkin</artifactId>
+		</dependency>
+		 -->
 
+		<!-- 日志统一配置 -->
+		<dependency>
+			<groupId>com.open.capacity</groupId>
+			<artifactId>log-core</artifactId>
+			<version>${core.version}</version>
+		</dependency>
+		
+		<!-- 关系型和非关系型数据库配置 -->
+		<dependency>
+			<groupId>com.open.capacity</groupId>
+			<artifactId>db-core</artifactId>
+			<version>${core.version}</version>
+		</dependency>
+		 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
+
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
 		</dependency>
+
+		 
+		 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
+	 	 <dependency>
+            <groupId>com.codingapi.txlcn</groupId>
+            <artifactId>txlcn-tm</artifactId>
+        </dependency>
+        
+        <!-- 选用eureka时打开-->
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-configuration-processor</artifactId>
-			<optional>true</optional>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
-
-
-
-		<!-- swagger -->
-		 <dependency>
-			<groupId>com.open.capacity</groupId>
-			<artifactId>swagger-core</artifactId>
-			<version>${core.version}</version>
-		</dependency> 
-
-
+		 
 	</dependencies>
 
 
@@ -167,5 +134,4 @@
 		</plugins>
 		<finalName>${project.artifactId}</finalName>
 	</build>
-  
 </project>

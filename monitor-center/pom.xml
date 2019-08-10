@@ -22,7 +22,13 @@
 		products derived from ~ this software without specific prior written permission. 
 		~ Author: owen gitgeek (624191343@qq.com) ~ -->
 	<modules>
+		<!-- springboot admin监控 -->
 		<module>admin-server</module>
+		<!-- 日志中心 -->
+  		<module>log-center</module>
+  		<!-- 事物中心 -->
+  		<module>transaction-center</module>
+  		<!-- zipkin链路跟踪 -->
 		<module>zipkin-center</module>
 	</modules>
 </project>
