@@ -1,7 +1,14 @@
+
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0810/170317_e33b6c75_869801.png "屏幕截图.png")
+
 # [![Fork me on Gitee](https://gitee.com/owenwangwen/open-capacity-platform/widgets/widget_5.svg)](https://gitee.com/owenwangwen/open-capacity-platform)open-capacity-platform 微服务能力开放平台 
+
+
 [![star](https://gitee.com/owenwangwen/open-capacity-platform/badge/star.svg?theme=white)](https://gitee.com/owenwangwen/open-capacity-platform/stargazers)
 [![Fork me on Gitee](https://gitee.com/owenwangwen/open-capacity-platform/widgets/widget_6.svg)](https://gitee.com/owenwangwen/open-capacity-platform)
 [![fork](https://gitee.com/owenwangwen/open-capacity-platform/badge/fork.svg?theme=white)](https://gitee.com/owenwangwen/open-capacity-platform/members)
+
+
 
 简称ocp是基于layui+springcloud的企业级微服务框架(用户权限管理，配置中心管理，应用管理，....),其核心的设计目标是分离前后端，快速开发部署，学习简单，功能强大，提供快速接入核心接口能力，其目标是帮助企业搭建一套类似百度能力开放平台的框架；  
 - 基于layui前后端分离的企业级微服务架构  
@@ -10,7 +17,9 @@
 - 提供完善的企业微服务流量监控，日志监控能力   
 - 提供完善的压力测试方案  
 - 提供完善的灰度发布方案  
-- 提供完善的微服务部署方案       
+- 提供完善的微服务部署方案  
+
+    
 
 # **演示地址** #
 http://59.110.164.254:8066/login.html  admin/admin   
@@ -25,7 +34,6 @@ http://59.110.164.254:8066/login.html  admin/admin
 
 ### 欢迎进群（大佬云集）
 `一键加群`
-<a target="_blank" href="https://jq.qq.com/?_wv=1027&k=5JSjd5D"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="open-capacity-platform交流" title="open-capacity-platform交流"></a>        
 <table>
 	<tr>
             <td><img src=https://images.gitee.com/uploads/images/2019/0604/143151_36a5c07e_869801.png "屏幕截图.png" />
@@ -73,7 +81,7 @@ http://59.110.164.254:8066/login.html  admin/admin
    
 ## 代码结构  
     
-![输入图片说明](https://images.gitee.com/uploads/images/2019/0722/163117_e4acc5ed_869801.png "屏幕截图.png") 
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0810/165644_7385ee5a_869801.png "屏幕截图.png") 
 
 ## 能力开放管理平台   
 
