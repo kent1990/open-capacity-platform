@@ -81,7 +81,7 @@ http://59.110.164.254:8066/login.html  admin/admin
    
 ## 代码结构  
     
-![输入图片说明](https://images.gitee.com/uploads/images/2019/0810/165644_7385ee5a_869801.png "屏幕截图.png") 
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0819/214757_e3408bdc_869801.png "屏幕截图.png")
 
 ## 能力开放管理平台   
 
