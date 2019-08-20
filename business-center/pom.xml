@@ -37,5 +37,8 @@
   	<module>sms-center</module>
 	<!--批处理-->
 	<module>batch-center</module>
+
+      <!--工作流-->
+      <module>workflow-center</module>
   </modules>
 </project>

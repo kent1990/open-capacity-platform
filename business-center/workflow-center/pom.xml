@@ -8,23 +8,27 @@
 	</parent>
 	<artifactId>workflow-center</artifactId>
 
+	<properties>
+		<core.version>1.0.1</core.version>
+		<flowable.version>6.4.1</flowable.version>
+	</properties>
 
-	<dependencies>
+	<!--<dependencies>
 
-		<!-- 关系型和非关系型数据库配置 -->
+		&lt;!&ndash; 关系型和非关系型数据库配置 &ndash;&gt;
 		<dependency>
 			<groupId>com.open.capacity</groupId>
 			<artifactId>db-core</artifactId>
 			<version>${core.version}</version>
 		</dependency>
-		<!-- 日志统一配置 -->
+		&lt;!&ndash; 日志统一配置 &ndash;&gt;
 		<dependency>
 			<groupId>com.open.capacity</groupId>
 			<artifactId>log-core</artifactId>
 			<version>${core.version}</version>
 		</dependency>
 
-		<!--flowable工作流依赖 -->
+		&lt;!&ndash;flowable工作流依赖 &ndash;&gt;
 		<dependency>
 			<groupId>org.flowable</groupId>
 			<artifactId>flowable-spring-boot-starter</artifactId>
@@ -38,8 +42,60 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-	</dependencies>
+	</dependencies>-->
+	<dependencies>
+		<!--add-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+			<version>2.0.0</version>
+		</dependency>
 
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.15</version>
+		</dependency>
+
+		<!--	<dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>1.2.46</version>
+            </dependency>-->
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.flowable</groupId>
+			<artifactId>flowable-spring-boot-starter</artifactId>
+			<version>${flowable.version}</version>
+		</dependency>
+		<!--流程设计器-->
+		<dependency>
+			<groupId>org.flowable</groupId>
+			<artifactId>flowable-ui-modeler-rest</artifactId>
+			<version>${flowable.version}</version>
+		</dependency>
+		<!--路由配置-->
+		<dependency>
+			<groupId>org.flowable</groupId>
+			<artifactId>flowable-ui-modeler-conf</artifactId>
+			<version>${flowable.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.flowable</groupId>
+			<artifactId>flowable-ui-modeler-logic</artifactId>
+			<version>${flowable.version}</version>
+		</dependency>
+	</dependencies>
 
 
 	<build>
