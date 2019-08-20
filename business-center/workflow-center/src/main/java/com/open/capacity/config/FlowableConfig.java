@@ -1,6 +1,6 @@
 package com.open.capacity.config;
 
-import org.flowable.engine.common.impl.persistence.StrongUuidGenerator;
+import org.flowable.common.engine.impl.persistence.StrongUuidGenerator;
 import org.flowable.spring.SpringProcessEngineConfiguration;
 import org.flowable.spring.boot.EngineConfigurationConfigurer;
 import org.springframework.context.annotation.Configuration;
