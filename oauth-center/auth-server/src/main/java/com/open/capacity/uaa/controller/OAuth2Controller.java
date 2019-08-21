@@ -65,7 +65,7 @@ import io.swagger.annotations.ApiParam;
  * @version 创建时间：2018年4月28日 下午2:18:54 类说明
  */
 
-@Api(tags = "OAuth2相关操作")
+@Api(tags = "OAuth API")
 @RestController
 public class OAuth2Controller {
 

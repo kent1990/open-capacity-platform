@@ -24,9 +24,9 @@ import org.springframework.web.server.ServerWebExchange;
 
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.open.capacity.client.commons.Result;
 import com.open.capacity.client.service.impl.SysClientServiceImpl;
 import com.open.capacity.client.utils.RedisLimiterUtils;
+import com.open.capacity.common.web.Result;
 import com.open.capacity.redis.util.RedisUtil;
 
 import reactor.core.publisher.Mono;

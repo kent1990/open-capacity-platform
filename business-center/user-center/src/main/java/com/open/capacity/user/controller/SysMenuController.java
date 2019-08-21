@@ -37,7 +37,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@Api(tags = "菜单模块api")
+@Api(tags = "MENU API")
 @RequestMapping("/menus")
 public class SysMenuController {
 

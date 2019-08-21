@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.open.capacity.client.commons.PageResult;
-import com.open.capacity.client.commons.Result;
 import com.open.capacity.client.dto.GatewayRouteDefinition;
 import com.open.capacity.client.service.DynamicRouteService;
+import com.open.capacity.common.web.PageResult;
+import com.open.capacity.common.web.Result;
 
 @RestController
 @RequestMapping("/route")

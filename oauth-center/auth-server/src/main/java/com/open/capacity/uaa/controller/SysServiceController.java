@@ -35,7 +35,7 @@ import io.swagger.annotations.ApiOperation;
  * @Copy: [com.zzg]
  */
 @RestController
-@Api(tags = "服务模块api")
+@Api(tags = "SERVICE API")
 @RequestMapping("/services")
 public class SysServiceController {
 

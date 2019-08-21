@@ -11,7 +11,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Component;
 
-import com.open.capacity.client.commons.Result;
+import com.open.capacity.common.web.Result;
 import com.open.capacity.redis.util.RedisUtil;
 
 

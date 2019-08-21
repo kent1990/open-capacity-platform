@@ -25,6 +25,8 @@ import com.open.capacity.oss.model.FileInfo;
 import com.open.capacity.oss.model.FileType;
 import com.open.capacity.oss.service.FileService;
 
+import io.swagger.annotations.Api;
+
 /**
  * @author 作者 owen E-mail: 624191343@qq.com
  * @version 创建时间：2017年11月12日 上午22:57:51
@@ -32,6 +34,7 @@ import com.open.capacity.oss.service.FileService;
 *  参考src/main/view/upload.html
 */
 @RestController
+@Api(tags = "FILE API")
 public class FileController {
 
 	@Autowired

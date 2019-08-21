@@ -16,6 +16,8 @@ import com.open.capacity.sms.model.SmsCode;
 import com.open.capacity.sms.service.SmsCodeService;
 import com.open.capacity.sms.service.SmsService;
 
+import io.swagger.annotations.Api;
+
 /**
  * * 程序名 : SmsController
  * 建立日期: 2018-07-09
@@ -28,6 +30,7 @@ import com.open.capacity.sms.service.SmsService;
  * 序号 	       日期 		        修改人 		         修改原因
  */
 @RestController
+@Api(tags = "SMS API")
 public class SmsController {
 
 	@Autowired

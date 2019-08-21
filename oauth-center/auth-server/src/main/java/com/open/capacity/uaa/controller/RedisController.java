@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 
+import io.swagger.annotations.Api;
+
 /**
  * @Author: [zhangzhiguang]
  * @Date: [2018-08-24 20:38]
@@ -22,6 +24,7 @@ import com.alibaba.fastjson.JSON;
  * @Copy: [com.zzg]
  */
 @Controller
+@Api(tags = "REDIS API")
 @RequestMapping("/redis")
 public class RedisController {
 

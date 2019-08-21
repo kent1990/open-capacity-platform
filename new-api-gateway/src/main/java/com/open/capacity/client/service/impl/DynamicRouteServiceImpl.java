@@ -30,7 +30,6 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.open.capacity.client.commons.PageResult;
 import com.open.capacity.client.dto.GatewayFilterDefinition;
 import com.open.capacity.client.dto.GatewayPredicateDefinition;
 import com.open.capacity.client.dto.GatewayRouteDefinition;
@@ -38,6 +37,7 @@ import com.open.capacity.client.entity.GatewayRoutes;
 import com.open.capacity.client.mapper.GatewayRoutesMapper;
 import com.open.capacity.client.service.DynamicRouteService;
 import com.open.capacity.client.vo.GatewayRoutesVO;
+import com.open.capacity.common.web.PageResult;
 
 import ma.glasnost.orika.MapperFacade;
 import ma.glasnost.orika.MapperFactory;

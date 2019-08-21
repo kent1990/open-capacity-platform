@@ -30,8 +30,8 @@ import io.swagger.annotations.ApiOperation;
  *
  * @author owen 624191343@qq.com
  */
-@Api(tags = "应用")
 @RestController
+@Api(tags = "CLIENT API")
 @RequestMapping("/clients")
 public class SysClientController {
 

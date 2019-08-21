@@ -40,7 +40,7 @@ import io.swagger.annotations.ApiOperation;
 * 权限管理
  */
 @RestController
-@Api(tags = "权限模块api")
+@Api(tags = "PERMISSION API")
 public class SysPermissionController {
 
 	@Autowired

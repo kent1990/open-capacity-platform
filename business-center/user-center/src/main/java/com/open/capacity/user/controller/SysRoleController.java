@@ -31,7 +31,7 @@ import io.swagger.annotations.ApiOperation;
 * 角色管理
  */
 @RestController
-@Api(tags = "角色模块api")
+@Api(tags = "ROLE API")
 public class SysRoleController {
 
 	@Autowired

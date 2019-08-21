@@ -2,9 +2,9 @@ package com.open.capacity.client.service;
 
 import java.util.Map;
 
-import com.open.capacity.client.commons.PageResult;
 import com.open.capacity.client.dto.GatewayRouteDefinition;
 import com.open.capacity.client.vo.GatewayRoutesVO;
+import com.open.capacity.common.web.PageResult;
 
 /**
  * 操作 路由 Service

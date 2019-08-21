@@ -50,7 +50,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @RestController
-@Api(tags = "用户模块api")
+@Api(tags = "USER API")
 public class SysUserController {
 
     @Autowired
