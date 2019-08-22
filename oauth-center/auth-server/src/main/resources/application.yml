@@ -104,6 +104,7 @@ mybatis-plus:
 
 security:
   ignored: /oauth/user/token , /oauth/client/token , /login  ,  /user/login   , /doc.html ,/user/logout ,/document.html
+  validcode: true
   oauth2:
     ignored: /oauth/user/token , /oauth/client/token   ,/user/logout ,/document.html 
     resource:

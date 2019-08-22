@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
@@ -29,9 +30,10 @@ public class ValidateCodeFilter extends OncePerRequestFilter {
 	@Autowired
 	private ValidateCodeService validateCodeService;
 
-	@Autowired
-	private SecurityProperties securityProperties;
 
+	@Value("${security.validcode:false}")
+	private Boolean validFlag ;
+	
 	/**
 	 * 验证码校验失败处理器
 	 */
@@ -49,22 +51,30 @@ public class ValidateCodeFilter extends OncePerRequestFilter {
 	@Override
 	protected boolean shouldNotFilter(HttpServletRequest request) {
 
-		// 登录提交的时候验证验证码
-		if (pathMatcher.match("/oauth/token", request.getRequestURI())) {
+		// 登录提交的时候验证验证码 配置打开验证开关
+		if(validFlag){
+			
+			if (pathMatcher.match("/oauth/token", request.getRequestURI())) {
 
-			 if (request.getParameter("grant_type")!=null){
-				//密码模式需要验证码
-				 if("password".toUpperCase().equals(request.getParameter("grant_type").toUpperCase())){
-					 return false;
+				 if (request.getParameter("grant_type")!=null){
+					//密码模式需要验证码
+					 if("password".toUpperCase().equals(request.getParameter("grant_type").toUpperCase())){
+						 return false;
+					 }
+					 
 				 }
-				 
-			 }
-			
-			
+				
+				
+			}
+			 
 		}
+		
+		
 		return true;
 	}
-
+	/** 
+	 *  /oauth/token时  查看security.validcode
+	 */
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 			throws IOException, ServletException {

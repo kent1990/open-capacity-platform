@@ -19,12 +19,15 @@ import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.util.CollectionUtils;
 
+import lombok.extern.slf4j.Slf4j;
+
 
 /**
  * @author 作者 owen E-mail: 624191343@qq.com
  * @version 创建时间：2017年04月23日 下午20:01:06 类说明
  * redis工具类
  */
+@Slf4j
 public class RedisUtil {
 
 	
@@ -213,7 +216,8 @@ public class RedisUtil {
 			});
 			return true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			StackTraceElement stackTraceElement= e.getStackTrace()[0];	 	                        
+            log.error("set-"+stackTraceElement.getMethodName()+"--"+stackTraceElement.getLineNumber());	 	     
 			return false;
 		}
 	}
@@ -247,7 +251,8 @@ public class RedisUtil {
 			}
 			return true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			StackTraceElement stackTraceElement= e.getStackTrace()[0];	 	                        
+            log.error("set-"+stackTraceElement.getMethodName()+"--"+stackTraceElement.getLineNumber());	 	     
 			return false;
 		}
 	}
@@ -324,7 +329,9 @@ public class RedisUtil {
 			operations.setBit(key, offset, isShow);
 			result = true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			StackTraceElement stackTraceElement= e.getStackTrace()[0];	 	                        
+            log.error("setBit-"+stackTraceElement.getMethodName()+"--"+stackTraceElement.getLineNumber());	 	     
+			return false ;
 		}
 		return result;
 	}
@@ -342,7 +349,9 @@ public class RedisUtil {
 			ValueOperations<String, Object> operations = redisTemplate.opsForValue();
 			result = operations.getBit(key, offset);
 		} catch (Exception e) {
-			e.printStackTrace();
+			StackTraceElement stackTraceElement= e.getStackTrace()[0];	 	                        
+            log.error("getBit-"+stackTraceElement.getMethodName()+"--"+stackTraceElement.getLineNumber());	 	     
+			return false ;
 		}
 		return result;
 	}
@@ -362,7 +371,8 @@ public class RedisUtil {
         try {
             return redisTemplate.opsForList().range(key, start, end);
         } catch (Exception e) {
-            e.printStackTrace();
+        	StackTraceElement stackTraceElement= e.getStackTrace()[0];	 	                        
+            log.error("lGet-"+stackTraceElement.getMethodName()+"--"+stackTraceElement.getLineNumber());	 	     
             return null;
         }
     }
@@ -377,7 +387,8 @@ public class RedisUtil {
         try {
             return redisTemplate.opsForList().size(key);
         } catch (Exception e) {
-            e.printStackTrace();
+        	StackTraceElement stackTraceElement= e.getStackTrace()[0];	 	                        
+            log.error("lGetListSize-"+stackTraceElement.getMethodName()+"--"+stackTraceElement.getLineNumber());	 	     
             return 0;
         }
     }
@@ -393,7 +404,8 @@ public class RedisUtil {
         try {
             return redisTemplate.opsForList().index(key, index);
         } catch (Exception e) {
-            e.printStackTrace();
+        	StackTraceElement stackTraceElement= e.getStackTrace()[0];	 	                        
+            log.error("lGetIndex-"+stackTraceElement.getMethodName()+"--"+stackTraceElement.getLineNumber());	 	     
             return null;
         }
     }
@@ -411,7 +423,8 @@ public class RedisUtil {
             redisTemplate.opsForList().rightPush(key, value);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+        	StackTraceElement stackTraceElement= e.getStackTrace()[0];	 	                        
+            log.error("lSet-"+stackTraceElement.getMethodName()+"--"+stackTraceElement.getLineNumber());	 	     
             return false;
         }
     }
@@ -430,7 +443,8 @@ public class RedisUtil {
             if (time > 0) expire(key, time);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+        	StackTraceElement stackTraceElement= e.getStackTrace()[0];	 	                        
+            log.error("lSet-"+stackTraceElement.getMethodName()+"--"+stackTraceElement.getLineNumber());	 	     
             return false;
         }
     }
@@ -448,7 +462,8 @@ public class RedisUtil {
             redisTemplate.opsForList().rightPushAll(key, value);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+        	StackTraceElement stackTraceElement= e.getStackTrace()[0];	 	                        
+            log.error("lSet-"+stackTraceElement.getMethodName()+"--"+stackTraceElement.getLineNumber());	 	     
             return false;
         }
     }
@@ -467,7 +482,8 @@ public class RedisUtil {
             if (time > 0) expire(key, time);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+        	StackTraceElement stackTraceElement= e.getStackTrace()[0];	 	                        
+            log.error("lSet-"+stackTraceElement.getMethodName()+"--"+stackTraceElement.getLineNumber());	 	     
             return false;
         }
     }
@@ -485,7 +501,8 @@ public class RedisUtil {
             redisTemplate.opsForList().set(key, index, value);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+        	StackTraceElement stackTraceElement= e.getStackTrace()[0];	 	                        
+            log.error("lUpdateIndex-"+stackTraceElement.getMethodName()+"--"+stackTraceElement.getLineNumber());	 	     
             return false;
         }
     }
@@ -503,7 +520,8 @@ public class RedisUtil {
             Long remove = redisTemplate.opsForList().remove(key, count, value);
             return remove;
         } catch (Exception e) {
-            e.printStackTrace();
+        	StackTraceElement stackTraceElement= e.getStackTrace()[0];	 	                        
+            log.error("lRemove-"+stackTraceElement.getMethodName()+"--"+stackTraceElement.getLineNumber());	 	                      
             return 0;
         }
     }

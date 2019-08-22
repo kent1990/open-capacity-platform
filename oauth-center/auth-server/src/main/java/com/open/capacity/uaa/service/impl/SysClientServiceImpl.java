@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.open.capacity.common.constant.UaaConstant;
 import com.open.capacity.common.web.PageResult;
 import com.open.capacity.common.web.Result;
 import com.open.capacity.uaa.dao.SysClientDao;
@@ -30,16 +31,7 @@ public class SysClientServiceImpl implements SysClientService {
 
     private static final Logger log = LoggerFactory.getLogger(SysClientServiceImpl.class);
 
-    /**
-     * 缓存client的redis key，这里是hash结构存储
-     */
-    private static final String CACHE_CLIENT_KEY = "oauth_client_details";
-    
-    
-    /**
-     * 缓存client的有效状态，是否限流，阀值多少，这里是hash结构存储
-     */
-    private static final String CACHE_CLIENT_VALID = "client_details_valid";
+     
 
     @Autowired
     private SysClientDao sysClientDao;
@@ -83,7 +75,7 @@ public class SysClientServiceImpl implements SysClientService {
 
         sysClientServiceDao.delete(id,null);
 
-        redisTemplate.boundHashOps(CACHE_CLIENT_KEY).delete(id) ;
+        redisTemplate.boundHashOps(UaaConstant.CACHE_CLIENT_KEY).delete(id) ;
         log.debug("删除应用id:{}", id);
     }
 
@@ -143,9 +135,9 @@ public class SysClientServiceImpl implements SysClientService {
 		ClientDetails clientDetails = jdbcClientDetailsService.loadClientByClientId(client.getClientId()); 
 		
 		if(enabled){
-			redisTemplate.boundHashOps(CACHE_CLIENT_KEY).put(client.getClientId(), JSONObject.toJSONString(clientDetails));
+			redisTemplate.boundHashOps(UaaConstant.CACHE_CLIENT_KEY).put(client.getClientId(), JSONObject.toJSONString(clientDetails));
 		}else{
-			redisTemplate.boundHashOps(CACHE_CLIENT_KEY).delete(client.getClientId()) ;
+			redisTemplate.boundHashOps(UaaConstant.CACHE_CLIENT_KEY).delete(client.getClientId()) ;
 		}
 
 		log.info("应用状态修改：{}", client);

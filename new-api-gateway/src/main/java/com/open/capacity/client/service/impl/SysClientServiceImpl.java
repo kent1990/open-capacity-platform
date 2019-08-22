@@ -14,6 +14,7 @@ import org.springframework.util.CollectionUtils;
 
 import com.alibaba.fastjson.JSONObject;
 import com.open.capacity.client.dao.SysClientDao;
+import com.open.capacity.common.constant.UaaConstant;
 
 /**
  * @author 作者 owen E-mail: 624191343@qq.com
@@ -23,10 +24,7 @@ import com.open.capacity.client.dao.SysClientDao;
 @Service("sysClientService")
 public class SysClientServiceImpl {
 
-	/**
-     * 缓存client的redis key，这里是hash结构存储
-     */
-    private static final String CACHE_CLIENT_VALID = "oauth_client_valid";
+	 
     private Logger logger =LoggerFactory.getLogger(SysClientServiceImpl.class) ;
 
     @Autowired
@@ -38,7 +36,7 @@ public class SysClientServiceImpl {
 	public Map getClient(String clientId){
 		// 先从redis获取
 		Map client ;
-        String value = (String) redisTemplate.boundHashOps(CACHE_CLIENT_VALID).get(clientId);
+        String value = (String) redisTemplate.boundHashOps(UaaConstant.CACHE_CLIENT_KEY).get(clientId);
         if (StringUtils.isBlank(value)) {
         	client = cacheAndGetClient(clientId);
         } else {
@@ -60,7 +58,7 @@ public class SysClientServiceImpl {
         	client = sysClientDao.getClient(clientId);
             if (client != null) {
                 // 写入redis缓存
-                redisTemplate.boundHashOps(CACHE_CLIENT_VALID).put(clientId, JSONObject.toJSONString(client));
+                redisTemplate.boundHashOps(UaaConstant.CACHE_CLIENT_KEY).put(clientId, JSONObject.toJSONString(client));
                 logger.info("缓存clientId:{},{}", clientId, client);
             }
         }catch (Exception e){
@@ -74,7 +72,7 @@ public class SysClientServiceImpl {
      * 将oauth_client_details全表刷入redis
      */
     public void loadAllClientToCache() {
-        if (redisTemplate.hasKey(CACHE_CLIENT_VALID)) {
+        if (redisTemplate.hasKey(UaaConstant.CACHE_CLIENT_KEY)) {
             return;
         }
         logger.info("将oauth_client_details全表刷入redis");
@@ -87,7 +85,7 @@ public class SysClientServiceImpl {
 
         for(Iterator<Map> it = list.iterator() ; it.hasNext();){
         	Map temp = it.next() ;
-        	redisTemplate.boundHashOps(CACHE_CLIENT_VALID).put(String.valueOf(temp.get("client_id")), JSONObject.toJSONString(temp));
+        	redisTemplate.boundHashOps(UaaConstant.CACHE_CLIENT_KEY).put(String.valueOf(temp.get("client_id")), JSONObject.toJSONString(temp));
         }
         
     }
