@@ -20,7 +20,7 @@ spring:
   application:
     name: workflow-center
   datasource:
-    url: jdbc:mysql://59.110.164.254:3306/flowable?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
+    url: jdbc:mysql://59.110.164.254:3306/workflow-center?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
