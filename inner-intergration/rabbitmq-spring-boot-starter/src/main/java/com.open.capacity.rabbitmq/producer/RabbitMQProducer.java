@@ -5,9 +5,10 @@ package com.open.capacity.rabbitmq.producer;
  * @version V1.0
  * @Title: RabbitMQProducer
  * @Package: com.open.capacity.rabbitmq.producer
- * @Description: TODO
+ * @Description: 消息生产者
  * @date 2019/8/25  21:01
  **/
 
 public class RabbitMQProducer {
+
 }
