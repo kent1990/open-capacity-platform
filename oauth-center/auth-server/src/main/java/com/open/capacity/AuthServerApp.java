@@ -9,10 +9,10 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Import;
 
+import com.open.capacity.common.feign.GolbalFeignConfig;
 import com.open.capacity.common.port.PortApplicationEnvironmentPreparedEventListener;
 import com.open.capacity.log.annotation.EnableLogging;
 import com.open.capacity.uaa.server.UAAServerConfig;
-import com.open.capacity.uaa.server.config.GolbalFeignConfig;
 
 /** 
 * @author owen 624191343@qq.com

@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
@@ -23,8 +24,10 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.open.capacity.common.auth.props.PermitUrlProperties;
+import com.open.capacity.common.feign.FeignInterceptorConfig;
+import com.open.capacity.common.feign.GolbalFeignConfig;
+import com.open.capacity.common.rest.RestTemplateConfig;
 import com.open.capacity.uaa.client.authorize.AuthorizeConfigManager;
-import com.open.capacity.uaa.client.config.GolbalFeignConfig;
 
 /**
  * @author 作者 owen E-mail: 624191343@qq.com
@@ -35,6 +38,7 @@ import com.open.capacity.uaa.client.config.GolbalFeignConfig;
 @EnableResourceServer
 @AutoConfigureAfter(TokenStore.class)
 @EnableConfigurationProperties(PermitUrlProperties.class)
+@Import({RestTemplateConfig.class,FeignInterceptorConfig.class})
 @EnableFeignClients(defaultConfiguration=GolbalFeignConfig.class)
 //开启spring security 注解
 //@EnableGlobalMethodSecurity(prePostEnabled = true)

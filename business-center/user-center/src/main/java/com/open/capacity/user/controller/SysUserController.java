@@ -167,7 +167,8 @@ public class SysUserController {
     @LogAnnotation(module="user-center",recordRequestParam=false)
 //  searchKey=username, searchValue=as
     public PageResult<SysUser> findUsers(@RequestHeader(name="trace_id",required=false) String traceId ,  @RequestParam Map<String, Object> params) throws JsonProcessingException {
-        return sysUserService.findUsers(params);
+        log.info("hell");
+    	return sysUserService.findUsers(params);
     }
 
     /**

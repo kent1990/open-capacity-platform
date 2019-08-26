@@ -24,5 +24,7 @@
   	<module>uaa-client-spring-boot-starter</module>
   	<!-- 认证服务器配置 -->
   	<module>uaa-server-spring-boot-starter</module>
+  	<!-- mq -->
+  	<module>rabbitmq-spring-boot-starter</module>
   </modules>
 </project>

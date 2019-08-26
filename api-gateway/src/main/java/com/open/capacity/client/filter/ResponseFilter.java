@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
-import com.open.capacity.client.utils.LoggingUtils;
+import com.open.capacity.log.util.LogUtil;
 
 /**
  * 请求完成后，将trace_id设置到response header里面进行传递
@@ -38,8 +38,9 @@ public class ResponseFilter extends ZuulFilter {
 	@Override public Object run() {
 		RequestContext requestContext = RequestContext.getCurrentContext();
 		String URL = requestContext.getRequest().getRequestURL().toString();
-		LOGGER.debug("response url " + URL + ", traceId = " + LoggingUtils.getTraceId());
-		requestContext.getResponse().addHeader(LoggingUtils.TRACE_ID, LoggingUtils.getTraceId()); 
+		String traceId = requestContext.getRequest().getHeader(LogUtil.HTTP_HEADER_TRACE_ID);
+		LOGGER.info("response url " + URL + ", traceId = " + traceId);
+		requestContext.getResponse().addHeader(LogUtil.HTTP_HEADER_TRACE_ID, traceId); 
 		return null;
 	}
 	}

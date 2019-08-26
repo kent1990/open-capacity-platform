@@ -21,7 +21,8 @@ public class LogImportSelector implements ImportSelector {
 		
 		return new String[] { 
 				"com.open.capacity.log.aop.LogAnnotationAOP",
-				"com.open.capacity.log.service.impl.LogServiceImpl"
+				"com.open.capacity.log.service.impl.LogServiceImpl",
+				"com.open.capacity.log.config.LogAutoConfig"
 				
 		};
 	}

@@ -1,4 +1,4 @@
-package com.open.capacity.uaa.server.config;
+package com.open.capacity.common.feign;
 
 import org.springframework.context.annotation.Bean;
 

@@ -1,5 +1,6 @@
 package com.open.capacity.rabbitmq.enumcode;
 
+
 public enum ConsumerResultEnum {
 
     SEND(0,"收到消息,未确认"),

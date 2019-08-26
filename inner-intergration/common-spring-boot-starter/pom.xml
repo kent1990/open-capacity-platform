@@ -34,7 +34,11 @@
 			<artifactId>spring-security-oauth2</artifactId>
 			<optional>true</optional>
 		</dependency>
-		
+		<!--  feigin http rpc -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+		</dependency>
 		<!-- aop处理 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

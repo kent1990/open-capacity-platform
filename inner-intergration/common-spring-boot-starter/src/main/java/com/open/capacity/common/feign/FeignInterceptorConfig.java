@@ -1,5 +1,6 @@
-package com.open.capacity.uaa.client.config;
+package com.open.capacity.common.feign;
 
+import org.slf4j.MDC;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.Authentication;
@@ -8,6 +9,7 @@ import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
 
+import cn.hutool.core.util.StrUtil;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 
@@ -29,6 +31,7 @@ public class FeignInterceptorConfig {
 
 			@Override
 			public void apply(RequestTemplate template) {
+				//传递token
 				Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 				if (authentication != null) {
 					if (authentication instanceof OAuth2Authentication) {
@@ -38,6 +41,13 @@ public class FeignInterceptorConfig {
 					}
 
 				}
+				//传递traceId
+	            String traceId = MDC.get("traceid");
+	            if (StrUtil.isNotEmpty(traceId)) {
+	                template.header("app_trace_id", traceId);
+	            }
+
+				
 			}
 		};
 

@@ -44,11 +44,6 @@
 		</dependency>
 		
 
-		<!-- uaa feigin http rpc -->
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-openfeign</artifactId>
-		</dependency>
 		
 		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-jwt -->
 		<dependency>
