@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.collections.MapUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
@@ -83,13 +84,14 @@ public class OAuth2Controller {
 
 	@ApiOperation(value = "用户名密码获取token")
 	@PostMapping("/oauth/user/token")
+    @LogAnnotation(module="auth-server",recordRequestParam=false)
 	public void getUserTokenInfo(
 			@ApiParam(required = true, name = "username", value = "账号") @RequestParam(value = "username") String username,
 			@ApiParam(required = true, name = "password", value = "密码") @RequestParam(value = "password") String password,
 			HttpServletRequest request, HttpServletResponse response) {
 		String clientId = request.getHeader("client_id");
 		String clientSecret = request.getHeader("client_secret");
-
+		
 		try {
 
 			if (clientId == null || "".equals(clientId)) {
@@ -165,7 +167,7 @@ public class OAuth2Controller {
 	
 	@ApiOperation(value = "clientId获取token")
 	@PostMapping("/oauth/client/token")
-	@LogAnnotation(module = "auth-server", recordRequestParam = false)
+	@LogAnnotation(module="auth-server",recordRequestParam=false)
 	public void getClientTokenInfo(HttpServletRequest request, HttpServletResponse response) {
 
 		String clientId = request.getHeader("client_id");
@@ -238,6 +240,7 @@ public class OAuth2Controller {
 
 	@ApiOperation(value = "access_token刷新token")
 	@PostMapping(value = "/oauth/refresh/token", params = "access_token")
+	@LogAnnotation(module="auth-server",recordRequestParam=false)
 	public void refreshTokenInfo(String access_token, HttpServletRequest request, HttpServletResponse response) {
 
 		// 拿到当前用户信息
@@ -308,6 +311,7 @@ public class OAuth2Controller {
 	 */
 	@ApiOperation(value = "移除token")
 	@PostMapping(value = "/oauth/remove/token", params = "access_token")
+	@LogAnnotation(module="auth-server",recordRequestParam=false)
 	public void removeToken(String access_token) {
 
 		// 拿到当前用户信息
@@ -335,6 +339,7 @@ public class OAuth2Controller {
 
 	@ApiOperation(value = "获取token信息")
 	@PostMapping(value = "/oauth/get/token", params = "access_token")
+	@LogAnnotation(module="auth-server",recordRequestParam=false)
 	public OAuth2AccessToken getTokenInfo(String access_token) {
 
 		// 拿到当前用户信息
@@ -362,6 +367,7 @@ public class OAuth2Controller {
 	 */
 	@ApiOperation(value = "当前登陆用户信息")
 	@RequestMapping(value = { "/oauth/userinfo" }, produces = "application/json") // 获取用户信息。/auth/user
+	@LogAnnotation(module="auth-server",recordRequestParam=false)
 	public Map<String, Object> getCurrentUserDetail() {
 		Map<String, Object> userInfo = new HashMap<>();
 		userInfo.put("user", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
@@ -388,6 +394,7 @@ public class OAuth2Controller {
 
 	@ApiOperation(value = "token列表")
 	@PostMapping("/oauth/token/list")
+	@LogAnnotation(module="auth-server",recordRequestParam=false)
 	public PageResult<HashMap<String, String>> getUserTokenInfo(@RequestParam Map<String, Object> params)
 			throws Exception {
 		List<HashMap<String, String>> list = new ArrayList<>();

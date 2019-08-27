@@ -20,12 +20,12 @@ public class LogMdcThreadUtil {
 
     public static void setTraceIdIfAbsent() {
         if (MDC.get(LogUtil.LOG_TRACE_ID) == null) {
-            MDC.put(LogUtil.LOG_TRACE_ID, LogUtil.getTraceId());
+            MDC.put(LogUtil.LOG_TRACE_ID,  MDC.get("X-B3-TraceId"));
         }
     }
 
     public static void setTraceId() {
-        MDC.put(LogUtil.LOG_TRACE_ID, LogUtil.getTraceId());
+        MDC.put(LogUtil.LOG_TRACE_ID,  MDC.get("X-B3-TraceId"));
     }
 
     public static void setTraceId(String traceId) {

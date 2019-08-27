@@ -45,12 +45,12 @@ public class RequestFilter extends ZuulFilter {
 	@Override
 	public Object run() {
 		
-		String traceId = LogUtil.getTraceId();
+		String traceId = MDC.get("X-B3-TraceId");
 	    MDC.put(LogUtil.LOG_TRACE_ID, traceId);
 		RequestContext requestContext = RequestContext.getCurrentContext();
 		String URL = requestContext.getRequest().getRequestURL().toString();
 		requestContext.addZuulRequestHeader(LogUtil.HTTP_HEADER_TRACE_ID, traceId);
-		LOGGER.info("request url = " + URL + ", traceId = " + traceId);
+		LOGGER.trace("request url = " + URL + ", traceId = " + traceId);
 		return null;
 	}
 }

@@ -42,7 +42,7 @@ public class FeignInterceptorConfig {
 
 				}
 				//传递traceId
-	            String traceId = MDC.get("traceid");
+	            String traceId = StrUtil.isNotEmpty(MDC.get("traceid"))  ?  MDC.get("traceid") :  MDC.get("X-B3-TraceId") ;
 	            if (StrUtil.isNotEmpty(traceId)) {
 	                template.header("app_trace_id", traceId);
 	            }

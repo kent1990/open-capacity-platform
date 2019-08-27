@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.google.common.collect.Maps;
 import com.open.capacity.common.web.PageResult;
 import com.open.capacity.common.web.Result;
+import com.open.capacity.log.annotation.LogAnnotation;
 import com.open.capacity.uaa.dto.SysClientDto;
 import com.open.capacity.uaa.model.SysClient;
 import com.open.capacity.uaa.service.SysClientService;
@@ -42,6 +43,7 @@ public class SysClientController {
     @GetMapping
     @ApiOperation(value = "应用列表")
     @PreAuthorize("hasAuthority('sys:role:query')")
+    @LogAnnotation(module="auth-server",recordRequestParam=false)
     public PageResult<SysClient> listRoles(@RequestParam Map<String, Object> params) {
         return sysClientService.listRoles(params) ;
     }
@@ -49,12 +51,14 @@ public class SysClientController {
     @GetMapping("/{id}")
     @ApiOperation(value = "根据id获取应用")
     @PreAuthorize("hasAuthority('sys:role:query')")
+    @LogAnnotation(module="auth-server",recordRequestParam=false)
     public SysClient get(@PathVariable Long id) {
         return sysClientService.getById(id);
     }
 
     @GetMapping("/all")
     @ApiOperation(value = "所有应用")
+    @LogAnnotation(module="auth-server",recordRequestParam=false)
     @PreAuthorize("hasAnyAuthority('sys:user:query','sys:role:query')")
     public List<SysClient> roles() {
         return sysClientService.findList(Maps.newHashMap());
@@ -62,6 +66,7 @@ public class SysClientController {
 
     @GetMapping(params = "userId")
     @ApiOperation(value = "根据用户id获取拥有的角色")
+    @LogAnnotation(module="auth-server",recordRequestParam=false)
     @PreAuthorize("hasAnyAuthority('sys:user:query','sys:role:query')")
     public List<SysClient> roles(Long userId) {
         return sysClientService.listByUserId(userId);
@@ -70,6 +75,7 @@ public class SysClientController {
     @DeleteMapping("/{id}")
     @ApiOperation(value = "删除应用")
     @PreAuthorize("hasAuthority('sys:role:del')")
+    @LogAnnotation(module="auth-server",recordRequestParam=false)
     public void delete(@PathVariable Long id) {
     	sysClientService.deleteClient(id);
     }
@@ -84,6 +90,7 @@ public class SysClientController {
     @PutMapping("/updateEnabled")
     @ApiOperation(value = "修改状态")
     @PreAuthorize("hasAuthority('sys:role:saveOrUpdate')")
+    @LogAnnotation(module="auth-server",recordRequestParam=false)
     public Result updateEnabled(@RequestBody Map<String, Object> params){
         return  sysClientService.updateEnabled(params);
     }

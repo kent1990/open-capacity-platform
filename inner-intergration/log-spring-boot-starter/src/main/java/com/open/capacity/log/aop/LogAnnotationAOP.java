@@ -15,6 +15,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 
@@ -25,6 +26,7 @@ import com.open.capacity.common.model.SysLog;
 import com.open.capacity.common.util.SysUserUtil;
 import com.open.capacity.log.annotation.LogAnnotation;
 import com.open.capacity.log.service.LogService;
+import com.open.capacity.log.util.LogUtil;
 
 /**
  * 
@@ -48,7 +50,7 @@ public class LogAnnotationAOP {
 	public Object logSave(ProceedingJoinPoint joinPoint, LogAnnotation ds) throws Throwable {
 
 		// 请求流水号
-		String transid = getRandom();
+		String transid = MDC.get(LogUtil.LOG_TRACE_ID);
 		// 记录开始时间
 		long start = System.currentTimeMillis();
 		// 获取方法参数

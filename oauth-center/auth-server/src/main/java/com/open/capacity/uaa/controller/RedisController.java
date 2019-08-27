@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.open.capacity.log.annotation.LogAnnotation;
 
 import io.swagger.annotations.Api;
 
@@ -32,8 +33,10 @@ public class RedisController {
     private RedisTemplate<String,Object> redisTemplate ;
 
 
-    @RequestMapping("/memoryInfo")
+   
     @ResponseBody
+    @RequestMapping("/memoryInfo")
+    @LogAnnotation(module="auth-server",recordRequestParam=false)
     public String getMemoryInfo() {
         Map<String, Object> map = new HashMap<>();
 
@@ -50,8 +53,10 @@ public class RedisController {
     }
 
 
-    @RequestMapping("/keysSize")
+    
     @ResponseBody
+    @RequestMapping("/keysSize")
+    @LogAnnotation(module="auth-server",recordRequestParam=false)
     public String getKeysSize() {
         Map<String, Object> map = new HashMap<>();
 

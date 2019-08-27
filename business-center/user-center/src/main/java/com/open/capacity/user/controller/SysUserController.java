@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -167,7 +168,7 @@ public class SysUserController {
     @LogAnnotation(module="user-center",recordRequestParam=false)
 //  searchKey=username, searchValue=as
     public PageResult<SysUser> findUsers(@RequestHeader(name="trace_id",required=false) String traceId ,  @RequestParam Map<String, Object> params) throws JsonProcessingException {
-        log.info("hell");
+    	log.info("USER SLEUTH:======="+ MDC.get("X-B3-TraceId"));
     	return sysUserService.findUsers(params);
     }
 

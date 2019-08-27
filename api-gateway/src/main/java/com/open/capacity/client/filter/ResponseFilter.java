@@ -2,6 +2,7 @@ package com.open.capacity.client.filter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import org.springframework.stereotype.Component;
 
 import com.netflix.zuul.ZuulFilter;
@@ -38,8 +39,8 @@ public class ResponseFilter extends ZuulFilter {
 	@Override public Object run() {
 		RequestContext requestContext = RequestContext.getCurrentContext();
 		String URL = requestContext.getRequest().getRequestURL().toString();
-		String traceId = requestContext.getRequest().getHeader(LogUtil.HTTP_HEADER_TRACE_ID);
-		LOGGER.info("response url " + URL + ", traceId = " + traceId);
+		String traceId =  MDC.get("X-B3-TraceId") ;
+		LOGGER.trace("response url " + URL + ", traceId = " + traceId);
 		requestContext.getResponse().addHeader(LogUtil.HTTP_HEADER_TRACE_ID, traceId); 
 		return null;
 	}

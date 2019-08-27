@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.open.capacity.common.web.PageResult;
 import com.open.capacity.common.web.Result;
+import com.open.capacity.log.annotation.LogAnnotation;
 import com.open.capacity.uaa.dto.SysClientDto;
 import com.open.capacity.uaa.model.SysService;
 import com.open.capacity.uaa.service.SysServiceService;
@@ -46,9 +47,10 @@ public class SysServiceController {
      * 查询所有服务
      * @return
      */
-    @PreAuthorize("hasAuthority('service:get/service/findAlls')")
     @ApiOperation(value = "查询所有服务")
     @GetMapping("/findAlls")
+    @PreAuthorize("hasAuthority('service:get/service/findAlls')")
+    @LogAnnotation(module="auth-server",recordRequestParam=false)
     public PageResult<SysService> findAlls() {
         List<SysService> list = sysServiceService.findAll();
 
@@ -62,6 +64,7 @@ public class SysServiceController {
     @ApiOperation(value = "获取服务以及顶级服务")
     @GetMapping("/findOnes")
     @PreAuthorize("hasAuthority('service:get/service/findOnes')")
+    @LogAnnotation(module="auth-server",recordRequestParam=false)
     public PageResult<SysService> findOnes(){
         List<SysService> list = sysServiceService.findOnes();
         return PageResult.<SysService>builder().data(list).code(0).count((long)list.size()).build() ;
@@ -72,9 +75,12 @@ public class SysServiceController {
      * @param id
      * @return
      */
-    @PreAuthorize("hasAuthority('service:delete/service/{id}')")
-    @ApiOperation(value = "删除服务")
+    
+    
     @DeleteMapping("/{id}")
+    @ApiOperation(value = "删除服务")
+    @PreAuthorize("hasAuthority('service:delete/service/{id}')")
+    @LogAnnotation(module="auth-server",recordRequestParam=false)
     public Result delete(@PathVariable Long id){
         try {
             sysServiceService.delete(id);
@@ -86,9 +92,11 @@ public class SysServiceController {
         return Result.succeed("操作成功");
     }
 
-    @PreAuthorize("hasAnyAuthority('service:post/saveOrUpdate')")
+    
     @ApiOperation(value = "新增服务")
     @PostMapping("/saveOrUpdate")
+    @LogAnnotation(module="auth-server",recordRequestParam=false)
+    @PreAuthorize("hasAnyAuthority('service:post/saveOrUpdate')")
     public Result saveOrUpdate(@RequestBody SysService service) {
         try{
             if (service.getId() != null){
@@ -105,6 +113,7 @@ public class SysServiceController {
 
     @ApiOperation(value = "根据clientId获取对应的服务")
     @GetMapping("/{clientId}/services")
+    @LogAnnotation(module="auth-server",recordRequestParam=false)
     public List<Map<String, Object>> findServicesByclientId(@PathVariable Long clientId) {
         Set<Long> clientIds = new HashSet<Long>();
         
@@ -134,6 +143,7 @@ public class SysServiceController {
     }
 
     @PostMapping("/granted")
+    @LogAnnotation(module="auth-server",recordRequestParam=false)
     public Result setMenuToClient(@RequestBody SysClientDto clientDto) {
         sysServiceService.setMenuToClient(clientDto.getId(), clientDto.getServiceIds());
 
