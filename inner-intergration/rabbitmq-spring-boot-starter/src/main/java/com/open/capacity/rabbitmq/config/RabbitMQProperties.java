@@ -1,5 +1,6 @@
 package com.open.capacity.rabbitmq.config;
 
+import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -10,9 +11,19 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @Description: 是否开启
  * @date 2019/8/25  21:02
  **/
-
-@ConfigurationProperties("ocp.fast.rabbitmq")
+@Data
+@ConfigurationProperties(prefix = "ocp.fast.rabbitmq")
 public class RabbitMQProperties {
 
     private boolean enable;
+
+    private String addresses;
+
+    private String username;
+
+    private String password;
+
+    private String virtualHost;
+
+    private boolean publisherConfirms = true;
 }

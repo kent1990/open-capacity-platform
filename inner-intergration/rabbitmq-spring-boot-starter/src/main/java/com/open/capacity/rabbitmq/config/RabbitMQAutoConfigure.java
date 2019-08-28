@@ -1,16 +1,16 @@
 package com.open.capacity.rabbitmq.config;
 
-import com.open.capacity.rabbitmq.producer.RabbitMQProducer;
+import com.open.capacity.rabbitmq.producer.FastBuildRabbitMqProducer;
+import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
+import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.autoconfigure.mongo.MongoProperties;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 
 /**
  * @author Coder编程
@@ -22,13 +22,35 @@ import org.springframework.context.annotation.Primary;
  **/
 
 @Configuration
-@ConditionalOnClass(RabbitMQProducer.class)
+@ConditionalOnClass(FastBuildRabbitMqProducer.class)
 @EnableConfigurationProperties(RabbitMQProperties.class)
 public class RabbitMQAutoConfigure {
-    @Bean
-    public RabbitTemplate rabbitTemplate(){
 
-        return new RabbitTemplate();
+
+    @Autowired
+    private RabbitMQProperties rabbitMQProperties;
+
+    @Bean
+    public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory){
+        return new RabbitTemplate(connectionFactory);
     }
-    //TODO
+
+    @Bean
+    @ConditionalOnMissingBean
+    public ConnectionFactory connectionFactory() {
+        CachingConnectionFactory connectionFactory = new CachingConnectionFactory();
+        connectionFactory.setAddresses(rabbitMQProperties.getAddresses());
+        connectionFactory.setUsername(rabbitMQProperties.getUsername());
+        connectionFactory.setPassword(rabbitMQProperties.getPassword());
+        connectionFactory.setVirtualHost(rabbitMQProperties.getVirtualHost());
+        connectionFactory.setPublisherConfirms(rabbitMQProperties.isPublisherConfirms());
+        return connectionFactory;
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    @ConditionalOnProperty(prefix = "ocp.fast.rabbitmq", value = "enalbe", havingValue = "true")
+    public FastBuildRabbitMqProducer fastRabbitMQProducer(ConnectionFactory connectionFactory){
+        return new FastBuildRabbitMqProducer(connectionFactory);
+    }
 }
