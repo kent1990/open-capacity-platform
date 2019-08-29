@@ -23,5 +23,9 @@ public interface UserFeignClient {
     @GetMapping(value = "/users-anon/login", params = "username")
     LoginAppUser findByUsername(@RequestParam("username") String username);
 
+
+	@GetMapping(value = "/users-anon/mobile", params = "mobile")
+	LoginAppUser findByMobile(@RequestParam("mobile") String mobile);
+
     
 }

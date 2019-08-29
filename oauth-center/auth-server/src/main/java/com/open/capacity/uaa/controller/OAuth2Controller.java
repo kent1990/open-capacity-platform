@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.open.capacity.uaa.server.token.SmsCodeAuthenticationToken;
 import org.apache.commons.collections.MapUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -497,5 +498,97 @@ public class OAuth2Controller {
 		result.addAll(execute);
 		return result;
 	}
+
+
+
+	@PostMapping("/authentication/sms")
+	public void getMobileInfo(
+			@ApiParam(required = true, name = "mobile", value = "手机号") @RequestParam(value = "mobile") String mobile,
+			@ApiParam(required = true, name = "smsCode", value = "验证码") @RequestParam(value = "smsCode") String smsCode,
+			HttpServletRequest request, HttpServletResponse response) {
+		String clientId = request.getHeader("client_id");
+		String clientSecret = request.getHeader("client_secret");
+
+		try {
+			if (clientId == null || "".equals(clientId)) {
+				throw new UnapprovedClientAuthenticationException("请求头中无client_id信息");
+			}
+
+			if (clientSecret == null || "".equals(clientSecret)) {
+				throw new UnapprovedClientAuthenticationException("请求头中无client_secret信息");
+			}
+
+			RedisClientDetailsService clientDetailsService = SpringUtil.getBean(RedisClientDetailsService.class);
+
+			ClientDetails clientDetails = clientDetailsService.loadClientByClientId(clientId);
+
+			if (clientDetails == null) {
+				throw new UnapprovedClientAuthenticationException("clientId对应的信息不存在");
+			} else if (!passwordEncoder.matches(clientSecret, clientDetails.getClientSecret())) {
+				throw new UnapprovedClientAuthenticationException("clientSecret不匹配");
+			}
+
+			TokenRequest tokenRequest = new TokenRequest(MapUtils.EMPTY_MAP, clientId, clientDetails.getScope(),
+					"customer");
+
+			OAuth2Request oAuth2Request = tokenRequest.createOAuth2Request(clientDetails);
+
+
+			SmsCodeAuthenticationToken token = new SmsCodeAuthenticationToken(mobile);
+//			UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
+
+			AuthenticationManager authenticationManager = SpringUtil.getBean(AuthenticationManager.class);
+
+			Authentication authentication = authenticationManager.authenticate(token);
+			SecurityContextHolder.getContext().setAuthentication(authentication);
+
+			OAuth2Authentication oAuth2Authentication = new OAuth2Authentication(oAuth2Request, authentication);
+
+			AuthorizationServerTokenServices authorizationServerTokenServices = SpringUtil
+					.getBean("defaultAuthorizationServerTokenServices", AuthorizationServerTokenServices.class);
+
+			OAuth2AccessToken oAuth2AccessToken = authorizationServerTokenServices
+					.createAccessToken(oAuth2Authentication);
+
+			oAuth2Authentication.setAuthenticated(true);
+
+			response.setContentType("application/json;charset=UTF-8");
+			response.getWriter().write(objectMapper.writeValueAsString(oAuth2AccessToken));
+			response.getWriter().flush();
+			response.getWriter().close();
+
+		} catch (Exception e) {
+
+			response.setStatus(HttpStatus.UNAUTHORIZED.value());
+
+			response.setContentType("application/json;charset=UTF-8");
+
+			Map<String, String> rsp = new HashMap<>();
+			rsp.put("resp_code", HttpStatus.UNAUTHORIZED.value() + "");
+			rsp.put("rsp_msg", e.getMessage());
+
+			try {
+				response.getWriter().write(objectMapper.writeValueAsString(rsp));
+				response.getWriter().flush();
+				response.getWriter().close();
+			} catch (JsonProcessingException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+		}
+	}
+
+
+
+
+
+
+
+
+
 
 }
