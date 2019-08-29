@@ -87,7 +87,12 @@ public class SysUserController {
         return sysUserService.findByUsername(username);
     }
 
-
+    @GetMapping(value = "/users-anon/mobile", params = "mobile")
+    @ApiOperation(value = "根据用户名查询用户")
+    @LogAnnotation(module="user-center",recordRequestParam=false)
+    public LoginAppUser findByMobile(String mobile) {
+        return sysUserService.findByMobile(mobile);
+    }
 
     @PreAuthorize("hasAuthority('user:get/users/{id}')")
     @GetMapping("/users/{id}")

@@ -205,6 +205,36 @@ public class SysUserServiceImpl implements SysUserService {
 		return null;
 	}
 
+
+	@Transactional
+	@Override
+	public LoginAppUser findByMobile(String mobile) {
+		SysUser sysUser = sysUserDao.findUserByMobile(mobile);
+		if (sysUser != null) {
+			LoginAppUser loginAppUser = new LoginAppUser();
+			BeanUtils.copyProperties(sysUser, loginAppUser);
+
+			Set<SysRole> sysRoles = userRoleDao.findRolesByUserId(sysUser.getId());
+			loginAppUser.setSysRoles(sysRoles);// 设置角色
+
+			if (!CollectionUtils.isEmpty(sysRoles)) {
+				Set<Long> roleIds = sysRoles.parallelStream().map(r -> r.getId()).collect(Collectors.toSet());
+				Set<SysPermission> sysPermissions = sysPermissionService.findByRoleIds(roleIds);
+				if (!CollectionUtils.isEmpty(sysPermissions)) {
+					Set<String> permissions = sysPermissions.parallelStream().map(p -> p.getPermission())
+							.collect(Collectors.toSet());
+
+					loginAppUser.setPermissions(permissions);// 设置权限集合
+				}
+
+			}
+
+			return loginAppUser;
+		}
+
+		return null;
+	}
+
 	@Override
 	public SysUser findById(Long id) {
 		return sysUserDao.findById(id);

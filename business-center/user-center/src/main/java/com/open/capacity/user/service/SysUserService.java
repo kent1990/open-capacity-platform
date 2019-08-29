@@ -36,6 +36,9 @@ public interface SysUserService {
 	 */
 	LoginAppUser findByUsername(String username);
 
+	LoginAppUser findByMobile(String mobile);
+
+
 	SysUser findById(Long id);
 
 	/**
