@@ -28,6 +28,8 @@ public class SmsController {
 
         String calidateCode = StringUtils.generateRamdomNum();
 
+        // TODO: 2019-08-29 发送短信验证码 每个公司对接不同，自己实现
+
         validateCodeService.saveImageCode(mobile, calidateCode);
         return  Result.succeed(  calidateCode, "发送成功");
     }

@@ -504,7 +504,7 @@ public class OAuth2Controller {
 	@PostMapping("/authentication/sms")
 	public void getMobileInfo(
 			@ApiParam(required = true, name = "mobile", value = "手机号") @RequestParam(value = "mobile") String mobile,
-			@ApiParam(required = true, name = "smsCode", value = "验证码") @RequestParam(value = "smsCode") String smsCode,
+			@ApiParam(required = true, name = "validCode", value = "验证码") @RequestParam(value = "validCode",required = false) String validCode,
 			HttpServletRequest request, HttpServletResponse response) {
 		String clientId = request.getHeader("client_id");
 		String clientSecret = request.getHeader("client_secret");
