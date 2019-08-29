@@ -71,6 +71,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		web.ignoring().antMatchers("/oauth/client/token");
 		web.ignoring().antMatchers("/validata/code/**");
 		web.ignoring().antMatchers("/sms/**");
+		web.ignoring().antMatchers("/authentication/**");
 		web.ignoring().antMatchers(permitUrlProperties.getIgnored());
 		
 	}
