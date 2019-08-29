@@ -26,8 +26,10 @@ public class SmsController {
         String content = SmsController.SYSMSG_LOGIN_PWD_MSG.replace("{0}", StringUtils.generateRamdomNum());
 //        SendMsgResult sendMsgResult = MobileMsgConfig.sendMsg(mobile, content);
 
-        validateCodeService.saveImageCode(mobile, StringUtils.generateRamdomNum());
-        return  Result.succeed(  StringUtils.generateRamdomNum(), "发送成功");
+        String calidateCode = StringUtils.generateRamdomNum();
+
+        validateCodeService.saveImageCode(mobile, calidateCode);
+        return  Result.succeed(  calidateCode, "发送成功");
     }
 
 }
