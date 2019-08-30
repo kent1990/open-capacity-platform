@@ -503,7 +503,7 @@ public class OAuth2Controller {
 
 	@PostMapping("/authentication/sms")
 	public void getMobileInfo(
-			@ApiParam(required = true, name = "mobile", value = "手机号") @RequestParam(value = "mobile") String mobile,
+			@ApiParam(required = true, name = "deviceId", value = "手机号") @RequestParam(value = "deviceId") String deviceId,
 			@ApiParam(required = true, name = "validCode", value = "验证码") @RequestParam(value = "validCode",required = false) String validCode,
 			HttpServletRequest request, HttpServletResponse response) {
 		String clientId = request.getHeader("client_id");
@@ -534,7 +534,7 @@ public class OAuth2Controller {
 			OAuth2Request oAuth2Request = tokenRequest.createOAuth2Request(clientDetails);
 
 
-			SmsCodeAuthenticationToken token = new SmsCodeAuthenticationToken(mobile);
+			SmsCodeAuthenticationToken token = new SmsCodeAuthenticationToken(deviceId);
 //			UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
 
 			AuthenticationManager authenticationManager = SpringUtil.getBean(AuthenticationManager.class);
