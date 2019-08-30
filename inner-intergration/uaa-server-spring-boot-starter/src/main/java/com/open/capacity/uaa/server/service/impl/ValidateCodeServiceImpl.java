@@ -114,7 +114,7 @@ public class ValidateCodeServiceImpl implements ValidateCodeService {
 	public void validate(HttpServletRequest request) {
 		String deviceId = request.getParameter("deviceId");
 		if (StringUtils.isBlank(deviceId)) {
-			throw new RuntimeException("请在请求参数中携带deviceId参数");
+			throw new AuthenticationException("请在请求参数中携带deviceId参数"){};
 		}
 		String code = this.getCode(deviceId);
 		String codeInRequest;

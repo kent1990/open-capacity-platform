@@ -14,6 +14,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.oauth2.common.exceptions.InvalidClientException;
 import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.security.oauth2.provider.NoSuchClientException;
@@ -117,9 +118,9 @@ public class RedisClientDetailsService extends JdbcClientDetailsService {
             }
         }catch (NoSuchClientException e){
             logger.error("clientId:{},{}", clientId, clientId );
+            throw new AuthenticationException ("应用不存在"){};
         }catch (InvalidClientException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        	throw new AuthenticationException ("应用状态不合法"){};
         }
 
         return clientDetails;

@@ -91,7 +91,6 @@ public class RedisTemplateTokenStore implements TokenStore {
 
 	public void storeAccessToken(OAuth2AccessToken token, OAuth2Authentication authentication) {
 
-		OAuth2AccessToken existingAccessToken = this.getAccessToken(authentication);
 
 		this.redisTemplate.opsForValue().set(ACCESS + token.getValue(), token);
 		this.redisTemplate.opsForValue().set(AUTH + token.getValue(), authentication);
@@ -115,8 +114,8 @@ public class RedisTemplateTokenStore implements TokenStore {
 		}
 
 		if (!authentication.isClientOnly()) {
-			if (existingAccessToken != null) {
-				if (!existingAccessToken.isExpired()) {
+			if (token != null) {
+				if (token.getExpiration() != null) {
 					int seconds = token.getExpiresIn();
 					redisTemplate.expire(UNAME_TO_ACCESS + authentication.getOAuth2Request().getClientId(), seconds,
 							TimeUnit.SECONDS);
@@ -129,8 +128,8 @@ public class RedisTemplateTokenStore implements TokenStore {
 
 		}
 
-		if (existingAccessToken != null) {
-			if (!existingAccessToken.isExpired()) {
+		if (token != null) {
+			if (token.getExpiration() != null) {
 				int seconds = token.getExpiresIn();
 				redisTemplate.expire(CLIENT_ID_TO_ACCESS + authentication.getOAuth2Request().getClientId(), seconds,
 						TimeUnit.SECONDS);
