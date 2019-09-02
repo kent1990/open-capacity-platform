@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 短信提供
- * @author zlt
- * @date 2018/12/18
+ * @author zzg
+ * @date 2019/09/01
  */
 @RestController
 public class SmsController {
