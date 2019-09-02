@@ -1,5 +1,6 @@
 package com.open.capacity.uaa.server.config;
 
+import com.open.capacity.uaa.server.provider.SmsCodeAuthenticationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.openfeign.EnableFeignClients;
@@ -56,6 +57,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	private ValidateCodeConfig validateCodeConfig ;
+
+	@Autowired
+	private SmsCodeAuthenticationProvider smsCodeAuthenticationProvider;
+
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
@@ -110,6 +115,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.logout().logoutSuccessUrl("/login.html")
 				.logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler())
 				.addLogoutHandler(oauthLogoutHandler).clearAuthentication(true);
+
+
+		http
+				// 注册到AuthenticationManager中去
+				.authenticationProvider(smsCodeAuthenticationProvider);
 
 		//增加验证码处理
 		http.apply(validateCodeConfig) ;

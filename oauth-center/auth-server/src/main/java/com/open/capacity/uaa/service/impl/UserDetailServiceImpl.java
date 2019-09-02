@@ -1,5 +1,6 @@
 package com.open.capacity.uaa.service.impl;
 
+import com.open.capacity.common.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.authentication.DisabledException;
@@ -19,16 +20,19 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
     @Autowired
     private UserFeignClient  userFeignClient;
-    
-
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        LoginAppUser loginAppUser = null;
 
-//      后续考虑集成spring socail,支持多种类型登录
-        LoginAppUser loginAppUser = userFeignClient.findByUsername(username);   			  //方式1  feign调用       对外feign resttemplate
-        
-//        LoginAppUser loginAppUser = userLoginGrpc.findByUsername(username);		  //方式2  gprc调用		对内grpc dubbo
+        if (StringUtils.isPhone(username)){
+            loginAppUser = userFeignClient.findByMobile(username);
+        }else {
+            //      后续考虑集成spring socail,支持多种类型登录
+            loginAppUser = userFeignClient.findByUsername(username);   			  //方式1  feign调用       对外feign resttemplate
+//        loginAppUser = userLoginGrpc.findByUsername(username);		  //方式2  gprc调用		对内grpc dubbo
+        }
+
         if (loginAppUser == null) {
             throw new AuthenticationCredentialsNotFoundException("用户不存在");
         } else if (!loginAppUser.isEnabled()) {
