@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class SmsCodeAuthenticationProvider implements  AuthenticationProvider {
 
-    @Autowired
+    @Autowired(required = false)
     @Qualifier("smsUserDetailServiceImpl")
     private UserDetailsService smsUserDetailServiceImpl;
 
