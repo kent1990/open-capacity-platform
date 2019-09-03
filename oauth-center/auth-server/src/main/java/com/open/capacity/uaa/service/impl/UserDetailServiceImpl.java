@@ -2,6 +2,7 @@ package com.open.capacity.uaa.service.impl;
 
 import com.open.capacity.common.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,6 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
+@Primary
 public class UserDetailServiceImpl implements UserDetailsService {
 
     @Autowired

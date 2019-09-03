@@ -2,6 +2,7 @@ package com.open.capacity.uaa.server.provider;
 
 import com.open.capacity.uaa.server.token.SmsCodeAuthenticationToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.DisabledException;
@@ -15,13 +16,14 @@ import org.springframework.stereotype.Component;
 public class SmsCodeAuthenticationProvider implements  AuthenticationProvider {
 
     @Autowired
-    private UserDetailsService userDetailsService;
+    @Qualifier("smsUserDetailServiceImpl")
+    private UserDetailsService smsUserDetailServiceImpl;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         SmsCodeAuthenticationToken token = (SmsCodeAuthenticationToken) authentication;
 
-        UserDetails userDetails = userDetailsService.loadUserByUsername((String) token.getPrincipal());
+        UserDetails userDetails = smsUserDetailServiceImpl.loadUserByUsername((String) token.getPrincipal());
 
         if (userDetails == null) {
             throw new AuthenticationCredentialsNotFoundException("用户不存在");
