@@ -48,7 +48,9 @@ public class RedisRouteDefinitionRepository implements RouteDefinitionRepository
 //                    .forEach(routeDefinition -> routeDefinitions.add(JSON.parseObject(routeDefinition, RouteDefinition.class)));
 //        }
 //        return Flux.fromIterable(routeDefinitions);
-        
+
+
+        routeDefinitions.clear();
         
         BoundHashOperations<String, String, String> boundHashOperations = redisTemplate.boundHashOps(GATEWAY_ROUTES_PREFIX);  
         
@@ -60,10 +62,7 @@ public class RedisRouteDefinitionRepository implements RouteDefinitionRepository
         while (it.hasNext()) {    
         	Map.Entry<String, String> entry = it.next();    
         	routeDefinitions.add(JSON.parseObject(entry.getValue(), RouteDefinition.class));
-        	
-        }    
-     
-        
+        }
         return Flux.fromIterable(routeDefinitions);
     }
 
