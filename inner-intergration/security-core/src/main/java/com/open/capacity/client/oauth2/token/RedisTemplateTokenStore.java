@@ -198,10 +198,12 @@ public class RedisTemplateTokenStore implements TokenStore {
 						/**
 						 * 	自动续费 30分钟
 						 */
-						LocalDateTime t1 = LocalDateTime.now().plusMinutes(30);
-						ZoneId zone = ZoneId.systemDefault();
-						Instant instant = t1.atZone(zone).toInstant();
-						java.util.Date date = Date.from(instant);
+//						LocalDateTime t1 = LocalDateTime.now().plusMinutes(30);
+//						ZoneId zone = ZoneId.systemDefault();
+//						Instant instant = t1.atZone(zone).toInstant();
+//						java.util.Date date = Date.from(instant);
+						//5000万次循环测试后发现比上面快17倍,虽然 System.currentTimeMillis() 极致情况下有性能问题 30*60*1000
+						java.util.Date date = new Date(System.currentTimeMillis()+1800000);
 
 						token.setExpiration(date);
 
