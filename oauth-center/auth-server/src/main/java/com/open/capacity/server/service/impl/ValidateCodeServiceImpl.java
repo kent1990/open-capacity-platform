@@ -131,7 +131,7 @@ public class ValidateCodeServiceImpl implements ValidateCodeService {
 			throw new AuthenticationException ("验证码不存在或已过期"){};
 		}
 
-		if (!StringUtils.equals(code, codeInRequest)) {
+		if (code.equalsIgnoreCase(codeInRequest) == false) {
 			throw new AuthenticationException ("验证码不正确"){};
 		}
 
