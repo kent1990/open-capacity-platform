@@ -41,15 +41,9 @@ public class RedisRouteDefinitionRepository implements RouteDefinitionRepository
         /**
          * 从redis 中 获取 全部路由,因为保存在redis ,mysql 中 频繁读取mysql 有可能会带来不必要的问题
          */
-//        Set<String> gatewayKeys =  redisTemplate.boundHashOps(GATEWAY_ROUTES_PREFIX)   ;
-//        if (!CollectionUtils.isEmpty(gatewayKeys)) {
-//            List<String> gatewayRoutes = Optional.ofNullable(redisTemplate.opsForValue().multiGet(gatewayKeys)).orElse(Lists.newArrayList());
-//            gatewayRoutes
-//                    .forEach(routeDefinition -> routeDefinitions.add(JSON.parseObject(routeDefinition, RouteDefinition.class)));
-//        }
-//        return Flux.fromIterable(routeDefinitions);
         
-        
+    	routeDefinitions.clear();
+    	
         BoundHashOperations<String, String, String> boundHashOperations = redisTemplate.boundHashOps(GATEWAY_ROUTES_PREFIX);  
         
         

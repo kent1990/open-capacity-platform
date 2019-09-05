@@ -207,16 +207,11 @@ public class RedisTemplateTokenStore implements TokenStore {
 
 					if (oauth2AccessToken instanceof DefaultOAuth2AccessToken) {
 						DefaultOAuth2AccessToken token = (DefaultOAuth2AccessToken) oauth2AccessToken;
-//						Calendar cal = Calendar.getInstance();
-//						cal.add(Calendar.DATE, 30);
-//						Date date = cal.getTime();
+
 						/**
 						 * 	自动续费 30分钟
 						 */
-						LocalDateTime t1 = LocalDateTime.now().plusMinutes(30);
-						ZoneId zone = ZoneId.systemDefault();
-						Instant instant = t1.atZone(zone).toInstant();
-						java.util.Date date = Date.from(instant);
+						java.util.Date date = new Date(System.currentTimeMillis()+1800000);
 
 						token.setExpiration(date);
 

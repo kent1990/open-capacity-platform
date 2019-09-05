@@ -5,6 +5,8 @@ import com.xxl.job.core.handler.IJobHandler;
 import com.xxl.job.core.handler.annotation.JobHandler;
 import com.xxl.job.core.log.XxlJobLogger;
 import com.xxl.job.core.util.ShardingUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 
@@ -16,10 +18,10 @@ import org.springframework.stereotype.Service;
 @JobHandler(value="shardingJobHandler")
 @Service
 public class ShardingJobHandler extends IJobHandler {
-
+	Logger logger = LoggerFactory.getLogger(ShardingJobHandler.class);
 	@Override
 	public ReturnT<String> execute(String param) throws Exception {
-
+		logger.info("获取参数shardingJobHandler===》"+param);
 		// 分片参数
 		ShardingUtil.ShardingVO shardingVO = ShardingUtil.getShardingVo();
 		XxlJobLogger.log("分片参数：当前分片序号 = {0}, 总分片数 = {1}", shardingVO.getIndex(), shardingVO.getTotal());
