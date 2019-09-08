@@ -87,28 +87,28 @@ http://59.110.164.254:8066/login.html  admin/admin
 
 <table>
 	<tr>
-        <td><img src="https://images.gitee.com/uploads/images/2019/0330/112405_4b826028_869801.png "屏幕截图.png"/></td>
-        <td><img src="https://images.gitee.com/uploads/images/2019/0110/231916_74fcbc85_1441068.png"/></td>
-        <td><img src="https://images.gitee.com/uploads/images/2019/0110/231924_0ab3f997_1441068.png"/></td>
-        <td><img src="https://images.gitee.com/uploads/images/2019/0110/231924_0ab3f997_1441068.png"/></td>
+        <td><img src=https://images.gitee.com/uploads/images/2019/0330/112405_4b826028_869801.png "屏幕截图.png"/></td>
+        <td><img src=https://images.gitee.com/uploads/images/2019/0908/215719_7280e0a7_869801.png "屏幕截图.png"/></td>
+        <td><img src=https://images.gitee.com/uploads/images/2019/0908/215805_ccc6f047_869801.png "屏幕截图.png"/></td>
+        <td><img src=https://images.gitee.com/uploads/images/2019/0908/215849_3579d1f2_869801.png "屏幕截图.png"/></td>
     </tr>
     <tr>
-        <td><img src="https://images.gitee.com/uploads/images/2019/0110/231923_4e42ff5d_1441068.png"/></td>
-        <td><img src="https://images.gitee.com/uploads/images/2019/0329/212209_2ba53e32_869801.png "服务治理.png"/></td>
-        <td><img src="https://images.gitee.com/uploads/images/2019/0126/125449_9b960f05_1147840.png"/></td>
-        <td><img src="https://images.gitee.com/uploads/images/2019/0126/125449_baa02383_1147840.png"/></td>
+        <td><img src=https://images.gitee.com/uploads/images/2019/0908/215938_54aac61f_869801.png "屏幕截图.png"/></td>
+        <td><img src=https://images.gitee.com/uploads/images/2019/0908/220014_980f9120_869801.png "屏幕截图.png"/></td>
+        <td><img src=https://images.gitee.com/uploads/images/2019/0908/220042_ecb2e2f9_869801.png "屏幕截图.png"/></td>
+        <td><img src=https://images.gitee.com/uploads/images/2019/0908/220109_a46454f2_869801.png "屏幕截图.png"/></td>
     </tr>
     <tr>
-        <td><img src="https://images.gitee.com/uploads/images/2019/0110/231932_6e2ce5f5_1441068.png"/></td>
-        <td><img src="https://images.gitee.com/uploads/images/2019/0126/125449_7a3dec37_1147840.png"/></td>
-		<td><img src=https://images.gitee.com/uploads/images/2019/0731/144605_a6abd629_869801.png "屏幕截图.png" /></td>
-        <td><img src=https://images.gitee.com/uploads/images/2019/0731/144758_1090d7d4_869801.png "屏幕截图.png"/></td>
+        <td><img src=https://images.gitee.com/uploads/images/2019/0908/220255_2cca26da_869801.png "屏幕截图.png"/></td>
+        <td><img src=https://images.gitee.com/uploads/images/2019/0908/220334_eb7e8ccc_869801.png "屏幕截图.png"/></td>
+		<td><img src=https://images.gitee.com/uploads/images/2019/0908/220403_d8941a88_869801.png "屏幕截图.png" /></td>
+        <td><img src=https://images.gitee.com/uploads/images/2019/0908/220448_3e4ec4f0_869801.png "屏幕截图.png"/></td>
     </tr>
 	<tr>
+		<td><img src=https://images.gitee.com/uploads/images/2019/0908/220535_058f4e5c_869801.png "屏幕截图.png"/></td>
+		<td><img src=https://images.gitee.com/uploads/images/2019/0908/220908_e83f7a53_869801.png "屏幕截图.png"/></td>
 		<td><img src="https://images.gitee.com/uploads/images/2019/0329/212515_6b74c76a_869801.png "屏幕截图.png"/></td>
-        <td><img src="https://images.gitee.com/uploads/images/2019/0329/212356_27ecb030_869801.png "111.png"/></td>
         <td><img src=https://images.gitee.com/uploads/images/2019/0731/144404_6e9f86e3_869801.png "屏幕截图.png"/></td>
-        <td><img src=https://images.gitee.com/uploads/images/2019/0731/144523_c4c5d0e6_869801.png "屏幕截图.png"/></td>
     </tr>
 </table>
 
