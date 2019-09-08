@@ -50,7 +50,7 @@ public class RequestFilter extends ZuulFilter {
 		RequestContext requestContext = RequestContext.getCurrentContext();
 		String URL = requestContext.getRequest().getRequestURL().toString();
 		requestContext.addZuulRequestHeader(LogUtil.HTTP_HEADER_TRACE_ID, traceId);
-		LOGGER.trace("request url = " + URL + ", traceId = " + traceId);
+		LOGGER.info("request url = " + URL + ", traceId = " + traceId);
 		return null;
 	}
 }

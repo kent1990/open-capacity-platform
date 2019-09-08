@@ -15,6 +15,8 @@
                 <option value="logLevel">日志级别</option>
                 <option value="appName">应用名</option>
                 <option value="classname">类名</option>
+                <option value="contextTraceId">上下文跟踪号</option>
+                <option value="currentTraceId">当前跟踪号</option>
             </select>&emsp;
             <input id="user-search-value" class="layui-input search-input" type="text" placeholder="输入关键字"/>&emsp;
             <button id="user-btn-search" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>
@@ -46,6 +48,8 @@
                         return util.toDateString(d.timestamp, 'yyyy-MM-dd HH:mm:ss');
                     }, title: '日志时间'
                 },
+                {field: 'contextTraceId', sort: true, title: '上下文跟踪号', width: 150},
+                {field: 'currentTraceId', sort: true, title: '当前跟踪号', width: 150},
                 {field: 'message', sort: true, title: '日志信息', width: 350},
                 {field: 'logLevel', sort: true, title: '日志级别', width: 100},
                 {field: 'appName', sort: true, title: '应用名', width: 120},
@@ -53,6 +57,7 @@
                 {field: 'serverPort', sort: true, title: '服务端口', width: 100},
                 {field: 'threadName', sort: true, title: '线程名', width: 150},
                 {field: 'classname', sort: true, title: '类名', width: 250}
+                
             ]]
         });
 
