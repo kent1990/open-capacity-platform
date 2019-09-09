@@ -1,6 +1,6 @@
 package com.open.capacity.common.config;
 
-import com.open.capacity.interceptor.ApiIdempotentInterceptor;
+import com.open.capacity.common.interceptor.ApiIdempotentInterceptor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;

@@ -1,6 +1,6 @@
 package com.open.capacity.common.annotation;
 
-import com.open.capacity.selector.ApiIdempotentImportSelector;
+import com.open.capacity.common.selector.ApiIdempotentImportSelector;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;

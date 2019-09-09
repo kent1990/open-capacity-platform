@@ -1,10 +1,9 @@
-package com.open.capacity.interceptor;
+package com.open.capacity.common.interceptor;
 
 import com.open.capacity.common.annotation.ApiIdempotent;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
