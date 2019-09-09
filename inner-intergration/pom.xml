@@ -26,7 +26,5 @@
   	<module>uaa-server-spring-boot-starter</module>
   	<!-- mq -->
   	<module>rabbitmq-spring-boot-starter</module>
-    <!-- 幂等拦截器 -->
-    <module>apiIdempotent-spring-boot-starter</module>
   </modules>
 </project>

@@ -8,6 +8,7 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.open.capacity.common.annotation.ApiIdempotent;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -83,6 +84,7 @@ public class SysUserController {
     @GetMapping(value = "/users-anon/login", params = "username")
     @ApiOperation(value = "根据用户名查询用户")
     @LogAnnotation(module="user-center",recordRequestParam=false)
+    @ApiIdempotent
     public LoginAppUser findByUsername(String username) {
         return sysUserService.findByUsername(username);
     }

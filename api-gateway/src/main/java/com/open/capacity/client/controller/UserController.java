@@ -6,6 +6,9 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import cn.hutool.core.text.StrBuilder;
+import cn.hutool.core.util.RandomUtil;
+import com.open.capacity.common.web.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -62,4 +65,15 @@ public class UserController {
 		redisTemplateStore.removeRefreshToken(refreshToken);
 		return "delR";
 	}
+
+	@GetMapping("/getToken")
+	public Result token() {
+		String str = RandomUtil.randomString(24);
+		StrBuilder token = new StrBuilder();
+		token.append(str);
+		redisTemplate.opsForValue().set(token.toString(), token.toString(),300);
+		return Result.succeed(token.toString(),"");
+	}
+
+
 }

@@ -157,6 +157,7 @@
 				<artifactId>log-spring-boot-starter</artifactId>
 				<version>${core.version}</version>
 			</dependency>
+
 			<!-- 资源服务 -->
 			<dependency>
 				<groupId>com.open.capacity</groupId>

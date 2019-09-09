@@ -25,7 +25,7 @@
   			<groupId>com.open.capacity</groupId>
   			<artifactId>log-spring-boot-starter</artifactId>
   		</dependency>
-  		
+
   		<!-- 公共实体配置 -->
   		<dependency>
   			<groupId>com.open.capacity</groupId>

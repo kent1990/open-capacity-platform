@@ -11,6 +11,13 @@
   
 	<dependencies>
 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+
 		<!-- 数据库配置 -->
 		<dependency>
 			<groupId>com.open.capacity</groupId>
