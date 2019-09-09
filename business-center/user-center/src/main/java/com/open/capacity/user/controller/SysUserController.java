@@ -268,6 +268,7 @@ public class SysUserController {
     @PostMapping("/users/saveOrUpdate")
     @PreAuthorize("hasAnyAuthority('user:post/users/saveOrUpdate')")
     @LogAnnotation(module="user-center",recordRequestParam=false)
+    @ApiIdempotent
     public Result saveOrUpdate(@RequestBody SysUser sysUser) {
         return  sysUserService.saveOrUpdate(sysUser);
     }
