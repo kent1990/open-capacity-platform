@@ -336,6 +336,11 @@
 			<name>pm</name>
 			<email>1280415703@qq.com</email>
 		</developer>
+		<developer>
+			<id>12</id>
+			<name>finally</name>
+			<email>1363946966@qq.com</email>
+		</developer>
 	</developers>
 
 </project>

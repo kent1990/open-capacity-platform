@@ -2,6 +2,7 @@ package com.open.capacity.uaa.server.controller;
 
 import com.open.capacity.common.util.StringUtils;
 import com.open.capacity.common.web.Result;
+import com.open.capacity.log.annotation.LogAnnotation;
 import com.open.capacity.uaa.server.service.ValidateCodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,7 @@ public class SmsController {
     private ValidateCodeService validateCodeService;
 
     @RequestMapping("/sms/send")
+    @LogAnnotation(module="auth-server",recordRequestParam=false)
     public Result sendSms(@RequestParam(value = "mobile",required = false) String mobile) {
         String content = SmsController.SYSMSG_LOGIN_PWD_MSG.replace("{0}", StringUtils.generateRamdomNum());
 //        SendMsgResult sendMsgResult = MobileMsgConfig.sendMsg(mobile, content);

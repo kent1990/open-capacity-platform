@@ -40,7 +40,7 @@ public class ResponseFilter extends ZuulFilter {
 		RequestContext requestContext = RequestContext.getCurrentContext();
 		String URL = requestContext.getRequest().getRequestURL().toString();
 		String traceId =  MDC.get("X-B3-TraceId") ;
-		LOGGER.trace("response url " + URL + ", traceId = " + traceId);
+		LOGGER.info("response url " + URL + ", traceId = " + traceId);
 		requestContext.getResponse().addHeader(LogUtil.HTTP_HEADER_TRACE_ID, traceId); 
 		return null;
 	}

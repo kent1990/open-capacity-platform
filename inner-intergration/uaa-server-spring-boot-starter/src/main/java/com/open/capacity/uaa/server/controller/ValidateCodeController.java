@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.google.code.kaptcha.Producer;
+import com.open.capacity.log.annotation.LogAnnotation;
 import com.open.capacity.uaa.server.service.ValidateCodeService;
 
 /**
@@ -34,6 +35,7 @@ public class ValidateCodeController {
      * @throws Exception
      */
     @GetMapping("/validata/code/{deviceId}")
+    @LogAnnotation(module="auth-server",recordRequestParam=false)
     public void createCode(@PathVariable String deviceId, HttpServletResponse response) throws Exception {
         Assert.notNull(deviceId, "机器码不能为空");
         response.setHeader("Cache-Control", "no-store, no-cache");

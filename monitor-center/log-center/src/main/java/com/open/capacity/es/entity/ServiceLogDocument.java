@@ -26,4 +26,6 @@ public class ServiceLogDocument {
     private String logLevel;
     private String appName;
     private String classname;
+    private String contextTraceId;
+    private String currentTraceId;
 }

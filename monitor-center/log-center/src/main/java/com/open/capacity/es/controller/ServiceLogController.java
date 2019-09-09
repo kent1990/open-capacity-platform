@@ -27,6 +27,8 @@ import cn.hutool.core.util.StrUtil;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.data.domain.Sort;
+
 /**
  * @author zlt
  */
@@ -41,6 +43,8 @@ public class ServiceLogController {
 	private static final String ES_PARAM_LOG_LEVEL = "logLevel";
 	private static final String ES_PARAM_APP_NAME = "appName";
 	private static final String ES_PARAM_CLASSNAME = "classname";
+	private static final String ES_PARAM_CONTEXT_TRACE_ID = "contextTraceId";
+	private static final String ES_PARAM_CURRENT_TRACE_ID = "currentTraceId";
 
 	@Autowired
 	public ServiceLogDao serviceLogDao;
@@ -73,10 +77,18 @@ public class ServiceLogController {
 				// 模糊查询
 				builder.must(QueryBuilders.fuzzyQuery(ES_PARAM_CLASSNAME, searchValue));
 			}
+			if (ES_PARAM_CONTEXT_TRACE_ID.equals(searchKey)) {
+				// 模糊查询
+				builder.must(QueryBuilders.fuzzyQuery(ES_PARAM_CONTEXT_TRACE_ID, searchValue));
+			}
+			if (ES_PARAM_CURRENT_TRACE_ID.equals(searchKey)) {
+				// 模糊查询
+				builder.must(QueryBuilders.fuzzyQuery(ES_PARAM_CURRENT_TRACE_ID, searchValue));
+			}
 		}
 		// 分页参数
 		Pageable pageable = PageRequest.of(MapUtils.getInteger(params, "page")-1, MapUtils.getInteger(params, "limit")
-				//, Sort.Direction.DESC,"timestamp"
+			, Sort.Direction.DESC,"timestamp"
 				);
 		SearchQuery query = new NativeSearchQueryBuilder().withQuery(builder).withPageable(pageable).build();
 		Page<ServiceLogDocument> result = serviceLogDao.search(query);

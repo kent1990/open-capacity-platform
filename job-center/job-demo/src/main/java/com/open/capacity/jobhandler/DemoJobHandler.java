@@ -30,7 +30,7 @@ public class DemoJobHandler extends IJobHandler {
 
 	@Override
 	public ReturnT<String> execute(String param) throws Exception {
-		logger.info("获取参数===》"+param);
+		logger.info("获取参数===》param=="+param);
 		XxlJobLogger.log("获取参数==》"+param);
 		XxlJobLogger.log("XXL-JOB, Hello World.");
 
