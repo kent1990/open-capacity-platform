@@ -7,4 +7,7 @@ public class UaaConstant {
      */
     public static final String CACHE_CLIENT_KEY = "oauth_client_details";
     
+    public static final String TOKEN_PARAM = "access_token" ;
+    
+    public static final String TOKEN_HEADER = "accessToken" ;
 }

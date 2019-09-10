@@ -1,5 +1,8 @@
 package com.open.capacity.common.util;
 
+import java.util.Map;
+
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,6 +24,15 @@ public class SysUserUtil {
 	 */
 	@SuppressWarnings("rawtypes")
 	public static LoginAppUser getLoginAppUser() {
+		
+		//当内部服务，不带token时，内部服务
+		String accessToken =  TokenUtil.getToken() ;
+		RedisTemplate redisTemplate =  SpringUtils.getBean(RedisTemplate.class);
+		Map<String, Object> params = (Map<String, Object>) redisTemplate.opsForValue().get("token:" + accessToken);
+		if(params!=null){
+			return (LoginAppUser) params.get("auth") ;
+		}
+		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication instanceof OAuth2Authentication) {
 			OAuth2Authentication oAuth2Auth = (OAuth2Authentication) authentication;
@@ -36,6 +48,9 @@ public class SysUserUtil {
 
 			}
 		}
+		
+		
+		
 
 		return null;
 	}

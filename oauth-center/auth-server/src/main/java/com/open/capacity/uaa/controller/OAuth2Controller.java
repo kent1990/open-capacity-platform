@@ -53,6 +53,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.open.capacity.common.auth.details.LoginAppUser;
 import com.open.capacity.common.model.SysPermission;
+import com.open.capacity.common.util.SysUserUtil;
 import com.open.capacity.common.web.PageResult;
 import com.open.capacity.log.annotation.LogAnnotation;
 import com.open.capacity.uaa.server.service.RedisClientDetailsService;
@@ -315,16 +316,7 @@ public class OAuth2Controller {
 	@LogAnnotation(module="auth-server",recordRequestParam=false)
 	public void removeToken(String access_token) {
 
-		// 拿到当前用户信息
-		Authentication user = SecurityContextHolder.getContext().getAuthentication();
-
-		if (user != null) {
-			if (user instanceof OAuth2Authentication) {
-				Authentication athentication = (Authentication) user;
-				OAuth2AuthenticationDetails details = (OAuth2AuthenticationDetails) athentication.getDetails();
-			}
-
-		}
+		 
 		OAuth2AccessToken accessToken = tokenStore.readAccessToken(access_token);
 		if (accessToken != null) {
 			// 移除access_token
@@ -343,16 +335,7 @@ public class OAuth2Controller {
 	@LogAnnotation(module="auth-server",recordRequestParam=false)
 	public OAuth2AccessToken getTokenInfo(String access_token) {
 
-		// 拿到当前用户信息
-		Authentication user = SecurityContextHolder.getContext().getAuthentication();
-
-		if (user != null) {
-			if (user instanceof OAuth2Authentication) {
-				Authentication athentication = (Authentication) user;
-				OAuth2AuthenticationDetails details = (OAuth2AuthenticationDetails) athentication.getDetails();
-			}
-
-		}
+		 
 		OAuth2AccessToken accessToken = tokenStore.readAccessToken(access_token);
 
 		return accessToken;
@@ -371,12 +354,12 @@ public class OAuth2Controller {
 	@LogAnnotation(module="auth-server",recordRequestParam=false)
 	public Map<String, Object> getCurrentUserDetail() {
 		Map<String, Object> userInfo = new HashMap<>();
-		userInfo.put("user", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-		logger.debug("认证详细信息:" + SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString());
+		userInfo.put("user", SysUserUtil.getLoginAppUser());
+		logger.debug("认证详细信息:" + SysUserUtil.getLoginAppUser().toString());
 
 		List<SysPermission> permissions = new ArrayList<>();
 
-		new ArrayList(SecurityContextHolder.getContext().getAuthentication().getAuthorities()).forEach(o -> {
+		new ArrayList(SysUserUtil.getLoginAppUser().getAuthorities()).forEach(o -> {
 			SysPermission sysPermission = new SysPermission();
 			sysPermission.setPermission(o.toString());
 			permissions.add(sysPermission);
