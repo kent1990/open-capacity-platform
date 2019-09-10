@@ -84,7 +84,6 @@ public class SysUserController {
     @GetMapping(value = "/users-anon/login", params = "username")
     @ApiOperation(value = "根据用户名查询用户")
     @LogAnnotation(module="user-center",recordRequestParam=false)
-    @ApiIdempotent
     public LoginAppUser findByUsername(String username) {
         return sysUserService.findByUsername(username);
     }
