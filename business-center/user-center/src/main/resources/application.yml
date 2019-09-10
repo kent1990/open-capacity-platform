@@ -101,7 +101,7 @@ mybatis-plus:
 
 security:
   oauth2:
-    ignored: /users-anon/**  , /doc.html   ,/document.html  ,/users/saveOrUpdate
+    ignored: /users-anon/**  , /doc.html   ,/document.html
     token:
       store:
         type: redis
