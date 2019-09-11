@@ -20,9 +20,9 @@ import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
-import com.open.capacity.client.service.SysClientServiceImpl;
 import com.open.capacity.client.utils.RedisLimiterUtils;
 import com.open.capacity.common.web.Result;
+import com.open.capacity.uaa.client.service.SysClientService;
 
 /**
  * Created by owen on 2017/9/10. 根据应用 url 限流 oauth_client_details if_limit 限流开关
@@ -40,7 +40,7 @@ public class RateLimitFilter extends ZuulFilter {
 	private ObjectMapper objectMapper;
 
 	@Resource
-	SysClientServiceImpl sysClientServiceImpl;
+	SysClientService sysClientService;
 
 	@Override
 	public String filterType() {
@@ -151,7 +151,7 @@ public class RateLimitFilter extends ZuulFilter {
 
 					String clientId = athentication.getOAuth2Request().getClientId();
 
-					Map client = sysClientServiceImpl.getClient(clientId);
+					Map client = sysClientService.getClient(clientId);
 					
 					if(client!=null){
 						String flag = String.valueOf(client.get("if_limit") ) ;

@@ -106,6 +106,7 @@ public class RedisTemplateTokenStore implements TokenStore {
 					.getUserAuthentication();
 			LoginAppUser appUser = (LoginAppUser) authenticationToken.getPrincipal();
 			params.put("username", appUser.getUsername());
+			params.put("auth",  appUser );
 			params.put("authorities", appUser.getAuthorities());
 		}
 

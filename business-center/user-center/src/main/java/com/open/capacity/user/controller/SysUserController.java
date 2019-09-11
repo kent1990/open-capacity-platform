@@ -31,6 +31,7 @@ import com.open.capacity.common.auth.details.LoginAppUser;
 import com.open.capacity.common.model.SysRole;
 import com.open.capacity.common.model.SysUser;
 import com.open.capacity.common.util.SysUserUtil;
+import com.open.capacity.common.util.TokenUtil;
 import com.open.capacity.common.web.PageResult;
 import com.open.capacity.common.web.Result;
 import com.open.capacity.log.annotation.LogAnnotation;
@@ -174,7 +175,8 @@ public class SysUserController {
     @LogAnnotation(module="user-center",recordRequestParam=false)
 //  searchKey=username, searchValue=as
     public PageResult<SysUser> findUsers(@RequestHeader(name="trace_id",required=false) String traceId ,  @RequestParam Map<String, Object> params) throws JsonProcessingException {
-    	log.info("USER SLEUTH:======="+ MDC.get("X-B3-TraceId"));
+    	
+    	System.out.println(SysUserUtil.getLoginAppUser());
     	return sysUserService.findUsers(params);
     }
 

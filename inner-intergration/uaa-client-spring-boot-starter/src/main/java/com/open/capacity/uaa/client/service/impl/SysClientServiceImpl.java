@@ -1,4 +1,4 @@
-package com.open.capacity.client.service;
+package com.open.capacity.uaa.client.service.impl;
 
 import java.util.Iterator;
 import java.util.List;
@@ -15,8 +15,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import com.alibaba.fastjson.JSONObject;
-import com.open.capacity.client.dao.SysClientDao;
 import com.open.capacity.common.constant.UaaConstant;
+import com.open.capacity.uaa.client.dao.SysClientDao;
+import com.open.capacity.uaa.client.service.SysClientService;
 
 /**
  * @author 作者 owen E-mail: 624191343@qq.com
@@ -24,7 +25,7 @@ import com.open.capacity.common.constant.UaaConstant;
  * 查询应用绑定的资源权限
  */
 @Service("sysClientService")
-public class SysClientServiceImpl {
+public class SysClientServiceImpl implements SysClientService {
 
  
     private Logger logger =LoggerFactory.getLogger(SysClientServiceImpl.class) ;
