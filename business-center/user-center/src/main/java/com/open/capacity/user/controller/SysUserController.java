@@ -303,7 +303,16 @@ public class SysUserController {
     }
 
 
-
+    /**
+     * 测试幂等接口
+     * @param sysUser
+     * @return
+     */
+    @PostMapping("/users/save")
+    @ApiIdempotent
+    public Result save(@RequestBody SysUser sysUser) {
+        return  sysUserService.saveOrUpdate(sysUser);
+    }
 
 
 

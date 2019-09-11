@@ -66,7 +66,7 @@ public class UserController {
 		return "delR";
 	}
 
-	@GetMapping("/getToken")
+	@GetMapping("/getVersion")
 	public Result token() {
 		String str = RandomUtil.randomString(24);
 		StrBuilder token = new StrBuilder();

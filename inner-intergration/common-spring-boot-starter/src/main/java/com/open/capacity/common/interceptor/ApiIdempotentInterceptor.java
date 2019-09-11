@@ -8,7 +8,6 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
@@ -17,10 +16,8 @@ import java.lang.reflect.Method;
 @AllArgsConstructor
 public class ApiIdempotentInterceptor implements HandlerInterceptor {
 
+    private static final String VERSION_NAME = "version";
 
-    private static final String TOKEN_NAME = "token";
-
-    @Resource
     private RedisTemplate< String, Object> redisTemplate ;
 
 
@@ -42,21 +39,21 @@ public class ApiIdempotentInterceptor implements HandlerInterceptor {
 
 
     private void checkApiIdempotent(HttpServletRequest request) {
-        String token = request.getHeader(TOKEN_NAME);
-        if (StringUtils.isBlank(token)) {// header中不存在token
-            token = request.getParameter(TOKEN_NAME);
-            if (StringUtils.isBlank(token)) {// parameter中也不存在token
+        String version = request.getHeader(VERSION_NAME);
+        if (StringUtils.isBlank(version)) {// header中不存在token
+            version = request.getParameter(VERSION_NAME);
+            if (StringUtils.isBlank(version)) {// parameter中也不存在token
                 throw new IllegalArgumentException("无效的参数");
             }
         }
 
-        if (!redisTemplate.hasKey(token)) {
+        if (!redisTemplate.hasKey(version)) {
             throw new IllegalArgumentException("不存在对应的参数");
         }
 
-        Boolean bool = redisTemplate.delete(token);
+        Boolean bool = redisTemplate.delete(version);
         if (!bool) {
-            throw new IllegalArgumentException("没有删除对应的token");
+            throw new IllegalArgumentException("没有删除对应的version");
         }
     }
 
