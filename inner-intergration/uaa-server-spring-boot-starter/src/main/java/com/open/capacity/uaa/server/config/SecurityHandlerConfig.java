@@ -103,7 +103,7 @@ public class SecurityHandlerConfig {
 				response.setStatus(HttpStatus.UNAUTHORIZED.value());
 
 				rsp.put("resp_code", HttpStatus.UNAUTHORIZED.value() + "");
-				rsp.put("rsp_msg", msg);
+				rsp.put("resp_msg", msg);
 
 				response.setContentType("application/json;charset=UTF-8");
 				response.getWriter().write(objectMapper.writeValueAsString(rsp));

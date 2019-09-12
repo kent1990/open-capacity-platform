@@ -99,6 +99,9 @@ layui.config({
         field.client_secret = 'webApp';
 
         layer.load(2);
+        
+        debugger ;
+        
         $.ajax({
         	url: config.base_server + 'api-auth/oauth/token',
         	//url:   'http://127.0.0.1:8000/oauth/token',
@@ -122,7 +125,12 @@ layui.config({
                 if (xhr.status == 400) {
                     layer.msg('账号或密码错误', {icon: 5, time: 500});
                 }else if( xhr.status  == 401){
-                    layer.msg('验证码异常', {icon: 5, time: 500});
+                	
+                	var error =JSON.parse(xhr.responseText) ;
+                	
+                	var error_msg = error.error_description ? error.error_description :error.resp_msg ;
+                
+                    layer.msg(error_msg ? error_msg  : xhr.statusText, {icon: 5, time: 500});
                 }
                 else if( xhr.status  == 500){
                     layer.msg('服务器异常,请联系管理员', {icon: 5, time: 500});

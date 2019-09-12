@@ -9,12 +9,12 @@
     <div class="layui-card-body">
         <div class="layui-form toolbar">
             搜索：
-            <select id="user-search-key">
+            <select id="sql-search-key">
                 <option value="">-请选择-</option>
                 <option value="query_str">查询语句</option>
             </select>&emsp;
-            <input id="user-search-value" class="layui-input search-input" type="text" placeholder="输入关键字"/>&emsp;
-            <button id="user-btn-search" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>
+            <input id="sql-search-value" class="layui-input search-input" type="text" placeholder="输入关键字"/>&emsp;
+            <button id="sql-btn-search" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>
         </div>
 
         <table class="layui-table" id="slowQueryLog-table" lay-filter="slowQueryLog-table"></table>
@@ -51,9 +51,9 @@
         });
 
         // 搜索按钮点击事件
-        $('#user-btn-search').click(function () {
-            var key = $('#user-search-key').val();
-            var value = $('#user-search-value').val();
+        $('#sql-btn-search').click(function () {
+            var key = $('#sql-search-key').val();
+            var value = $('#sql-search-value').val();
             table.reload('slowQueryLog-table', {where: {searchKey: key, searchValue: value}});
         });
     });

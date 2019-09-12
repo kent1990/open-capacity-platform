@@ -149,7 +149,7 @@ public class OAuth2Controller {
 
 			Map<String, String> rsp = new HashMap<>();
 			rsp.put("resp_code", HttpStatus.UNAUTHORIZED.value() + "");
-			rsp.put("rsp_msg", e.getMessage());
+			rsp.put("resp_msg", e.getMessage());
 
 			try {
 				response.getWriter().write(objectMapper.writeValueAsString(rsp));
@@ -223,7 +223,7 @@ public class OAuth2Controller {
 			response.setContentType("application/json;charset=UTF-8");
 			Map<String, String> rsp = new HashMap<>();
 			rsp.put("resp_code", HttpStatus.UNAUTHORIZED.value() + "");
-			rsp.put("rsp_msg", e.getMessage());
+			rsp.put("resp_msg", e.getMessage());
 
 			try {
 				response.getWriter().write(objectMapper.writeValueAsString(rsp));
@@ -289,7 +289,7 @@ public class OAuth2Controller {
 			response.setContentType("application/json;charset=UTF-8");
 			Map<String, String> rsp = new HashMap<>();
 			rsp.put("resp_code", HttpStatus.UNAUTHORIZED.value() + "");
-			rsp.put("rsp_msg", e.getMessage());
+			rsp.put("resp_msg", e.getMessage());
 
 			try {
 				response.getWriter().write(objectMapper.writeValueAsString(rsp));
@@ -548,7 +548,7 @@ public class OAuth2Controller {
 
 			Map<String, String> rsp = new HashMap<>();
 			rsp.put("resp_code", HttpStatus.UNAUTHORIZED.value() + "");
-			rsp.put("rsp_msg", e.getMessage());
+			rsp.put("resp_msg", e.getMessage());
 
 			try {
 				response.getWriter().write(objectMapper.writeValueAsString(rsp));
