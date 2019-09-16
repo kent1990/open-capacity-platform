@@ -1,12 +1,13 @@
 /**
  * 
  */
-package com.open.capacity.log;
+package com.open.capacity;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 import com.open.capacity.log.annotation.EnableLogging;
 
@@ -15,7 +16,6 @@ import com.open.capacity.log.annotation.EnableLogging;
 * @version 创建时间：2018年4月5日 下午19:52:21
 * 类说明 
 */
- 
 @Configuration
 @EnableLogging
 @SpringBootApplication
