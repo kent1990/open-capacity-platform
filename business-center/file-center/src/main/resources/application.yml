@@ -12,6 +12,11 @@ qiniu:
     accessKeySecret: 5CBWKFd1pP-OSiusd1Bvhokp-ih4i3bs2QA2r-U2
     endpoint: http://ps3sk2wqy.bkt.clouddn.com
     bucketName: ocp
+
+file:
+  oss:
+    domain: /api-file/fileinfo/files/
+    basePath: "D:\\uploadshp"
     
 spring:
   datasource:
