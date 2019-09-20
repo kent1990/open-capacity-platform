@@ -7,6 +7,7 @@ import com.open.capacity.oss.dao.FileDao;
 import com.open.capacity.oss.model.FileInfo;
 import com.open.capacity.oss.model.FileType;
 import com.open.capacity.oss.task.TaskUnZipCall;
+import com.open.capacity.oss.utils.FileUtil;
 import org.apache.commons.collections4.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -98,6 +99,9 @@ public class LocalOssServiceImpl extends AbstractFileService {
         fileInfo.setPathDir(basePath + File.separator + pathDir);
         fileInfo.setPath(basePath + File.separator + subPath);
         fileInfo.setUrl(domain + subPath);
+
+        // 本地保存文件
+        FileUtil.saveFile(file,fileInfo.getPath());
 //        fileInfo.setUrl(domain +  subPath.replaceAll("/","-") );
     }
 
