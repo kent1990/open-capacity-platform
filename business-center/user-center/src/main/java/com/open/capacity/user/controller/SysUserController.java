@@ -8,11 +8,9 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.open.capacity.common.annotation.ApiIdempotent;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -27,11 +25,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.open.capacity.common.annotation.ApiIdempotent;
 import com.open.capacity.common.auth.details.LoginAppUser;
 import com.open.capacity.common.model.SysRole;
 import com.open.capacity.common.model.SysUser;
 import com.open.capacity.common.util.SysUserUtil;
-import com.open.capacity.common.util.TokenUtil;
 import com.open.capacity.common.web.PageResult;
 import com.open.capacity.common.web.Result;
 import com.open.capacity.log.annotation.LogAnnotation;
@@ -51,7 +49,6 @@ import lombok.extern.slf4j.Slf4j;
 * @version 创建时间：2017年11月12日 上午22:57:51
  *用户
  */
-@Slf4j
 @RestController
 @Api(tags = "USER API")
 public class SysUserController {

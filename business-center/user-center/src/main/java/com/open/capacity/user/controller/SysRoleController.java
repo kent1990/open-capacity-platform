@@ -2,8 +2,6 @@ package com.open.capacity.user.controller;
 
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,13 +28,13 @@ import io.swagger.annotations.ApiOperation;
 * @version 创建时间：2017年11月12日 上午22:57:51
 * 角色管理
  */
+
 @RestController
 @Api(tags = "ROLE API")
 public class SysRoleController {
 
 	@Autowired
 	private SysRoleService sysRoleService;
-	private static Logger log = LoggerFactory.getLogger(SysRoleController.class);
 	private ObjectMapper objectMapper = new ObjectMapper();
 
 

@@ -13,8 +13,6 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
@@ -28,6 +26,8 @@ import com.open.capacity.log.annotation.LogAnnotation;
 import com.open.capacity.log.service.LogService;
 import com.open.capacity.log.util.LogUtil;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * 
  * @author owen
@@ -36,12 +36,11 @@ import com.open.capacity.log.util.LogUtil;
  * 如果开启日志记录，需要多数据配置
  * 
  */
- 
+@Slf4j 
 @Aspect
 @Order(-1) // 保证该AOP在@Transactional之前执行
 public class LogAnnotationAOP {
 
-	private static final Logger logger = LoggerFactory.getLogger(LogAnnotationAOP.class);
 	
 	@Autowired(required=false)
 	private LogService logService ;
@@ -58,18 +57,18 @@ public class LogAnnotationAOP {
 		String httpMethod = null;
 		Object result = null;
 		List<Object> httpReqArgs = new ArrayList<Object>();
-		SysLog log = new SysLog();
-		log.setCreateTime(new Date());
+		SysLog sysLog = new SysLog();
+		sysLog.setCreateTime(new Date());
 		
 		LoginAppUser loginAppUser = SysUserUtil.getLoginAppUser();
 		if (loginAppUser != null) {
-			log.setUsername(loginAppUser.getUsername());
+			sysLog.setUsername(loginAppUser.getUsername());
 		}
 
 		MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
 
 		LogAnnotation logAnnotation = methodSignature.getMethod().getDeclaredAnnotation(LogAnnotation.class);
-		log.setModule(logAnnotation.module() + ":" + methodSignature.getDeclaringTypeName() + "/"
+		sysLog.setModule(logAnnotation.module() + ":" + methodSignature.getDeclaringTypeName() + "/"
 				+ methodSignature.getName());
 
 		Object[] args = joinPoint.getArgs();// 参数值
@@ -88,20 +87,20 @@ public class LogAnnotationAOP {
 
 		try {
 			String params = JSONObject.toJSONString(httpReqArgs);
-			log.setParams(params);
+			sysLog.setParams(params);
 			// 打印请求参数参数
-			logger.info("开始请求，transid={},  url={} , httpMethod={}, reqData={} ", transid, url, httpMethod, params);
+			log.info("开始请求，transid={},  url={} , httpMethod={}, reqData={} ", transid, url, httpMethod, params);
 		} catch (Exception e) {
-			logger.error("记录参数失败：{}", e.getMessage());
+			log.error("记录参数失败：{}", e.getMessage());
 		}
 
 		try {
 			// 调用原来的方法
 			result = joinPoint.proceed();
-			log.setFlag(Boolean.TRUE);
+			sysLog.setFlag(Boolean.TRUE);
 		} catch (Exception e) {
-			log.setFlag(Boolean.FALSE);
-			log.setRemark(e.getMessage());
+			sysLog.setFlag(Boolean.FALSE);
+			sysLog.setRemark(e.getMessage());
 
 			throw e;
 		} finally {
@@ -110,17 +109,17 @@ public class LogAnnotationAOP {
 				try {
 					if (logAnnotation.recordRequestParam()) {
 						if(logService!=null){
-							logService.save(log);
+							logService.save(sysLog);
 						}
 						
 					}
 				} catch (Exception e) {
-					logger.error("记录参数失败：{}", e.getMessage());
+					log.error("记录参数失败：{}", e.getMessage());
 				}
 
 			});
 			// 获取回执报文及耗时
-			logger.info("请求完成, transid={}, 耗时={}, resp={}:", transid, (System.currentTimeMillis() - start),
+			log.info("请求完成, transid={}, 耗时={}, resp={}:", transid, (System.currentTimeMillis() - start),
 					result == null ? null : JSON.toJSONString(result));
 
 		}

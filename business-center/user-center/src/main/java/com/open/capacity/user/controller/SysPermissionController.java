@@ -8,8 +8,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -46,7 +44,6 @@ public class SysPermissionController {
 	@Autowired
 	private SysPermissionService sysPermissionService;
 
-	private static Logger log = LoggerFactory.getLogger(SysPermissionController.class);
 	private ObjectMapper objectMapper = new ObjectMapper();
 	/**
 	 * 删除权限标识

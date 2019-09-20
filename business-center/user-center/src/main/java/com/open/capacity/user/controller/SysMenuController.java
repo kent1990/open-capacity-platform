@@ -10,8 +10,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang.ObjectUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.CollectionUtils;
@@ -43,7 +41,6 @@ public class SysMenuController {
 
 	@Autowired
 	private SysMenuService menuService;
-	private static Logger log = LoggerFactory.getLogger(SysMenuController.class);
 	private ObjectMapper objectMapper = new ObjectMapper();
 
 	// <!-- -->
