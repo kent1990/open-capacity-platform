@@ -64,20 +64,18 @@ public class LogAnnotationAOP {
 		List<Object> httpReqArgs = new ArrayList<Object>();
 		SysLog sysLog = new SysLog();
 		sysLog.setCreateTime(new Date());
-		
 		LoginAppUser loginAppUser = SysUserUtil.getLoginAppUser();
 		if (loginAppUser != null) {
 			sysLog.setUsername(loginAppUser.getUsername());
 		}
-
 		MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
-
 		LogAnnotation logAnnotation = methodSignature.getMethod().getDeclaredAnnotation(LogAnnotation.class);
 		sysLog.setModule(logAnnotation.module() + ":" + methodSignature.getDeclaringTypeName() + "/"
 				+ methodSignature.getName());
 
 		Object[] args = joinPoint.getArgs();// 参数值
 		url =  methodSignature.getDeclaringTypeName() + "/"+ methodSignature.getName();
+		String params = null ;
 		for (Object object : args) {
 			if (object instanceof HttpServletRequest) {
 				HttpServletRequest request = (HttpServletRequest) object;
@@ -91,7 +89,7 @@ public class LogAnnotationAOP {
 		}
 
 		try {
-			String params = JSONObject.toJSONString(httpReqArgs);
+			params = JSONObject.toJSONString(httpReqArgs);
 			sysLog.setParams(params);
 			// 打印请求参数参数
 			log.info("开始请求，transid={},  url={} , httpMethod={}, reqData={} ", transid, url, httpMethod, params);
@@ -106,7 +104,7 @@ public class LogAnnotationAOP {
 		} catch (Exception e) {
 			sysLog.setFlag(Boolean.FALSE);
 			sysLog.setRemark(e.getMessage());
-
+			log.error("请求报错，transid={},  url={} , httpMethod={}, reqData={} ,error ={} ", transid, url, httpMethod, params,e.getMessage());
 			throw e;
 		} finally {
 
