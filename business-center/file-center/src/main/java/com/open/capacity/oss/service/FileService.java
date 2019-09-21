@@ -4,7 +4,7 @@ import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.open.capacity.commons.PageResult;
+import com.open.capacity.common.web.PageResult;
 import com.open.capacity.oss.model.FileInfo;
 
 /**
@@ -22,4 +22,5 @@ public interface FileService {
 	
 	PageResult<FileInfo>  findList(Map<String, Object> params);
 
+	void unZip(String filePath, String descDir) throws RuntimeException ;
 }

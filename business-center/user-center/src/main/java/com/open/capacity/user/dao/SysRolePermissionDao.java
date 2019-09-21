@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.open.capacity.model.system.SysPermission;
+import com.open.capacity.common.model.SysPermission;
 
  
 /**

@@ -3,41 +3,28 @@
   <parent>
     <groupId>com.open.capacity</groupId>
     <artifactId>open-capacity-platform</artifactId>
-    <version>1.0.1</version>
+    <version>2.0.1</version>
   </parent>
   <artifactId>inner-intergration</artifactId>
-  <description>内部支撑工具</description>
-  <!--
-  ~
-  ~  Copyright (c) 2018-2025, open-capacity-platform All rights reserved.
-  ~
-  ~  Redistribution and use in source and binary forms, with or without
-  ~  modification, are permitted provided that the following conditions are met:
-  ~
-  ~ Redistributions of source code must retain the above copyright notice,
-  ~  this list of conditions and the following disclaimer.
-  ~  Redistributions in binary form must reproduce the above copyright
-  ~  notice, this list of conditions and the following disclaimer in the
-  ~  documentation and/or other materials provided with the distribution.
-  ~  Neither the name of the open-capacity-platform developer nor the names of its
-  ~  contributors may be used to endorse or promote products derived from
-  ~  this software without specific prior written permission.
-  ~  Author: owen gitgeek (624191343@qq.com)
-  ~
--->
   <packaging>pom</packaging>
+  <description>内部支撑工具</description>
+    
   <modules>
-  	<!-- 数据库逻辑封装  -->
-  	<module>db-core</module>
-  	<!-- Model层，和部分工具类 -->
-  	<module>api-commons</module>
-  	<!-- 资源服务器 -->
-  	<module>security-core</module>
-  	<!-- 日志格式-->
-  	<module>log-core</module>
-  	<!-- 分布式锁 -->
-  	<module>lock-core</module>
-  	<!-- swagger引用 -->
-  	<module>swagger-core</module>
+  	<!-- 关系型数据库配置-->
+  	<module>db-spring-boot-starter</module>
+  	<!-- 非关系型数据库配置-->
+  	<module>redis-spring-boot-starter</module>
+  	<!-- 日志统一配置 -->
+  	<module>log-spring-boot-starter</module>
+  	<!-- 公共实体类配置 -->
+  	<module>common-spring-boot-starter</module>
+  	<!-- API文档配置 -->
+  	<module>swagger-spring-boot-starter</module>
+  	<!-- 资源服务器配置 -->
+  	<module>uaa-client-spring-boot-starter</module>
+  	<!-- 认证服务器配置 -->
+  	<module>uaa-server-spring-boot-starter</module>
+  	<!-- mq -->
+  	<module>rabbitmq-spring-boot-starter</module>
   </modules>
 </project>

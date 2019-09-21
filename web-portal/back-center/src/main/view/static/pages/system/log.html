@@ -9,15 +9,17 @@
     <div class="layui-card-body">
         <div class="layui-form toolbar">
             搜索：
-            <select id="user-search-key">
+            <select id="log-search-key">
                 <option value="">-请选择-</option>
                 <option value="message">日志信息</option>
                 <option value="logLevel">日志级别</option>
                 <option value="appName">应用名</option>
                 <option value="classname">类名</option>
+                <option value="contextTraceId">上下文跟踪号</option>
+                <option value="currentTraceId">当前跟踪号</option>
             </select>&emsp;
-            <input id="user-search-value" class="layui-input search-input" type="text" placeholder="输入关键字"/>&emsp;
-            <button id="user-btn-search" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>
+            <input id="log-search-value" class="layui-input search-input" type="text" placeholder="输入关键字"/>&emsp;
+            <button id="log-btn-search" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>
         </div>
 
         <table class="layui-table" id="log-table" lay-filter="log-table"></table>
@@ -46,6 +48,8 @@
                         return util.toDateString(d.timestamp, 'yyyy-MM-dd HH:mm:ss');
                     }, title: '日志时间'
                 },
+                {field: 'contextTraceId', sort: true, title: '上下文跟踪号', width: 150},
+                {field: 'currentTraceId', sort: true, title: '当前跟踪号', width: 150},
                 {field: 'message', sort: true, title: '日志信息', width: 350},
                 {field: 'logLevel', sort: true, title: '日志级别', width: 100},
                 {field: 'appName', sort: true, title: '应用名', width: 120},
@@ -53,6 +57,7 @@
                 {field: 'serverPort', sort: true, title: '服务端口', width: 100},
                 {field: 'threadName', sort: true, title: '线程名', width: 150},
                 {field: 'classname', sort: true, title: '类名', width: 250}
+                
             ]]
         });
 
@@ -61,9 +66,9 @@
         });
 
         // 搜索按钮点击事件
-        $('#user-btn-search').click(function () {
-            var key = $('#user-search-key').val();
-            var value = $('#user-search-value').val();
+        $('#log-btn-search').click(function () {
+            var key = $('#log-search-key').val();
+            var value = $('#log-search-value').val();
             table.reload('log-table', {where: {searchKey: key, searchValue: value}});
         });
     });

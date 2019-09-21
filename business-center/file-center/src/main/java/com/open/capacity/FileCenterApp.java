@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
-import com.open.capacity.autoconfigure.port.PortApplicationEnvironmentPreparedEventListener;
+import com.open.capacity.common.port.PortApplicationEnvironmentPreparedEventListener;
 
 /**
  * @author 作者 owen E-mail: 624191343@qq.com

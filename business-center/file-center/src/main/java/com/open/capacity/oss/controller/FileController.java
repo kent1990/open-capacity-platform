@@ -3,8 +3,6 @@ package com.open.capacity.oss.controller;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,14 +15,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.open.capacity.annotation.log.LogAnnotation;
-import com.open.capacity.commons.PageResult;
-import com.open.capacity.commons.Result;
-import com.open.capacity.log.monitor.PointUtil;
+import com.open.capacity.common.web.PageResult;
+import com.open.capacity.common.web.Result;
+import com.open.capacity.log.annotation.LogAnnotation;
 import com.open.capacity.oss.config.OssServiceFactory;
 import com.open.capacity.oss.model.FileInfo;
 import com.open.capacity.oss.model.FileType;
 import com.open.capacity.oss.service.FileService;
+
+import io.swagger.annotations.Api;
 
 /**
  * @author 作者 owen E-mail: 624191343@qq.com
@@ -33,11 +32,11 @@ import com.open.capacity.oss.service.FileService;
 *  参考src/main/view/upload.html
 */
 @RestController
+@Api(tags = "FILE API")
 public class FileController {
 
 	@Autowired
 	private OssServiceFactory fileServiceFactory;
-	private static Logger log = LoggerFactory.getLogger(FileController.class);
 	private ObjectMapper objectMapper = new ObjectMapper();
 	/**
 	 * 文件上传

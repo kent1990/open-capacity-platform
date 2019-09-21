@@ -14,7 +14,7 @@ server:
 #服务名称
 spring:
   application:
-    name: auth-gateway
+    name: api-gateway
   cloud:
     nacos:
       discovery:

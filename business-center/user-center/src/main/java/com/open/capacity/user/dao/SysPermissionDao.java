@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.open.capacity.model.system.SysPermission;
+import com.open.capacity.common.model.SysPermission;
 
 /**
 * @author 作者 owen E-mail: 624191343@qq.com

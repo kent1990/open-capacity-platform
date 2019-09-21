@@ -15,7 +15,7 @@
 		</where>
 	</update>
 
-	<select id="findMenusByRoleIds" resultType="com.open.capacity.model.system.SysMenu">
+	<select id="findMenusByRoleIds" resultType="com.open.capacity.common.model.SysMenu">
 		select distinct t.* from sys_menu t
 		inner join sys_role_menu r on r.menuId = t.id
 		where

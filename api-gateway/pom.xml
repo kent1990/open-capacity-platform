@@ -3,64 +3,51 @@
   <parent>
     <groupId>com.open.capacity</groupId>
     <artifactId>open-capacity-platform</artifactId>
-    <version>1.0.1</version>
+    <version>2.0.1</version>
   </parent>
   <artifactId>api-gateway</artifactId>
   
-  <!--
-  ~
-  ~  Copyright (c) 2018-2025, open-capacity-platform All rights reserved.
-  ~
-  ~  Redistribution and use in source and binary forms, with or without
-  ~  modification, are permitted provided that the following conditions are met:
-  ~
-  ~ Redistributions of source code must retain the above copyright notice,
-  ~  this list of conditions and the following disclaimer.
-  ~  Redistributions in binary form must reproduce the above copyright
-  ~  notice, this list of conditions and the following disclaimer in the
-  ~  documentation and/or other materials provided with the distribution.
-  ~  Neither the name of the open-capacity-platform developer nor the names of its
-  ~  contributors may be used to endorse or promote products derived from
-  ~  this software without specific prior written permission.
-  ~  Author: owen gitgeek (624191343@qq.com)
-  ~
--->
-  <dependencies>
-		<!-- 服务追踪
+  <dependencies> 
+  		<dependency>
+  			<groupId>com.open.capacity</groupId>
+  			<artifactId>db-spring-boot-starter</artifactId>
+  		</dependency>
+  		
+  		
+  		<dependency>
+  			<groupId>com.open.capacity</groupId>
+  			<artifactId>redis-spring-boot-starter</artifactId>
+  		</dependency>
+  		
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-zipkin</artifactId>
-		</dependency>
-		 -->
-
-		<!-- 日志统一配置 -->
-		<dependency>
-			<groupId>com.open.capacity</groupId>
-			<artifactId>log-core</artifactId>
-			<version>${core.version}</version>
-		</dependency>
-
-		<!-- 公共实体类模块 -->
-		<dependency>
-			<groupId>com.open.capacity</groupId>
-			<artifactId>api-commons</artifactId>
-			<version>${core.version}</version>
-		</dependency>
-		<!-- 关系型和非关系型数据库配置 -->
-		<dependency>
-			<groupId>com.open.capacity</groupId>
-			<artifactId>db-core</artifactId>
-			<version>${core.version}</version>
-		</dependency>
+  			<groupId>com.open.capacity</groupId>
+  			<artifactId>log-spring-boot-starter</artifactId>
+  		</dependency>
+  		
+  		
+  		<dependency>
+  			<groupId>com.open.capacity</groupId>
+  			<artifactId>common-spring-boot-starter</artifactId>
+  		</dependency>
+  		
+  		<dependency>
+  			<groupId>com.open.capacity</groupId>
+  			<artifactId>uaa-client-spring-boot-starter</artifactId>
+  		</dependency>
 		
-		<!-- 资源服务器 -->
+		<!-- swagger -->
 		<dependency>
-			<groupId>com.open.capacity</groupId>
-			<artifactId>security-core</artifactId>
-			<version>${core.version}</version>
+			<groupId>com.didispace</groupId>
+			<artifactId>swagger-butler-core</artifactId>
+			<version>2.0.0</version>
 		</dependency>
-		
-		<dependency>
+		 
+		 <dependency>
+  			<groupId>com.open.capacity</groupId>
+  			<artifactId>swagger-spring-boot-starter</artifactId>
+  		</dependency>
+
+		 <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 			<!-- 移除tomcat容器 -->
@@ -101,17 +88,7 @@
 		</dependency>
 
 
-		<!-- swagger -->
-		<dependency>
-			<groupId>com.didispace</groupId>
-			<artifactId>swagger-butler-core</artifactId>
-			<version>1.2.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.open.capacity</groupId>
-			<artifactId>swagger-core</artifactId>
-			<version>${core.version}</version>
-		</dependency> 
+		
 	 
 
 
@@ -137,24 +114,24 @@
             <artifactId>spring-cloud-zuul-ratelimit</artifactId>
             <version>2.2.3.RELEASE</version>
         </dependency>
-
-
-	  <!-- 选用nacos时打开-->
-	  <dependency>
-		  <groupId>org.springframework.cloud</groupId>
-		  <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-	  </dependency>
-	  <!--alibaba nacos config-->
-	  <dependency>
-		  <groupId>org.springframework.cloud</groupId>
-		  <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
-	  </dependency>
-	  <!--alibaba sentinel-->
-	  <dependency>
-		  <groupId>org.springframework.cloud</groupId>
-		  <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
-	  </dependency>
 		
+		<!-- 选用nacos时打开-->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+		</dependency>
+		<!--alibaba nacos config-->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+		</dependency>
+        <!--alibaba sentinel-->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+		</dependency>
+		
+		 
 	</dependencies>
 
 	<!-- 形成带第三方jar包的可执行jar包，jar包目录结构如下 application.properties lib META-INF mybatis 
@@ -197,6 +174,4 @@
 		</plugins>
 		<finalName>${project.artifactId}</finalName>
 	</build>
-  
-  
 </project>

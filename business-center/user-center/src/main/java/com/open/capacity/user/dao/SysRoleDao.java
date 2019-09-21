@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-import com.open.capacity.model.system.SysRole;
+import com.open.capacity.common.model.SysRole;
 
 /**
 * @author 作者 owen E-mail: 624191343@qq.com

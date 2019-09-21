@@ -7,9 +7,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.context.annotation.Import;
 
-import com.open.capacity.annotation.EnableLogging;
-import com.open.capacity.autoconfigure.port.PortApplicationEnvironmentPreparedEventListener;
+import com.open.capacity.common.feign.GolbalFeignConfig;
+import com.open.capacity.common.port.PortApplicationEnvironmentPreparedEventListener;
+import com.open.capacity.log.annotation.EnableLogging;
+import com.open.capacity.uaa.server.UAAServerConfig;
 
 /** 
 * @author owen 624191343@qq.com
@@ -17,9 +20,10 @@ import com.open.capacity.autoconfigure.port.PortApplicationEnvironmentPreparedEv
 * 类说明 
 */
 @EnableLogging
-@EnableFeignClients
 @EnableDiscoveryClient
 @SpringBootApplication
+@Import(UAAServerConfig.class)
+@EnableFeignClients(defaultConfiguration=GolbalFeignConfig.class)
 public class AuthServerApp {
 	
 	public static void main(String[] args) {

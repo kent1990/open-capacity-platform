@@ -17,7 +17,6 @@ bin/
 NewCustServSer/
 SrenewSer/
 sms-drugstore/
-04.sms-center.sql
 
 # idea ignore
 .idea/

@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
-import com.open.capacity.model.system.SysMenu;
+import com.open.capacity.common.model.SysMenu;
 /**
 * @author 作者 owen E-mail: 624191343@qq.com
 * @version 创建时间：2017年11月13日 上午22:57:51

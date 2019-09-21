@@ -73,7 +73,7 @@
 		<include refid="where" />
 	</select>
 
-	<select id="findList" resultType="com.open.capacity.model.system.SysUser">
+	<select id="findList" resultType="com.open.capacity.common.model.SysUser">
 		select * from sys_user t
 		<include refid="where" />
 		order by t.id desc

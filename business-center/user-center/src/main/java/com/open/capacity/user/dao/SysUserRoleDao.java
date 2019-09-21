@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
-import com.open.capacity.model.system.SysRole;
+import com.open.capacity.common.model.SysRole;
 
  
 /**

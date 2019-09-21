@@ -9,8 +9,7 @@ import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.open.capacity.model.system.SysPermission;
-import com.open.capacity.model.system.SysUser;
+import com.open.capacity.common.model.SysUser;
 
 /**
 * @author 作者 owen E-mail: 624191343@qq.com
@@ -40,5 +39,9 @@ public interface SysUserDao  extends BaseMapper<SysUser> {
 	
 	@Select("select u.* from sys_user u   where u.username = #{username}")
 	SysUser findUserByUsername(String username);
+
+	@Select("select u.* from sys_user u   where u.phone = #{mobile}")
+	SysUser findUserByMobile(String mobile);
+	
 
 }

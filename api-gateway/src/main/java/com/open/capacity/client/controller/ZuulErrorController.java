@@ -1,13 +1,12 @@
 package com.open.capacity.client.controller;
 
 import org.springframework.boot.web.servlet.error.ErrorController;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.netflix.zuul.context.RequestContext;
-import com.open.capacity.commons.Result;
+import com.open.capacity.common.web.Result;
 
 import lombok.extern.slf4j.Slf4j;
 

@@ -69,7 +69,7 @@ spring:
     host: 59.110.164.254
     port: 6379
     timeout: 6000
-    database: 5
+    database: 8
     lettuce:
       pool:
         max-active: -1 # 连接池最大连接数（使用负值表示没有限制）,如果赋值为-1，则表示不限制；如果pool已经分配了maxActive个jedis实例，则此时pool的状态为exhausted(耗尽)
@@ -106,7 +106,7 @@ mybatis-plus:
 
 security:
   oauth2:
-    ignored:  /test163/** , /api-auth/** , /doc.html ,/test111 ,/api-user/users-anon/login,/user-center/users-anon/login,/document.html,**/v2/api-docs,/oauth/** ,/login.html ,/user/login,/**/**.css ,/**/**.js  
+    ignored:  /test163/** , /api-auth/** , /doc.html ,/test111 ,/api-user/users-anon/login, /api-user/users/save,    /user-center/users-anon/login,/document.html,**/v2/api-docs,/oauth/** ,/login.html ,/user/login,/**/**.css ,/**/**.js   ,/getVersion
     token:
       store:
         type: redis
@@ -118,8 +118,6 @@ security:
 
 #设置最大超时时间
 ribbon:  
-  eager-load:
-    enabled: true
   ServerListRefreshInterval: 10  #刷新服务列表源的间隔时间
   httpclient:
     enabled: false
@@ -250,10 +248,6 @@ zuul:
       path: /api-sms/**
       service-id: sms-center  
       strip-prefix: true
-    eureka:
-      path: /api-eureka/**
-      service-id: eureka-server
-      strip-prefix: true
     generator:
       path: /api-generator/**
       service-id: generator-center
@@ -313,7 +307,6 @@ swagger:
   butler:
     api-docs-path:  v2/api-docs
     auto-generate-from-zuul-routes: true
-    ignore-routes: auth-login-page,auth-login-process,auth-login-token,auth-login-authorize,auth-check-process,auth-css-process01,auth-css-process02,auth-js-process01,auth-js-process02
       
 #  generate-routes: auth-server, auth-client 
 
