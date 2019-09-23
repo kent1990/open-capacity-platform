@@ -16,5 +16,8 @@
   	<module>log-center</module>
   	<!-- 事物中心 -->
   	<module>transaction-center</module>
+  	<!-- sentinel -->
+  	<module>sentinel-dashboard</module>
+  	
   </modules>
 </project>
