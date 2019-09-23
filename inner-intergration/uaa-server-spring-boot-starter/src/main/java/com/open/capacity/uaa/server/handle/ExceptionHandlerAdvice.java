@@ -10,19 +10,18 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.open.capacity.common.exception.controller.ControllerException;
-
+import com.open.capacity.common.exception.hystrix.HytrixException;
 
 /**
  * @author 作者 owen E-mail: 624191343@qq.com
- * @version 创建时间：2017年11月12日 上午22:57:51
- * 异常通用处理
-*/
+ * @version 创建时间：2017年11月12日 上午22:57:51 异常通用处理
+ */
 @RestControllerAdvice
 public class ExceptionHandlerAdvice {
 
 	/**
-	 * IllegalArgumentException异常处理返回json
-	 * 状态码:400
+	 * IllegalArgumentException异常处理返回json 状态码:400
+	 * 
 	 * @param exception
 	 * @return
 	 */
@@ -35,9 +34,10 @@ public class ExceptionHandlerAdvice {
 
 		return data;
 	}
+
 	/**
-	 * AccessDeniedException异常处理返回json
-	 * 状态码:403
+	 * AccessDeniedException异常处理返回json 状态码:403
+	 * 
 	 * @param exception
 	 * @return
 	 */
@@ -50,10 +50,20 @@ public class ExceptionHandlerAdvice {
 
 		return data;
 	}
- 
+
 	@ExceptionHandler({ ControllerException.class })
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	public Map<String, Object> controllerException(ControllerException exception) {
+		Map<String, Object> data = new HashMap<>();
+		data.put("resp_code", HttpStatus.INTERNAL_SERVER_ERROR.value());
+		data.put("resp_msg", exception.getMessage());
+
+		return data;
+	}
+
+	@ExceptionHandler({ HytrixException.class })
+	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+	public Map<String, Object> hytrixException(HytrixException exception) {
 		Map<String, Object> data = new HashMap<>();
 		data.put("resp_code", HttpStatus.INTERNAL_SERVER_ERROR.value());
 		data.put("resp_msg", exception.getMessage());

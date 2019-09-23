@@ -1,10 +1,5 @@
 package com.open.capacity.common.feign;
 
-import feign.Response;
-import feign.Util;
-import feign.codec.ErrorDecoder;
-import lombok.extern.slf4j.Slf4j;
-
 import java.io.IOException;
 
 import org.apache.commons.lang3.StringUtils;
@@ -13,7 +8,14 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
+
+import com.open.capacity.common.exception.hystrix.HytrixException;
 import com.open.capacity.common.exception.service.ServiceException;
+
+import feign.Response;
+import feign.Util;
+import feign.codec.ErrorDecoder;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class FeignExceptionConfig {
@@ -40,16 +42,24 @@ public class FeignExceptionConfig {
              try {
                  String json = Util.toString(response.body().asReader());
                  // 非业务异常包装成自定义异常类ServiceException
-                 exception = new ServiceException(json);
-                 if (StringUtils.isEmpty(json)) {
-                     return new ServiceException("程序异常");
+                 if (StringUtils.isNotEmpty(json)) {
+                	 
+                	 if(json.contains("resp_code")){
+                		 FeignFaildResult result = mapper.readValue(json, FeignFaildResult.class);
+                         result.setStatus(response.status());
+                         // 业务异常包装成自定义异常类HytrixException
+                         if (result.getStatus() != HttpStatus.OK.value()) {
+                             exception = new HytrixException(result.getResp_msg());
+                         }
+                	 }else{
+                		 exception = new ServiceException("程序异常");
+                	 }
+                	 
+                    
+                 }else{
+                	 exception = feign.FeignException.errorStatus(methodKey, response);
                  }
-                 FeignFaildResult result = mapper.readValue(json, FeignFaildResult.class);
-                 result.setStatus(response.status());
-                 // 业务异常包装成自定义异常类ServiceException
-                 if (result.getStatus() != HttpStatus.OK.value()) {
-                     exception = new ServiceException(result.getResp_msg());
-                 }
+                 
              } catch (IOException ex) {
                  log.error(ex.getMessage(), ex);
              }
