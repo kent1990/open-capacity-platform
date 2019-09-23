@@ -24,11 +24,12 @@ import org.springframework.core.annotation.Order;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.open.capacity.common.auth.details.LoginAppUser;
+import com.open.capacity.common.constant.TraceConstant;
 import com.open.capacity.common.model.SysLog;
 import com.open.capacity.common.util.SysUserUtil;
 import com.open.capacity.log.annotation.LogAnnotation;
 import com.open.capacity.log.service.LogService;
-import com.open.capacity.log.util.LogUtil;
+import com.open.capacity.log.util.TraceUtil;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -54,7 +55,7 @@ public class LogAnnotationAOP {
 	public Object logSave(ProceedingJoinPoint joinPoint, LogAnnotation ds) throws Throwable {
 
 		// 请求流水号
-		String transid = StringUtils.defaultString(MDC.get(LogUtil.LOG_TRACE_ID), this.getRandom());
+		String transid = StringUtils.defaultString(TraceUtil.getTrace(), MDC.get(TraceConstant.LOG_TRACE_ID));
 		// 记录开始时间
 		long start = System.currentTimeMillis();
 		// 获取方法参数

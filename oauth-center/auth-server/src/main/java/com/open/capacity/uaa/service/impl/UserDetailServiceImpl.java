@@ -1,6 +1,8 @@
 package com.open.capacity.uaa.service.impl;
 
 import com.open.capacity.common.util.StringUtils;
+import com.open.capacity.log.annotation.LogAnnotation;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
@@ -24,6 +26,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
     private UserFeignClient  userFeignClient;
 
     @Override
+    @LogAnnotation(module="auth-server",recordRequestParam=false)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         LoginAppUser loginAppUser = null;
 
