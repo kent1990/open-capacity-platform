@@ -27,7 +27,7 @@ public class RestTemplateInterceptor implements ClientHttpRequestInterceptor {
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
         ServletRequestAttributes attributes = (ServletRequestAttributes) requestAttributes;
         HttpServletRequest httpRequest = attributes.getRequest();
-        String header = httpRequest.getHeader("Authorization");
+        String header = httpRequest.getHeader(UaaConstant.Authorization);
 
         
 		String token = StringUtils.isBlank(StringUtils.substringAfter(header, OAuth2AccessToken.BEARER_TYPE+" ")) ? httpRequest.getParameter(OAuth2AccessToken.ACCESS_TOKEN) :  StringUtils.substringAfter(header, OAuth2AccessToken.BEARER_TYPE +" ");

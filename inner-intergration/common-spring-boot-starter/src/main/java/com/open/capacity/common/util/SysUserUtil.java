@@ -10,6 +10,7 @@ import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
 
 import com.open.capacity.common.auth.details.LoginAppUser;
+import com.open.capacity.common.constant.UaaConstant;
 
 /**
  * @author 作者 owen E-mail: 624191343@qq.com
@@ -25,14 +26,7 @@ public class SysUserUtil {
 	@SuppressWarnings("rawtypes")
 	public static LoginAppUser getLoginAppUser() {
 		
-		//当内部服务，不带token时，内部服务
-		String accessToken =  TokenUtil.getToken() ;
-		RedisTemplate redisTemplate =  SpringUtils.getBean(RedisTemplate.class);
-		Map<String, Object> params = (Map<String, Object>) redisTemplate.opsForValue().get("token:" + accessToken);
-		if(params!=null){
-			return (LoginAppUser) params.get("auth") ;
-		}
-		
+		// 当OAuth2AuthenticationProcessingFilter设置当前登录时，直接返回
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication instanceof OAuth2Authentication) {
 			OAuth2Authentication oAuth2Auth = (OAuth2Authentication) authentication;
@@ -48,9 +42,15 @@ public class SysUserUtil {
 
 			}
 		}
-		
-		
-		
+
+		// 当内部服务，不带token时，内部服务
+		String accessToken = TokenUtil.getToken();
+		RedisTemplate redisTemplate = SpringUtils.getBean(RedisTemplate.class);
+		Map<String, Object> params = (Map<String, Object>) redisTemplate.opsForValue()
+				.get(UaaConstant.TOKEN + ":" + accessToken);
+		if (params != null) {
+			return (LoginAppUser) params.get(UaaConstant.AUTH);
+		}
 
 		return null;
 	}

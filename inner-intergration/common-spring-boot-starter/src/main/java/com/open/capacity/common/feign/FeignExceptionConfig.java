@@ -50,6 +50,8 @@ public class FeignExceptionConfig {
                          // 业务异常包装成自定义异常类HytrixException
                          if (result.getStatus() != HttpStatus.OK.value()) {
                              exception = new HytrixException(result.getResp_msg());
+                         }else{
+                        	 exception = feign.FeignException.errorStatus(methodKey, response);
                          }
                 	 }else{
                 		 exception = new ServiceException("程序异常");
