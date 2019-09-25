@@ -33,7 +33,9 @@ http://59.110.164.254:8066/login.html  admin/admin
  [https://www.kancloud.cn/owenwangwen/open-capacity-platform/content](https://www.kancloud.cn/owenwangwen/open-capacity-platform/content)
 
 ### 欢迎进群（大佬云集）
-`一键加群`
+
+<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=4eb3e891564dba87ff097d2ca403bf8c2ceb9244f198692feda5d0dd424b9457"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="ocp&amp;cp微服务" title="ocp&amp;cp微服务"></a>  
+
 <table>
 	<tr>
             <td><img src=https://images.gitee.com/uploads/images/2019/0604/143151_36a5c07e_869801.png "屏幕截图.png" />
@@ -68,6 +70,7 @@ http://59.110.164.254:8066/login.html  admin/admin
 	- 微服务服务监控
 - 能力开放平台业务支撑
 	- 网关基于应用方式API接口隔离
+	- 网关基于应用限制调用次数
 	- 下游服务基于RBAC权限管理，实现细粒度控制
 	- 代码生成器中心  
 	- 网关聚合服务内部Swagger接口文档
