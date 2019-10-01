@@ -1,12 +1,11 @@
 package com.open.capacity.user.dao;
 
-import java.util.Set;
-
+import com.open.capacity.common.model.SysPermission;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.open.capacity.common.model.SysPermission;
+import java.util.Set;
 
  
 /**
@@ -20,8 +19,9 @@ public interface SysRolePermissionDao {
 	@Insert("insert into sys_role_permission(roleId, permissionId) values(#{roleId}, #{permissionId})")
 	int saveRolePermission(@Param("roleId") Long roleId, @Param("permissionId") Long permissionId);
 
-	int deleteRolePermission(@Param("roleId") Long roleId, @Param("permissionId") Long permissionId);
+	int deleteRolePermission(Long permissionId);
 
 	Set<SysPermission> findPermissionsByRoleIds(@Param("roleIds") Set<Long> roleIds);
+
 
 }

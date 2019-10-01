@@ -1,14 +1,13 @@
 package com.open.capacity.common.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
-
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
-
-import lombok.Data;
 
 @Data
 public class SysMenu implements Serializable {
@@ -28,7 +27,7 @@ public class SysMenu implements Serializable {
 	private Boolean hidden;
 
 
-	private List<SysMenu> subMenus;
+	private List<SysMenu> children;
 
 	private Long roleId;
 	private Set<Long> menuIds;

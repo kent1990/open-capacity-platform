@@ -36,90 +36,52 @@ public class SysPermissionServiceImpl implements SysPermissionService {
 	private SysRolePermissionDao rolePermissionDao;
 
 	@Override
-	public Set<SysPermission> findByRoleIds(Set<Long> roleIds)  throws ServiceException {
-		try {
-			return rolePermissionDao.findPermissionsByRoleIds(roleIds);
-		} catch (Exception e) {
-			throw new ServiceException(e);
-		}
+	public Set<SysPermission> findByRoleIds(Set<Long> roleIds) {
+		return rolePermissionDao.findPermissionsByRoleIds(roleIds);
 	}
 
 	@Transactional
 	@Override
-	public void save(SysPermission sysPermission)  throws ServiceException {
-		try {
-			SysPermission permission = sysPermissionDao.findByPermission(sysPermission.getPermission());
-			if (permission != null) {
-				throw new IllegalArgumentException("权限标识已存在");
-			}
-			sysPermission.setCreateTime(new Date());
-			sysPermission.setUpdateTime(sysPermission.getCreateTime());
-
-			sysPermissionDao.insert(sysPermission);
-			log.info("保存权限标识：{}", sysPermission);
-		} catch (Exception e) {
-			throw new ServiceException(e);
+	public void save(SysPermission sysPermission) {
+		SysPermission permission = sysPermissionDao.findByPermission(sysPermission.getPermission());
+		if (permission != null) {
+			throw new IllegalArgumentException("权限标识已存在");
 		}
+		sysPermission.setCreateTime(new Date());
+		sysPermission.setUpdateTime(sysPermission.getCreateTime());
+
+		sysPermissionDao.insert(sysPermission);
+		log.info("保存权限标识：{}", sysPermission);
 	}
 
 	@Transactional
 	@Override
-	public void update(SysPermission sysPermission)  throws ServiceException {
-		try {
-			sysPermission.setUpdateTime(new Date());
-			sysPermissionDao.updateByOps(sysPermission);
-			log.info("修改权限标识：{}", sysPermission);
-		} catch (Exception e) {
-			throw new ServiceException(e);
-		}
+	public void update(SysPermission sysPermission) {
+		sysPermission.setUpdateTime(new Date());
+		sysPermissionDao.updateByOps(sysPermission);
+		log.info("修改权限标识：{}", sysPermission);
 	}
 
 	@Transactional
 	@Override
-	public void delete(Long id)  throws ServiceException {
-		try {
-			SysPermission permission = sysPermissionDao.findById(id);
-			if (permission == null) {
-				throw new IllegalArgumentException("权限标识不存在");
-			}
-
-			sysPermissionDao.deleteOps(id);
-			rolePermissionDao.deleteRolePermission(null, id);
-			log.info("删除权限标识：{}", permission);
-		} catch (Exception e) {
-			throw new ServiceException(e);
+	public void delete(Long id) {
+		SysPermission permission = sysPermissionDao.findById(id);
+		if (permission == null) {
+			throw new IllegalArgumentException("权限标识不存在");
 		}
+		rolePermissionDao.deleteRolePermission(id);
+		log.info("删除权限标识：{}", permission);
 	}
 
 	@Override
-	public PageResult<SysPermission> findPermissions(Map<String, Object> params)  throws ServiceException {
-		try {
-			//设置分页信息，分别是当前页数和每页显示的总记录数【记住：必须在mapper接口中的方法执行之前设置该分页信息】
-			if (MapUtils.getInteger(params, "page")!=null && MapUtils.getInteger(params, "limit")!=null)
-				PageHelper.startPage(MapUtils.getInteger(params, "page"),MapUtils.getInteger(params, "limit"),true);
-			List<SysPermission> list  = sysPermissionDao.findList(params);
-			PageInfo<SysPermission> pageInfo = new PageInfo(list);
-
-			return PageResult.<SysPermission>builder().data(pageInfo.getList()).code(0).count(pageInfo.getTotal()).build()  ;
-		} catch (Exception e) {
-			throw new ServiceException(e);
+	public PageResult<SysPermission> findPermissions(Map<String, Object> params) {
+		//设置分页信息，分别是当前页数和每页显示的总记录数【记住：必须在mapper接口中的方法执行之前设置该分页信息】
+		if ((MapUtils.getInteger(params, "page") != null && MapUtils.getInteger(params, "limit") != null)) {
+			PageHelper.startPage(MapUtils.getInteger(params, "page"), MapUtils.getInteger(params, "limit"), true);
 		}
-
-	}
-
-	@Override
-	public void setAuthToRole(Long roleId, Set<Long> authIds)  throws ServiceException {
-		try {
-			rolePermissionDao.deleteRolePermission(roleId,null);
-
-			if (!CollectionUtils.isEmpty(authIds)) {
-				authIds.forEach(authId -> {
-					rolePermissionDao.saveRolePermission(roleId, authId);
-				});
-			}
-		} catch (Exception e) {
-			throw new ServiceException(e);
-		}
-
+		List<SysPermission> list  = sysPermissionDao.findList(params);
+		PageInfo<SysPermission> pageInfo = new PageInfo(list);
+		return PageResult.<SysPermission>builder().data(pageInfo.getList()).code(0).count(pageInfo.getTotal()).
+				current(pageInfo.getPageNum()).size(pageInfo.getPageSize()).build();
 	}
 }

@@ -1,16 +1,11 @@
 package com.open.capacity.user.dao;
 
+import com.open.capacity.common.model.SysRole;
+import org.apache.ibatis.annotations.*;
+
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
-
-import com.open.capacity.common.model.SysRole;
 
 /**
 * @author 作者 owen E-mail: 624191343@qq.com
@@ -39,5 +34,29 @@ public interface SysRoleDao {
 	int count(Map<String, Object> params);
 
 	List<SysRole> findList(Map<String, Object> params);
+
+	/**
+	 * @Author levlin
+	 * @Date 14:05 2019/7/28
+	 * @Param
+	 * @Description 角色菜单
+	 **/
+	List<HashMap<String, String>> findMenusByRoleId(Integer roleId);
+
+	/**
+	 * @Author levlin
+	 * @Date 23:30 2019/7/28
+	 * @Param
+	 * @Description 角色权限
+	 **/
+	List<HashMap<String, String>> findPermissionByRoleId(Integer roleId);
+
+	/**
+	 * @Author: levlin
+	 * @Date: 2019/9/1
+	 * @param:
+	 * @Description: 删除角色
+	 */
+	void deleteRole(Long roleId);
 
 }

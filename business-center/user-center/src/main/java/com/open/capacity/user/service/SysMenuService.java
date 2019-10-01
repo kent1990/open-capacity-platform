@@ -1,10 +1,10 @@
 package com.open.capacity.user.service;
 
-import java.util.List;
-import java.util.Set;
-
 import com.open.capacity.common.exception.service.ServiceException;
 import com.open.capacity.common.model.SysMenu;
+
+import java.util.List;
+import java.util.Set;
 
 public interface SysMenuService {
 
@@ -44,23 +44,73 @@ public interface SysMenuService {
 	 * 菜单列表
 	 * @return
 	 */
-	List<SysMenu> findAll()  throws ServiceException;
+	List<SysMenu> findAll();
+
 
 	/**
 	 * ID获取菜单
 	 * @param id
 	 * @return
 	 */
-	SysMenu findById(Long id)  throws ServiceException;
+	SysMenu findMenuByMenuId(Long id);
+
+	/**
+	 * ID获取菜单
+	 * @param id
+	 * @return
+	 */
+	SysMenu findById(Long id);
+
 
 	/**
 	 * 角色ID获取菜单
 	 * @param roleId
 	 * @return
 	 */
-	Set<Long> findMenuIdsByRoleId(Long roleId)  throws ServiceException;
+	Set<Long> findMenuIdsByRoleId(Long roleId);
 
-	List<SysMenu> findOnes()  throws ServiceException;
+	List<SysMenu> findOnes();
+
+	/**
+	 * @Author levlin
+	 * @Date 18:21 2019/7/28
+	 * @Param
+	 * @Description 根据角色删除菜单
+	 **/
+	Integer delRoleMenus(Integer roleId);
+
+	/**
+	 * @Author levlin
+	 * @Date 18:25 2019/7/28
+	 * @Param
+	 * @Description 增加角色菜单
+	 **/
+	Integer saveRoleMenus(Integer roleId,String[] resourceIds);
+
+	/**
+	 * @Author levlin
+	 * @Date 18:27 2019/7/28
+	 * @Param
+	 * @Description 删除菜单
+	 **/
+	Integer delHalfResourceIds(Integer roleId, String[] halfResourceIds);
+
+	/**
+	 * @Author levlin
+	 * @Date 17:26 2019/7/29
+	 * @Param
+	 * @Description 角色保存菜单
+	 **/
+	Integer saveMenusByRoleId(Set<Long> roleIds, Long menuId);
+
+	/**
+	 * @Author levlin
+	 * @Date 15:49 2019/7/31
+	 * @Param
+	 * @Description 菜单权限
+	 **/
+	List<SysMenu> preMenus();
+
 
 
 }

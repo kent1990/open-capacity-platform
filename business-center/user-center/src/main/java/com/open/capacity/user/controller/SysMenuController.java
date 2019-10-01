@@ -1,26 +1,5 @@
 package com.open.capacity.user.controller;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import org.apache.commons.lang.ObjectUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.open.capacity.common.auth.details.LoginAppUser;
 import com.open.capacity.common.exception.controller.ControllerException;
@@ -28,13 +7,23 @@ import com.open.capacity.common.exception.service.ServiceException;
 import com.open.capacity.common.model.SysMenu;
 import com.open.capacity.common.model.SysRole;
 import com.open.capacity.common.util.SysUserUtil;
+import com.open.capacity.common.web.CodeEnum;
 import com.open.capacity.common.web.PageResult;
 import com.open.capacity.common.web.Result;
 import com.open.capacity.log.annotation.LogAnnotation;
 import com.open.capacity.user.service.SysMenuService;
-
+import com.open.capacity.user.service.SysRoleService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 @RestController
 @Api(tags = "MENU API")
@@ -43,9 +32,12 @@ public class SysMenuController {
 
 	@Autowired
 	private SysMenuService menuService;
+
+	@Autowired
+	private SysRoleService sysRoleService;
+
 	private ObjectMapper objectMapper = new ObjectMapper();
 
-	// <!-- -->
 	/**
 	 * 删除菜单
 	 * 
@@ -57,15 +49,9 @@ public class SysMenuController {
 	@DeleteMapping("/{id}")
 	@LogAnnotation(module="user-center",recordRequestParam=false)
 	public Result delete(@PathVariable Long id) throws ControllerException {
-
 		try {
-			try {
-				menuService.delete(id);
-				return Result.succeed("操作成功");
-			} catch (Exception ex) {
-				ex.printStackTrace();
-				return Result.failed("操作失败");
-			}
+			menuService.delete(id);
+			return Result.succeed("操作成功");
 		} catch (Exception e) {
 			throw new ControllerException(e);
 		}
@@ -116,15 +102,12 @@ public class SysMenuController {
 	@PostMapping("/granted")
 	@LogAnnotation(module="user-center",recordRequestParam=false)
 	public Result setMenuToRole(@RequestBody SysMenu sysMenu) throws ControllerException {
-
 		try {
 			menuService.setMenuToRole(sysMenu.getRoleId(), sysMenu.getMenuIds());
-
 			return Result.succeed("操作成功");
 		} catch (ServiceException e) {
 			throw new ControllerException(e);
 		}
-
 	}
 
 	@PreAuthorize("hasAuthority('menu:get/menus/findAlls')")
@@ -132,10 +115,8 @@ public class SysMenuController {
 	@GetMapping("/findAlls")
 	@LogAnnotation(module="user-center",recordRequestParam=false)
 	public PageResult<SysMenu> findAlls() throws ControllerException {
-
 		try {
 			List<SysMenu> list = menuService.findAll();
-
 			return PageResult.<SysMenu>builder().data(list).code(0).count((long) list.size()).build();
 		} catch (ServiceException e) {
 			throw new ControllerException(e);
@@ -166,7 +147,6 @@ public class SysMenuController {
 	@PostMapping("saveOrUpdate")
 	@LogAnnotation(module="user-center",recordRequestParam=false)
 	public Result saveOrUpdate(@RequestBody SysMenu menu) throws ControllerException {
-
 			try {
 				if (menu.getId() != null) {
 					menuService.update(menu);
@@ -177,8 +157,6 @@ public class SysMenuController {
 			} catch (ServiceException e) {
 				throw new ControllerException(e);
 			}
-		 
-
 	}
 
 	/**
@@ -192,53 +170,51 @@ public class SysMenuController {
 	@ApiOperation(value = "查询当前用户菜单")
 	@LogAnnotation(module="user-center",recordRequestParam=false)
 	public List<SysMenu> findMyMenu() throws ControllerException {
-
 		try {
 			LoginAppUser loginAppUser = SysUserUtil.getLoginAppUser();
 			Set<SysRole> roles = loginAppUser.getSysRoles();
 			if (CollectionUtils.isEmpty(roles)) {
 				return Collections.emptyList();
 			}
-
 			List<SysMenu> menus = menuService
 					.findByRoles(roles.parallelStream().map(SysRole::getId).collect(Collectors.toSet()));
-
-			List<SysMenu> sysMenus = TreeBuilder(menus);
-
-			return sysMenus;
+			return menus;
 		} catch (ServiceException e) {
 			throw new ControllerException(e);
 		}
 	}
 
-	/**
-	 * 两层循环实现建树
-	 * 
-	 * @param sysMenus
-	 * @return
-	 * @throws ControllerException 
-	 */
-	public static List<SysMenu> TreeBuilder(List<SysMenu> sysMenus) throws ControllerException {
-
-		try {
-			List<SysMenu> menus = new ArrayList<SysMenu>();
-			for (SysMenu sysMenu : sysMenus) {
-				if (ObjectUtils.equals(-1L, sysMenu.getParentId())) {
-					menus.add(sysMenu);
-				}
-				for (SysMenu menu : sysMenus) {
-					if (menu.getParentId().equals(sysMenu.getId())) {
-						if (sysMenu.getSubMenus() == null) {
-							sysMenu.setSubMenus(new ArrayList<>());
-						}
-						sysMenu.getSubMenus().add(menu);
-					}
-				}
-			}
-			return menus;
-		} catch (Exception e) {
-			throw new ControllerException(e);
+	@PreAuthorize("hasAuthority('menu:get/menus/findMenusByRoleId/{roleId}')")
+	@GetMapping(value = "/findMenusByRoleId/{roleId}")
+	@ApiOperation(value = "查询角色菜单")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "roleId", value = "角色id", required = true, dataType = "Integer")
+	})
+	@LogAnnotation(module="user-center",recordRequestParam=false)
+	public Result<List<HashMap<String, String>>> findMenusByRoleId(@PathVariable Integer roleId){
+		List<HashMap<String, String>> map = sysRoleService.findMenusByRoleId(roleId);
+		if (map.size() != 0) {
+			Result<List<HashMap<String, String>>> result = new Result<>();
+			result.setDatas(map);
+			return result;
 		}
+		return Result.failed("fail");
 	}
 
+	@PreAuthorize("hasAuthority('menu:get/menus/findMenusByMenuId/{menuId}')")
+	@GetMapping(value = "/findMenusByMenuId/{menuId}")
+	@ApiOperation(value = "查询菜单")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "menuId", value = "菜单id", required = true, dataType = "Integer")
+	})
+	@LogAnnotation(module="user-center",recordRequestParam=false)
+	public Result<SysMenu> findMenusByMenuId(@PathVariable Integer menuId){
+		Result<SysMenu> menuResult = new Result<>();
+		if (menuId != 0L) {
+			menuResult.setResp_code(CodeEnum.SUCCESS.getCode());
+			menuResult.setDatas(menuService.findMenuByMenuId(Long.valueOf(menuId)));
+			return menuResult;
+		}
+		return Result.failed("操作错误");
+	}
 }

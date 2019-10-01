@@ -1,37 +1,26 @@
 package com.open.capacity.user.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.open.capacity.common.exception.controller.ControllerException;
 import com.open.capacity.common.exception.service.ServiceException;
+import com.open.capacity.common.model.SysMenu;
 import com.open.capacity.common.model.SysPermission;
+import com.open.capacity.common.web.CodeEnum;
 import com.open.capacity.common.web.PageResult;
 import com.open.capacity.common.web.Result;
 import com.open.capacity.log.annotation.LogAnnotation;
+import com.open.capacity.user.service.SysMenuService;
 import com.open.capacity.user.service.SysPermissionService;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 /**
@@ -41,10 +30,14 @@ import io.swagger.annotations.ApiOperation;
  */
 @RestController
 @Api(tags = "PERMISSION API")
+@RequestMapping("/permissions")
 public class SysPermissionController {
 
 	@Autowired
 	private SysPermissionService sysPermissionService;
+
+	@Autowired
+	private SysMenuService menuService;
 
 	private ObjectMapper objectMapper = new ObjectMapper();
 	/**
@@ -55,7 +48,7 @@ public class SysPermissionController {
 	 */
 	@PreAuthorize("hasAuthority('permission:delete/permissions/{id}')")
 	@ApiOperation(value = "后台管理删除权限标识")
-	@DeleteMapping("/permissions/{id}")
+	@DeleteMapping("/{id}")
 	@LogAnnotation(module="user-center",recordRequestParam=false)
 	public Result delete(@PathVariable Long id) throws ControllerException {
 
@@ -82,7 +75,7 @@ public class SysPermissionController {
         @ApiImplicitParam(name = "limit",value = "分页结束位置", required = true, dataType = "Integer")
     })
 	@LogAnnotation(module="user-center",recordRequestParam=false)
-	@GetMapping("/permissions")
+	@GetMapping("/findPermissions")
 	public PageResult<SysPermission> findPermissions(@RequestParam Map<String, Object> params) throws ControllerException {
 		
 		try {
@@ -99,7 +92,7 @@ public class SysPermissionController {
 	 * @throws ControllerException 
 	 */
 	@PreAuthorize("hasAnyAuthority('permission:put/permissions','permission:post/permissions')")
-	@PostMapping("/permissions/saveOrUpdate")
+	@PostMapping("/saveOrUpdate")
 	@LogAnnotation(module="user-center",recordRequestParam=false)
 	public Result saveOrUpdate(@RequestBody SysPermission sysPermission) throws ControllerException {
 		try{
@@ -116,7 +109,7 @@ public class SysPermissionController {
 
 	@PreAuthorize("hasAuthority('permission:get/permissions/{roleId}/permissions')")
 	@ApiOperation(value = "根据roleId获取对应的权限")
-	@GetMapping("/permissions/{roleId}/permissions")
+	@GetMapping("/{roleId}/permissions")
 	@LogAnnotation(module="user-center",recordRequestParam=false)
 	public List<Map<String, Object>> findAuthByRoleId(@PathVariable Long roleId) throws ControllerException {
 		
@@ -148,32 +141,22 @@ public class SysPermissionController {
 			throw new ControllerException(e);
 		}
 	}
+
 	/**
-	 * 给角色分配权限
-	 * @throws ControllerException 
-	 */
-	@PreAuthorize("hasAuthority('permission:post/permissions/granted')")
-	@ApiOperation(value = "角色分配权限")
-	@PostMapping("/permissions/granted")
-	@LogAnnotation(module="user-center",recordRequestParam=false)
-	public Result setAuthToRole(@RequestBody SysPermission sysPermission) throws ControllerException {
-		try {
-			sysPermissionService.setAuthToRole(sysPermission.getRoleId(),sysPermission.getAuthIds());
-			return Result.succeed("操作成功");
-		} catch (ServiceException e) {
-			throw new ControllerException(e);
-		}
+	 * @Author levlin
+	 * @Date 15:42 2019/7/31
+	 * @Param
+	 * @Description 权限菜单
+	 **/
+	@PreAuthorize("hasAuthority('permission:get/menus/preMenus')")
+	@GetMapping("/preMenus")
+	@ApiOperation(value = "查询所有菜单")
+	@LogAnnotation(module = "user-center", recordRequestParam = false)
+	public Result<List<SysMenu>> preMenus(){
+		Result<List<SysMenu>> sysMenuResult = new Result<>();
+		sysMenuResult.setDatas(menuService.preMenus());
+		sysMenuResult.setResp_code(CodeEnum.SUCCESS.getCode());
+		return sysMenuResult;
 	}
-
-
-
-
-
-
-
-
-
-
-
 
 }

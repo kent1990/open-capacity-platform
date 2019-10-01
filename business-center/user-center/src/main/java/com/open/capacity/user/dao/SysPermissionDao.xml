@@ -22,11 +22,23 @@
 	</select>
 
 	<select id="findList" resultType="com.open.capacity.common.model.SysPermission">
-		select * from sys_permission t
-		<include refid="where" />
-		order by t.id desc
-		<!--<if test="start != null and start >= 0 and length != null and length > 0">-->
-			<!--limit #{start}, #{length}-->
-		<!--</if>-->
+		SELECT
+		p.id AS id,
+		p.name AS NAME,
+		p.menuId AS menuId,
+		p.`permission` AS permission,
+		p.createTime AS createTime ,
+		m.`name` AS menuName
+		FROM
+		sys_permission p
+		JOIN sys_menu m
+		ON p.`menuId` = m.id
+		<where>
+			1=1
+			<if test="params.permission !=null and params.permission !=''">
+				and p.permission like concat('%', #{params.permission}, '%')
+			</if>
+		</where>
+		ORDER BY menuId
 	</select>
 </mapper>

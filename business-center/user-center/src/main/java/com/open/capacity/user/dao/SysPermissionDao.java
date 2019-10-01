@@ -1,17 +1,11 @@
 package com.open.capacity.user.dao;
 
-import java.util.List;
-import java.util.Map;
-
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
-
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.open.capacity.common.model.SysPermission;
+import org.apache.ibatis.annotations.*;
+
+import java.util.List;
+import java.util.Map;
 
 /**
 * @author 作者 owen E-mail: 624191343@qq.com
@@ -39,6 +33,6 @@ public interface SysPermissionDao  extends BaseMapper<SysPermission> {
 
 	int count(Map<String, Object> params);
 
-	List<SysPermission> findList(Map<String, Object> params);
+	List<SysPermission> findList(@Param("params") Map<String, Object> params);
 
 }

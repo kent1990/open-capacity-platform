@@ -1,52 +1,44 @@
 package com.open.capacity.user.controller;
 
-import java.io.IOException;
-import java.io.OutputStream;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.collections4.MapUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
+import cn.afterturn.easypoi.excel.ExcelExportUtil;
+import cn.afterturn.easypoi.excel.entity.ExportParams;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.open.capacity.common.annotation.ApiIdempotent;
 import com.open.capacity.common.auth.details.LoginAppUser;
+import com.open.capacity.common.constant.UserType;
 import com.open.capacity.common.exception.controller.ControllerException;
 import com.open.capacity.common.exception.service.ServiceException;
 import com.open.capacity.common.model.SysRole;
 import com.open.capacity.common.model.SysUser;
 import com.open.capacity.common.util.SysUserUtil;
+import com.open.capacity.common.util.ValidatorUtil;
 import com.open.capacity.common.web.PageResult;
 import com.open.capacity.common.web.Result;
 import com.open.capacity.log.annotation.LogAnnotation;
 import com.open.capacity.user.model.SysUserExcel;
 import com.open.capacity.user.service.SysUserService;
-
-import cn.afterturn.easypoi.excel.ExcelExportUtil;
-import cn.afterturn.easypoi.excel.entity.ExportParams;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.Cleanup;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.MapUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author 作者 owen E-mail: 624191343@qq.com
@@ -56,6 +48,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RestController
 @Api(tags = "USER API")
+@RequestMapping("/users")
 public class SysUserController {
 
     @Autowired
@@ -86,17 +79,6 @@ public class SysUserController {
 		
         
     }
-    
-    @GetMapping(value = "/users-anon/login", params = "username")
-    @ApiOperation(value = "根据用户名查询用户")
-    @LogAnnotation(module="user-center",recordRequestParam=false)
-    public LoginAppUser findByUsername(String username) throws ControllerException {
-        try {
-			return sysUserService.findByUsername(username);
-		} catch (ServiceException e) {
-			throw new ControllerException(e);
-		}
-    }
 
     @GetMapping(value = "/users-anon/mobile", params = "mobile")
     @ApiOperation(value = "根据用户名查询手机号")
@@ -110,14 +92,10 @@ public class SysUserController {
     }
 
     @PreAuthorize("hasAuthority('user:get/users/{id}')")
-    @GetMapping("/users/{id}")
+    @GetMapping("/findUserById/{id}")
     @LogAnnotation(module="user-center",recordRequestParam=false)
-    public SysUser findUserById(@PathVariable Long id) throws ControllerException {
-        try {
-			return sysUserService.findById(id);
-		} catch (ServiceException e) {
-			throw new ControllerException(e);
-		}
+    public SysUser findUserById(@PathVariable Long id) {
+        return sysUserService.findById(id);
     }
 
     /**
@@ -128,14 +106,10 @@ public class SysUserController {
      * @throws ControllerException 
      */
     @PreAuthorize("hasAnyAuthority('user:put/users/password','user:post/users/{id}/resetPassword')")
-    @PutMapping(value = "/users/{id}/password", params = {"newPassword"})
+    @PutMapping(value = "/resetPassword/{id}/password", params = {"newPassword"})
     @LogAnnotation(module="user-center",recordRequestParam=false)
-    public void resetPassword(@PathVariable Long id, String newPassword) throws ControllerException {
-        try {
-			sysUserService.updatePassword(id, null, newPassword);
-		} catch (ServiceException e) {
-			throw new ControllerException(e);
-		}
+    public void resetPassword(@PathVariable Long id, String newPassword) {
+        sysUserService.updatePassword(id, null, newPassword);
     }
 
     /**
@@ -145,7 +119,7 @@ public class SysUserController {
      * @throws JsonProcessingException 
      */
     @PreAuthorize("hasAuthority('user:put/users/me')")
-    @PutMapping("/users")
+    @PutMapping("/updateSysUser")
     @LogAnnotation(module="user-center",recordRequestParam=false)
     public void updateSysUser(@RequestBody SysUser sysUser) throws ControllerException {
         try {
@@ -163,14 +137,10 @@ public class SysUserController {
      * @throws JsonProcessingException 
      */
     @PreAuthorize("hasAuthority('user:post/users/{id}/roles')")
-    @PostMapping("/users/{id}/roles")
+    @PostMapping("/setRoleToUser/{id}/roles")
     @LogAnnotation(module="user-center",recordRequestParam=false)
-    public void setRoleToUser(@PathVariable Long id, @RequestBody Set<Long> roleIds) throws ControllerException {
-        try {
-			sysUserService.setRoleToUser(id, roleIds);
-		} catch (ServiceException e) {
-			throw new ControllerException(e);
-		}
+    public void setRoleToUser(@PathVariable Long id, @RequestBody Set<Long> roleIds) throws JsonProcessingException {
+        sysUserService.setRoleToUser(id, roleIds);
     }
 
     /**
@@ -181,21 +151,15 @@ public class SysUserController {
      * @throws ControllerException 
      */
     @PreAuthorize("hasAnyAuthority('user:get/users/{id}/roles')")
-    @GetMapping("/users/{id}/roles")
+    @GetMapping("/findRolesByUserId/{id}/roles")
     @LogAnnotation(module="user-center",recordRequestParam=false)
-    public Set<SysRole> findRolesByUserId(@PathVariable Long id) throws ControllerException {
-        try {
-			return sysUserService.findRolesByUserId(id);
-		} catch (ServiceException e) {
-			throw new ControllerException(e);
-		}
+    public Set<SysRole> findRolesByUserId(@PathVariable Long id) {
+        return sysUserService.findRolesByUserId(id);
     }
 
 
-//    <!-- -->
     /**
      * 用户查询
-     * http://192.168.3.2:7000/users?access_token=3b45d059-601b-4c63-85f9-9d77128ee94d&start=0&length=10
      * @param params
      * @return
      * @throws ControllerException 
@@ -206,16 +170,10 @@ public class SysUserController {
             @ApiImplicitParam(name = "page", value = "分页起始位置", required = true, dataType = "Integer"),
             @ApiImplicitParam(name = "limit",value = "分页结束位置", required = true, dataType = "Integer")
     })
-    @GetMapping("/users")
+    @GetMapping("/findUsers")
     @LogAnnotation(module="user-center",recordRequestParam=false)
-//  searchKey=username, searchValue=as
-    public PageResult<SysUser> findUsers(@RequestHeader(name="trace_id",required=false) String traceId ,  @RequestParam Map<String, Object> params) throws ControllerException {
-    	
-    	try {
-			return sysUserService.findUsers(params);
-		} catch (ServiceException e) {
-			throw new ControllerException(e);
-		}
+    public PageResult<SysUser> findUsers( @RequestParam Map<String, Object> params) throws JsonProcessingException {
+        return sysUserService.findUsers(params);
     }
 
     /**
@@ -225,12 +183,10 @@ public class SysUserController {
      * @return
      * @throws ControllerException 
      */
-    @PutMapping("/users/me")
+    @PutMapping("/me")
     @LogAnnotation(module="user-center",recordRequestParam=false)
     @PreAuthorize("hasAnyAuthority('user:put/users/me','user:post/users/saveOrUpdate')")
     public Result updateMe(@RequestBody SysUser sysUser) throws ControllerException {
-//        SysUser user = SysUserUtil.getLoginAppUser();
-//        sysUser.setId(user.getId());
         try {
 			SysUser user = sysUserService.updateSysUser(sysUser);
 
@@ -246,7 +202,7 @@ public class SysUserController {
      * @param sysUser
      * @throws ControllerException 
      */
-    @PutMapping(value = "/users/password")
+    @PutMapping(value = "/updatePassword")
     @PreAuthorize("hasAuthority('user:put/users/password')")
     @LogAnnotation(module="user-center",recordRequestParam=false)
     public Result updatePassword(@RequestBody SysUser sysUser) throws ControllerException {
@@ -276,7 +232,7 @@ public class SysUserController {
      * @throws ControllerException 
      */
     @ApiOperation(value = "修改用户状态")
-    @GetMapping("/users/updateEnabled")
+    @GetMapping("/updateEnabled")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "用户id", required = true, dataType = "Integer"),
             @ApiImplicitParam(name = "enabled",value = "是否启用", required = true, dataType = "Boolean")
@@ -302,18 +258,14 @@ public class SysUserController {
      * @throws ControllerException 
      */
     @PreAuthorize("hasAuthority('user:post/users/{id}/resetPassword' )")
-    @PostMapping(value = "/users/{id}/resetPassword")
+    @PostMapping(value = "/{id}/resetPassword")
     @LogAnnotation(module="user-center",recordRequestParam=false)
-    public Result resetPassword(@PathVariable Long id) throws ControllerException {
-        try {
-			if (id == 1L){
-			    return Result.failed("超级管理员不给予修改");
-			}
-			sysUserService.updatePassword(id, null, "123456");
-			return Result.succeed(null,"重置成功");
-		} catch (ServiceException e) {
-			throw new ControllerException(e);
-		}
+    public Result resetPassword(@PathVariable Long id) {
+        if (id == 1L){
+            return Result.failed("超级管理员不给予修改");
+        }
+        sysUserService.updatePassword(id, null, "123456");
+        return Result.succeed(null,"重置成功");
     }
 
 
@@ -321,17 +273,49 @@ public class SysUserController {
      * 新增or更新
      * @param sysUser
      * @return
-     * @throws ControllerException 
      */
-    @PostMapping("/users/saveOrUpdate")
+    @PostMapping("/saveOrUpdate")
     @PreAuthorize("hasAnyAuthority('user:post/users/saveOrUpdate')")
     @LogAnnotation(module="user-center",recordRequestParam=false)
-    public Result saveOrUpdate(@RequestBody SysUser sysUser) throws ControllerException {
-        try {
-			return  sysUserService.saveOrUpdate(sysUser);
-		} catch (ServiceException e) {
-			throw new ControllerException(e);
-		}
+    public Result saveOrUpdate(@RequestBody SysUser sysUser) {
+        String username = sysUser.getUsername();
+        if (StringUtils.isBlank(username)) {
+            //throw new IllegalArgumentException("用户名不能为空");
+            return Result.failed("用户名不能为空");
+        }
+
+        // 防止用手机号直接当用户名，手机号要发短信验证
+        if (ValidatorUtil.checkPhone(username)) {
+            //throw new IllegalArgumentException("用户名要包含英文字符");
+            return Result.failed("用户名要包含英文字符");
+        }
+
+        // 防止用邮箱直接当用户名，邮箱也要发送验证（暂未开发）
+        if (username.contains("@")) {
+            //throw new IllegalArgumentException("用户名不能包含@");
+            return Result.failed("用户名不能包含@");
+        }
+
+        if (username.contains("|")) {
+            //throw new IllegalArgumentException("用户名不能包含|字符");
+            return Result.failed("用户名不能包含|字符");
+        }
+
+        if (StringUtils.isBlank(sysUser.getNickname())) {
+            sysUser.setNickname(username);
+        }
+
+        if (StringUtils.isBlank(sysUser.getType())) {
+            sysUser.setType(UserType.BACKEND.name());
+        }
+
+        if (!StringUtils.isBlank(sysUser.getPhone())) {
+            // 防止用手机号直接当用户名，手机号要发短信验证
+            if (!ValidatorUtil.checkPhone(sysUser.getPhone())) {
+                return Result.failed("手机号格式不正确");
+            }
+        }
+        return sysUserService.saveOrUpdate(sysUser);
     }
 
     /**

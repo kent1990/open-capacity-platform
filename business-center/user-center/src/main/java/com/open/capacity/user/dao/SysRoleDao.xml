@@ -24,9 +24,26 @@
 		select * from sys_role t
 		<include refid="where" />
 		order by t.id desc
-		<!--<if test="page != null and page >= 0 and limit != null and limit > 0">-->
-			<!--limit #{page},#{limit}-->
-		<!--</if>-->
-
 	</select>
+
+	<select id="findMenusByRoleId" resultType="java.util.HashMap">
+		SELECT me.`id` AS id FROM sys_role_menu role LEFT JOIN sys_menu  me ON role.`menuId` = me.`id` WHERE role.`roleId` = #{roleId}
+	</select>
+
+	<select id="findPermissionByRoleId" resultType="java.util.HashMap">
+		SELECT permissionId AS id FROM sys_role_permission WHERE roleId  = #{roleId}
+	</select>
+
+	<delete id="deleteRole" parameterType="java.lang.Long">
+		DELETE role,u,p
+		FROM
+		  sys_role role
+		  LEFT JOIN sys_role_user u
+			ON role.`id` = u.`roleId`
+		  LEFT JOIN sys_role_permission p
+			ON p.`roleId` = role.`id`
+		  LEFT JOIN sys_role_menu m
+			ON m.`roleId` = role.`id`
+		  WHERE role.`id` = #{roleId}
+	</delete>
 </mapper>

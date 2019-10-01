@@ -1,14 +1,13 @@
 package com.open.capacity.user.dao;
 
-import java.util.List;
-import java.util.Set;
-
+import com.open.capacity.common.model.SysMenu;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
-import com.open.capacity.common.model.SysMenu;
+import java.util.List;
+import java.util.Set;
 
 /**
 * @author 作者 owen E-mail: 624191343@qq.com
@@ -27,4 +26,13 @@ public interface SysRoleMenuDao {
 	Set<Long> findMenuIdsByRoleId(Long roleId);
 
 	List<SysMenu> findMenusByRoleIds(@Param("roleIds") Set<Long> roleIds);
+
+
+	/**
+	 * @Author levlin
+	 * @Date 22:02 2019/7/28
+	 * @Param
+	 * @Description 菜单权限
+	 **/
+	List<SysMenu> menusPermission();
 }

@@ -46,11 +46,4 @@ public interface SysPermissionService {
 	 */
 	PageResult<SysPermission> findPermissions(Map<String, Object> params)  throws ServiceException;
 
-	/**
-	 * 授权
-	 * @param roleId
-	 * @param authIds
-	 */
-	void setAuthToRole(Long roleId, Set<Long> authIds)  throws ServiceException;
-
 }

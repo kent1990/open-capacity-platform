@@ -27,4 +27,6 @@ public class PageResult<T> implements Serializable {
 	private Long count;
 	private int code;
 	private List<T> data;
+	private Integer current;
+	private Integer size;
 }

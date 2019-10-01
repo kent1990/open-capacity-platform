@@ -4,15 +4,7 @@
 <mapper namespace="com.open.capacity.user.dao.SysRolePermissionDao">
 
 	<delete id="deleteRolePermission">
-		delete from sys_role_permission
-		<where>
-			<if test="roleId != null">
-				and roleId = #{roleId}
-			</if>
-			<if test="permissionId != null">
-				and permissionId = #{permissionId}
-			</if>
-		</where>
+		DELETE p,r FROM sys_permission p LEFT JOIN sys_role_permission r ON p.id = r.permissionId WHERE p.id = #{permissionId};
 	</delete>
 
 	<select id="findPermissionsByRoleIds" resultType="com.open.capacity.common.model.SysPermission">
@@ -23,7 +15,7 @@
 		<where>
 			rp.roleId in
 			<foreach collection="roleIds" item="roleId" open="("
-				separator="," close=")">
+					 separator="," close=")">
 				#{roleId}
 			</foreach>
 		</where>
