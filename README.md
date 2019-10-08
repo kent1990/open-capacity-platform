@@ -10,8 +10,8 @@
 
 
 
-简称ocp是基于layui+springcloud的企业级微服务框架(用户权限管理，配置中心管理，应用管理，....),其核心的设计目标是分离前后端，快速开发部署，学习简单，功能强大，提供快速接入核心接口能力，其目标是帮助企业搭建一套类似百度能力开放平台的框架；  
-- 基于layui前后端分离的企业级微服务架构  
+简称ocp是基于vue+springcloud的企业级微服务框架(用户权限管理，配置中心管理，应用管理，....),其核心的设计目标是分离前后端，快速开发部署，学习简单，功能强大，提供快速接入核心接口能力，其目标是帮助企业搭建一套类似百度能力开放平台的框架；  
+- 基于vue前后端分离的企业级微服务架构  
 - 兼容spring cloud netflix & spring cloud alibaba  
 - 优化Spring Security内部实现，实现API调用的统一出口和权限认证授权中心  
 - 提供完善的企业微服务流量监控，日志监控能力   
@@ -45,7 +45,6 @@ http://59.110.164.254:8066/login.html  admin/admin
 # 技术介绍
 <table>
 	<tr>
-		<td><img src="https://images.gitee.com/uploads/images/2019/0523/091013_fffdcf8b_869801.png "屏幕截图.png"></td>
 		<td><img src="https://images.gitee.com/uploads/images/2019/0531/151440_a763b84e_869801.png "屏幕截图.png"></td>
     </tr>
 	
@@ -84,35 +83,30 @@ http://59.110.164.254:8066/login.html  admin/admin
    
 ## 代码结构  
     
-![输入图片说明](https://images.gitee.com/uploads/images/2019/0819/214757_e3408bdc_869801.png "屏幕截图.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2019/1008/091711_c1a4603f_869801.png "屏幕截图.png")
 
 ## 能力开放管理平台   
-
+ 
 <table>
 	<tr>
-        <td><img src=https://images.gitee.com/uploads/images/2019/0330/112405_4b826028_869801.png "屏幕截图.png"/></td>
-        <td><img src=https://images.gitee.com/uploads/images/2019/0908/215719_7280e0a7_869801.png "屏幕截图.png"/></td>
-        <td><img src=https://images.gitee.com/uploads/images/2019/0908/215805_ccc6f047_869801.png "屏幕截图.png"/></td>
-        <td><img src=https://images.gitee.com/uploads/images/2019/0908/215849_3579d1f2_869801.png "屏幕截图.png"/></td>
+        <td><img src=https://images.gitee.com/uploads/images/2019/1008/085758_fc5524be_869801.png "屏幕截图.png"/></td>
+        <td><img src=https://images.gitee.com/uploads/images/2019/1008/085910_c1700e27_869801.png "屏幕截图.png"/></td>
+        <td><img src=https://images.gitee.com/uploads/images/2019/1008/085943_a53eef0d_869801.png "屏幕截图.png"/></td>
+        <td><img src=https://images.gitee.com/uploads/images/2019/1008/090021_862896f9_869801.png "屏幕截图.png"/></td>
     </tr>
     <tr>
-        <td><img src=https://images.gitee.com/uploads/images/2019/0908/215938_54aac61f_869801.png "屏幕截图.png"/></td>
-        <td><img src=https://images.gitee.com/uploads/images/2019/0908/220014_980f9120_869801.png "屏幕截图.png"/></td>
-        <td><img src=https://images.gitee.com/uploads/images/2019/0908/220042_ecb2e2f9_869801.png "屏幕截图.png"/></td>
-        <td><img src=https://images.gitee.com/uploads/images/2019/0908/220109_a46454f2_869801.png "屏幕截图.png"/></td>
+        <td><img src=https://images.gitee.com/uploads/images/2019/1008/090059_23e054d8_869801.png "屏幕截图.png"/></td>
+        <td><img src=https://images.gitee.com/uploads/images/2019/1008/090151_3bab0b63_869801.png "屏幕截图.png"/></td>
+        <td><img src=https://images.gitee.com/uploads/images/2019/1008/090226_309e1c5b_869801.png "屏幕截图.png"/></td>
+        <td><img src=https://images.gitee.com/uploads/images/2019/1008/090253_ef499c3a_869801.png "屏幕截图.png"/></td>
     </tr>
     <tr>
-        <td><img src=https://images.gitee.com/uploads/images/2019/0908/220255_2cca26da_869801.png "屏幕截图.png"/></td>
-        <td><img src=https://images.gitee.com/uploads/images/2019/0908/220334_eb7e8ccc_869801.png "屏幕截图.png"/></td>
-		<td><img src=https://images.gitee.com/uploads/images/2019/0908/220403_d8941a88_869801.png "屏幕截图.png" /></td>
-        <td><img src=https://images.gitee.com/uploads/images/2019/0908/220448_3e4ec4f0_869801.png "屏幕截图.png"/></td>
+        <td><img src=https://images.gitee.com/uploads/images/2019/1008/090338_4ccec4d5_869801.png "屏幕截图.png"/></td>
+        <td><img src=https://images.gitee.com/uploads/images/2019/1008/090414_dfa3bd1f_869801.png "屏幕截图.png"/></td>
+		<td><img src=https://images.gitee.com/uploads/images/2019/1008/090452_1bb1f7fb_869801.png "屏幕截图.png"/></td>
+        <td><img src=https://images.gitee.com/uploads/images/2019/1008/090831_2d215a76_869801.png "屏幕截图.png"/></td>
     </tr>
-	<tr>
-		<td><img src=https://images.gitee.com/uploads/images/2019/0908/220535_058f4e5c_869801.png "屏幕截图.png"/></td>
-		<td><img src=https://images.gitee.com/uploads/images/2019/0908/220908_e83f7a53_869801.png "屏幕截图.png"/></td>
-		<td><img src="https://images.gitee.com/uploads/images/2019/0329/212515_6b74c76a_869801.png "屏幕截图.png"/></td>
-        <td><img src=https://images.gitee.com/uploads/images/2019/0731/144404_6e9f86e3_869801.png "屏幕截图.png"/></td>
-    </tr>
+	 
 </table>
 
 # 容器化部署     
@@ -202,8 +196,9 @@ https://gitee.com/owenwangwen/config-center
 阿波罗官方地址   
 https://github.com/ctripcorp/apollo  
 
-# Spring Cloud Alibaba 初探
-https://gitee.com/owenwangwen/open-capacity-platform/tree/alibaba
+
+# VUE前端地址
+[https://gitee.com/owenwangwen/jeecp](https://gitee.com/owenwangwen/jeecp)
 
 # 用户权益 #
 - 允许免费用于学习、毕设、公司项目、私活等。
