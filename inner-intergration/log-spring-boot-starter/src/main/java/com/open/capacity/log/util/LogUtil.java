@@ -2,6 +2,8 @@ package com.open.capacity.log.util;
 
 import java.util.concurrent.ThreadLocalRandom;
 
+import com.open.capacity.common.constant.TraceConstant;
+
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -11,15 +13,8 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public class LogUtil {
-	/**
-     * 日志跟踪id名。
-     */
-    public static final String LOG_TRACE_ID = "traceid";
-
-    /**
-     * 请求头跟踪id名。
-     */
-    public static final String HTTP_HEADER_TRACE_ID = "app_trace_id";
+	 
+	public static TraceConstant traceConstant ;
    
     /**
 	 * 生成日志随机数

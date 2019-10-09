@@ -15,21 +15,23 @@ import org.slf4j.MDC;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.util.concurrent.ListenableFuture;
 
+import com.open.capacity.common.constant.TraceConstant;
+
 
 public class LogMdcThreadUtil {
 
     public static void setTraceIdIfAbsent() {
-        if (MDC.get(LogUtil.LOG_TRACE_ID) == null) {
-            MDC.put(LogUtil.LOG_TRACE_ID,  MDC.get("X-B3-TraceId"));
+        if (MDC.get(TraceConstant.LOG_TRACE_ID) == null) {
+            MDC.put(TraceConstant.LOG_TRACE_ID,  MDC.get(TraceConstant.LOG_B3_TRACEID));
         }
     }
 
     public static void setTraceId() {
-        MDC.put(LogUtil.LOG_TRACE_ID,  MDC.get("X-B3-TraceId"));
+        MDC.put(TraceConstant.LOG_TRACE_ID,  MDC.get(TraceConstant.LOG_B3_TRACEID));
     }
 
     public static void setTraceId(String traceId) {
-        MDC.put(LogUtil.LOG_TRACE_ID, traceId);
+        MDC.put(TraceConstant.LOG_TRACE_ID, traceId);
     }
 
     public static <T> Callable<T> wrap(final Callable<T> callable, final Map<String, String> context) {

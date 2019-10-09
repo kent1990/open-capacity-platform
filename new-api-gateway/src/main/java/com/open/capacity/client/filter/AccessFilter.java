@@ -21,7 +21,10 @@ import org.springframework.util.AntPathMatcher;
 import org.springframework.web.server.ServerWebExchange;
 
 import com.alibaba.fastjson.JSONObject;
+import com.open.capacity.client.utils.TokenUtil;
 import com.open.capacity.client.vo.AuthIgnored;
+import com.open.capacity.common.constant.TraceConstant;
+import com.open.capacity.common.constant.UaaConstant;
 
 import reactor.core.publisher.Mono;
 
@@ -53,7 +56,9 @@ public class AccessFilter implements GlobalFilter, Ordered {
 	public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
 		// TODO Auto-generated method stub
 
-		String accessToken = extractToken(exchange.getRequest());
+		String accessToken = TokenUtil.extractToken(exchange.getRequest());
+		 
+		
 
 		// 默认
 		boolean flag = false;
@@ -70,7 +75,7 @@ public class AccessFilter implements GlobalFilter, Ordered {
 			return chain.filter(exchange);
 		} else {
 
-			Map<String, Object> params = (Map<String, Object>) redisTemplate.opsForValue().get("token:" + accessToken);
+			Map<String, Object> params = (Map<String, Object>) redisTemplate.opsForValue().get(UaaConstant.TOKEN+":" + accessToken);
 
 			if (params != null) {
 				return chain.filter(exchange);
@@ -79,7 +84,7 @@ public class AccessFilter implements GlobalFilter, Ordered {
 
 				ServerHttpResponse response = exchange.getResponse();
 				JSONObject message = new JSONObject();
-				message.put("resp_code", -1);
+				message.put("resp_code", 401);
 				message.put("resp_msg", "未认证通过！");
 				byte[] bits = message.toJSONString().getBytes(StandardCharsets.UTF_8);
 				DataBuffer buffer = response.bufferFactory().wrap(bits);
@@ -91,23 +96,6 @@ public class AccessFilter implements GlobalFilter, Ordered {
 
 		}
 
-	}
-
-	protected String extractToken(ServerHttpRequest request) {
-		List<String> strings = request.getHeaders().get("Authorization");
-		String authToken = null;
-		if (strings != null) {
-			authToken = strings.get(0).substring("Bearer".length()).trim();
-		}
-
-		if (StringUtils.isBlank(authToken)) {
-			strings = request.getQueryParams().get("access_token");
-			if (strings != null) {
-				authToken = strings.get(0);
-			}
-		}
-
-		return authToken;
 	}
 
 }

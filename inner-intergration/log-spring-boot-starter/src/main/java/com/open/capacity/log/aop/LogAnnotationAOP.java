@@ -24,11 +24,12 @@ import org.springframework.core.annotation.Order;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.open.capacity.common.auth.details.LoginAppUser;
+import com.open.capacity.common.constant.TraceConstant;
 import com.open.capacity.common.model.SysLog;
 import com.open.capacity.common.util.SysUserUtil;
 import com.open.capacity.log.annotation.LogAnnotation;
 import com.open.capacity.log.service.LogService;
-import com.open.capacity.log.util.LogUtil;
+import com.open.capacity.log.util.TraceUtil;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -54,7 +55,7 @@ public class LogAnnotationAOP {
 	public Object logSave(ProceedingJoinPoint joinPoint, LogAnnotation ds) throws Throwable {
 
 		// 请求流水号
-		String transid = StringUtils.defaultString(MDC.get(LogUtil.LOG_TRACE_ID), this.getRandom());
+		String transid = StringUtils.defaultString(TraceUtil.getTrace(), MDC.get(TraceConstant.LOG_TRACE_ID));
 		// 记录开始时间
 		long start = System.currentTimeMillis();
 		// 获取方法参数
@@ -64,20 +65,18 @@ public class LogAnnotationAOP {
 		List<Object> httpReqArgs = new ArrayList<Object>();
 		SysLog sysLog = new SysLog();
 		sysLog.setCreateTime(new Date());
-		
 		LoginAppUser loginAppUser = SysUserUtil.getLoginAppUser();
 		if (loginAppUser != null) {
 			sysLog.setUsername(loginAppUser.getUsername());
 		}
-
 		MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
-
 		LogAnnotation logAnnotation = methodSignature.getMethod().getDeclaredAnnotation(LogAnnotation.class);
 		sysLog.setModule(logAnnotation.module() + ":" + methodSignature.getDeclaringTypeName() + "/"
 				+ methodSignature.getName());
 
 		Object[] args = joinPoint.getArgs();// 参数值
 		url =  methodSignature.getDeclaringTypeName() + "/"+ methodSignature.getName();
+		String params = null ;
 		for (Object object : args) {
 			if (object instanceof HttpServletRequest) {
 				HttpServletRequest request = (HttpServletRequest) object;
@@ -91,7 +90,7 @@ public class LogAnnotationAOP {
 		}
 
 		try {
-			String params = JSONObject.toJSONString(httpReqArgs);
+			params = JSONObject.toJSONString(httpReqArgs);
 			sysLog.setParams(params);
 			// 打印请求参数参数
 			log.info("开始请求，transid={},  url={} , httpMethod={}, reqData={} ", transid, url, httpMethod, params);
@@ -106,7 +105,7 @@ public class LogAnnotationAOP {
 		} catch (Exception e) {
 			sysLog.setFlag(Boolean.FALSE);
 			sysLog.setRemark(e.getMessage());
-
+			log.error("请求报错，transid={},  url={} , httpMethod={}, reqData={} ,error ={} ", transid, url, httpMethod, params,e.getMessage());
 			throw e;
 		} finally {
 
