@@ -1,36 +1,14 @@
-#端口
-server:
-  port: 9200
-#  tomcat: 
-#    accept-count: 1024
-#    max-threads: 1024
-#    max-connections: 2000
-  undertow:
-    io-threads: 16
-    worker-threads: 256
-    buffer-size: 1024
-    buffers-per-region: 1024
-    direct-buffers: true 
-#服务名称
 spring:
-  application:
-    name: api-gateway
   cloud:
     nacos:
-      discovery:
-        server-addr:  127.0.0.1:8848
       config:
-        server-addr: 127.0.0.1:8848
-    sentinel:
-      transport:
-        port: 8719
-        dashboard: 127.0.0.1:8989
-#metrics
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-  endpoint:
-    health:
-      show-details: always
+        # 共享配置的DataId，多个使用,分隔
+        # 越靠后，优先级越高；
+        # .yaml后缀不能少，只支持yaml/properties
+        shared-dataids: common.yaml
+        refreshable-dataids: common.yaml
+        server-addr: 119.27.173.249:8848
+        file-extension: yaml
+        namespace: 95a4a445-f548-4c0d-98fc-a471454dabec  #命名空间 代指某个环境
+  application:
+    name: api-gateway

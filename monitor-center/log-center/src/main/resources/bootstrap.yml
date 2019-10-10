@@ -1,28 +1,14 @@
-#端口
-server:
-#  port: 5000    #固定端口
-   port: 5006 #随机端口
-#服务名称
 spring:
-  application:
-    name: log-center
   cloud:
     nacos:
-      discovery:
-        server-addr:  127.0.0.1:8848
       config:
+        # 共享配置的DataId，多个使用,分隔
+        # 越靠后，优先级越高；
+        # .yaml后缀不能少，只支持yaml/properties
+        shared-dataids: common.yaml
+        refreshable-dataids: common.yaml
+        server-addr: 119.27.173.249:8848
         file-extension: yaml
-        server-addr: 127.0.0.1:8848
-    sentinel:
-      transport:
-        port: 8719
-        dashboard: 127.0.0.1:8989 
-          
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-  endpoint:
-    health:
-      show-details: always
+        namespace: 95a4a445-f548-4c0d-98fc-a471454dabec  #命名空间 代指某个环境
+  application:
+    name: log-center
