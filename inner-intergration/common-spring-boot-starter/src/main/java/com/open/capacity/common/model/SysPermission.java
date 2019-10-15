@@ -1,9 +1,5 @@
 package com.open.capacity.common.model;
 
-import java.io.Serializable;
-import java.util.Date;
-import java.util.Set;
-
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -11,8 +7,11 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
-
 import lombok.Data;
+
+import java.io.Serializable;
+import java.util.Date;
+import java.util.Set;
 
 
 /**
@@ -32,6 +31,8 @@ public class SysPermission extends Model<SysPermission> implements Serializable 
 	private Long id;
 	private String permission;
 	private String name;
+	private Integer menuId;
+	private String menuName;
 	@TableField(value="createTime")
 	private Date createTime;
 	@TableField(value="updateTime")
