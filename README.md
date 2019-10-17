@@ -1,8 +1,10 @@
-
-![输入图片说明](https://images.gitee.com/uploads/images/2019/0810/170317_e33b6c75_869801.png "屏幕截图.png")
-
 # [![Fork me on Gitee](https://gitee.com/owenwangwen/open-capacity-platform/widgets/widget_5.svg)](https://gitee.com/owenwangwen/open-capacity-platform)open-capacity-platform 微服务能力开放平台 
 
+<p align="center"> 
+ <img src="https://img.shields.io/circleci/project/vuejs/vue/dev.svg" alt="Build Status">
+  <img src="https://img.shields.io/badge/Spring%20Cloud-Finchley.SR2.RELEASE-blue.svg" alt="Coverage Status">
+  <img src="https://img.shields.io/badge/Spring%20Boot-2.0.4.RELEASE-blue.svg" alt="Downloads">
+</p>
 
 [![star](https://gitee.com/owenwangwen/open-capacity-platform/badge/star.svg?theme=white)](https://gitee.com/owenwangwen/open-capacity-platform/stargazers)
 [![Fork me on Gitee](https://gitee.com/owenwangwen/open-capacity-platform/widgets/widget_6.svg)](https://gitee.com/owenwangwen/open-capacity-platform)
@@ -84,7 +86,7 @@ http://59.110.164.254:8066/login.html  admin/admin
    
 ## 代码结构  
     
-![输入图片说明](https://images.gitee.com/uploads/images/2019/0819/214757_e3408bdc_869801.png "屏幕截图.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2019/1017/224252_368047c9_869801.png "屏幕截图.png")
 
 ## 能力开放管理平台   
 
