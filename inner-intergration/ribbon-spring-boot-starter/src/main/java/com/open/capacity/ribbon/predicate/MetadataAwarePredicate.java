@@ -23,7 +23,7 @@ public class MetadataAwarePredicate extends DiscoveryEnabledPredicate {
     @Override
     protected boolean apply(DiscoveryEnabledServer server) {
 
-        final RibbonFilterContext context = RibbonFilterContextHolder.getContext();
+//        final RibbonFilterContext context = RibbonFilterContextHolder.getContext();
        
        
         return true ;
