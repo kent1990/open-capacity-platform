@@ -7,6 +7,7 @@ import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.open.capacity.common.constant.TraceConstant;
 import com.open.capacity.log.util.LogUtil;
+import com.open.capacity.ribbon.core.context.RibbonFilterContextHolder;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -52,6 +53,7 @@ public class RequestFilter extends ZuulFilter {
 		String URL = requestContext.getRequest().getRequestURL().toString();
 		requestContext.addZuulRequestHeader(TraceConstant.HTTP_HEADER_TRACE_ID, traceId);
 		log.info("request url = " + URL + ", traceId = " + traceId);
+//		RibbonFilterContextHolder.getContext().add("hello", "hello");
 		return null;
 	}
 }

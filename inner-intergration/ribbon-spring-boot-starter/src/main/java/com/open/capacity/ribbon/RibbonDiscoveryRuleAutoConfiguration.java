@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
 import com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList;
+import com.open.capacity.ribbon.core.concurrent.RibbonFilterContextConcurrencyStrategy;
 import com.open.capacity.ribbon.rule.DiscoveryEnabledRule;
 import com.open.capacity.ribbon.rule.MetadataAwareRule;
 
@@ -22,7 +23,7 @@ import com.open.capacity.ribbon.rule.MetadataAwareRule;
 @Configuration
 @ConditionalOnClass(DiscoveryEnabledNIWSServerList.class)
 @AutoConfigureBefore(RibbonClientConfiguration.class)
-//@ConditionalOnProperty(value = "ribbon.filter.metadata.enabled", matchIfMissing = true)
+@ConditionalOnProperty(value = "ribbon.filter.metadata.enabled", havingValue="true" )
 public class RibbonDiscoveryRuleAutoConfiguration {
 
     @Bean
@@ -31,4 +32,9 @@ public class RibbonDiscoveryRuleAutoConfiguration {
     public DiscoveryEnabledRule metadataAwareRule() {
         return new MetadataAwareRule();
     }
+    
+    @Bean
+	public RibbonFilterContextConcurrencyStrategy requestAttributeHystrixConcurrencyStrategy() {
+		return new RibbonFilterContextConcurrencyStrategy();
+	}
 }
