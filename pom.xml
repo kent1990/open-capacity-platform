@@ -229,6 +229,7 @@
 					<include>**/*.xsd</include>
 					<include>**/*.ftl</include>
 					<include>**/*.lua</include>
+					<include>**/*.json</include>
 					<include>processes/*</include>
 					<include>**/spring.factories</include>
 				</includes>
