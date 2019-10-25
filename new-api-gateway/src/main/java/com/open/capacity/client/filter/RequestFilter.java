@@ -16,6 +16,8 @@ import com.open.capacity.common.constant.UaaConstant;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
+import java.util.Objects;
+
 /**
  * * 程序名 : AccessFilter 建立日期: 2018-09-09 作者 : someday 模块 : 网关 描述 : oauth校验 备注 :
  * version20180909001
@@ -40,7 +42,11 @@ public class RequestFilter implements GlobalFilter, Ordered {
 		MDC.put(TraceConstant.LOG_TRACE_ID, traceId);
 		
 		String accessToken = TokenUtil.extractToken(exchange.getRequest());
-		
+
+		if (Objects.isNull(accessToken)){
+			accessToken = "";
+		}
+
 		//构建head
 		ServerHttpRequest traceHead = exchange.getRequest().mutate()
 				 .header(TraceConstant.HTTP_HEADER_TRACE_ID, traceId )

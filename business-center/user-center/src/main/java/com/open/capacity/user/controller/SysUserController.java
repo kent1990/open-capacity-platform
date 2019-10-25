@@ -9,6 +9,7 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -86,7 +87,8 @@ public class SysUserController {
 		
         
     }
-    
+
+    @SentinelResource("findByUsername")
     @GetMapping(value = "/users-anon/login", params = "username")
     @ApiOperation(value = "根据用户名查询用户")
     @LogAnnotation(module="user-center",recordRequestParam=false)
