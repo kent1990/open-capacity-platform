@@ -13,7 +13,6 @@ public class TestController {
 	@GetMapping("/test")
 	public String opt(){
 		
-		System.out.println(SysUserUtil.getLoginAppUser());
 		return "ok" ;
 	}
 	
