@@ -43,9 +43,6 @@ public class RequestFilter implements GlobalFilter, Ordered {
 		
 		String accessToken = TokenUtil.extractToken(exchange.getRequest());
 
-		if (Objects.isNull(accessToken)){
-			accessToken = "";
-		}
 
 		//构建head
 		ServerHttpRequest traceHead = exchange.getRequest().mutate()
