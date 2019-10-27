@@ -122,6 +122,10 @@
 			<artifactId>flowable-ui-modeler-logic</artifactId>
 			<version>${flowable.version}</version>
 		</dependency>
+
+
+
+
 	</dependencies>
 
 

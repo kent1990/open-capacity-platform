@@ -1,4 +1,4 @@
-package com.open.capacity.controller;
+package com.open.capacity.rest;
 
 import org.flowable.ui.common.service.exception.InternalServerErrorException;
 import org.springframework.beans.factory.annotation.Autowired;

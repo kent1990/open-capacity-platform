@@ -1,4 +1,4 @@
-package com.open.capacity.controller;
+package com.open.capacity.rest;
 
 import org.flowable.ui.common.model.UserRepresentation;
 import org.flowable.ui.common.security.DefaultPrivileges;
@@ -17,7 +17,7 @@ import java.util.List;
  * @date 2019/7/28 16:58
  */
 @RestController
-@RequestMapping("/flowapp")
+@RequestMapping("/app")
 public class AppController {
 
     @RequestMapping(value = "/rest/account", method = RequestMethod.GET, produces = "application/json")
