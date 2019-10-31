@@ -124,9 +124,10 @@ flowable:
 #flowable:
 ##关闭定时任务JOB
 #  async-executor-activate: false
-#  common:
-#    app:
+  common:
+    app:
 #      idm-url: http://localhost:${spirng.port}/expense/
+      idm-url: http://localhost:${spirng.port}/flowable-idm
 #  idm:
 #    app:
 #      admin:
