@@ -207,7 +207,7 @@ hystrix:
   command:
     default:
       circuitBreaker:
-        foreOpen: false
+        forceOpen: false
       execution:
         timeout:
           enabled: true
