@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.open.capacity.common.test;
+package com.open.capacity;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

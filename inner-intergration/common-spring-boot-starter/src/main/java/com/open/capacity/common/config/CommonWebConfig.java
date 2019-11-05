@@ -1,24 +1,34 @@
 package com.open.capacity.common.config;
 
-import com.open.capacity.common.interceptor.ApiIdempotentInterceptor;
+import javax.annotation.Resource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import javax.annotation.Resource;
+import com.open.capacity.common.interceptor.AccessInterceptor;
+import com.open.capacity.common.interceptor.ApiIdempotentInterceptor;
+import com.open.capacity.redis.util.RedisUtil;
 
 @Configuration
 @ConditionalOnClass(WebMvcConfigurer.class)
-public class ApiIdempotentConfig implements  WebMvcConfigurer {
+public class CommonWebConfig implements  WebMvcConfigurer {
 
 
     @Resource
     private RedisTemplate< String, Object> redisTemplate ;
 
+    @Autowired
+	private RedisUtil redisUtil;
+    
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+    	registry.addInterceptor(new AccessInterceptor(redisUtil)) ;
         registry.addInterceptor(new ApiIdempotentInterceptor(redisTemplate)).addPathPatterns("/**") ;
+        
+        
     }
 }
