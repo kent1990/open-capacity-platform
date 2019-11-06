@@ -15,7 +15,7 @@ import com.open.capacity.redis.util.RedisUtil;
 
 @Configuration
 @ConditionalOnClass(WebMvcConfigurer.class)
-public class CommonWebConfig implements  WebMvcConfigurer {
+public class ApiIdempotentConfig implements  WebMvcConfigurer {
 
 
     @Resource
