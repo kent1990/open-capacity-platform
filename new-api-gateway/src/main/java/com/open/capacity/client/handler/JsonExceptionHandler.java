@@ -1,4 +1,4 @@
-package com.open.capacity.client.exception.handle;
+package com.open.capacity.client.handler;
 
 import java.util.HashMap;
 import java.util.Map;

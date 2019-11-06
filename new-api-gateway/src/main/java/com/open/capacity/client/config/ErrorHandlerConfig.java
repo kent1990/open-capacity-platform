@@ -1,4 +1,4 @@
-package com.open.capacity.client.exception;
+package com.open.capacity.client.config;
 
 import java.util.Collections;
 import java.util.List;
@@ -17,7 +17,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.http.codec.ServerCodecConfigurer;
 import org.springframework.web.reactive.result.view.ViewResolver;
 
-import com.open.capacity.client.exception.handle.JsonExceptionHandler;
+import com.open.capacity.client.handler.JsonExceptionHandler;
 
  
 /**

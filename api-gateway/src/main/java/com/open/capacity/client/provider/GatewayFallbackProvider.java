@@ -47,6 +47,7 @@ public class GatewayFallbackProvider implements FallbackProvider {
 	@Override
 	public ClientHttpResponse fallbackResponse(String route, Throwable cause){
 
+		log.error("网关执行请求:{}失败,hystrix服务降级处理", route);
 		if(cause instanceof HystrixTimeoutException){
 			return response(HttpStatus.GATEWAY_TIMEOUT,cause);
 		}else{
