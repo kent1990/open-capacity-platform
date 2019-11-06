@@ -4,7 +4,7 @@ public class TraceConstant {
 	/**
      * 日志跟踪id名。
      */
-    public static final String LOG_TRACE_ID = "traceid";
+    public static final String LOG_TRACE_ID = "traceId";
     
     public static final String LOG_B3_TRACEID = "X-B3-TraceId";
 
