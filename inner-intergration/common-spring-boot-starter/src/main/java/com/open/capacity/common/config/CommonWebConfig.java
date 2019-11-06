@@ -9,7 +9,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import com.open.capacity.common.interceptor.AccessInterceptor;
+import com.open.capacity.common.interceptor.AccessLimitInterceptor;
 import com.open.capacity.common.interceptor.ApiIdempotentInterceptor;
 import com.open.capacity.redis.util.RedisUtil;
 
@@ -26,7 +26,7 @@ public class CommonWebConfig implements  WebMvcConfigurer {
     
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-    	registry.addInterceptor(new AccessInterceptor(redisUtil)) ;
+    	registry.addInterceptor(new AccessLimitInterceptor(redisUtil)) ;
         registry.addInterceptor(new ApiIdempotentInterceptor(redisTemplate)).addPathPatterns("/**") ;
         
         
