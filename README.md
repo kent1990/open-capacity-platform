@@ -2,8 +2,8 @@
 
 <p align="center"> 
  <img src="https://img.shields.io/circleci/project/vuejs/vue/dev.svg" alt="Build Status">
-  <img src="https://img.shields.io/badge/Spring%20Cloud-Finchley.SR2.RELEASE-blue.svg" alt="Coverage Status">
-  <img src="https://img.shields.io/badge/Spring%20Boot-2.0.4.RELEASE-blue.svg" alt="Downloads">
+  <img src="https://img.shields.io/badge/Spring%20Cloud-Greenwich.SR2.RELEASE-blue.svg" alt="Coverage Status">
+  <img src="https://img.shields.io/badge/Spring%20Boot-2.1.3.RELEASE-blue.svg" alt="Downloads">
 </p>
 
 [![star](https://gitee.com/owenwangwen/open-capacity-platform/badge/star.svg?theme=white)](https://gitee.com/owenwangwen/open-capacity-platform/stargazers)

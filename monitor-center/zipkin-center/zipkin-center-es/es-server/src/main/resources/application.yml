@@ -25,17 +25,17 @@ zipkin:
   storage:
     type: elasticsearch
     elasticsearch:
-      hosts: http://35.192.230.214:9200/ 
+      hosts: http://47.99.88.28:9200
       #      username: elastic
       #      password: changeme
-      cluster: docker-cluster
+      cluster: elasticsearch
       index: zipkin
       index-shards: 1
       index-replicas: 1
   collector:
     kafka:
-      bootstrap-servers: 39.108.176.135:9092
-      zookeeper: 39.108.176.135:2181
+      bootstrap-servers: 47.99.88.28:9092
+      zookeeper: 47.99.88.28:2181
       topic: zipkin
  
 
@@ -66,6 +66,3 @@ logging:
     org.hibernate: INFO
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
     org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
-    com.neusoft: DEBUG     
-    com.netflix: DEBUG                    #用于心跳检测输出的日志
-                  
