@@ -30,7 +30,7 @@ spring:
     kafka:
       topic: zipkin
   kafka:
-    bootstrap-servers: 39.108.176.135:9092
+    bootstrap-servers: 47.99.88.28:9092
  
 
 
@@ -60,6 +60,4 @@ logging:
     org.hibernate: INFO
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
     org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
-    com.neusoft: DEBUG     
-    com.netflix: DEBUG                    #用于心跳检测输出的日志
           
