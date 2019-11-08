@@ -70,4 +70,13 @@ public class ExceptionHandlerAdvice {
 
 		return data;
 	}
+	@ExceptionHandler(Throwable.class)
+	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public Map<String, Object> handleError(Throwable e) {
+        Map<String, Object> data = new HashMap<>();
+		data.put("resp_code", HttpStatus.INTERNAL_SERVER_ERROR.value());
+		data.put("resp_msg", e.getMessage());
+
+		return data;
+    }
 }

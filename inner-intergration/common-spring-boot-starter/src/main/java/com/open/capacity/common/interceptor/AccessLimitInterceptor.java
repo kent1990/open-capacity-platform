@@ -30,17 +30,22 @@ public class AccessLimitInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		if (handler instanceof HandlerMethod) {
-			LoginAppUser user = SysUserUtil.getLoginAppUser();
+			
 			HandlerMethod hm = (HandlerMethod) handler;
 			AccessLimit accessLimit = hm.getMethodAnnotation(AccessLimit.class);
 			if (accessLimit == null) {
 				return true;
 			}
+			 
+			
+			
+			
 			int seconds = accessLimit.seconds();
 			int maxCount = accessLimit.maxCount();
 			boolean needLogin = accessLimit.needLogin();
 			String key = request.getRequestURI();
 			if (needLogin) {
+				LoginAppUser user = SysUserUtil.getLoginAppUser();
 				if (user == null) {
 					render(response, Result.failed("用户鉴权异常！"));
 					return false;

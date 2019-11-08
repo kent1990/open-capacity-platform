@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.open.capacity.common.exception.controller.ControllerException;
 import com.open.capacity.common.exception.hystrix.HytrixException;
 
+ 
+
 /**
  * @author 作者 owen E-mail: 624191343@qq.com
  * @version 创建时间：2017年11月12日 上午22:57:51 异常通用处理 服务于oauth 服务端于客户端
@@ -70,4 +72,13 @@ public class ExceptionHandlerAdvice {
 
 		return data;
 	}
+	@ExceptionHandler(Throwable.class)
+	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public Map<String, Object> handleError(Throwable e) {
+        Map<String, Object> data = new HashMap<>();
+		data.put("resp_code", HttpStatus.INTERNAL_SERVER_ERROR.value());
+		data.put("resp_msg", e.getMessage());
+
+		return data;
+    }
 }
