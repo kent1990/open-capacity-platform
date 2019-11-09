@@ -32,8 +32,8 @@ spring:
               fallbackUri: 'forward:/defaultfallback'
           - name: RequestRateLimiter
             args:
-              redis-rate-limiter.replenishRate: 1  # 令牌桶的容积
-              redis-rate-limiter.burstCapacity: 3  # 流速 每秒
+              redis-rate-limiter.replenishRate: 1000  # 令牌桶的容积
+              redis-rate-limiter.burstCapacity: 1000  # 流速 每秒
               key-resolver: "#{@ipAddressKeyResolver}" #SPEL表达式去的对应的bean
         - id: api-auth
           uri: lb://auth-server
@@ -49,8 +49,8 @@ spring:
               fallbackUri: 'forward:/defaultfallback'
           - name: RequestRateLimiter
             args:
-              redis-rate-limiter.replenishRate: 1  # 令牌桶的容积
-              redis-rate-limiter.burstCapacity: 3  # 流速 每秒
+              redis-rate-limiter.replenishRate: 1000  # 令牌桶的容积
+              redis-rate-limiter.burstCapacity: 1000  # 流速 每秒
               key-resolver: "#{@ipAddressKeyResolver}" #SPEL表达式去的对应的bean
         - id: api-file
           uri: lb://file-center
@@ -65,8 +65,8 @@ spring:
               fallbackUri: 'forward:/defaultfallback'
           - name: RequestRateLimiter
             args:
-              redis-rate-limiter.replenishRate: 1  # 令牌桶的容积
-              redis-rate-limiter.burstCapacity: 3  # 流速 每秒
+              redis-rate-limiter.replenishRate: 1000  # 令牌桶的容积
+              redis-rate-limiter.burstCapacity: 1000  # 流速 每秒
               key-resolver: "#{@ipAddressKeyResolver}" #SPEL表达式去的对应的bean
         - id: api-generator
           uri: lb://generator-center
@@ -81,8 +81,8 @@ spring:
               fallbackUri: 'forward:/defaultfallback'
           - name: RequestRateLimiter
             args:
-              redis-rate-limiter.replenishRate: 1  # 令牌桶的容积
-              redis-rate-limiter.burstCapacity: 3  # 流速 每秒
+              redis-rate-limiter.replenishRate: 1000  # 令牌桶的容积
+              redis-rate-limiter.burstCapacity: 1000  # 流速 每秒
               key-resolver: "#{@ipAddressKeyResolver}" #SPEL表达式去的对应的bean
         - id: api-baidu
           uri: http://www.163.com
