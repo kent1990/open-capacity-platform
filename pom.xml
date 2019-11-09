@@ -1,29 +1,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.open.capacity</groupId>
-	<artifactId>open-capacity-platform</artifactId>
+	<groupId>com.owen</groupId>
+	<artifactId>owen-oracle-platform</artifactId>
 	<version>2.0.1</version>
 	<packaging>pom</packaging>
 	<modules>
-		 <!-- 内部支撑工具 -->
-		<module>inner-intergration</module>
-		<!-- 注册中心 -->
-		<module>register-center</module>
-		<!-- 认证中心 -->
-		<module>oauth-center</module>
-		<!-- 业务网关 -->
-		<module>api-gateway</module>
+		<!-- 基础服务 -->
+		<module>basic-center</module>
 		<!-- 业务中心 -->
 		<module>business-center</module>
-		<!-- 任务中心-->
-		<module>job-center</module>
-		<!-- 灰度发布中心 <module>gray-center</module> -->
-		<!-- 调优中心 <module>tuning-center</module> -->
-		<!-- 监控中心 -->
-		<module>monitor-center</module>
-		<!-- spring cloud gateway -->
-		<module>new-api-gateway</module>
+		 <!-- 内部支撑工具 -->
+		<module>common-utils</module>
 		<!-- web页面门户 -->
 		<module>web-portal</module>
 	</modules>
@@ -177,12 +165,7 @@
 				<artifactId>swagger-spring-boot-starter</artifactId>
 				<version>${core.version}</version>
 			</dependency>
-			<!-- 自定义路由策略 -->
-			<dependency>
-				<groupId>com.open.capacity</groupId>
-				<artifactId>ribbon-spring-boot-starter</artifactId>
-				<version>${core.version}</version>
-			</dependency>
+			
 			
 
 		</dependencies>
@@ -229,7 +212,6 @@
 					<include>**/*.xsd</include>
 					<include>**/*.ftl</include>
 					<include>**/*.lua</include>
-					<include>**/*.json</include>
 					<include>processes/*</include>
 					<include>**/spring.factories</include>
 				</includes>
@@ -279,74 +261,4 @@
     </distributionManagement>
 	
 	 -->
-
-	<developers>
-		
-		<developer>
-			<id>00</id>
-			<name>owen</name>
-			<email>624191343@qq.com</email>
-		</developer>
-		<developer>
-			<id>01</id>
-			<name>gitgeek</name>
-			<email>986969368@qq.com</email>
-		</developer>
-		<developer>
-			<id>02</id>
-			<name>someday</name>
-			<email>842695235@qq.com</email>
-		</developer>
-		<developer>
-			<id>03</id>
-			<name>caoheyang911016</name>
-			<email>328690901@qq.com</email>
-		</developer>
-		<developer>
-			<id>04</id>
-			<name>Binary</name>
-			<email>154232101@qq.com</email>
-		</developer>
-		<developer>
-			<id>05</id>
-			<name>financeyuan</name>
-			<email>2478412512@qq.com</email>
-		</developer>
-		<developer>
-			<id>06</id>
-			<name>1758783856</name>
-			<email>1758783856@qq.com</email>
-		</developer>
-		<developer>
-			<id>07</id>
-			<name>68335397</name>
-			<email>68335397@qq.com</email>
-		</developer>
-		<developer>
-			<id>08</id>
-			<name>415213294</name>
-			<email>415213294@qq.com</email>
-		</developer>
-		<developer>
-			<id>09</id>
-			<name>573059382</name>
-			<email>573059382@qq.com</email>
-		</developer>
-		<developer>
-			<id>10</id>
-			<name>dawei</name>
-			<email>phone:15098899951 area:jinan email:64738479@qq.com</email>
-		</developer>
-		<developer>
-			<id>11</id>
-			<name>pm</name>
-			<email>1280415703@qq.com</email>
-		</developer>
-		<developer>
-			<id>12</id>
-			<name>finally</name>
-			<email>1363946966@qq.com</email>
-		</developer>
-	</developers>
-
 </project>

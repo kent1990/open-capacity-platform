@@ -2,7 +2,7 @@
 
 body {
     background-image: linear-gradient(-180deg, #1a1454 0%, #0e81a5 100%);
-    /*background-image: url("../images/bg_login.png");*/
+    background-image: url("../images/desk.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -84,10 +84,12 @@ body {
 
 /** 底部样式 */
 .login-footer {
+    font-size: larger;
     text-align: center;
     line-height: 30px;
     color: rgba(255, 255, 255, 0.7) !important;
     padding-bottom: 20px;
+    background-color: #99989D;
 }
 
 .login-footer span {

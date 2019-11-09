@@ -77,7 +77,8 @@ html {
 }
 
 .layui-layout-admin .layui-header .layui-logo img {
-    height: 40px;
+    height: 60px;
+    width: 220px;
 }
 
 .layui-layout-admin .layui-header .layui-logo cite {

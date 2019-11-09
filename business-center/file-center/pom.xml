@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>com.open.capacity</groupId>
+    <groupId>com.owen</groupId>
     <artifactId>business-center</artifactId>
     <version>2.0.1</version>
   </parent>
@@ -12,38 +12,44 @@
   
   		<!-- 关系型数据库配置 -->
 	 	<dependency>
-  			<groupId>com.open.capacity</groupId>
+  			<groupId>com.owen</groupId>
   			<artifactId>db-spring-boot-starter</artifactId>
+			<version>2.0.1</version>
   		</dependency>
   		
   		<!-- 非关系型数据库配置 -->
   		<dependency>
-  			<groupId>com.open.capacity</groupId>
+  			<groupId>com.owen</groupId>
   			<artifactId>redis-spring-boot-starter</artifactId>
+			<version>2.0.1</version>
   		</dependency>
   		
   		<!-- 日志中心配置 -->
 		<dependency>
-  			<groupId>com.open.capacity</groupId>
+  			<groupId>com.owen</groupId>
   			<artifactId>log-spring-boot-starter</artifactId>
+			<version>2.0.1</version>
   		</dependency>
   		
   		<!-- 公共实体配置 -->
   		<dependency>
-  			<groupId>com.open.capacity</groupId>
+  			<groupId>com.owen</groupId>
   			<artifactId>common-spring-boot-starter</artifactId>
+			<version>2.0.1</version>
   		</dependency>
   		
   		<!-- 资源服务器配置 -->
   		<dependency>
-  			<groupId>com.open.capacity</groupId>
+  			<groupId>com.owen</groupId>
   			<artifactId>uaa-client-spring-boot-starter</artifactId>
+			<version>2.0.1</version>
   		</dependency>
 		
 		<!-- API文档配置 -->
 		<dependency>
-  			<groupId>com.open.capacity</groupId>
+  			<groupId>com.owen</groupId>
   			<artifactId>swagger-spring-boot-starter</artifactId>
+			<version>2.0.1</version>
   		</dependency>
 
 		<!-- WEB守护进程启动springboot -->

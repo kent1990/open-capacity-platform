@@ -2,8 +2,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.open.capacity</groupId>
-        <artifactId>open-capacity-platform</artifactId>
+        <groupId>com.owen</groupId>
+        <artifactId>owen-oracle-platform</artifactId>
         <version>2.0.1</version>
     </parent>
     <artifactId>business-center</artifactId>
@@ -11,15 +11,10 @@
     <description>业务中心</description>
 
     <modules>
+        <module>auth-server</module>
         <!-- 用户中心 -->
         <module>user-center</module>
         <!-- 文件中心 -->
         <module>file-center</module>
-        <!-- 代码生成器 -->
-        <module>generator-center</module>
-        <!-- 短信中心 -->
-        <module>sms-center</module>
-        <!--工作流-->
-        <module>workflow-center</module>
     </modules>
 </project>
