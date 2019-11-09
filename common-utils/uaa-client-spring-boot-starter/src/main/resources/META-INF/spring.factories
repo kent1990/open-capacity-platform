@@ -1,0 +1,8 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.owen.client.authorize.provider.AuthAuthorizeConfigProvider,\
+com.owen.client.authorize.OpenAuthorizeConfigManager,\
+com.owen.client.config.ExceptionHandlerAdvice,\
+com.owen.common.feign.FeignInterceptorConfig,\
+com.owen.client.config.SecurityHandlerConfig,\
+com.owen.client.config.TokenStoreConfig,\
+com.owen.client.UAAClientAutoConfig
