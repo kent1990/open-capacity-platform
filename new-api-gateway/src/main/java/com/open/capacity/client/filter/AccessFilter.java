@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
@@ -23,18 +24,24 @@ import org.springframework.web.server.ServerWebExchange;
 import com.alibaba.fastjson.JSONObject;
 import com.open.capacity.client.utils.TokenUtil;
 import com.open.capacity.client.vo.AuthIgnored;
+import com.open.capacity.common.auth.props.PermitUrlProperties;
 import com.open.capacity.common.constant.TraceConstant;
 import com.open.capacity.common.constant.UaaConstant;
 
 import reactor.core.publisher.Mono;
 
 /**
- * * 程序名 : AccessFilter 建立日期: 2018-09-09 作者 : someday 模块 : 网关 描述 : oauth校验 备注 :
+ * * 程序名 : AccessFilter 
+ * 建立日期: 2018-09-09 
+ * 作者 : someday 
+ * 模块 : 网关 
+ * 描述 : oauth校验 备注 :
  * version20180909001
  * <p>
  * 修改历史 序号 日期 修改人 修改原因
  */
 @Component
+@EnableConfigurationProperties(PermitUrlProperties.class)
 public class AccessFilter implements GlobalFilter, Ordered {
 
 	// url匹配器
@@ -44,7 +51,7 @@ public class AccessFilter implements GlobalFilter, Ordered {
 	private RedisTemplate<String, Object> redisTemplate;
 
 	@Resource
-	private AuthIgnored authIgnored;
+	private PermitUrlProperties permitUrlProperties;
 
 	@Override
 	public int getOrder() {
@@ -63,7 +70,7 @@ public class AccessFilter implements GlobalFilter, Ordered {
 		// 默认
 		boolean flag = false;
 
-		for (String ignored : authIgnored.getIgnored()) {
+		for (String ignored :permitUrlProperties.getIgnored()) {
 
 			if (pathMatcher.match(ignored, exchange.getRequest().getPath().value())) {
 				flag = true; // 白名单

@@ -1,17 +1,23 @@
-spring:
-  cloud:
-    nacos:
-      config:
-        # 共享配置的DataId，多个使用,分隔
-        # 越靠后，优先级越高；
-        # .yaml后缀不能少，只支持yaml/properties
-        shared-dataids: common.yaml
-        refreshable-dataids: common.yaml
-        server-addr: 119.27.173.249:8848
-        file-extension: yaml
-        namespace: 95a4a445-f548-4c0d-98fc-a471454dabec  #命名空间 代指某个环境
-  application:
-    name: new-api-gateway
-  main:
-    allow-bean-definition-overriding: true
+#端口
+server:
+  port: 9200
 
+#服务名称
+spring:
+  application:
+      name: new-api-gateway
+  main:
+    allow-bean-definition-overriding: true    
+ 
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+ 
+
+ 

@@ -25,5 +25,8 @@
   	<!-- 认证服务器配置 -->
   	<module>uaa-server-spring-boot-starter</module>
   	<!-- mq -->
+  	<module>rabbitmq-spring-boot-starter</module>
+  	<!-- 自定义负载均衡策略-->
+  	<module>ribbon-spring-boot-starter</module>
   </modules>
 </project>

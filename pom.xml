@@ -47,9 +47,9 @@
 		<log4j2.version>2.1</log4j2.version>
 		<jasypt.version>1.14</jasypt.version>
 		<hutool.version>4.1.13</hutool.version>
-		<fastjson.version>1.2.47</fastjson.version>
-		<disruptor.version>3.4.1</disruptor.version>
-		<maven.compiler.source>1.8</maven.compiler.source>
+		<fastjson.version>1.2.60</fastjson.version>
+  		<disruptor.version>3.4.1</disruptor.version>
+  		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<docker.host>http://59.110.164.254:5555</docker.host>
 		<docker.image.prefix>owenwangwen</docker.image.prefix>
@@ -63,7 +63,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<hibernate-validator.verion>5.0.2.Final</hibernate-validator.verion>
 		<flowable.version>6.4.1</flowable.version>
-		<spring-cloud-dependencies.version>Greenwich.RELEASE</spring-cloud-dependencies.version>
+		<spring-cloud-dependencies.version>Greenwich.SR2</spring-cloud-dependencies.version>
 		<spring-cloud-alibaba-dependencies.version>2.1.0.RELEASE</spring-cloud-alibaba-dependencies.version>
 
 
@@ -231,6 +231,7 @@
 					<include>**/*.xsd</include>
 					<include>**/*.ftl</include>
 					<include>**/*.lua</include>
+					<include>**/*.json</include>
 					<include>processes/*</include>
 					<include>**/spring.factories</include>
 				</includes>
