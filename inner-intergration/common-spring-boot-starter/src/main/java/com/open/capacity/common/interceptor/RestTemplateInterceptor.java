@@ -40,7 +40,7 @@ public class RestTemplateInterceptor implements ClientHttpRequestInterceptor {
         headers.add(UaaConstant.TOKEN_HEADER,  token);
 
        //传递traceId
-        String traceId = StrUtil.isNotEmpty(MDC.get(TraceConstant.LOG_TRACE_ID))  ?  MDC.get(TraceConstant.LOG_TRACE_ID) :  MDC.get(TraceConstant.LOG_TRACE_ID) ;
+        String traceId = StrUtil.isNotEmpty(MDC.get(TraceConstant.LOG_TRACE_ID))  ?  MDC.get(TraceConstant.LOG_TRACE_ID) :  MDC.get(TraceConstant.LOG_B3_TRACEID) ;
         if (StrUtil.isNotEmpty(traceId)) {
             headers.add(TraceConstant.HTTP_HEADER_TRACE_ID,  traceId);
         }
