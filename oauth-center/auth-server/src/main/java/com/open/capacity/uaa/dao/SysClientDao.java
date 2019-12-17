@@ -29,7 +29,7 @@ public interface SysClientDao {
 
     List<SysClient> findList(@Param("params") Map<String, Object> params );
 
-    @Select("select id id , client_id clientId , resource_ids resourceIds ,client_secret clientSecret ,web_server_redirect_uri webServerRedirectUri  from oauth_client_details t where t.id = #{id}  ")
+    @Select("select id id , client_id clientId , resource_ids resourceIds ,client_secret clientSecret,client_secret_str clientSecretStr ,web_server_redirect_uri webServerRedirectUri  from oauth_client_details t where t.id = #{id}  ")
     SysClient getById(Long id);
 
     @Select("select * from oauth_client_details t where t.client_id = #{clientId}  ")
