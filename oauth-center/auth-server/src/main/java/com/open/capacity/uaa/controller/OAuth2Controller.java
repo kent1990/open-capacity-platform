@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 import javax.annotation.Resource;
@@ -48,6 +49,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.open.capacity.common.auth.details.LoginAppUser;
 import com.open.capacity.common.model.SysPermission;
 import com.open.capacity.common.util.SysUserUtil;
@@ -382,7 +385,7 @@ public class OAuth2Controller {
 			throws Exception {
 		List<HashMap<String, String>> list = new ArrayList<>();
 
-		Set<String> keys = redisTemplate.keys("access:" + "*");
+		Set<String> keys = Optional.ofNullable(redisTemplate.keys("access:" + "*")).orElse(Sets.newHashSet(""));
 		// Object key1 = keys.toArray()[0];
 		// Object token1 = redisTemplate.opsForValue().get(key1);
 		// 根据分页参数获取对应数据
@@ -399,41 +402,45 @@ public class OAuth2Controller {
 			HashMap<String, String> map = new HashMap<String, String>();
 
 			try {
-				map.put("token_type", token.getTokenType());
-				map.put("token_value", token.getValue());
-				map.put("expires_in", token.getExpiresIn() + "");
+				
+				if(token!=null){
+					map.put("token_type", token.getTokenType());
+					map.put("token_value", token.getValue());
+					map.put("expires_in", token.getExpiresIn() + "");
+				}
+				OAuth2Authentication oAuth2Auth = tokenStore.readAuthentication(token);
+				Authentication authentication = oAuth2Auth.getUserAuthentication();
+
+				map.put("client_id", oAuth2Auth.getOAuth2Request().getClientId());
+				map.put("grant_type", oAuth2Auth.getOAuth2Request().getGrantType());
+
+				if (authentication instanceof UsernamePasswordAuthenticationToken) {
+					UsernamePasswordAuthenticationToken authenticationToken = (UsernamePasswordAuthenticationToken) authentication;
+
+					if (authenticationToken.getPrincipal() instanceof LoginAppUser) {
+						LoginAppUser user = (LoginAppUser) authenticationToken.getPrincipal();
+						map.put("user_id", user.getId() + "");
+						map.put("user_name", user.getUsername() + "");
+						map.put("user_head_imgurl", user.getHeadImgUrl() + "");
+					}
+
+				} else if (authentication instanceof PreAuthenticatedAuthenticationToken) {
+					// 刷新token方式
+					PreAuthenticatedAuthenticationToken authenticationToken = (PreAuthenticatedAuthenticationToken) authentication;
+					if (authenticationToken.getPrincipal() instanceof LoginAppUser) {
+						LoginAppUser user = (LoginAppUser) authenticationToken.getPrincipal();
+						map.put("user_id", user.getId() + "");
+						map.put("user_name", user.getUsername() + "");
+						map.put("user_head_imgurl", user.getHeadImgUrl() + "");
+					}
+
+				}
+				list.add(map);
 			} catch (Exception e) {
 
 			}
 
-			OAuth2Authentication oAuth2Auth = tokenStore.readAuthentication(token);
-			Authentication authentication = oAuth2Auth.getUserAuthentication();
-
-			map.put("client_id", oAuth2Auth.getOAuth2Request().getClientId());
-			map.put("grant_type", oAuth2Auth.getOAuth2Request().getGrantType());
-
-			if (authentication instanceof UsernamePasswordAuthenticationToken) {
-				UsernamePasswordAuthenticationToken authenticationToken = (UsernamePasswordAuthenticationToken) authentication;
-
-				if (authenticationToken.getPrincipal() instanceof LoginAppUser) {
-					LoginAppUser user = (LoginAppUser) authenticationToken.getPrincipal();
-					map.put("user_id", user.getId() + "");
-					map.put("user_name", user.getUsername() + "");
-					map.put("user_head_imgurl", user.getHeadImgUrl() + "");
-				}
-
-			} else if (authentication instanceof PreAuthenticatedAuthenticationToken) {
-				// 刷新token方式
-				PreAuthenticatedAuthenticationToken authenticationToken = (PreAuthenticatedAuthenticationToken) authentication;
-				if (authenticationToken.getPrincipal() instanceof LoginAppUser) {
-					LoginAppUser user = (LoginAppUser) authenticationToken.getPrincipal();
-					map.put("user_id", user.getId() + "");
-					map.put("user_name", user.getUsername() + "");
-					map.put("user_head_imgurl", user.getHeadImgUrl() + "");
-				}
-
-			}
-			list.add(map);
+			
 
 		}
 
@@ -476,7 +483,8 @@ public class OAuth2Controller {
 		});
 
 		List<String> result = new ArrayList<String>(pageSize);
-		result.addAll(execute);
+		
+		Optional.ofNullable(result).orElse(Lists.newArrayList("")).addAll(execute);
 		return result;
 	}
 
@@ -560,5 +568,5 @@ public class OAuth2Controller {
 
 		}
 	}
-
+	  
 }
