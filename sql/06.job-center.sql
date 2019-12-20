@@ -1,8 +1,5 @@
-# Host: 59.110.164.254  (Version 5.7.22)
-# Date: 2019-11-14 12:48:17
-# Generator: MySQL-Front 5.4  (Build 4.153) - http://www.mysqlfront.de/
-
-/*!40101 SET NAMES utf8 */;
+CREATE DATABASE IF NOT EXISTS `iyydb_job` DEFAULT CHARACTER SET = utf8mb4;
+Use `iyydb_job`;
 
 #
 # Structure for table "XXL_JOB_QRTZ_CALENDARS"

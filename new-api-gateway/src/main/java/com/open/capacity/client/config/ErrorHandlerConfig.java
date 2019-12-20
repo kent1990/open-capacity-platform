@@ -17,7 +17,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.http.codec.ServerCodecConfigurer;
 import org.springframework.web.reactive.result.view.ViewResolver;
 
-import com.open.capacity.client.handler.JsonExceptionHandler;
+import com.open.capacity.client.handler.ResExceptionHandler;
 
  
 /**
@@ -60,7 +60,7 @@ public class ErrorHandlerConfig {
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
     public ErrorWebExceptionHandler errorWebExceptionHandler(ErrorAttributes errorAttributes) {
-        JsonExceptionHandler exceptionHandler = new JsonExceptionHandler(
+    	ResExceptionHandler exceptionHandler = new ResExceptionHandler(
                 errorAttributes, 
                 this.resourceProperties,
                 this.serverProperties.getError(), 

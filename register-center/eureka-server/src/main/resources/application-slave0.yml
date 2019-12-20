@@ -30,14 +30,14 @@ eureka:
   client: 
     register-with-eureka: true  #false:不作为一个客户端注册到注册中心,是否将自身的实例信息注册到eureka服务器
     fetch-registry: false      #为true时，可以启动，但报异常：Cannot execute request on any known server ，是否从eureka服务端获取注册信息，消费者需要配置true
-    instance-info-replication-interval-seconds: 2
+    instance-info-replication-interval-seconds: 10
     registry-fetch-interval-seconds: 30  #从eureka服务端获取注册信息的间隔时间
     service-url:
       defaultZone: http://ocp:ocp2019@127.0.0.1:1111/eureka
   instance:
     prefer-ip-address: true
     instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${spring.application.instance_id:${server.port}}
-    lease-renewal-interval-in-seconds: 2    # 续约更新时间间隔（默认30秒），eureka客户端向服务端发送心跳的时间间隔
+    lease-renewal-interval-in-seconds: 10    # 续约更新时间间隔（默认30秒），eureka客户端向服务端发送心跳的时间间隔
     lease-expiration-duration-in-seconds: 30 # 续约到期时间（默认90秒）
 ribbon:
   ServerListRefreshInterval: 1000    #刷新服务列表源的间隔时间

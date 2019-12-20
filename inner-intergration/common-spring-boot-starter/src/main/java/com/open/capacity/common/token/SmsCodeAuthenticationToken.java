@@ -1,4 +1,4 @@
-package com.open.capacity.uaa.server.token;
+package com.open.capacity.common.token;
 
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;

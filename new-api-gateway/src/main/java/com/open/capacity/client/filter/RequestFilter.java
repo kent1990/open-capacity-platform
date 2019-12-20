@@ -50,10 +50,6 @@ public class RequestFilter implements GlobalFilter, Ordered {
 		log.info("request url = " + exchange.getRequest().getURI() + ", traceId = " + traceId);
 		
 		ServerWebExchange build = exchange.mutate().request(traceHead).build();
-
-		
-		
-	 
 		
         return chain.filter(build);
 
