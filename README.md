@@ -28,8 +28,8 @@ http://59.110.164.254:8066/login.html  admin/admin
 
 
 # **监控演示** #
-<a target="_blank" href="http://106.13.3.200/verynginx/index.html">**实时监控**</a> 用户名/密码：verynginx/verynginx       
-<a target="_blank" href="http://106.13.3.200:3000/#">**grafana监控**</a> 用户名/密码：admin/1q2w3e4r    
+<a target="_blank" href="http://47.98.236.203/verynginx/index.html">**实时监控**</a> 用户名/密码：verynginx/verynginx       
+<a target="_blank" href="http://47.98.236.203:3000/#">**grafana监控**</a> 用户名/密码：admin/1q2w3e4r    
 
 # 开发手册  
  [https://www.kancloud.cn/owenwangwen/open-capacity-platform/content](https://www.kancloud.cn/owenwangwen/open-capacity-platform/content)
