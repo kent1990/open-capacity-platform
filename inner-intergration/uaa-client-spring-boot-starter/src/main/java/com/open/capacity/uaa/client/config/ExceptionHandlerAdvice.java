@@ -47,6 +47,7 @@ public class ExceptionHandlerAdvice {
 		return data;
 	}
 
+	
 	/**
 	 * AccessDeniedException异常处理返回json 状态码:403
 	 * 
@@ -62,57 +63,57 @@ public class ExceptionHandlerAdvice {
 
 		return data;
 	}
-
 	@ExceptionHandler(MissingServletRequestParameterException.class)
-	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public Map<String, Object> handleError(MissingServletRequestParameterException e) {
 		Map<String, Object> data = new HashMap<>();
-		data.put("resp_code", HttpStatus.INTERNAL_SERVER_ERROR.value());
+		data.put("resp_code", HttpStatus.BAD_REQUEST.value());
 		data.put("resp_msg", e.getMessage());
 
 		return data;
 	}
 
 	@ExceptionHandler(MethodArgumentTypeMismatchException.class)
-	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public Map<String, Object> handleError(MethodArgumentTypeMismatchException e) {
 		Map<String, Object> data = new HashMap<>();
-		data.put("resp_code", HttpStatus.FORBIDDEN.value());
+		data.put("resp_code", HttpStatus.BAD_REQUEST.value());
 		data.put("resp_msg", e.getMessage());
 
 		return data;
 	}
 
 	@ExceptionHandler(MethodArgumentNotValidException.class)
-	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public Map<String, Object> handleError(MethodArgumentNotValidException e) {
 		Map<String, Object> data = new HashMap<>();
-		data.put("resp_code", HttpStatus.INTERNAL_SERVER_ERROR.value());
+		data.put("resp_code", HttpStatus.BAD_REQUEST.value());
 		data.put("resp_msg", e.getMessage());
 
 		return data;
 	}
 
 	@ExceptionHandler(BindException.class)
-	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public Map<String, Object> handleError(BindException e) {
 		Map<String, Object> data = new HashMap<>();
-		data.put("resp_code", HttpStatus.INTERNAL_SERVER_ERROR.value());
+		data.put("resp_code", HttpStatus.BAD_REQUEST.value());
 		data.put("resp_msg", e.getMessage());
 
 		return data;
 	}
 
 	@ExceptionHandler(ConstraintViolationException.class)
-	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public Map<String, Object> handleError(ConstraintViolationException e) {
 		Map<String, Object> data = new HashMap<>();
-		data.put("resp_code", HttpStatus.INTERNAL_SERVER_ERROR.value());
+		data.put("resp_code", HttpStatus.BAD_REQUEST.value());
 		data.put("resp_msg", e.getMessage());
 
 		return data;
 	}
-
+	
+	
 	@ExceptionHandler(NoHandlerFoundException.class)
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	public Map<String, Object> handleError(NoHandlerFoundException e) {
@@ -133,25 +134,27 @@ public class ExceptionHandlerAdvice {
 		return data;
 	}
 
-	@ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+@ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+	@ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
 	public Map<String, Object> handleError(HttpRequestMethodNotSupportedException e) {
 		Map<String, Object> data = new HashMap<>();
-		data.put("resp_code", HttpStatus.INTERNAL_SERVER_ERROR.value());
+		data.put("resp_code", HttpStatus.METHOD_NOT_ALLOWED.value());
 		data.put("resp_msg", e.getMessage());
 
 		return data;
 	}
-
-	@ExceptionHandler(HttpMediaTypeNotSupportedException.class)
-	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-	public Map<String, Object> handleError(HttpMediaTypeNotSupportedException e) {
-		Map<String, Object> data = new HashMap<>();
-		data.put("resp_code", HttpStatus.INTERNAL_SERVER_ERROR.value());
+	
+    @ResponseStatus(HttpStatus.UNSUPPORTED_MEDIA_TYPE)
+    @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
+    public Map<String, Object> handleError(HttpMediaTypeNotSupportedException e) {
+    	Map<String, Object> data = new HashMap<>();
+		data.put("resp_code", HttpStatus.UNSUPPORTED_MEDIA_TYPE.value());
 		data.put("resp_msg", e.getMessage());
-
 		return data;
-	}
+    }
+	 
+
+	 
 
 	@ExceptionHandler({ DataAccessException.class })
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
