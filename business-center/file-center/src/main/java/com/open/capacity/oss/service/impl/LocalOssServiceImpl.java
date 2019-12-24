@@ -1,23 +1,13 @@
 package com.open.capacity.oss.service.impl;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import com.open.capacity.common.web.PageResult;
-import com.open.capacity.oss.dao.FileDao;
-import com.open.capacity.oss.model.FileInfo;
-import com.open.capacity.oss.model.FileType;
-import com.open.capacity.oss.task.TaskUnZipCall;
-import com.open.capacity.oss.utils.FileUtil;
-import org.apache.commons.collections4.MapUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
 import java.io.File;
 import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Enumeration;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
@@ -26,12 +16,30 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import org.apache.commons.collections4.MapUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.open.capacity.common.web.PageResult;
+import com.open.capacity.oss.dao.FileDao;
+import com.open.capacity.oss.model.FileInfo;
+import com.open.capacity.oss.model.FileType;
+import com.open.capacity.oss.task.TaskUnZipCall;
+import com.open.capacity.oss.utils.FileUtil;
+
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * 本地存储文件
  *
  * @author pm 1280415703@qq.com
  * @date 2019/8/11 16:22
  */
+@Slf4j
 @Service("fileInfoServiceImpl")
 public class LocalOssServiceImpl extends AbstractFileService {
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
@@ -118,8 +126,7 @@ public class LocalOssServiceImpl extends AbstractFileService {
         //fileInfo
         final List<Future<Boolean>> futureList = new ArrayList<>();
         Charset gbk = Charset.forName("gbk");
-        try {
-            ZipFile zip = new ZipFile(filePath);
+        try ( ZipFile zip = new ZipFile(filePath)){
             AtomicReference<Integer> counts = new AtomicReference<>(0);
             for (Enumeration entries = zip.entries(); entries.hasMoreElements(); ) {
                 ZipEntry entry = (ZipEntry) entries.nextElement();
@@ -135,19 +142,16 @@ public class LocalOssServiceImpl extends AbstractFileService {
                         counts.getAndSet(counts.get() - 1);
                     }
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                	log.error("LocalOssServiceImpl->unZip1:{}" ,e.getMessage());
                 } catch (ExecutionException e) {
-                    e.printStackTrace();
+                	log.error("LocalOssServiceImpl->unZip2:{}" ,e.getMessage());
                 } catch (TimeoutException e) {
-                    e.printStackTrace();
+                	log.error("LocalOssServiceImpl->unZip3:{}" ,e.getMessage());
                 }
             });
             if (counts.get() == 0) {
                 // 全部解压完成
             }
-            zip.close();
-//            File file = new File(descDir);
-//            file.delete();
         } catch (Exception e) {
         }
     }

@@ -2,8 +2,6 @@ package com.open.capacity.log.util;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-import com.open.capacity.common.constant.TraceConstant;
-
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -14,7 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class LogUtil {
 	 
-	public static TraceConstant traceConstant ;
    
     /**
 	 * 生成日志随机数

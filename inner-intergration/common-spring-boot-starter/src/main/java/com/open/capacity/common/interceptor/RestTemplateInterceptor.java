@@ -1,5 +1,9 @@
 package com.open.capacity.common.interceptor;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.MDC;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpRequest;
@@ -13,13 +17,9 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.open.capacity.common.constant.TraceConstant;
 import com.open.capacity.common.constant.UaaConstant;
-import com.open.capacity.common.util.StringUtils;
-import com.open.capacity.common.util.TokenUtil;
+import com.open.capacity.common.util.StringUtil;
 
 import cn.hutool.core.util.StrUtil;
-
-import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 
 public class RestTemplateInterceptor implements ClientHttpRequestInterceptor {
     @Override
@@ -30,9 +30,9 @@ public class RestTemplateInterceptor implements ClientHttpRequestInterceptor {
         String header = httpRequest.getHeader(UaaConstant.Authorization);
 
         
-		String token = StringUtils.isBlank(StringUtils.substringAfter(header, OAuth2AccessToken.BEARER_TYPE+" ")) ? httpRequest.getParameter(OAuth2AccessToken.ACCESS_TOKEN) :  StringUtils.substringAfter(header, OAuth2AccessToken.BEARER_TYPE +" ");
+		String token = StringUtil.isBlank(StringUtil.substringAfter(header, OAuth2AccessToken.BEARER_TYPE+" ")) ? httpRequest.getParameter(OAuth2AccessToken.ACCESS_TOKEN) :  StringUtil.substringAfter(header, OAuth2AccessToken.BEARER_TYPE +" ");
 		
-		token = StringUtils.isBlank(httpRequest.getHeader(UaaConstant.TOKEN_HEADER)) ? token : httpRequest.getHeader(UaaConstant.TOKEN_HEADER) ;
+		token = StringUtil.isBlank(httpRequest.getHeader(UaaConstant.TOKEN_HEADER)) ? token : httpRequest.getHeader(UaaConstant.TOKEN_HEADER) ;
 		
 		
 		//传递token
@@ -40,7 +40,7 @@ public class RestTemplateInterceptor implements ClientHttpRequestInterceptor {
         headers.add(UaaConstant.TOKEN_HEADER,  token);
 
        //传递traceId
-        String traceId = StrUtil.isNotEmpty(MDC.get(TraceConstant.LOG_TRACE_ID))  ?  MDC.get(TraceConstant.LOG_TRACE_ID) :  MDC.get(TraceConstant.LOG_TRACE_ID) ;
+        String traceId = StrUtil.isNotEmpty(MDC.get(TraceConstant.LOG_TRACE_ID))  ?  MDC.get(TraceConstant.LOG_TRACE_ID) :  MDC.get(TraceConstant.LOG_B3_TRACEID) ;
         if (StrUtil.isNotEmpty(traceId)) {
             headers.add(TraceConstant.HTTP_HEADER_TRACE_ID,  traceId);
         }

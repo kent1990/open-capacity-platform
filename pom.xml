@@ -184,8 +184,13 @@
 				<artifactId>swagger-spring-boot-starter</artifactId>
 				<version>${core.version}</version>
 			</dependency>
-
-
+			<!-- 自定义路由策略 -->
+			<dependency>
+				<groupId>com.open.capacity</groupId>
+				<artifactId>ribbon-spring-boot-starter</artifactId>
+				<version>${core.version}</version>
+			</dependency>
+			
 
 		</dependencies>
 	</dependencyManagement>
@@ -264,11 +269,23 @@
 		</resources>
 	</build>
 
-	<!-- <distributionManagement> <repository> <id>ocp-releases</id> <name>ocp 
-		Release Repository</name> <url>http://106.13.3.200:8081/repository/maven-releases/</url> 
-		</repository> <snapshotRepository> <id>ocp-snapshots</id> <name>ocp Snapshot 
-		Repository</name> <url>http://106.13.3.200:8081/repository/maven-snapshots/</url> 
-		</snapshotRepository> </distributionManagement> -->
+	<!-- 
+	
+	<distributionManagement>
+        <repository>
+            <id>ocp-releases</id>
+            <name>ocp Release Repository</name>
+            <url>http://106.13.3.200:8081/repository/maven-releases/</url>
+        </repository>
+ 
+        <snapshotRepository>
+            <id>ocp-snapshots</id>
+            <name>ocp Snapshot Repository</name>
+            <url>http://106.13.3.200:8081/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+	
+	 -->
 
 	<developers>
 

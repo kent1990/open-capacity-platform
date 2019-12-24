@@ -56,7 +56,7 @@ public class AccessLimitInterceptor extends HandlerInterceptorAdapter {
 			}
 
 			if (!redisUtil.hasKey(key) || redisUtil.getExpire(key) <= 0) {
-				redisUtil.set(key, 0,  seconds * 60);
+				redisUtil.set(key, 0,  seconds );
 			}
 			if (redisUtil.incr(key, 1) > maxCount) {
 				render(response, Result.failed("访问太频繁！"));

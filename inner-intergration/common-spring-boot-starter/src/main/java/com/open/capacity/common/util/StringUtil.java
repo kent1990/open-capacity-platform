@@ -3,19 +3,29 @@ package com.open.capacity.common.util;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class StringUtils extends org.apache.commons.lang3.StringUtils{
+import org.apache.commons.collections.CollectionUtils;
+
+/**
+ * StringUtils包装字符串处理类 
+ */
+public class StringUtil extends org.apache.commons.lang3.StringUtils{
 
     /**
      * //mybatis use
      */
     public static final String ITEM_PREFIX = "__frch_";
 
-    private static String pingYin = "A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z";
-    public static Map<String, String> pinYinMap = new HashMap<String, String>();
+    private static final String pingYin = "A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z";
+    private static Map<String, String> pinYinMap = new HashMap<String, String>();
 
     /**
      * // 后台系统 // 访问设置的合法ip
@@ -189,7 +199,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils{
     /**
      * 图片类型
      */
-    public static String imgType = "bmp,jpg,png,jpeg,gif";
+    public static final String imgType = "bmp,jpg,png,jpeg,gif";
 
 
     /**
@@ -238,8 +248,8 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils{
      */
     public static boolean checkImgFileType(String fileEnd, String fileType) {
         boolean isRealType = false;
-        if (StringUtils.isEmpty(fileType)) {
-            fileType = StringUtils.imgType;
+        if (StringUtil.isEmpty(fileType)) {
+            fileType = StringUtil.imgType;
         }
         if (fileType.indexOf(",") != -1) {
             String[] arrType = fileType.split(",");
@@ -366,11 +376,14 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils{
      * @time:2015年9月25日上午11:33:27
      */
     public static <T> T getInList(List list,int index){
-        if(isNotEmpty(list) && list.size() > index){
-            return (T)list.get(index);
-        }else{
+    	
+    	if(CollectionUtils.isNotEmpty(list) && list.size() > index ){
+    		 return (T)list.get(index);
+    		
+    	}else{
             return null;
         }
+    	
     }
 
 
@@ -383,61 +396,14 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils{
      */
     public static boolean matchYx(String yx) {
         boolean temp = false;
-        if (StringUtils.isNotEmpty(yx)) {
+        if (StringUtil.isNotEmpty(yx)) {
             temp = yx
                     .matches("\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*");
         }
         return temp;
     }
 
-    // 用户名正则表达式true匹配
-    public static boolean matchYhm(String yhm) {
-        boolean temp = false;
-        temp = yhm.matches("^[a-zA-Z0-9_\u4e00-\u9fa5]+$");
-        if (!temp) {
-            temp = StringUtils.matchSjhm(yhm);
-            if (!temp) {
-                temp = StringUtils.matchYx(yhm);
-            }
-        }
-        return temp;
-    }
-
-    /**
-     * 手机号码正则表达式true匹配
-     *
-     * @param sjhm
-     * @return
-     */
-    public static boolean matchSjhm(String sjhm) {
-        boolean temp = false;
-        if (StringUtils.isNotEmpty(sjhm)) {
-            if (sjhm.startsWith("86+")) {// 内地
-                sjhm = sjhm.substring("86+".length(), sjhm.length());
-            } else if (sjhm.startsWith("+886")) {// 台湾
-                sjhm = sjhm.substring("+886".length(), sjhm.length());
-            } else if (sjhm.startsWith("+852")) {// 香港
-                sjhm = sjhm.substring("+852".length(), sjhm.length());
-            } else if (sjhm.startsWith("+853")) {// 澳门
-                sjhm = sjhm.substring("+853".length(), sjhm.length());
-            }
-            temp = sjhm.matches("^[1][3-8]\\d{9}$");// ^1[3|4|5|8][0-9]\\d{4,8}$
-            if (!temp) {// 台湾手机10位数，皆以09起头
-                temp = sjhm.matches("^[0][9]\\d{8}$");//
-            } else if (!temp) {// +853******** 加上去好 刚好11位 澳门手机和固定电话都是8位 手机是6开头
-                // 固话是2开头
-                temp = sjhm.matches("^[5]\\d{7}$");//
-            } else if (!temp) {// +853******** 加上去好 刚好11位 澳门手机和固定电话都是8位 手机是6开头
-                // 固话是2开头
-                temp = sjhm.matches("^[6]\\d{7}$");//
-            } else if (!temp) {// +853******** 加上去好 刚好11位 澳门手机和固定电话都是8位 手机是6开头
-                // 固话是2开头
-                temp = sjhm.matches("^[9]\\d{7}$");//
-            }
-        }
-
-        return temp;
-    }
+    
 
     /**
      *
@@ -607,7 +573,29 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils{
             return isMatch;
         }
     }
+     
+    // 手机号码前三后四脱敏
+    public static String mobileEncrypt(String mobile) {
+        if (StringUtil.isEmpty(mobile) || (mobile.length() != 11)) {
+            return mobile;
+        }
+        return mobile.replaceAll("(\\d{3})\\d{4}(\\d{4})", "$1****$2");
+    }
 
+    //身份证前三后四脱敏
+    public static String idEncrypt(String id) {
+        if (StringUtil.isEmpty(id) || (id.length() < 8)) {
+            return id;
+        }
+        return id.replaceAll("(?<=\\w{3})\\w(?=\\w{4})", "*");
+    }
 
+    //护照前2后3位脱敏，护照一般为8或9位
+    public static String idPassport(String id) {
+        if (StringUtil.isEmpty(id) || (id.length() < 8)) {
+            return id;
+        }
+        return id.substring(0, 2) + new String(new char[id.length() - 5]).replace("\0", "*") + id.substring(id.length() - 3);
+    }
 
 }
