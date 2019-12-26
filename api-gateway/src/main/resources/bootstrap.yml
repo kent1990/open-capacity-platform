@@ -2,13 +2,13 @@ spring:
   cloud:
     nacos:
       config:
-        # 共享配置的DataId，多个使用,分隔
-        # 越靠后，优先级越高；
-        # .yaml后缀不能少，只支持yaml/properties
+        # ?????DataId?????,??
+        # ??????????
+        # .yaml?????????yaml/properties
         shared-dataids: common.yaml
         refreshable-dataids: common.yaml
         server-addr: 119.27.173.249:8848
         file-extension: yaml
-        namespace: 95a4a445-f548-4c0d-98fc-a471454dabec  #命名空间 代指某个环境
+        namespace: 95a4a445-f548-4c0d-98fc-a471454dabec  #nacos中的命名空间，此时服务放在服务列表的dev中
   application:
     name: api-gateway
