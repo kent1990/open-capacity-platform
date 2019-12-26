@@ -190,53 +190,8 @@ zuul:
     auth:
       path: /api-auth/**
       service-id: auth-server 
-      strip-prefix: true   
+      strip-prefix: false   
       custom-sensitive-headers: true  #http://blog.didispace.com/spring-cloud-zuul-cookie-redirect/ zuul授权码跳转问题
-    auth-login-page:
-      path: /login.html
-      service-id: auth-server
-      strip-prefix: true
-      custom-sensitive-headers: true
-    auth-css-process01:
-      path: /css/import_main.css
-      service-id: auth-server
-      strip-prefix: true
-      custom-sensitive-headers: true
-    auth-css-process02:
-      path: /css/page_all.css
-      service-id: auth-server
-      strip-prefix: true
-      custom-sensitive-headers: true    
-    auth-js-process01:
-      path: /js/ld.min.js
-      service-id: auth-server
-      strip-prefix: true
-      custom-sensitive-headers: true  
-    auth-js-process02:
-      path: /js/wrapper.js
-      service-id: auth-server
-      strip-prefix: true
-      custom-sensitive-headers: true 
-    auth-login-process:
-      path: /user/login
-      service-id: auth-server
-      strip-prefix: true
-      custom-sensitive-headers: true
-    auth-login-token:
-      path: /oauth/token
-      service-id: auth-server
-      strip-prefix: true
-      custom-sensitive-headers: true  
-    auth-login-authorize:
-      path: /oauth/authorize
-      service-id: auth-server
-      strip-prefix: true
-      custom-sensitive-headers: true
-    auth-check-process:
-      path: /oauth/check_token
-      service-id: auth-server
-      strip-prefix: true
-      custom-sensitive-headers: true  
     user:
       path: /api-user/**
       service-id: user-center

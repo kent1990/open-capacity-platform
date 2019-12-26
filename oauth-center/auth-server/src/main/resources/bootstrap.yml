@@ -1,5 +1,8 @@
 #端口
 server:
+  servlet:
+    context-path: /api-auth
+  use-forward-headers: false  
   port: 8000
 #  port: ${randomServerPort.value[8000,8000]}    #随机端口
 
@@ -36,6 +39,6 @@ eureka:
     lease-expiration-duration-in-seconds: 10 #如果心跳检测一直没有发送，10秒后会从eureka服务器中将此服务剔除
     #注册实例文档
 #    status-page-url: http://${spring.cloud.client.ip-address}:${randomServerPort.value[8000,8000]}/document.html # 随机端口
-    status-page-url:  http://${spring.cloud.client.ip-address}:${server.port}/doc.html
+    status-page-url:  http://${spring.cloud.client.ip-address}:${server.port}/api-auth/doc.html
 #    status-page-url: http://${docker.ipAddress}:${server.port}/auth/doc.html # 固定端口
         
