@@ -41,4 +41,8 @@ eureka:
 #    status-page-url: http://${spring.cloud.client.ip-address}:${randomServerPort.value[8000,8000]}/document.html # 随机端口
     status-page-url:  http://${spring.cloud.client.ip-address}:${server.port}/api-auth/doc.html
 #    status-page-url: http://${docker.ipAddress}:${server.port}/auth/doc.html # 固定端口
+    metadata-map:
+      management:        
+        context-path: /api-auth/actuator    
+
         
