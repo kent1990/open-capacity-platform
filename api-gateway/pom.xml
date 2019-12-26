@@ -90,10 +90,12 @@
 			<artifactId>commons-lang3</artifactId>
 		</dependency>
 
-
-		
-	 
-
+	  <!-- sentinel限流 -->
+      <dependency>
+          <groupId>com.alibaba.csp</groupId>
+          <artifactId>sentinel-zuul-adapter</artifactId>
+          <version>1.6.1</version>
+      </dependency>
 
 		<dependency>
 			<groupId>com.squareup.okhttp3</groupId>
@@ -128,12 +130,19 @@
 			<groupId>com.alibaba.cloud</groupId>
 			<artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
 		</dependency>
+
+	  <dependency>
+		  <groupId>com.alibaba.csp</groupId>
+		  <artifactId>sentinel-transport-simple-http</artifactId>
+		  <version>1.7.1</version>
+	  </dependency>
+
 	  <dependency>
 		  <groupId>com.alibaba.cloud</groupId>
 		  <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
 	  </dependency>
-		 
-	</dependencies>
+
+  </dependencies>
 
 	<!-- 形成带第三方jar包的可执行jar包，jar包目录结构如下 application.properties lib META-INF mybatis 
 		org -->

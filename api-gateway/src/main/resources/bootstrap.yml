@@ -10,5 +10,13 @@ spring:
         server-addr: 119.27.173.249:8848
         file-extension: yaml
         namespace: 95a4a445-f548-4c0d-98fc-a471454dabec  #nacos中的命名空间，此时服务放在服务列表的dev中
+    sentinel:
+      transport:
+        dashboard: localhost:8080  #sentinel配置
+      eager: true
+
+#由于sentinel jar包官网下载很慢，需要的朋友自取百度云盘：
+#链接：https://pan.baidu.com/s/1sVp-NydAo5UxJ4BWD3vulg
+#提取码：u8zp
   application:
     name: api-gateway
