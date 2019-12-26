@@ -42,7 +42,7 @@ spring:
           - Path=/api-auth/**
           filters:
           - GwSwaggerHeaderFilter
-          - StripPrefix=1
+          - StripPrefix=0
           - name: Hystrix
             args:
               name : default
