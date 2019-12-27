@@ -9,6 +9,10 @@ spring:
         refreshable-dataids: common.yaml
         server-addr: 119.27.173.249:8848
         file-extension: yaml
-        namespace: 95a4a445-f548-4c0d-98fc-a471454dabec  #命名空间 代指某个环境
+        namespace: 95a4a445-f548-4c0d-98fc-a471454dabec  #命名空间 代指某个环境 
+      discovery:
+        metadata:
+          management:
+            context-path: ${server.servlet.context-path}/actuator	
   application:
     name: auth-server
