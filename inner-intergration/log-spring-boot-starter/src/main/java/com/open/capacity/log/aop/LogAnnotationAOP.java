@@ -125,11 +125,11 @@ public class LogAnnotationAOP {
 					try {
 						
 						
-							log.info("日志落库开始：{}", sysLog);
+							log.trace("日志落库开始：{}", sysLog);
 							if(logService!=null){
 								logService.save(sysLog);
 							}
-							log.info("开始落库结束：{}", sysLog);
+							log.trace("开始落库结束：{}", sysLog);
 						
 						
 					} catch (Exception e) {
