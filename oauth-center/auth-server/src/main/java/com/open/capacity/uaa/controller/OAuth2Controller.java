@@ -53,11 +53,11 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.open.capacity.common.auth.details.LoginAppUser;
 import com.open.capacity.common.model.SysPermission;
+import com.open.capacity.common.token.SmsCodeAuthenticationToken;
 import com.open.capacity.common.util.SysUserUtil;
 import com.open.capacity.common.web.PageResult;
 import com.open.capacity.log.annotation.LogAnnotation;
 import com.open.capacity.uaa.server.service.RedisClientDetailsService;
-import com.open.capacity.uaa.server.token.SmsCodeAuthenticationToken;
 import com.open.capacity.uaa.utils.SpringUtil;
 
 import io.swagger.annotations.Api;

@@ -21,6 +21,7 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.sleuth.instrument.async.TraceableExecutorService;
 import org.springframework.core.annotation.Order;
+import org.springframework.core.task.TaskExecutor;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -50,16 +51,19 @@ public class LogAnnotationAOP {
 	
 	@Autowired(required=false)
 	private LogService logService ;
+
+	
 	@Autowired
-	private BeanFactory beanFactory;
-	private TraceableExecutorService traceableExecutorService ;
-	
-	
-	@PostConstruct
-	public void init() {
-		traceableExecutorService =   new TraceableExecutorService(beanFactory, Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors()) ,
-		        "logAop");
-	}
+	private TaskExecutor taskExecutor;
+
+//	@Autowired
+//  private BeanFactory beanFactory;
+//  private TraceableExecutorService traceableExecutorService ;
+//	@PostConstruct
+//	public void init() {
+//		traceableExecutorService =   new TraceableExecutorService(beanFactory, Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors()) ,
+//		        "logAop");
+//	}
 	
 	@Around("@annotation(ds)")
 	public Object logSave(ProceedingJoinPoint joinPoint, LogAnnotation ds) throws Throwable {
@@ -125,18 +129,18 @@ public class LogAnnotationAOP {
 					try {
 						
 						
-							log.info("日志落库开始：{}", sysLog);
+							log.trace("日志落库开始：{}", sysLog);
 							if(logService!=null){
 								logService.save(sysLog);
 							}
-							log.info("开始落库结束：{}", sysLog);
+							log.trace("开始落库结束：{}", sysLog);
 						
 						
 					} catch (Exception e) {
 						log.error("落库失败：{}", e.getMessage());
 					}
 	
-				}, traceableExecutorService);
+				}, taskExecutor);
 			}
 			 
 			// 获取回执报文及耗时
