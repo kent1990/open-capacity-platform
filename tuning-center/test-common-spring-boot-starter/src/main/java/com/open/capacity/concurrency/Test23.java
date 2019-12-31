@@ -11,6 +11,15 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * forkjoin
+ *09:23:41.992 [ForkJoinPool-1-worker-1] INFO com.open.capacity.concurrency.Test23 - form :1 , to : 15  15-1>5
+ *09:23:44.424 [ForkJoinPool-1-worker-3] INFO com.open.capacity.concurrency.Test23 - form :1 , to : 8   8-1 >5
+ *09:23:44.424 [ForkJoinPool-1-worker-2] INFO com.open.capacity.concurrency.Test23 - form :9 , to : 15  15-9 >5
+ *09:24:32.031 [ForkJoinPool-1-worker-0] INFO com.open.capacity.concurrency.Test23 - form :1 , to : 4  	1+2+3+4    -> 10
+ *09:24:34.652 [ForkJoinPool-1-worker-4] INFO com.open.capacity.concurrency.Test23 - form :5 , to : 8  	5+6+7+8    -> 26
+ *09:24:52.367 [ForkJoinPool-1-worker-2] INFO com.open.capacity.concurrency.Test23 - form :9 , to : 12 	9+10+11+12 -> 42
+ *09:25:02.678 [ForkJoinPool-1-worker-2] INFO com.open.capacity.concurrency.Test23 - form :13 , to : 15 13+14+15   -> 42
+ *result: 120
+ *result: 120
  */
 @Slf4j
 public class Test23 extends RecursiveTask<Integer> {
@@ -56,7 +65,7 @@ public class Test23 extends RecursiveTask<Integer> {
 	public static void main(String[] args) throws InterruptedException, ExecutionException {
 
 		int start = 1;
-		int end= 15;
+		int end= 100;
 		
 		ForkJoinPool pool = new ForkJoinPool();
 		//大任务拆分小任务
@@ -67,7 +76,7 @@ public class Test23 extends RecursiveTask<Integer> {
 		long ret = result.get() ;
 		System.out.println("result: " + ret);
 
-		System.out.println("result: " + IntStream.rangeClosed(1, 15).summaryStatistics().getSum());
+		System.out.println("result: " + IntStream.rangeClosed(1, 100).summaryStatistics().getSum());
 
 	}
 }
