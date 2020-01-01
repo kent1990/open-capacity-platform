@@ -94,7 +94,6 @@
       <dependency>
           <groupId>com.alibaba.csp</groupId>
           <artifactId>sentinel-zuul-adapter</artifactId>
-          <version>1.6.1</version>
       </dependency>
 
 		<dependency>

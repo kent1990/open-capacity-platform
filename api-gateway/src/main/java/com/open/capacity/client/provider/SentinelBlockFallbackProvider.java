@@ -1,4 +1,4 @@
-package com.open.capacity.client.config;
+package com.open.capacity.client.provider;
 
 import com.alibaba.csp.sentinel.adapter.gateway.zuul.fallback.BlockResponse;
 import com.alibaba.csp.sentinel.adapter.gateway.zuul.fallback.ZuulBlockFallbackProvider;

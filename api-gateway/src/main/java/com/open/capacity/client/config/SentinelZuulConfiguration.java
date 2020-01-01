@@ -8,6 +8,8 @@ import com.alibaba.csp.sentinel.adapter.gateway.zuul.filters.SentinelZuulErrorFi
 import com.alibaba.csp.sentinel.adapter.gateway.zuul.filters.SentinelZuulPostFilter;
 import com.alibaba.csp.sentinel.adapter.gateway.zuul.filters.SentinelZuulPreFilter;
 import com.netflix.zuul.ZuulFilter;
+import com.open.capacity.client.provider.SentinelBlockFallbackProvider;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
