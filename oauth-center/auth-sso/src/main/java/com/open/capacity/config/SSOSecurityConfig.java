@@ -39,7 +39,7 @@ import com.fasterxml.jackson.core.filter.TokenFilter;
 @Component
 @Configuration
 @EnableOAuth2Sso
-public class UnieapSecurityConfig extends WebSecurityConfigurerAdapter {
+public class SSOSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	
 	@Override
