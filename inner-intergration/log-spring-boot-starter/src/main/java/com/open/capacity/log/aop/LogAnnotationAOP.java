@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.sleuth.instrument.async.TraceableExecutorService;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.task.TaskExecutor;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -123,12 +124,14 @@ public class LogAnnotationAOP {
 			throw e;
 		} finally {
 			
+//			log.info(SecurityContextHolder.getContext().getAuthentication().getPrincipal()+"");
+			
 			//如果需要记录数据库开启异步操作
 			if (logAnnotation.recordRequestParam()) {
 				CompletableFuture.runAsync(() -> {
 					try {
 						
-						
+//							log.info(SecurityContextHolder.getContext().getAuthentication().getPrincipal()+"");
 							log.trace("日志落库开始：{}", sysLog);
 							if(logService!=null){
 								logService.save(sysLog);

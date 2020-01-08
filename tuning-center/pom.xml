@@ -32,6 +32,7 @@
 	<modules>
 		<module>test-spring-boot-starter</module>
 		<module>test-redis-spring-boot-starter</module>
-		 
+
+		<module>test-rabbitmq-spring-boot-starter</module>
 	</modules>
 </project>
