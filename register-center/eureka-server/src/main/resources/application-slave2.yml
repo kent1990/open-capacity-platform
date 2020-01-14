@@ -24,7 +24,7 @@ eureka:
     appname: eureka-server 
     prefer-ip-address: false
     instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${spring.application.instance_id:${server.port}}
-    lease-renewal-interval-in-seconds: 2    # 续约更新时间间隔（默认30秒）
+    lease-renewal-interval-in-seconds: 10    # 续约更新时间间隔（默认30秒）
     lease-expiration-duration-in-seconds: 30 # 续约到期时间（默认90秒）
 logging:
   level:

@@ -33,6 +33,7 @@ public class HystrixFallbackHandler implements HandlerFunction<ServerResponse> {
      
     @Override
     public Mono<ServerResponse> handle(ServerRequest serverRequest) {
+    	
         serverRequest.attribute(ServerWebExchangeUtils.GATEWAY_ORIGINAL_REQUEST_URL_ATTR)
             .ifPresent(originalUrls -> log.error("网关执行请求:{}失败,hystrix服务降级处理", originalUrls));
 
