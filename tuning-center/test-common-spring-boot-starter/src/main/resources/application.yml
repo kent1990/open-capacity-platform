@@ -89,6 +89,13 @@ mybatis-plus:
   mapper-locations: classpath*:com/open/**/dao/*.xml  
 
 
+log4j:
+  logger:
+    org:
+      apache:
+        commons:
+          httpclient: DEBUG
+
 management:
   endpoints:
     web:
