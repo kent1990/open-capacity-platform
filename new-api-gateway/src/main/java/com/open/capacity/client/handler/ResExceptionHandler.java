@@ -27,9 +27,9 @@ import org.springframework.web.reactive.function.server.ServerResponse;
  * 修改历史
  * 序号 	       日期 		        修改人 		         修改原因
  */
-public class JsonExceptionHandler extends DefaultErrorWebExceptionHandler {
+public class ResExceptionHandler extends DefaultErrorWebExceptionHandler {
 
-	public JsonExceptionHandler(ErrorAttributes errorAttributes, ResourceProperties resourceProperties,
+	public ResExceptionHandler(ErrorAttributes errorAttributes, ResourceProperties resourceProperties,
 			ErrorProperties errorProperties, ApplicationContext applicationContext) {
 		super(errorAttributes, resourceProperties, errorProperties, applicationContext);
 	}
