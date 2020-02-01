@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 @RocketMQMessageListener(consumerGroup="tranc-consumer-group",topic="trans-topic")
 public class ReciverTransactionMsgService implements RocketMQListener<String>{
 	//消费端
-	@Override
 	public void onMessage(String msg) {
 		// TODO Auto-generated method stub
 		System.out.println(msg);
