@@ -35,5 +35,6 @@
 
 		<module>test-rabbitmq-spring-boot-starter</module>
 		<module>test-rocketmq-spring-boot-starter</module>
+		<module>test-txlcn-spring-boot-starter</module>
 	</modules>
 </project>
