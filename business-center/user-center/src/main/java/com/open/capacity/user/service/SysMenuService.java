@@ -41,6 +41,14 @@ public interface SysMenuService {
 	List<SysMenu> findByRoles(Set<Long> roleIds)  throws ServiceException;
 
 	/**
+	 * @Author: levlin
+	 * @Date: 2020/2/5
+	 * @param:
+	 * @Description: 超级管理员菜单
+	 */
+	List<SysMenu> findAdminMenus();
+
+	/**
 	 * 菜单列表
 	 * @return
 	 */

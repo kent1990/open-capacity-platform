@@ -46,7 +46,7 @@ public class SysMenuController {
 	 */
 	@PreAuthorize("hasAuthority('menu:delete/menus/{id}')")
 	@ApiOperation(value = "删除菜单")
-	@DeleteMapping("/{id}")
+	@DeleteMapping("delete/{id}")
 	@LogAnnotation(module="user-center",recordRequestParam=false)
 	public Result delete(@PathVariable Long id) throws ControllerException {
 		try {
@@ -176,8 +176,21 @@ public class SysMenuController {
 			if (CollectionUtils.isEmpty(roles)) {
 				return Collections.emptyList();
 			}
-			List<SysMenu> menus = menuService
-					.findByRoles(roles.parallelStream().map(SysRole::getId).collect(Collectors.toSet()));
+			Iterator it = roles.iterator();
+			boolean flag = false;
+			while(it.hasNext()) {
+				SysRole s = (SysRole) it.next();
+				if (s.getCode().equals("ADMIN")){
+					flag = true;
+				}
+			}
+			List<SysMenu> menus = null;
+			if (flag){
+				menus = menuService.findAdminMenus();
+			}else {
+				menus = menuService
+						.findByRoles(roles.parallelStream().map(SysRole::getId).collect(Collectors.toSet()));
+			}
 			return menus;
 		} catch (ServiceException e) {
 			throw new ControllerException(e);

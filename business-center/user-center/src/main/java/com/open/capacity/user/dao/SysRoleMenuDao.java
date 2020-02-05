@@ -27,6 +27,14 @@ public interface SysRoleMenuDao {
 
 	List<SysMenu> findMenusByRoleIds(@Param("roleIds") Set<Long> roleIds);
 
+	/**
+	 * @Author: levlin
+	 * @Date: 2020/2/5
+	 * @param:
+	 * @Description: 超级管理员菜单
+	 */
+	List<SysMenu> findAdminMenus();
+
 
 	/**
 	 * @Author levlin

@@ -70,6 +70,32 @@
 		ORDER BY me.`sort` ASC
 	</select>
 
+	<select id="findAdminMenus" resultMap="menus">
+		SELECT
+		  me.`id` AS id,
+		  me.`name` AS NAME,
+		  me.`url` AS url,
+		  me.`path` AS path,
+		  me.`css`,
+		  me.`createTime` AS createTime,
+		  p.`id` AS pId,
+		  p.`name` AS pName,
+		  p.`url` AS pUrl,
+		  p.`path` AS pPath,
+		  p.`css` AS pCss
+		FROM
+		  sys_menu me
+		  LEFT JOIN sys_menu p
+		  LEFT JOIN sys_role_menu m
+			ON p.`id` = m.menuId
+			ON me.`id` = p.`parentId`
+		WHERE me.`hidden` = 0
+		  AND p.`hidden` = 0
+		GROUP BY p.`id`
+		ORDER BY me.`sort`,
+		  p.`sort` ASC
+	</select>
+
 	<!--根据菜单筛选权限，字符加10000 菜单id 和权限id 相同前端tree 导致勾选-->
 	<select id="menusPermission" resultMap="menuPermission">
 		SELECT

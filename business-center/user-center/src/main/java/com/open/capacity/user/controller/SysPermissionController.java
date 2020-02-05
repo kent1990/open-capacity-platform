@@ -48,7 +48,7 @@ public class SysPermissionController {
 	 */
 	@PreAuthorize("hasAuthority('permission:delete/permissions/{id}')")
 	@ApiOperation(value = "后台管理删除权限标识")
-	@DeleteMapping("/{id}")
+	@DeleteMapping("delete/{id}")
 	@LogAnnotation(module="user-center",recordRequestParam=false)
 	public Result delete(@PathVariable Long id) throws ControllerException {
 

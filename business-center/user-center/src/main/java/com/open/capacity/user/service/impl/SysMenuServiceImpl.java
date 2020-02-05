@@ -84,6 +84,11 @@ public class SysMenuServiceImpl implements SysMenuService {
 	}
 
 	@Override
+	public List<SysMenu> findAdminMenus() {
+		return roleMenuDao.findAdminMenus();
+	}
+
+	@Override
 	public List<SysMenu> findAll()  throws ServiceException{
 		try {
 			return menuDao.findAll();
