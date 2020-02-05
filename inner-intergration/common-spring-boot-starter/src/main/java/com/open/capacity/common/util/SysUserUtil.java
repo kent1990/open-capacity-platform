@@ -45,12 +45,17 @@ public class SysUserUtil {
 
 		// 当内部服务，不带token时，内部服务
 		String accessToken = TokenUtil.getToken();
-		RedisTemplate redisTemplate = SpringUtils.getBean(RedisTemplate.class);
-		Map<String, Object> params = (Map<String, Object>) redisTemplate.opsForValue()
-				.get(UaaConstant.TOKEN + ":" + accessToken);
-		if (params != null) {
-			return (LoginAppUser) params.get(UaaConstant.AUTH);
+		
+		if(accessToken!=null){
+			RedisTemplate redisTemplate = SpringUtils.getBean(RedisTemplate.class);
+			Map<String, Object> params = (Map<String, Object>) redisTemplate.opsForValue()
+					.get(UaaConstant.TOKEN + ":" + accessToken);
+			if (params != null) {
+				return (LoginAppUser) params.get(UaaConstant.AUTH);
+			}
 		}
+		
+		
 
 		return null;
 	}

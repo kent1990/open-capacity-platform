@@ -1,9 +1,5 @@
 package com.open.capacity.uaa.service.impl;
 
-import com.open.capacity.common.auth.details.LoginAppUser;
-import com.open.capacity.common.util.StringUtils;
-import com.open.capacity.uaa.feign.UserFeignClient;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
@@ -12,6 +8,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import com.open.capacity.common.auth.details.LoginAppUser;
+import com.open.capacity.common.util.StringUtil;
+import com.open.capacity.log.annotation.LogAnnotation;
+import com.open.capacity.uaa.feign.UserFeignClient;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
@@ -22,11 +25,11 @@ public class UserDetailServiceImpl implements UserDetailsService {
     private UserFeignClient  userFeignClient;
 
     @Override
-//    @LogAnnotation(module="auth-server",recordRequestParam=false)
+    @LogAnnotation(module="auth-server",recordRequestParam=false)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         LoginAppUser loginAppUser = null;
 
-        if (StringUtils.isPhone(username)){
+        if (StringUtil.isPhone(username)){
             loginAppUser = userFeignClient.findByMobile(username);
         }else {
             //      后续考虑集成spring socail,支持多种类型登录
