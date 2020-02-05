@@ -31,6 +31,7 @@ public class SysPermission extends Model<SysPermission> implements Serializable 
 	private Long id;
 	private String permission;
 	private String name;
+	@TableField(value="menuId")
 	private Integer menuId;
 	private String menuName;
 	@TableField(value="createTime")
