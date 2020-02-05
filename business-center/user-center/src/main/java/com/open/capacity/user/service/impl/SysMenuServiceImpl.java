@@ -29,7 +29,8 @@ public class SysMenuServiceImpl implements SysMenuService {
 	public void save(SysMenu menu)  throws ServiceException{
 		menu.setCreateTime(new Date());
 		menu.setUpdateTime(menu.getCreateTime());
-
+		menu.setIsMenu(menu.getIsMenu() == null ? 1 : 2);
+		menu.setHidden(menu.getHidden() == null ? false : true);
 		menuDao.save(menu);
 		log.info("新增菜单：{}", menu);
 	}
