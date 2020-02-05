@@ -47,7 +47,7 @@ public class SysUser  extends Model<SysUser>  implements Serializable {
 	private List<SysRole> roles;
 	
 	@TableField(exist=false)
-	private String roleId;
+	private String[] roleId;
 
 	@TableField(exist=false)
 	private String oldPassword;

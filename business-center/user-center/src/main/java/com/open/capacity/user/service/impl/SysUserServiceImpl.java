@@ -1,14 +1,22 @@
 package com.open.capacity.user.service.impl;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
-
+import com.open.capacity.common.auth.details.LoginAppUser;
+import com.open.capacity.common.constant.UserType;
+import com.open.capacity.common.exception.service.ServiceException;
+import com.open.capacity.common.model.SysPermission;
+import com.open.capacity.common.model.SysRole;
+import com.open.capacity.common.model.SysUser;
+import com.open.capacity.common.util.PageUtil;
+import com.open.capacity.common.util.SysUserUtil;
+import com.open.capacity.common.util.ValidatorUtil;
+import com.open.capacity.common.web.PageResult;
+import com.open.capacity.common.web.Result;
+import com.open.capacity.user.dao.SysUserDao;
+import com.open.capacity.user.dao.SysUserRoleDao;
+import com.open.capacity.user.model.SysUserExcel;
+import com.open.capacity.user.service.SysPermissionService;
+import com.open.capacity.user.service.SysUserService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -27,24 +35,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
-import com.open.capacity.common.auth.details.LoginAppUser;
-import com.open.capacity.common.constant.UserType;
-import com.open.capacity.common.exception.service.ServiceException;
-import com.open.capacity.common.model.SysPermission;
-import com.open.capacity.common.model.SysRole;
-import com.open.capacity.common.model.SysUser;
-import com.open.capacity.common.util.PageUtil;
-import com.open.capacity.common.util.SysUserUtil;
-import com.open.capacity.common.util.ValidatorUtil;
-import com.open.capacity.common.web.PageResult;
-import com.open.capacity.common.web.Result;
-import com.open.capacity.user.dao.SysUserDao;
-import com.open.capacity.user.dao.SysUserRoleDao;
-import com.open.capacity.user.model.SysUserExcel;
-import com.open.capacity.user.service.SysPermissionService;
-import com.open.capacity.user.service.SysUserService;
-
-import lombok.extern.slf4j.Slf4j;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author 作者 owen E-mail: 624191343@qq.com
@@ -431,7 +423,7 @@ public class SysUserServiceImpl implements SysUserService {
 			}
 
 			userRoleDao.deleteUserRole(sysUser.getId(), null);
-			List roleIds = Arrays.asList(sysUser.getRoleId().split(","));
+			List roleIds = Arrays.asList(sysUser.getRoleId());
 			if (!CollectionUtils.isEmpty(roleIds)) {
 				roleIds.forEach(roleId -> {
 					userRoleDao.saveUserRoles(sysUser.getId(), Long.parseLong(roleId.toString()));
