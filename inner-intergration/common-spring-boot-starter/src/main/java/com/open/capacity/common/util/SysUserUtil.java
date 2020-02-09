@@ -1,6 +1,9 @@
 package com.open.capacity.common.util;
 
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -11,6 +14,9 @@ import org.springframework.security.web.authentication.preauth.PreAuthenticatedA
 
 import com.open.capacity.common.auth.details.LoginAppUser;
 import com.open.capacity.common.constant.UaaConstant;
+import com.open.capacity.common.model.SysRole;
+
+import cn.hutool.core.bean.BeanUtil;
 
 /**
  * @author 作者 owen E-mail: 624191343@qq.com
@@ -34,7 +40,23 @@ public class SysUserUtil {
 
 			if (authentication instanceof UsernamePasswordAuthenticationToken) {
 				UsernamePasswordAuthenticationToken authenticationToken = (UsernamePasswordAuthenticationToken) authentication;
-				return (LoginAppUser) authenticationToken.getPrincipal();
+				
+				if(authenticationToken.getPrincipal() instanceof LoginAppUser){
+					return (LoginAppUser) authenticationToken.getPrincipal();
+				}else if (authenticationToken.getPrincipal() instanceof Map){
+					
+					LoginAppUser loginAppUser = BeanUtil.mapToBean((Map) authenticationToken.getPrincipal(), LoginAppUser.class, true);
+					Set<SysRole> roles = new HashSet<>();
+					
+					for(Iterator<SysRole> it = loginAppUser.getSysRoles().iterator(); it.hasNext();){
+						SysRole role =  BeanUtil.mapToBean((Map) it.next() , SysRole.class, false);
+						roles.add(role) ;
+					}
+					loginAppUser.setSysRoles(roles); 
+					return loginAppUser;
+				}
+				
+				
 			} else if (authentication instanceof PreAuthenticatedAuthenticationToken) {
 				// 刷新token方式
 				PreAuthenticatedAuthenticationToken authenticationToken = (PreAuthenticatedAuthenticationToken) authentication;
