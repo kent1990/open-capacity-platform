@@ -38,6 +38,13 @@
   			<artifactId>uaa-client-spring-boot-starter</artifactId>
   		</dependency>
 		
+		
+		<!-- 熔断限流组件 -->
+		<dependency>
+			<groupId>com.open.capacity</groupId>
+			<artifactId>sentinel-spring-boot-starter</artifactId>
+		</dependency>
+		
 		 <dependency>
   			<groupId>com.open.capacity</groupId>
   			<artifactId>swagger-spring-boot-starter</artifactId>
@@ -72,15 +79,11 @@
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
-        <!--alibaba sentinel-->
-		<dependency>
-			<groupId>com.alibaba.cloud</groupId>
-			<artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
-		</dependency>
-	  <dependency>
+        
+	  	<dependency>
 		  <groupId>com.alibaba.cloud</groupId>
 		  <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
-	  </dependency>
+	  	</dependency>
 	</dependencies>
 
 	<!-- 形成带第三方jar包的可执行jar包，jar包目录结构如下 application.properties lib META-INF mybatis

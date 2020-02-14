@@ -5,7 +5,7 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
-import com.open.capacity.oss.service.impl.LocalOssServiceImpl;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
@@ -31,16 +31,23 @@ public class OssServiceFactory {
 	@Autowired
 	private FileService qiniuOssServiceImpl;
 	@Autowired
-	private LocalOssServiceImpl localOssServiceImpl;
+	private FileService fastDfsOssServiceImpl;
+	
+	@Autowired
+	private FileService localOssServiceImpl;
 
 	@PostConstruct
 	public void init() {
-		map.put(FileType.ALIYUN, aliyunOssServiceImpl);
+		map.put(FileType.ALIYUN,  aliyunOssServiceImpl);
 		map.put(FileType.QINIU ,  qiniuOssServiceImpl);
 		map.put(FileType.LOCAL ,  localOssServiceImpl);
+		map.put(FileType.FASTDFS ,  fastDfsOssServiceImpl);
 	}
 
 	public FileService getFileService(String fileType) {
+	   if (StringUtils.isBlank(fileType)) {
+			return localOssServiceImpl;
+		}
 
 		return map.get(FileType.valueOf(fileType));
 	}

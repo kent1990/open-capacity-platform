@@ -51,7 +51,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
+		
+		<!-- 熔断限流组件 -->
+		<dependency>
+			<groupId>com.open.capacity</groupId>
+			<artifactId>sentinel-spring-boot-starter</artifactId>
+		</dependency>
 	
  		<!-- spring boot 端点监控 -->
 		<dependency>
@@ -85,21 +90,23 @@
 			<artifactId>qiniu-java-sdk</artifactId>
 			<version>[7.2.0, 7.2.99]</version>
 		</dependency>
-		
+			
+		<!-- fastDFS -->
+        <dependency>
+            <groupId>com.github.tobato</groupId>
+            <artifactId>fastdfs-client</artifactId>
+            <version>1.26.5</version>
+        </dependency>
 		<!-- 选用nacos时打开-->
 		<dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
-        <!--alibaba sentinel-->
-		<dependency>
-			<groupId>com.alibaba.cloud</groupId>
-			<artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
-		</dependency>
-	  <dependency>
+        
+	  	<dependency>
 		  <groupId>com.alibaba.cloud</groupId>
 		  <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
-	  </dependency>
+	  	</dependency>
 
 	</dependencies>
 

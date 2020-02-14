@@ -4,12 +4,12 @@ spring:
     nacos:
       discovery:
         server-addr: 119.27.173.249:8848
-        namespace: 95a4a445-f548-4c0d-98fc-a471454dabec  #命名空间 代指某个环境
+        namespace: 0415e4d7-c6e4-4096-ae54-f4bba406d744  #命名空间 代指某个环境
   sentinel:
       transport:
-        port: 8719
         # 指定sentinel 控制台的地址
-        dashboard: 127.0.0.1:8080         
+        dashboard: 127.0.0.1:8080
+      eager: true         
   jackson:
         mapper:
             ALLOW_EXPLICIT_PROPERTY_RENAMING: true

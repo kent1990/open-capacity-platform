@@ -28,5 +28,6 @@
   	<module>rabbitmq-spring-boot-starter</module>
   	<!-- 自定义负载均衡策略-->
   	<module>ribbon-spring-boot-starter</module>
+  	<module>sentinel-spring-boot-starter</module>
   </modules>
 </project>
