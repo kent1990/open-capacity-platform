@@ -157,7 +157,7 @@ mybatis-plus:
 
 security:
   oauth2:
-    ignored:  /test163/** , /api-auth/** , /doc.html ,/test111 ,/api-user/users-anon/login, /api-user/users/save,    /user-center/users-anon/login,/document.html,**/v2/api-docs,/oauth/** ,/login.html ,/user/login,/**/**.css ,/**/**.js   ,/getVersion
+    ignored:  /api-file/statics/** , /test163/** , /api-auth/** , /doc.html ,/test111 ,/api-user/users-anon/login, /api-user/users/save,    /user-center/users-anon/login,/document.html,**/v2/api-docs,/oauth/** ,/login.html ,/user/login,/**/**.css ,/**/**.js   ,/getVersion
     token:
       store:
         type: redis

@@ -1,3 +1,4 @@
+#阿里云文件上传
 aliyun:
   oss:
     access-key: LTAIMjvZWiXRuClW
@@ -5,18 +6,31 @@ aliyun:
     endpoint: oss-cn-beijing.aliyuncs.com  
     bucketName: owenwangwen
     domain: https://owenwangwen.oss-cn-beijing.aliyuncs.com    
-    
+#七牛文件上传    
 qiniu:
   oss:
     access-key: owGiAWGn6DpU5zlrfLP4K9iQusahmspTW6PxRABW
     accessKeySecret: 5CBWKFd1pP-OSiusd1Bvhokp-ih4i3bs2QA2r-U2
-    endpoint: http://pxaf3mbtd.bkt.clouddn.com
-    bucketName: testowen
-
+    endpoint: http://q4c5xw7eb.bkt.clouddn.com
+    bucketName: ocpowenwangwen
+## 本地文件上传    
 file:
   oss:
-    domain: /api-file/fileinfo/files/
-    basePath: "D:\\uploadshp"
+    domain: http://127.0.0.1:9200/api-file
+    path: d:/uploadshp
+    prefix: /statics
+    
+#fastDFS配置
+fdfs:
+  oss : 
+    ##nginx需要安装fastdfs插件
+    domain: http://192.168.235.173/
+  soTimeout: 1500
+  connectTimeout: 600
+  pool:
+    jmx-enabled: false
+  trackerList: 192.168.235.173:22122
+
     
 spring:
   datasource:
@@ -89,7 +103,7 @@ spring:
     host: 59.110.164.254
     port: 6379    
     timeout: 6000
-    database: 8
+    database: 1
     lettuce:
       pool:
         max-active: 10 # 连接池最大连接数（使用负值表示没有限制）,如果赋值为-1，则表示不限制；如果pool已经分配了maxActive个jedis实例，则此时pool的状态为exhausted(耗尽)

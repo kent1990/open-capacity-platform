@@ -85,7 +85,13 @@
 			<artifactId>qiniu-java-sdk</artifactId>
 			<version>[7.2.0, 7.2.99]</version>
 		</dependency>
-		
+			
+		<!-- fastDFS -->
+        <dependency>
+            <groupId>com.github.tobato</groupId>
+            <artifactId>fastdfs-client</artifactId>
+            <version>1.26.5</version>
+        </dependency>
 		<!-- 选用nacos时打开-->
 		<dependency>
             <groupId>com.alibaba.cloud</groupId>

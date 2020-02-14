@@ -149,7 +149,7 @@ spring:
       url: jdbc:mysql://59.110.164.254:3306/oauth-center?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false 
       username: root
       password: root
-      driver-class-name:  com.mysql.jdbc.Driver
+      driver-class-name:  com.mysql.cj.jdbc.Driver
       #连接池配置(通常来说，只需要修改initialSize、minIdle、maxActive
       initial-size: 1
       max-active: 20
@@ -232,7 +232,7 @@ mybatis:
 
 security:
   oauth2:
-    ignored:  /api-file/files-anon/**,/test163/** , /api-auth/** , /doc.html ,/test111 ,/api-user/users-anon/login,/user-center/users-anon/login,/document.html,**/v2/api-docs,/oauth/** ,/login.html ,/user/login,/**/**.css ,/**/**.js
+    ignored: /api-file/statics/** ,  /api-file/files-anon/**,/test163/** , /api-auth/** , /doc.html ,/test111 ,/api-user/users-anon/login,/user-center/users-anon/login,/document.html,**/v2/api-docs,/oauth/** ,/login.html ,/user/login,/**/**.css ,/**/**.js
     
  
 

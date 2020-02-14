@@ -1,7 +1,7 @@
 #端口
 server:
   port: 5000    #固定端口
-
+#阿里云文件上传
 aliyun:
   oss:
     access-key: LTAIMjvZWiXRuClW
@@ -9,24 +9,33 @@ aliyun:
     endpoint: oss-cn-beijing.aliyuncs.com  
     bucketName: owenwangwen
     domain: https://owenwangwen.oss-cn-beijing.aliyuncs.com    
-    
+#七牛文件上传    
 qiniu:
   oss:
     access-key: owGiAWGn6DpU5zlrfLP4K9iQusahmspTW6PxRABW
     accessKeySecret: 5CBWKFd1pP-OSiusd1Bvhokp-ih4i3bs2QA2r-U2
-    endpoint: http://pxaf3mbtd.bkt.clouddn.com
-    bucketName: testowen
-
+    endpoint: http://q4c5xw7eb.bkt.clouddn.com
+    bucketName: ocpowenwangwen
+## 本地文件上传    
 file:
   oss:
-    domain: /api-file/fileinfo/files/
-    basePath: "D:\\uploadshp"
+    domain: http://127.0.0.1:9200/api-file
+    path: d:/uploadshp
+    prefix: /statics
+    
+#fastDFS配置
+fdfs:
+  oss : 
+    ##nginx需要安装fastdfs插件
+    domain: http://192.168.235.173/
+  soTimeout: 1500
+  connectTimeout: 600
+  pool:
+    jmx-enabled: false
+  trackerList: 192.168.235.173:22122
+
     
 spring:
-  servlet:
-    multipart:
-      max-request-size: 200MB
-      max-file-size: 200MB
   datasource:
     dynamic:
       enable: true
@@ -36,12 +45,12 @@ spring:
         url: jdbc:mysql://59.110.164.254:3306/file_center?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false 
         username: root
         password: root
-        driver-class-name:  com.mysql.jdbc.Driver
+        driver-class-name:  com.mysql.cj.jdbc.Driver
       log:
         url: jdbc:mysql://59.110.164.254:3306/log-center?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false 
         username: root
         password: root
-        driver-class-name:  com.mysql.jdbc.Driver   
+        driver-class-name:  com.mysql.cj.jdbc.Driver   
       #连接池配置(通常来说，只需要修改initialSize、minIdle、maxActive
       initial-size: 1
       max-active: 20
@@ -172,4 +181,4 @@ logging:
 
 
   
-   
+ 

@@ -17,7 +17,7 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<spring.boot.version>2.0.5.RELEASE</spring.boot.version>
 		<curator.version>4.0.1</curator.version>
-		<sentinel.version>1.6.3</sentinel.version>
+		<sentinel.version>1.7.1</sentinel.version>
 		<maven.surefire.version>2.22.1</maven.surefire.version>
 		<maven.source.version>3.0.1</maven.source.version>
 		<maven.javadoc.version>3.0.1</maven.javadoc.version>
@@ -101,22 +101,27 @@
 			<version>1.2.60</version>
 		</dependency>
 
-		<!-- for Nacos rule publisher sample -->
-		<dependency>
-			<groupId>com.alibaba.csp</groupId>
-			<artifactId>sentinel-datasource-nacos</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<!-- for Apollo rule publisher sample <dependency> <groupId>com.ctrip.framework.apollo</groupId> 
-			<artifactId>apollo-openapi</artifactId> <version>1.2.0</version> <scope>test</scope> 
-			</dependency> -->
-		<!--for Zookeeper rule publisher sample -->
-		<dependency>
-			<groupId>org.apache.curator</groupId>
-			<artifactId>curator-recipes</artifactId>
-			<version>${curator.version}</version>
-			<scope>test</scope>
-		</dependency>
+        <!-- for Nacos rule publisher sample -->
+        <dependency>
+            <groupId>com.alibaba.csp</groupId>
+            <artifactId>sentinel-datasource-nacos</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!-- for Apollo rule publisher sample
+        <dependency>
+            <groupId>com.ctrip.framework.apollo</groupId>
+            <artifactId>apollo-openapi</artifactId>
+            <version>1.2.0</version>
+            <scope>test</scope>
+        </dependency>
+		 -->
+        <!--for Zookeeper rule publisher sample-->
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-recipes</artifactId>
+            <version>${curator.version}</version>
+            <scope>test</scope>
+        </dependency>
 
 		<dependency>
 			<groupId>junit</groupId>
@@ -177,6 +182,7 @@
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
 			</resource>
 
 			<resource>

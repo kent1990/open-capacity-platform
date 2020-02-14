@@ -64,7 +64,7 @@
 		<hibernate-validator.verion>5.0.2.Final</hibernate-validator.verion>
 		<flowable.version>6.4.1</flowable.version>
 		<spring-cloud-dependencies.version>Greenwich.SR2</spring-cloud-dependencies.version>
-		<spring-cloud-alibaba-dependencies.version>2.1.0.RELEASE</spring-cloud-alibaba-dependencies.version>
+		<spring-cloud-alibaba-dependencies.version>2.1.1.RELEASE</spring-cloud-alibaba-dependencies.version>
 
 
 	</properties>
