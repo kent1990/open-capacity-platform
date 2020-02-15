@@ -46,14 +46,6 @@ spring:
           lowerCaseServiceId: true
           enabled: true
       routes:
-       # =====================================
-       - id: api-eureka
-         uri: lb://eureka-server
-         order: 8000
-         predicates:
-         - Path=/api-eureka/**
-         filters:
-         - StripPrefix=1   
        - id: api-user
          uri: lb://user-center
          order: 8001

@@ -245,10 +245,6 @@ zuul:
       path: /api-sms/**
       service-id: sms-center  
       strip-prefix: true
-    eureka:
-      path: /api-eureka/**
-      service-id: eureka-server
-      strip-prefix: true
     generator:
       path: /api-generator/**
       service-id: generator-center

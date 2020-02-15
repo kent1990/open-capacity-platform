@@ -18,3 +18,7 @@ spring:
       eager: true
   main:
     allow-bean-definition-overriding: true
+csp:
+  sentinel:
+    app:
+      type: 1    
