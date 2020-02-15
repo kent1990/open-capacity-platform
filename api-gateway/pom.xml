@@ -31,6 +31,12 @@
 		<dependency>
 			<groupId>com.open.capacity</groupId>
 			<artifactId>common-spring-boot-starter</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.hibernate</groupId>
+					<artifactId>hibernate-validator</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- 资源服务器 -->
@@ -39,11 +45,11 @@
 			<artifactId>uaa-client-spring-boot-starter</artifactId>
 		</dependency>
 
-		<!-- sentinel限流 -->
+		<!-- sentinel 网关限流 -->
 		<dependency>
-			<groupId>com.alibaba.csp</groupId>
-			<artifactId>sentinel-zuul-adapter</artifactId>
-		</dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-alibaba-sentinel-gateway</artifactId>
+        </dependency>
 		<!-- 熔断限流组件 -->
 		<dependency>
 			<groupId>com.open.capacity</groupId>
