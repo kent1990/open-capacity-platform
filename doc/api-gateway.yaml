@@ -22,7 +22,7 @@ spring:
           post: 1000
           error: -1
       filter:
-        enabled: false   
+        enabled: true   
       datasource:
         # 名称随意
         flow:
@@ -31,32 +31,16 @@ spring:
             dataId: ${spring.application.name}-flow-rules
             groupId: SENTINEL_GROUP
             # 规则类型，取值见：
-            # org.springframework.cloud.alibaba.sentinel.datasource.RuleType
-            rule-type: flow
-        degrade:
+            # com.alibaba.cloud.sentinel.datasource.RuleType
+            rule-type: gw-flow
+        api:
           nacos:
             server-addr: 119.27.173.249:8848
-            dataId: ${spring.application.name}-degrade-rules
+            dataId: ${spring.application.name}-api-group
             groupId: SENTINEL_GROUP
-            rule-type: degrade
-        system:
-          nacos:
-            server-addr: 119.27.173.249:8848
-            dataId: ${spring.application.name}-system-rules
-            groupId: SENTINEL_GROUP
-            rule-type: system
-        authority:
-          nacos:
-            server-addr: 119.27.173.249:8848
-            dataId: ${spring.application.name}-authority-rules
-            groupId: SENTINEL_GROUP
-            rule-type: authority
-        param-flow:
-          nacos:
-            server-addr: 119.27.173.249:8848
-            dataId: ${spring.application.name}-param-flow-rules
-            groupId: SENTINEL_GROUP
-            rule-type: param-flow
+            # 规则类型，取值见：
+            # com.alibaba.cloud.sentinel.datasource.RuleType
+            rule-type: gw-api-group
   datasource:
     dynamic:
       enable: true

@@ -11,11 +11,17 @@ management:
       show-details: always
    
 spring:
-  sentinel:
-      transport:
-        port: 8719
+  cloud: 
+    sentinel:
         # 指定sentinel 控制台的地址
-        dashboard: 127.0.0.1:8080   
+      dashboard: 127.0.0.1:8080
+      scg:
+        fallback:
+          response-status: 426
+          response-body: "{'resp_code':'426' , 'resp_msg':'程序异常'}"
+        enabled: true 
+      filter:
+        enabled: true    
       datasource:
         # 名称随意
         flow:
@@ -24,125 +30,86 @@ spring:
             dataId: ${spring.application.name}-flow-rules
             groupId: SENTINEL_GROUP
             # 规则类型，取值见：
-            # org.springframework.cloud.alibaba.sentinel.datasource.RuleType
-            rule-type: flow
-        degrade:
+            # com.alibaba.cloud.sentinel.datasource.RuleType
+            rule-type: gw-flow
+        api:
           nacos:
             server-addr: 119.27.173.249:8848
-            dataId: ${spring.application.name}-degrade-rules
+            dataId: ${spring.application.name}-api-group
             groupId: SENTINEL_GROUP
-            rule-type: degrade
-        system:
-          nacos:
-            server-addr: 119.27.173.249:8848
-            dataId: ${spring.application.name}-system-rules
-            groupId: SENTINEL_GROUP
-            rule-type: system
-        authority:
-          nacos:
-            server-addr: 119.27.173.249:8848
-            dataId: ${spring.application.name}-authority-rules
-            groupId: SENTINEL_GROUP
-            rule-type: authority
-        param-flow:
-          nacos:
-            server-addr: 119.27.173.249:8848
-            dataId: ${spring.application.name}-param-flow-rules
-            groupId: SENTINEL_GROUP
-            rule-type: param-flow    
-  main:
-    allow-bean-definition-overriding: true
-  cloud:
-     gateway:
-       discovery:
-         locator:
-           lowerCaseServiceId: true
-           enabled: true
-       routes:
-        # =====================================
-        - id: api-eureka
-          uri: lb://eureka-server
-          order: 8000
-          predicates:
-          - Path=/api-eureka/**
-          filters:
-          - StripPrefix=1   
-          - name: Hystrix
-            args:
-              name : default
-              fallbackUri: 'forward:/defaultfallback'
-        - id: api-user
-          uri: lb://user-center
-          order: 8001
-          predicates:
-          - Path=/api-user/**   
-          filters:
-          - GwSwaggerHeaderFilter
-          - StripPrefix=1 
-          - name: Hystrix
-            args:
-              name : default
-              fallbackUri: 'forward:/defaultfallback'
-          - name: RequestRateLimiter
-            args:
-              redis-rate-limiter.replenishRate: 1000  # 令牌桶的容积
-              redis-rate-limiter.burstCapacity: 1000  # 流速 每秒
-              key-resolver: "#{@ipAddressKeyResolver}" #SPEL表达式去的对应的bean
-        - id: api-auth
-          uri: lb://auth-server
-          order: 8002
-          predicates:
-          - Path=/api-auth/**
-          filters:
-          - GwSwaggerHeaderFilter
-          - PreserveHostHeader
-          - StripPrefix=0
-          - name: Hystrix
-            args:
-              name : default
-              fallbackUri: 'forward:/defaultfallback'
-          - name: RequestRateLimiter
-            args:
-              redis-rate-limiter.replenishRate: 1000  # 令牌桶的容积
-              redis-rate-limiter.burstCapacity: 1000  # 流速 每秒
-              key-resolver: "#{@ipAddressKeyResolver}" #SPEL表达式去的对应的bean
-        - id: api-file
-          uri: lb://file-center
-          order: 8003
-          predicates:
-          - Path=/api-file/**
-          filters:
-          - StripPrefix=1
-          - name: Hystrix
-            args:
-              name : default
-              fallbackUri: 'forward:/defaultfallback'
-          - name: RequestRateLimiter
-            args:
-              redis-rate-limiter.replenishRate: 1000  # 令牌桶的容积
-              redis-rate-limiter.burstCapacity: 1000  # 流速 每秒
-              key-resolver: "#{@ipAddressKeyResolver}" #SPEL表达式去的对应的bean
-        - id: api-generator
-          uri: lb://generator-center
-          order: 8004
-          predicates:
-          - Path=/api-generator/**
-          filters:
-          - StripPrefix=1      
-          - name: Hystrix
-            args:
-              name : default
-              fallbackUri: 'forward:/defaultfallback'
-          - name: RequestRateLimiter
-            args:
-              redis-rate-limiter.replenishRate: 1000  # 令牌桶的容积
-              redis-rate-limiter.burstCapacity: 1000  # 流速 每秒
-              key-resolver: "#{@ipAddressKeyResolver}" #SPEL表达式去的对应的bean
-        - id: api-baidu
-          uri: http://www.163.com
-          order: 8005
-          predicates:
-          - Path=/api-baidu/**  
+            # 规则类型，取值见：
+            # com.alibaba.cloud.sentinel.datasource.RuleType
+            rule-type: gw-api-group  
+    gateway:
+      discovery:
+        locator:
+          lowerCaseServiceId: true
+          enabled: true
+      routes:
+       # =====================================
+       - id: api-eureka
+         uri: lb://eureka-server
+         order: 8000
+         predicates:
+         - Path=/api-eureka/**
+         filters:
+         - StripPrefix=1   
+       - id: api-user
+         uri: lb://user-center
+         order: 8001
+         predicates:
+         - Path=/api-user/**   
+         filters:
+         - GwSwaggerHeaderFilter
+         - StripPrefix=1 
+         - name: RequestRateLimiter
+           args:
+             redis-rate-limiter.replenishRate: 1000  # 令牌桶的容积
+             redis-rate-limiter.burstCapacity: 1000  # 流速 每秒
+             key-resolver: "#{@ipAddressKeyResolver}" #SPEL表达式去的对应的bean
+       - id: api-auth
+         uri: lb://auth-server
+         order: 8002
+         predicates:
+         - Path=/api-auth/**
+         filters:
+         - GwSwaggerHeaderFilter
+         - PreserveHostHeader
+         - StripPrefix=0
+         - name: RequestRateLimiter
+           args:
+             redis-rate-limiter.replenishRate: 1000  # 令牌桶的容积
+             redis-rate-limiter.burstCapacity: 1000  # 流速 每秒
+             key-resolver: "#{@ipAddressKeyResolver}" #SPEL表达式去的对应的bean
+       - id: api-file
+         uri: lb://file-center
+         order: 8003
+         predicates:
+         - Path=/api-file/**
+         filters:
+         - StripPrefix=1
+         - name: RequestRateLimiter
+           args:
+             redis-rate-limiter.replenishRate: 1000  # 令牌桶的容积
+             redis-rate-limiter.burstCapacity: 1000  # 流速 每秒
+             key-resolver: "#{@ipAddressKeyResolver}" #SPEL表达式去的对应的bean
+       - id: api-generator
+         uri: lb://generator-center
+         order: 8004
+         predicates:
+         - Path=/api-generator/**
+         filters:
+         - StripPrefix=1      
+         - name: RequestRateLimiter
+           args:
+             redis-rate-limiter.replenishRate: 1000  # 令牌桶的容积
+             redis-rate-limiter.burstCapacity: 1000  # 流速 每秒
+             key-resolver: "#{@ipAddressKeyResolver}" #SPEL表达式去的对应的bean
+       - id: api-baidu
+         uri: http://www.163.com
+         order: 8005
+         predicates:
+         - Path=/api-baidu/**  
   datasource: 
     druid: 
       # JDBC 配置(驱动类自动从url的mysql识别,数据源类型自动识别)
@@ -232,7 +199,7 @@ mybatis:
 
 security:
   oauth2:
-    ignored: /api-file/statics/** ,  /api-file/files-anon/**,/test163/** , /api-auth/** , /doc.html ,/test111 ,/api-user/users-anon/login,/user-center/users-anon/login,/document.html,**/v2/api-docs,/oauth/** ,/login.html ,/user/login,/**/**.css ,/**/**.js
+    ignored:  /api-file/files-anon/**,/test163/** , /api-auth/** , /doc.html ,/test111 ,/api-user/users-anon/login,/user-center/users-anon/login,/document.html,**/v2/api-docs,/oauth/** ,/login.html ,/user/login,/**/**.css ,/**/**.js
     
  
 

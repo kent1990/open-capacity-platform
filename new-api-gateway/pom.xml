@@ -93,6 +93,11 @@
 			<version>${swagger.version}</version>
 		</dependency>
 		
+		<!-- sentinel 网关限流 -->
+		<dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-alibaba-sentinel-gateway</artifactId>
+        </dependency>
 		<!-- 熔断限流组件 -->
 		<dependency>
 			<groupId>com.open.capacity</groupId>
