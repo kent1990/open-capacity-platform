@@ -28,7 +28,7 @@ spring:
         flow:
           nacos:
             server-addr: 119.27.173.249:8848
-            dataId: ${spring.application.name}-flow-rules
+            dataId: ${spring.application.name}-sentinel-gw-flow
             groupId: SENTINEL_GROUP
             # 规则类型，取值见：
             # com.alibaba.cloud.sentinel.datasource.RuleType
@@ -36,7 +36,7 @@ spring:
         api:
           nacos:
             server-addr: 119.27.173.249:8848
-            dataId: ${spring.application.name}-api-group
+            dataId: ${spring.application.name}-sentinel-gw-api-group
             groupId: SENTINEL_GROUP
             # 规则类型，取值见：
             # com.alibaba.cloud.sentinel.datasource.RuleType
