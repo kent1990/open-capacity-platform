@@ -48,10 +48,10 @@ public class SysUserUtil {
 		
 		if(accessToken!=null){
 			RedisTemplate redisTemplate = SpringUtils.getBean(RedisTemplate.class);
-			Map<String, Object> params = (Map<String, Object>) redisTemplate.opsForValue()
+			LoginAppUser  loginAppUser= (LoginAppUser) redisTemplate.opsForValue()
 					.get(UaaConstant.TOKEN + ":" + accessToken);
-			if (params != null) {
-				return (LoginAppUser) params.get(UaaConstant.AUTH);
+			if (loginAppUser != null) {
+				return  loginAppUser ;
 			}
 		}
 		

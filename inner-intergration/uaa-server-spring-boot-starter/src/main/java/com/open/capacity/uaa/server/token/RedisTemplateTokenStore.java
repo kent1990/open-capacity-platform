@@ -89,17 +89,14 @@ public class RedisTemplateTokenStore implements TokenStore {
 
 	public void storeAccessToken(OAuth2AccessToken token, OAuth2Authentication authentication) {
 		
-		Map<String, Object> params = new HashMap<>();
 
-		params.put("clientId", authentication.getOAuth2Request().getClientId());
 
 		if (authentication.getUserAuthentication() instanceof UsernamePasswordAuthenticationToken) {
 			UsernamePasswordAuthenticationToken authenticationToken = (UsernamePasswordAuthenticationToken) authentication
 					.getUserAuthentication();
 			LoginAppUser appUser = (LoginAppUser) authenticationToken.getPrincipal();
-			params.put("username", appUser.getUsername());
-			params.put("auth",  appUser );
-			params.put("authorities", appUser.getAuthorities());
+			this.redisTemplate.opsForValue().set(TOKEN + token.getValue(), appUser);
+			
 		}
 
 		if (token != null){
@@ -107,9 +104,7 @@ public class RedisTemplateTokenStore implements TokenStore {
 			this.redisTemplate.opsForValue().set(AUTH + token.getValue(), authentication);
 			this.redisTemplate.opsForValue().set(AUTH_TO_ACCESS + authenticationKeyGenerator.extractKey(authentication),
 					token);
-			if (!params.isEmpty()) {
-				this.redisTemplate.opsForValue().set(TOKEN + token.getValue(), params);
-			}
+			 
 		}
 
 		if (!authentication.isClientOnly()) {
