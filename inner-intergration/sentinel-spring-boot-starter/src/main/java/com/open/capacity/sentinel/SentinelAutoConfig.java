@@ -23,6 +23,13 @@ public class SentinelAutoConfig {
 	@PostConstruct
     public void init() {
         WebCallbackManager.setUrlBlockHandler(new DefaultUrlBlockHandler());
+        //若希望对 HTTP ,黑白名单，请求按照来源限流，则可以自己实现  RequestOriginParser  接口从 HTTP 请求中解析 origin 并注册至 
+//        WebCallbackManager.setRequestOriginParser(new RequestOriginParser() {
+//            @Override
+//            public String parseOrigin(HttpServletRequest request) {
+//                return request.getRemoteAddr();
+//            }
+//        });
     }
 
     /**
