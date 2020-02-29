@@ -22,10 +22,11 @@ import com.open.capacity.client.dao.SysServiceDao;
 import reactor.core.publisher.Mono;
 
 /**
- * @author 作者 owen E-mail: 624191343@qq.com
+ * @author 作者 owen 
  * @version 创建时间：2018年2月1日 下午9:47:00 类说明
  */
 @Component
+@SuppressWarnings("all")
 public class AuthorizeConfigManager implements ReactiveAuthorizationManager<AuthorizationContext> {
 
 	@Resource

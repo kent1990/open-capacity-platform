@@ -21,6 +21,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Configuration
+@SuppressWarnings("all")
 public class EurekaInstanceCanceledListener implements ApplicationListener {
     @Override
     public void onApplicationEvent(ApplicationEvent applicationEvent) {

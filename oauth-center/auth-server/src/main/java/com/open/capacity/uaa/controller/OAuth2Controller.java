@@ -66,12 +66,13 @@ import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author 作者 owen E-mail: 624191343@qq.com
+ * @author 作者 owen 
  * @version 创建时间：2018年4月28日 下午2:18:54 类说明
  */
 @Slf4j
 @RestController
 @Api(tags = "OAuth API")
+@SuppressWarnings("all")
 public class OAuth2Controller {
 
 	@Resource
@@ -115,6 +116,7 @@ public class OAuth2Controller {
 				throw new UnapprovedClientAuthenticationException("clientSecret不匹配");
 			}
 
+			
 			TokenRequest tokenRequest = new TokenRequest(MapUtils.EMPTY_MAP, clientId, clientDetails.getScope(),
 					"customer");
 

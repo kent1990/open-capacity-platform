@@ -21,6 +21,10 @@ import com.open.capacity.common.util.StringUtil;
 
 import cn.hutool.core.util.StrUtil;
 
+/**
+ * blog: https://blog.51cto.com/13005375 
+ * code: https://gitee.com/owenwangwen/open-capacity-platform
+ */
 public class RestTemplateInterceptor implements ClientHttpRequestInterceptor {
     @Override
     public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution) throws IOException {

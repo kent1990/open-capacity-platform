@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferUtils;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpResponse;
@@ -22,6 +21,7 @@ import reactor.core.publisher.Mono;
  * 实现ServerAuthenticationFailureHandler并覆盖其onAuthenticationFailure自定义认证失败的处理逻辑，本例中仅返回认证失败的响应信息
  *
  */
+@SuppressWarnings("all")
 public class ResAuthenticationFailureHandler implements ServerAuthenticationFailureHandler {
 
     @Override

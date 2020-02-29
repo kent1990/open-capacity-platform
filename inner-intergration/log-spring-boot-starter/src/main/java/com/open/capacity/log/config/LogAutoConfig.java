@@ -10,7 +10,8 @@ import com.open.capacity.log.interceptor.LogInterceptor;
  * @author owen
  * @create 2017年7月2日
  * 日志拦截器，排除对spring cloud gateway的影响 (WebMvcConfigurer)
- * 
+ * blog: https://blog.51cto.com/13005375 
+ * code: https://gitee.com/owenwangwen/open-capacity-platform
  */
 @ConditionalOnClass(WebMvcConfigurer.class)
 public class LogAutoConfig implements WebMvcConfigurer {

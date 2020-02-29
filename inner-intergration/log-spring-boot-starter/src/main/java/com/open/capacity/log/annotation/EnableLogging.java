@@ -17,6 +17,8 @@ import com.open.capacity.log.selector.LogImportSelector;
  * @author owen
  * @create 2017年7月2日
  * 自动装配starter ，需要配置多数据源
+ * blog: https://blog.51cto.com/13005375 
+ * code: https://gitee.com/owenwangwen/open-capacity-platform
  */
 
 @Target(ElementType.TYPE)

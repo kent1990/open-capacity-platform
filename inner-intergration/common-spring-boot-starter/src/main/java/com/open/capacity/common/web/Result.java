@@ -18,7 +18,11 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class Result<T> implements Serializable {
 
-    private T datas;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4696008537295855861L;
+	private T datas;
     private Integer resp_code;
     private String resp_msg;
 

@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * @author 作者 owen E-mail: 624191343@qq.com
+ * @author 作者 owen 
  * @version 创建时间：2017年11月12日 上午22:57:51
  * 校验器：利用正则表达式校验邮箱、手机号等
  */

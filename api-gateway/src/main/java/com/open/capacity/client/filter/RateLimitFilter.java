@@ -30,6 +30,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Component
+@SuppressWarnings("all") 
 public class RateLimitFilter extends ZuulFilter {
 
 
@@ -110,6 +111,7 @@ public class RateLimitFilter extends ZuulFilter {
 	 * @param response
 	 * @throws IOException
 	 */
+	
 	public void outputChineseByOutputStream(HttpServletResponse response, ThreadLocal<Result> data) throws IOException {
 		/**
 		 * 使用OutputStream输出中文注意问题： 在服务器端，数据是以哪个码表输出的，那么就要控制客户端浏览器以相应的码表打开，

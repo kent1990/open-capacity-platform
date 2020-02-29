@@ -16,6 +16,7 @@ import com.open.capacity.common.model.SysRole;
 
 import cn.hutool.core.bean.BeanUtil;
 
+@SuppressWarnings("all")
 public class ResJwtAccessTokenConverter extends JwtAccessTokenConverter{
 	
 	

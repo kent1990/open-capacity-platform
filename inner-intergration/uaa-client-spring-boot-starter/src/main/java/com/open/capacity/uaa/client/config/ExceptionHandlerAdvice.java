@@ -25,8 +25,10 @@ import com.open.capacity.common.exception.hystrix.HytrixException;
 import com.open.capacity.common.exception.service.ServiceException;
 
 /**
- * @author 作者 owen E-mail: 624191343@qq.com
+ * @author 作者 owen 
  * @version 创建时间：2017年11月12日 上午22:57:51 异常通用处理 服务于oauth 服务端于客户端
+ * blog: https://blog.51cto.com/13005375 
+ * code: https://gitee.com/owenwangwen/open-capacity-platform
  */
 @RestControllerAdvice
 public class ExceptionHandlerAdvice {

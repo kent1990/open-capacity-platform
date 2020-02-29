@@ -38,6 +38,7 @@ import reactor.core.publisher.Mono;
  */
 @Slf4j
 @Component
+@SuppressWarnings("all")
 public class RateLimitFilter implements GlobalFilter, Ordered {
     // url匹配器
     private final AntPathMatcher pathMatcher = new AntPathMatcher();

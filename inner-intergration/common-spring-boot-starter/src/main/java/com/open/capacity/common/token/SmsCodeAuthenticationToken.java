@@ -2,9 +2,9 @@ package com.open.capacity.common.token;
 
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
-
 import java.util.Collection;
 
+@SuppressWarnings("all") 
 public class SmsCodeAuthenticationToken extends AbstractAuthenticationToken {
 
     // ~ Instance fields

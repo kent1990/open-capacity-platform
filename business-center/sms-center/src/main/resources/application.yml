@@ -101,6 +101,10 @@ spring:
 #    base-url: http://127.0.0.1:11008 
 
 mybatis-plus:
+  global-config:
+    banner: false
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mapper-locations: classpath*:com/open/**/dao/*.xml  
 
 

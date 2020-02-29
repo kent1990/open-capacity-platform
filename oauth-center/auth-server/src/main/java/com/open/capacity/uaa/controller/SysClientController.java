@@ -34,6 +34,7 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @Api(tags = "CLIENT API")
 @RequestMapping("/clients")
+@SuppressWarnings("all")
 public class SysClientController {
 
     @Autowired
@@ -72,13 +73,12 @@ public class SysClientController {
     	sysClientService.deleteClient(id);
     }
 
-    @PostMapping("/saveOrUpdate")
+	@PostMapping("/saveOrUpdate")
     @ApiOperation(value = "保存或者修改应用")
     @PreAuthorize("hasAuthority('client:post/clients')")
     public Result saveOrUpdate(@RequestBody SysClientDto clientDto){
         return  sysClientService.saveOrUpdate(clientDto);
     }
-    
     @PutMapping("/updateEnabled")
     @ApiOperation(value = "修改状态")
     @PreAuthorize("hasAuthority('client:post/clients')")

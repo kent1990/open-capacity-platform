@@ -13,6 +13,11 @@ import com.open.capacity.common.interceptor.AccessLimitInterceptor;
 import com.open.capacity.common.interceptor.ApiIdempotentInterceptor;
 import com.open.capacity.redis.util.RedisUtil;
 
+/**
+ * blog: https://blog.51cto.com/13005375 
+ * code: https://gitee.com/owenwangwen/open-capacity-platform
+ *
+ */
 @Configuration
 @ConditionalOnClass(WebMvcConfigurer.class)
 public class ApiIdempotentConfig implements  WebMvcConfigurer {

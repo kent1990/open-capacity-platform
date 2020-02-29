@@ -10,7 +10,7 @@ import com.aliyun.oss.OSSClient;
 
  
 /**
- * @author 作者 owen E-mail: 624191343@qq.com
+ * @author 作者 owen 
  * @version 创建时间：2018年1月31日 下午9:11:36 类说明 白名单
  * 阿里云配置
  */

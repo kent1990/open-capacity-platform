@@ -14,6 +14,8 @@ import com.open.capacity.datasource.constant.DataSourceKey;
  *
  * @author owen
  * @create 2017年7月2日
+ * blog: https://blog.51cto.com/13005375 
+ * code: https://gitee.com/owenwangwen/open-capacity-platform
  */
 public class DynamicDataSource extends AbstractRoutingDataSource {
 

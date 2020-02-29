@@ -16,7 +16,7 @@ import com.open.capacity.oss.service.impl.LocalOssServiceImpl;
 
  
 /**
- * @author 作者 owen E-mail: 624191343@qq.com
+ * @author 作者 owen 
  * @version 创建时间：2017年11月12日 上午22:57:51
  * FileService工厂<br>
  * 将各个实现类放入map

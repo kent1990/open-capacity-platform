@@ -41,9 +41,12 @@ import com.open.capacity.uaa.server.token.RedisTemplateTokenStore;
 /**
  * @author owen 624191343@qq.com
  * @version 创建时间：2017年11月12日 上午22:57:51
+ * blog: https://blog.51cto.com/13005375 
+ * code: https://gitee.com/owenwangwen/open-capacity-platform
  */
 
 @Configuration
+@SuppressWarnings("all")
 @Import({RestTemplateConfig.class,FeignInterceptorConfig.class})
 public class UAAServerConfig {
 
@@ -94,7 +97,8 @@ public class UAAServerConfig {
         @Autowired(required = false)
         private JwtAccessTokenConverter jwtAccessTokenConverter;
 
-        @Autowired
+       
+		@Autowired
         private WebResponseExceptionTranslator webResponseExceptionTranslator;
 
         @Autowired
@@ -106,7 +110,7 @@ public class UAAServerConfig {
         /**
          * 配置身份认证器，配置认证方式，TokenStore，TokenGranter，OAuth2RequestFactory
          */
-        public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+		public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 
             if (jwtTokenStore != null) {
                 endpoints.tokenStore(jwtTokenStore).authenticationManager(authenticationManager)

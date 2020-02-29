@@ -7,7 +7,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import com.open.capacity.common.port.PortApplicationEnvironmentPreparedEventListener;
 
 /**
- * @author 作者 owen E-mail: 624191343@qq.com
+ * @author 作者 owen 
  * @version 创建时间：2017年11月12日 上午22:57:51
  * 文件中心
 */

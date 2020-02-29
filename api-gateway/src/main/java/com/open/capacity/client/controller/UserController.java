@@ -23,11 +23,12 @@ import cn.hutool.core.util.RandomUtil;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author 作者 owen E-mail: 624191343@qq.com
+ * @author 作者 owen 
  * @version 创建时间：2018年4月5日 下午19:52:21
  */
 @Slf4j
 @RestController
+@SuppressWarnings("all") 
 public class UserController {
 	
 	@Resource
@@ -66,6 +67,7 @@ public class UserController {
 		return "delR";
 	}
 
+	
 	@GetMapping("/getVersion")
 	public Result token() {
 		String str = RandomUtil.randomString(24);

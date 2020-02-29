@@ -11,6 +11,7 @@ import org.springframework.web.server.ServerWebExchange;
 import com.open.capacity.client.config.GatewaySwaggerProvider;
 
 @Component
+@SuppressWarnings("all")
 public class GwSwaggerHeaderFilter extends AbstractGatewayFilterFactory {
 	 private static final String HEADER_NAME = "X-Forwarded-Prefix";
 	 

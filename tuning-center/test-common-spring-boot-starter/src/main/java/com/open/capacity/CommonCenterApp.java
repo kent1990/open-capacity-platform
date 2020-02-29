@@ -9,7 +9,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Configuration;
 
 /** 
-* @author 作者 owen E-mail: 624191343@qq.com
+* @author 作者 owen 
 * @version 创建时间：2018年4月5日 下午19:52:21
 * 类说明 
 */

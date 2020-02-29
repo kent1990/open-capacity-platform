@@ -19,9 +19,11 @@ import com.open.capacity.common.model.SysRole;
 import cn.hutool.core.bean.BeanUtil;
 
 /**
- * @author 作者 owen E-mail: 624191343@qq.com
+ * @author 作者 owen 
  * @version 创建时间：2017年11月12日 上午22:57:51 获取用户信息
+ * 
  */
+@SuppressWarnings("all") 
 public class SysUserUtil {
 
 	/**
@@ -29,7 +31,6 @@ public class SysUserUtil {
 	 * 
 	 * @return
 	 */
-	@SuppressWarnings("rawtypes")
 	public static LoginAppUser getLoginAppUser() {
 		
 		// 当OAuth2AuthenticationProcessingFilter设置当前登录时，直接返回

@@ -13,7 +13,7 @@ import com.open.capacity.oss.model.FileInfo;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author 作者 owen E-mail: 624191343@qq.com
+ * @author 作者 owen 
  * @version 创建时间：2017年11月12日 上午22:57:51
  * 文件工具类
 */

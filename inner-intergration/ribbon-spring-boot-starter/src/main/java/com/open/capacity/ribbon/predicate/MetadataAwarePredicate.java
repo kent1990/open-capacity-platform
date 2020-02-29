@@ -1,13 +1,6 @@
 package com.open.capacity.ribbon.predicate;
 
-import org.omg.IOP.ServiceContext;
-import org.omg.IOP.ServiceContextHolder;
-
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-import com.netflix.hystrix.strategy.concurrency.HystrixContextRunnable;
 import com.netflix.niws.loadbalancer.DiscoveryEnabledServer;
-import com.open.capacity.ribbon.core.context.RibbonFilterContext;
-import com.open.capacity.ribbon.core.context.RibbonFilterContextHolder;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -44,7 +37,7 @@ public class MetadataAwarePredicate extends DiscoveryEnabledPredicate {
 //		});
 //
 //		new Thread(runnable).start();
-
+		log.info("host=={}",server.getHost());
 		return true;
 
 	}

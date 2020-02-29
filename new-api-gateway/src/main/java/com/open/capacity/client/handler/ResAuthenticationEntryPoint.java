@@ -24,6 +24,7 @@ import reactor.core.publisher.Mono;
  *
  */
 @Slf4j
+@SuppressWarnings("all")
 public class ResAuthenticationEntryPoint implements ServerAuthenticationEntryPoint {
     @Override
     public Mono<Void> commence(ServerWebExchange exchange, AuthenticationException e) {

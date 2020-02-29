@@ -1,19 +1,10 @@
 spring:
   datasource:
-    dynamic:
-      enable: true
-    druid: 
       # JDBC 配置(驱动类自动从url的mysql识别,数据源类型自动识别)
-      core:
-        url: jdbc:mysql://59.110.164.254:3306/user-center?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
-        username: root
-        password: root
-        driver-class-name:  com.mysql.cj.jdbc.Driver
-      log:
-        url: jdbc:mysql://59.110.164.254:3306/log-center?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
-        username: root
-        password: root
-        driver-class-name:  com.mysql.cj.jdbc.Driver  
+      url: jdbc:mysql://59.110.164.254:3306/user-center?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false 
+      username: root
+      password: root
+      driver-class-name:  com.mysql.cj.jdbc.Driver
       #连接池配置(通常来说，只需要修改initialSize、minIdle、maxActive
       initial-size: 1
       max-active: 20
@@ -60,7 +51,7 @@ spring:
       #stat-view-servlet.allow=
       #stat-view-servlet.deny=128.242.127.1/24,128.242.128.1
       # Spring监控配置，说明请参考Druid Github Wiki，配置_Druid和Spring关联监控配置
-      #aop-patterns= # Spring监控AOP切入点，如x.y.z.service.*,配置多个英文逗号分隔
+      #aop-patterns= # Spring监控AOP切入点，如x.y.z.service.*,配置多个英文逗号分隔 
 ################### mysq end ##########################
 #  zipkin:
 #    base-url: http://59.110.164.254:11008
@@ -93,11 +84,11 @@ spring:
 #      shutdown-timeout: 100ms
 
 
-#mybatis:
-mybatis-plus:        
+mybatis-plus:   
+  global-config:
+    banner: false     
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl 
-  config-location: classpath:mybatis.cfg.xml
   mapper-locations: classpath*:com/open/**/dao/*.xml  
 
 

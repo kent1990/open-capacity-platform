@@ -5,6 +5,8 @@ import com.open.capacity.common.exception.BaseException;
 /**
  * service处理异常
  * controller处理
+ * blog: https://blog.51cto.com/13005375 
+ * code: https://gitee.com/owenwangwen/open-capacity-platform
  */
 public class ServiceException extends BaseException {
 

@@ -13,6 +13,8 @@ import com.open.capacity.log.service.LogService;
 /**
  * @author owen
  * 切换数据源，存储log-center
+ * blog: https://blog.51cto.com/13005375 
+ * code: https://gitee.com/owenwangwen/open-capacity-platform
  */
 public class LogServiceImpl implements LogService {
 

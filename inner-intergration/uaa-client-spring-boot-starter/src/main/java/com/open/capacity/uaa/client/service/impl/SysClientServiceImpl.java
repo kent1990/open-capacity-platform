@@ -20,11 +20,14 @@ import com.open.capacity.uaa.client.service.SysClientService;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author 作者 owen E-mail: 624191343@qq.com
+ * @author 作者 owen 
  * @version 创建时间：2018年4月5日 下午19:52:21 类说明
  * 查询应用绑定的资源权限
+ * blog: https://blog.51cto.com/13005375 
+ * code: https://gitee.com/owenwangwen/open-capacity-platform
  */
 @Slf4j
+@SuppressWarnings("all")
 @Service("sysClientService")
 public class SysClientServiceImpl implements SysClientService {
 

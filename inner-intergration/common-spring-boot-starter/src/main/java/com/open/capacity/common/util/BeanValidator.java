@@ -10,12 +10,13 @@ import javax.validation.ValidatorFactory;
 import org.apache.commons.collections4.MapUtils;
 
 /**
-* @author 作者 owen E-mail: 624191343@qq.com
+* @author 作者 owen 
 * @version 创建时间：2017年12月29日 下午2:13:07 
 * hibernate-validator校验工具类
 * 参考文档：http://docs.jboss.org/hibernate/validator/5.4/reference/en-US/html_single/
 * 类说明 
 */
+@SuppressWarnings("all") 
 public class BeanValidator {
 
     private static ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();

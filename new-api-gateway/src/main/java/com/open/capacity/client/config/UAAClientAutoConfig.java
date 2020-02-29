@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.security.authentication.ReactiveAuthenticationManager;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.config.web.server.SecurityWebFiltersOrder;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
@@ -30,6 +29,7 @@ import com.open.capacity.common.auth.props.PermitUrlProperties;
  * 资源服务器UAAClientAutoConfig
  */
 @Configuration
+@SuppressWarnings("all")
 @EnableConfigurationProperties(PermitUrlProperties.class)
 public class UAAClientAutoConfig {
     @Autowired

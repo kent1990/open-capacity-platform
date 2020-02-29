@@ -1,4 +1,4 @@
-package com.open.capacity.client.controller;
+package com.open.capacity.client.error;
 
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Controller;
@@ -8,14 +8,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.netflix.zuul.context.RequestContext;
 import com.open.capacity.common.web.Result;
 
-import lombok.extern.slf4j.Slf4j;
-
 /**
  * zuul自定义异常格式
  * (限流处理异常)
 */
 
-@Slf4j
 @Controller
 public class ZuulErrorController implements ErrorController {
 

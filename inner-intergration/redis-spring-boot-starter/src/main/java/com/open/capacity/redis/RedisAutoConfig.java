@@ -34,11 +34,13 @@ import com.open.capacity.redis.serializer.RedisObjectSerializer;
 import com.open.capacity.redis.util.RedisUtil;
 
 /**
- * @author 作者 owen E-mail: 624191343@qq.com
+ * @author 作者 owen 
  * @version 创建时间：2017年04月23日 下午20:01:06 类说明
  * redis自动装配
+ * 
  */
 @Configuration
+@SuppressWarnings("all")
 @AutoConfigureBefore(RedisTemplate.class)
 @EnableConfigurationProperties(RedissonProperties.class)
 public class RedisAutoConfig {
@@ -70,6 +72,7 @@ public class RedisAutoConfig {
 		RedisTemplate<String, Object> redisTemplate = new RedisTemplate<String, Object>();
 		redisTemplate.setConnectionFactory(lettuceConnectionFactory);
 
+		
 		RedisSerializer stringSerializer = new StringRedisSerializer();
 		// RedisSerializer redisObjectSerializer = new RedisObjectSerializer();
 		RedisSerializer redisObjectSerializer = new RedisObjectSerializer();

@@ -1,12 +1,13 @@
-CREATE DATABASE IF NOT EXISTS `iyydb_job` DEFAULT CHARACTER SET = utf8mb4;
-Use `iyydb_job`;
+CREATE DATABASE IF NOT EXISTS `job-center` DEFAULT CHARACTER SET = utf8mb4;
+Use `job-center`;
+SET FOREIGN_KEY_CHECKS = 0 ;
 
 #
 # Structure for table "XXL_JOB_QRTZ_CALENDARS"
 #
 
 DROP TABLE IF EXISTS `XXL_JOB_QRTZ_CALENDARS`;
-CREATE TABLE `xxl_job_qrtz_calendars` (
+CREATE TABLE `XXL_JOB_QRTZ_CALENDARS` (
   `sched_name` varchar(120) NOT NULL,
   `calendar_name` varchar(200) NOT NULL,
   `calendar` blob NOT NULL,
@@ -23,7 +24,7 @@ CREATE TABLE `xxl_job_qrtz_calendars` (
 #
 
 DROP TABLE IF EXISTS `XXL_JOB_QRTZ_FIRED_TRIGGERS`;
-CREATE TABLE `xxl_job_qrtz_fired_triggers` (
+CREATE TABLE `XXL_JOB_QRTZ_FIRED_TRIGGERS` (
   `sched_name` varchar(120) NOT NULL,
   `entry_id` varchar(95) NOT NULL,
   `trigger_name` varchar(200) NOT NULL,
@@ -44,14 +45,12 @@ CREATE TABLE `xxl_job_qrtz_fired_triggers` (
 # Data for table "XXL_JOB_QRTZ_FIRED_TRIGGERS"
 #
 
-INSERT INTO `XXL_JOB_QRTZ_FIRED_TRIGGERS` VALUES ('scheduler','owen15737065848981573706584877','5','1','owen1573706584898',1573706661535,1573706665000,5,'ACQUIRED',NULL,NULL,'0','0');
-
 #
 # Structure for table "XXL_JOB_QRTZ_JOB_DETAILS"
 #
 
 DROP TABLE IF EXISTS `XXL_JOB_QRTZ_JOB_DETAILS`;
-CREATE TABLE `xxl_job_qrtz_job_details` (
+CREATE TABLE `XXL_JOB_QRTZ_JOB_DETAILS` (
   `sched_name` varchar(120) NOT NULL,
   `job_name` varchar(200) NOT NULL,
   `job_group` varchar(200) NOT NULL,
@@ -76,7 +75,7 @@ INSERT INTO `XXL_JOB_QRTZ_JOB_DETAILS` VALUES ('quartzScheduler','3','1',NULL,'c
 #
 
 DROP TABLE IF EXISTS `XXL_JOB_QRTZ_LOCKS`;
-CREATE TABLE `xxl_job_qrtz_locks` (
+CREATE TABLE `XXL_JOB_QRTZ_LOCKS` (
   `sched_name` varchar(120) NOT NULL,
   `lock_name` varchar(40) NOT NULL,
   PRIMARY KEY (`sched_name`,`lock_name`)
@@ -93,7 +92,7 @@ INSERT INTO `XXL_JOB_QRTZ_LOCKS` VALUES ('quartzScheduler','STATE_ACCESS'),('qua
 #
 
 DROP TABLE IF EXISTS `XXL_JOB_QRTZ_PAUSED_TRIGGER_GRPS`;
-CREATE TABLE `xxl_job_qrtz_paused_trigger_grps` (
+CREATE TABLE `XXL_JOB_QRTZ_PAUSED_TRIGGER_GRPS` (
   `sched_name` varchar(120) NOT NULL,
   `trigger_group` varchar(200) NOT NULL,
   PRIMARY KEY (`sched_name`,`trigger_group`)
@@ -109,7 +108,7 @@ CREATE TABLE `xxl_job_qrtz_paused_trigger_grps` (
 #
 
 DROP TABLE IF EXISTS `XXL_JOB_QRTZ_SCHEDULER_STATE`;
-CREATE TABLE `xxl_job_qrtz_scheduler_state` (
+CREATE TABLE `XXL_JOB_QRTZ_SCHEDULER_STATE` (
   `sched_name` varchar(120) NOT NULL,
   `instance_name` varchar(200) NOT NULL,
   `last_checkin_time` bigint(13) NOT NULL,
@@ -128,7 +127,7 @@ INSERT INTO `XXL_JOB_QRTZ_SCHEDULER_STATE` VALUES ('quartzScheduler','USERCHI-E2
 #
 
 DROP TABLE IF EXISTS `XXL_JOB_QRTZ_TRIGGER_GROUP`;
-CREATE TABLE `xxl_job_qrtz_trigger_group` (
+CREATE TABLE `XXL_JOB_QRTZ_TRIGGER_GROUP` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `app_name` varchar(64) NOT NULL COMMENT '执行器AppName',
   `title` varchar(12) NOT NULL COMMENT '执行器名称',
@@ -149,7 +148,7 @@ INSERT INTO `XXL_JOB_QRTZ_TRIGGER_GROUP` VALUES (1,'open-xxl-job-demo','示例�
 #
 
 DROP TABLE IF EXISTS `XXL_JOB_QRTZ_TRIGGER_INFO`;
-CREATE TABLE `xxl_job_qrtz_trigger_info` (
+CREATE TABLE `XXL_JOB_QRTZ_TRIGGER_INFO` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `job_group` int(11) NOT NULL COMMENT '执行器主键ID',
   `job_cron` varchar(128) NOT NULL COMMENT '任务执行CRON',
@@ -182,7 +181,7 @@ INSERT INTO `XXL_JOB_QRTZ_TRIGGER_INFO` VALUES (5,1,'*/5 * * * * ?','有参任�
 #
 
 DROP TABLE IF EXISTS `XXL_JOB_QRTZ_TRIGGER_LOG`;
-CREATE TABLE `xxl_job_qrtz_trigger_log` (
+CREATE TABLE `XXL_JOB_QRTZ_TRIGGER_LOG` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `job_group` int(11) NOT NULL COMMENT '执行器主键ID',
   `job_id` int(11) NOT NULL COMMENT '任务，主键ID',
@@ -231,7 +230,7 @@ CREATE TABLE `xxl_job_qrtz_trigger_logglue` (
 #
 
 DROP TABLE IF EXISTS `XXL_JOB_QRTZ_TRIGGER_REGISTRY`;
-CREATE TABLE `xxl_job_qrtz_trigger_registry` (
+CREATE TABLE `XXL_JOB_QRTZ_TRIGGER_REGISTRY` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `registry_group` varchar(255) NOT NULL,
   `registry_key` varchar(255) NOT NULL,
@@ -251,7 +250,7 @@ INSERT INTO `XXL_JOB_QRTZ_TRIGGER_REGISTRY` VALUES (5,'EXECUTOR','open-xxl-job-d
 #
 
 DROP TABLE IF EXISTS `XXL_JOB_QRTZ_TRIGGERS`;
-CREATE TABLE `xxl_job_qrtz_triggers` (
+CREATE TABLE `XXL_JOB_QRTZ_TRIGGERS` (
   `sched_name` varchar(120) NOT NULL,
   `trigger_name` varchar(200) NOT NULL,
   `trigger_group` varchar(200) NOT NULL,
@@ -284,7 +283,7 @@ INSERT INTO `XXL_JOB_QRTZ_TRIGGERS` VALUES ('quartzScheduler','3','1','3','1',NU
 #
 
 DROP TABLE IF EXISTS `XXL_JOB_QRTZ_SIMPROP_TRIGGERS`;
-CREATE TABLE `xxl_job_qrtz_simprop_triggers` (
+CREATE TABLE `XXL_JOB_QRTZ_SIMPROP_TRIGGERS` (
   `sched_name` varchar(120) NOT NULL,
   `trigger_name` varchar(200) NOT NULL,
   `trigger_group` varchar(200) NOT NULL,
@@ -313,7 +312,7 @@ CREATE TABLE `xxl_job_qrtz_simprop_triggers` (
 #
 
 DROP TABLE IF EXISTS `XXL_JOB_QRTZ_SIMPLE_TRIGGERS`;
-CREATE TABLE `xxl_job_qrtz_simple_triggers` (
+CREATE TABLE `XXL_JOB_QRTZ_SIMPLE_TRIGGERS` (
   `sched_name` varchar(120) NOT NULL,
   `trigger_name` varchar(200) NOT NULL,
   `trigger_group` varchar(200) NOT NULL,
@@ -334,7 +333,7 @@ CREATE TABLE `xxl_job_qrtz_simple_triggers` (
 #
 
 DROP TABLE IF EXISTS `XXL_JOB_QRTZ_CRON_TRIGGERS`;
-CREATE TABLE `xxl_job_qrtz_cron_triggers` (
+CREATE TABLE `XXL_JOB_QRTZ_CRON_TRIGGERS` (
   `sched_name` varchar(120) NOT NULL,
   `trigger_name` varchar(200) NOT NULL,
   `trigger_group` varchar(200) NOT NULL,
@@ -355,7 +354,7 @@ INSERT INTO `XXL_JOB_QRTZ_CRON_TRIGGERS` VALUES ('quartzScheduler','3','1','1 1 
 #
 
 DROP TABLE IF EXISTS `XXL_JOB_QRTZ_BLOB_TRIGGERS`;
-CREATE TABLE `xxl_job_qrtz_blob_triggers` (
+CREATE TABLE `XXL_JOB_QRTZ_BLOB_TRIGGERS` (
   `sched_name` varchar(120) NOT NULL,
   `trigger_name` varchar(200) NOT NULL,
   `trigger_group` varchar(200) NOT NULL,
@@ -368,3 +367,4 @@ CREATE TABLE `xxl_job_qrtz_blob_triggers` (
 # Data for table "XXL_JOB_QRTZ_BLOB_TRIGGERS"
 #
 
+SET FOREIGN_KEY_CHECKS = 1;

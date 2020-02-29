@@ -28,6 +28,7 @@ import io.swagger.annotations.Api;
 @Controller
 @Api(tags = "REDIS API")
 @RequestMapping("/redis")
+@SuppressWarnings("all")
 public class RedisController {
 
     @Autowired
@@ -41,7 +42,7 @@ public class RedisController {
     public String getMemoryInfo() {
         Map<String, Object> map = new HashMap<>();
 
-        Object o = redisTemplate.execute(new RedisCallback() {
+		Object o = redisTemplate.execute(new RedisCallback() {
             @Override
             public Object doInRedis(RedisConnection connection) throws DataAccessException {
                 return Optional.ofNullable(connection.info("memory")).orElseThrow(RuntimeException::new).get("used_memory");
@@ -61,7 +62,7 @@ public class RedisController {
     public String getKeysSize() {
         Map<String, Object> map = new HashMap<>();
 
-        Object o =  redisTemplate.execute(new RedisCallback() {
+		Object o =  redisTemplate.execute(new RedisCallback() {
             public Long doInRedis(RedisConnection connection) throws DataAccessException {
                 return connection.dbSize();
             }

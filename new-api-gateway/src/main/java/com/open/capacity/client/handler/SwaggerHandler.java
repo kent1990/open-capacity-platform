@@ -17,6 +17,7 @@ import springfox.documentation.swagger.web.UiConfiguration;
 import springfox.documentation.swagger.web.UiConfigurationBuilder;
 
 @RestController
+@SuppressWarnings("all")
 @RequestMapping("/swagger-resources")
 public class SwaggerHandler {
     @Autowired(required = false)

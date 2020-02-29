@@ -1,7 +1,7 @@
 package com.open.capacity.redis.serializer;
 
 /** 
-* @author 作者 owen E-mail: 624191343@qq.com
+* @author 作者 owen 
 * @version 创建时间：2017年04月23日 下午20:01:06 类说明
 * 类说明 
 */

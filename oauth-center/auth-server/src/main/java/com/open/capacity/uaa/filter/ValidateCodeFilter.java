@@ -25,6 +25,7 @@ import lombok.extern.slf4j.Slf4j;
  * @date 2018/11/21
  */
 @Slf4j
+@SuppressWarnings("all")
 @Component("validateCodeFilter")
 public class ValidateCodeFilter extends OncePerRequestFilter {
 	@Autowired

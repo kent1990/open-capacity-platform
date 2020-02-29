@@ -53,8 +53,7 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<docker.host>http://59.110.164.254:5555</docker.host>
 		<docker.image.prefix>owenwangwen</docker.image.prefix>
-		<spring-boot.version>2.1.7.RELEASE</spring-boot.version>
-		<net-devh-grpc.version>2.0.1.RELEASE</net-devh-grpc.version>
+		<spring-boot.version>2.1.12.RELEASE</spring-boot.version>
 		<spring-platform.version>Cairo-SR3</spring-platform.version>
 		<spring.social.version>1.1.6.RELEASE</spring.social.version>
 		<spring-security.version>5.1.1.RELEASE</spring-security.version>
@@ -63,7 +62,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<hibernate-validator.verion>5.0.2.Final</hibernate-validator.verion>
 		<flowable.version>6.4.1</flowable.version>
-		<spring-cloud-dependencies.version>Greenwich.SR3</spring-cloud-dependencies.version>
+		<spring-cloud-dependencies.version>Greenwich.SR5</spring-cloud-dependencies.version>
 
 
 		

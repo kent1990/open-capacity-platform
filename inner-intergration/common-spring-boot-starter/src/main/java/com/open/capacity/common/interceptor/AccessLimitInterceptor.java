@@ -19,9 +19,12 @@ import lombok.AllArgsConstructor;
 
 /**
  * 非网关部分应用次数限制
+ * blog: https://blog.51cto.com/13005375 
+ * code: https://gitee.com/owenwangwen/open-capacity-platform
  */
 
 @AllArgsConstructor
+@SuppressWarnings("all")
 public class AccessLimitInterceptor extends HandlerInterceptorAdapter {
 
 	private RedisUtil redisUtil;

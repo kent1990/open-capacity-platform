@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 
  
 /**
-* @author 作者 owen E-mail: 624191343@qq.com
+* @author 作者 owen 
 * @version 创建时间：2017年11月12日 上午22:57:51
 * 分页参数处理工具
 * url 地址重写 ?start=1&length=10

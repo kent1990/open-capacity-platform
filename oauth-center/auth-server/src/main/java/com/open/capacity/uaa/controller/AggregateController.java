@@ -4,22 +4,14 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
-import javax.annotation.PostConstruct;
-
-import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.sleuth.instrument.async.TraceableExecutorService;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.common.collect.Lists;
 import com.open.capacity.common.auth.details.LoginAppUser;
-import com.open.capacity.common.util.TokenUtil;
 import com.open.capacity.uaa.feign.UserFeignClient;
 
 import io.swagger.annotations.Api;

@@ -17,6 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
+@SuppressWarnings("all")
 public class RedisLimiterUtils {
     public static final String API_WEB_TIME_KEY = "time_key:";
     public static final String API_WEB_COUNTER_KEY = "counter_key:";

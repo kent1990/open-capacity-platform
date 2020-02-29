@@ -35,7 +35,7 @@ import io.swagger.annotations.ApiOperation;
 
 
 /**
-* @author 作者 owen E-mail: 624191343@qq.com
+* @author 作者 owen 
 * @version 创建时间：2017年11月12日 上午22:57:51
 * 权限管理
  */

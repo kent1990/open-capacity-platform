@@ -19,6 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 @Primary
+@SuppressWarnings("all")
 public class UserDetailServiceImpl implements UserDetailsService {
 
     @Autowired

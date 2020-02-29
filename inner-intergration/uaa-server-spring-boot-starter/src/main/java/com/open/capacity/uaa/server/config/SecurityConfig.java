@@ -1,9 +1,7 @@
 package com.open.capacity.uaa.server.config;
 
-import com.open.capacity.uaa.server.provider.SmsCodeAuthenticationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,6 +20,7 @@ import org.springframework.security.web.authentication.logout.HttpStatusReturnin
 
 import com.open.capacity.common.auth.props.PermitUrlProperties;
 import com.open.capacity.uaa.server.handle.OauthLogoutHandler;
+import com.open.capacity.uaa.server.provider.SmsCodeAuthenticationProvider;
 
 /**
  * spring security配置
@@ -29,6 +28,8 @@ import com.open.capacity.uaa.server.handle.OauthLogoutHandler;
  * @author owen 624191343@qq.com
  * @version 创建时间：2017年11月12日 上午22:57:51 2017年10月16日
  *          在WebSecurityConfigurerAdapter不拦截oauth要开放的资源
+ * blog: https://blog.51cto.com/13005375 
+ * code: https://gitee.com/owenwangwen/open-capacity-platform
  */
 @Configuration
 @EnableWebSecurity

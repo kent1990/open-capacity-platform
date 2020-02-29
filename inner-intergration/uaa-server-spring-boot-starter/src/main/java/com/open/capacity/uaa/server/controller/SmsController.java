@@ -16,6 +16,7 @@ import com.open.capacity.uaa.server.service.ValidateCodeService;
  * @date 2019/09/01
  */
 @RestController
+@SuppressWarnings("all")
 public class SmsController {
 
     public final static String SYSMSG_LOGIN_PWD_MSG="验证码：{0}，3分钟内有效";
@@ -23,10 +24,10 @@ public class SmsController {
     @Autowired
     private ValidateCodeService validateCodeService;
 
-    @RequestMapping("/sms/send")
+	@RequestMapping("/sms/send")
     @LogAnnotation(module="auth-server",recordRequestParam=false)
     public Result sendSms(@RequestParam(value = "mobile",required = false) String mobile) {
-        String content = SmsController.SYSMSG_LOGIN_PWD_MSG.replace("{0}", StringUtil.generateRamdomNum());
+		String content = SmsController.SYSMSG_LOGIN_PWD_MSG.replace("{0}", StringUtil.generateRamdomNum());
 //        SendMsgResult sendMsgResult = MobileMsgConfig.sendMsg(mobile, content);
 
         String calidateCode = StringUtil.generateRamdomNum();
