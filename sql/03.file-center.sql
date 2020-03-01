@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS `file_center` DEFAULT CHARACTER SET = utf8mb4;
-Use `file_center`;
+CREATE DATABASE IF NOT EXISTS `file-center` DEFAULT CHARACTER SET = utf8mb4;
+Use `file-center`;
 
 
 SET FOREIGN_KEY_CHECKS=0;

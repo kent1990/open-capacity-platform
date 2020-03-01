@@ -1,11 +1,8 @@
 package com.open.capacity.common.util;
 
-import java.util.Date;
 import java.util.concurrent.ThreadLocalRandom;
 
 import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 
 /**
  * 随机数生成util

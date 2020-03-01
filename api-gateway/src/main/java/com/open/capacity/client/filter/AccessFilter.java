@@ -19,6 +19,7 @@ import com.open.capacity.common.util.TokenUtil;
  * Created by owen on 2017/9/10.
  */
 @Component
+@SuppressWarnings("all") 
 public class AccessFilter extends ZuulFilter {
 
      

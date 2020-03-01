@@ -17,6 +17,7 @@ import org.apache.commons.collections.CollectionUtils;
 /**
  * StringUtils包装字符串处理类 
  */
+@SuppressWarnings("all") 
 public class StringUtil extends org.apache.commons.lang3.StringUtils{
 
     /**
@@ -275,7 +276,7 @@ public class StringUtil extends org.apache.commons.lang3.StringUtils{
      * @author:kaiqiang.wu
      * @time:2015年9月9日下午4:34:45
      */
-    public static boolean isNotEmpty(Collection collection) {
+    public static boolean isNotEmpty( Collection collection) {
         return !isEmpty(collection);
     }
 
@@ -525,7 +526,7 @@ public class StringUtil extends org.apache.commons.lang3.StringUtils{
      * @return
      */
     public static String sub(String str,int start,int end){
-        String result = null;
+		String result = null;
 
         if(str == null || str.equals(""))
             return "";

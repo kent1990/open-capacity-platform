@@ -2,14 +2,8 @@ package com.open.capacity.common.util;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
-import javax.sql.DataSource;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -24,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
+@SuppressWarnings("all") 
 public class RequestUtil {
 	 
 

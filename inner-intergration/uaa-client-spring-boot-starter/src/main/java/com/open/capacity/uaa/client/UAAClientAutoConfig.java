@@ -30,12 +30,15 @@ import com.open.capacity.common.rest.RestTemplateConfig;
 import com.open.capacity.uaa.client.authorize.AuthorizeConfigManager;
 
 /**
- * @author 作者 owen E-mail: 624191343@qq.com
+ * @author 作者 owen 
  * @version 创建时间：2017年11月12日 上午22:57:51
+ * blog: https://blog.51cto.com/13005375 
+ * code: https://gitee.com/owenwangwen/open-capacity-platform
  */
 @Component
 @Configuration
 @EnableResourceServer
+@SuppressWarnings("all") 
 @AutoConfigureAfter(TokenStore.class)
 @EnableConfigurationProperties(PermitUrlProperties.class)
 @Import({RestTemplateConfig.class,FeignInterceptorConfig.class})

@@ -11,6 +11,7 @@ import org.springframework.web.reactive.function.server.RouterFunctions;
 import com.open.capacity.client.handler.HystrixFallbackHandler;
 
 @Configuration
+@SuppressWarnings("all")
 public class GatewayFallbackConfig {
         @Autowired
     private HystrixFallbackHandler hystrixFallbackHandler;

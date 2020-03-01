@@ -44,6 +44,7 @@ import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
 
 @Service
+@SuppressWarnings("all")
 public class DynamicRouteServiceImpl implements ApplicationEventPublisherAware, DynamicRouteService {
 
     @Autowired

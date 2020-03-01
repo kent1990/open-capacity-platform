@@ -8,6 +8,7 @@ import com.open.capacity.common.web.Result;
 import com.open.capacity.uaa.dto.SysClientDto;
 import com.open.capacity.uaa.model.SysClient;
 
+@SuppressWarnings("all")
 public interface SysClientService {
 
 	

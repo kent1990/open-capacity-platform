@@ -12,11 +12,13 @@ import com.open.capacity.uaa.client.constant.AuthServiceConstant;
 import com.open.capacity.uaa.client.service.RbacService;
 
 /** 
-* @author 作者 owen E-mail: 624191343@qq.com
+* @author 作者 owen 
 * @version 创建时间：2018年2月1日 下午9:50:27 
-* 类说明 
+* blog: https://blog.51cto.com/13005375 
+* code: https://gitee.com/owenwangwen/open-capacity-platform
 */
 @Component
+@SuppressWarnings("all")
 public class OpenAuthorizeConfigManager implements AuthorizeConfigManager {
 
 	@Autowired
@@ -29,9 +31,7 @@ public class OpenAuthorizeConfigManager implements AuthorizeConfigManager {
     @Value("${spring.application.name:}")
 	private String applicationName;
 
-	/* (non-Javadoc)
-	 * @see com.imooc.security.core.authorize.AuthorizeConfigManager#config(org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer.ExpressionInterceptUrlRegistry)
-	 */
+	 
 	@Override
 	public void config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config) {
 		 

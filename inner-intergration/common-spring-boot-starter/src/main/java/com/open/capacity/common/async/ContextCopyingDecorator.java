@@ -9,6 +9,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 
+/**
+ * @author owen
+ * blog: https://blog.51cto.com/13005375 
+ * code: https://gitee.com/owenwangwen/open-capacity-platform
+ *
+ */
 // https://stackoverflow.com/questions/23732089/how-to-enable-request-scope-in-async-task-executor
 // 传递RequestAttributes and MDC
 // SecurityContext

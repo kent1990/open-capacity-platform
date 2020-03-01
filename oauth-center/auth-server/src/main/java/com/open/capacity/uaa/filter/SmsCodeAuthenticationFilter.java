@@ -17,6 +17,7 @@ import java.io.IOException;
 
 
 @Slf4j
+@SuppressWarnings("all")
 @Component("smsCodeAuthenticationFilter")
 public class SmsCodeAuthenticationFilter extends OncePerRequestFilter {
     @Autowired

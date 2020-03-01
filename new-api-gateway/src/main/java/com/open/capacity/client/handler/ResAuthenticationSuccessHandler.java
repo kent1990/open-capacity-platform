@@ -15,6 +15,7 @@ import reactor.core.publisher.Mono;
  * 继承security对gateway支持的认证成功处理器WebFilterChainServerAuthenticationSuccessHandler,并覆盖其onAuthenticationSuccess方法
  * 本例中认证成功未做任何处理，可以添加请求头信息传递
  */
+@SuppressWarnings("all")
 public class ResAuthenticationSuccessHandler implements ServerAuthenticationSuccessHandler {
     @Override
     public Mono<Void> onAuthenticationSuccess(WebFilterExchange webFilterExchange, Authentication authentication) {

@@ -7,31 +7,18 @@
   </parent>
   <artifactId>db-spring-boot-starter</artifactId>
   <description>数据库支撑</description>
-  <properties>
-		<sharding-jdbc>2.0.3</sharding-jdbc>
-	</properties>
+ 
 
  	<dependencies>
 
-		
+
 		<!-- mysql驱动 -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
-		<!-- owen增加oracle的支持 
-		<dependency>
-			<groupId>com.oracle</groupId>
-			<artifactId>ojdbc6</artifactId>
-			<version>11.2.0.3</version>
-		</dependency>
-		-->
-
-		<!-- 增加jdbc的支持 -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-jdbc</artifactId>
-		</dependency>
+		<!-- owen增加oracle的支持 <dependency> <groupId>com.oracle</groupId> <artifactId>ojdbc6</artifactId> 
+			<version>11.2.0.3</version> </dependency> -->
 
 		<!-- 密码加密工具类 -->
 		<dependency>
@@ -40,27 +27,10 @@
 			<version>${jasypt.version}</version>
 		</dependency>
 
-		<!--sharding-jdbc <dependency> <groupId>com.dangdang</groupId> <artifactId>sharding-jdbc-core</artifactId> 
-			<version>${sharding-jdbc}</version> </dependency> -->
-		<!-- https://mvnrepository.com/artifact/io.shardingjdbc/sharding-jdbc-core -->
-		<dependency>
-			<groupId>io.shardingjdbc</groupId>
-			<artifactId>sharding-jdbc-core</artifactId>
-			<version>${sharding-jdbc}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>com.google.guava</groupId>
-					<artifactId>guava</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-			<version>20.0</version>
 		</dependency>
-
 
 		<!-- druid 官方 starter -->
 		<dependency>
@@ -69,34 +39,37 @@
 			<version>1.1.10</version>
 		</dependency>
 
-		<!-- owen增加mybatis的支持 -->
+
 		<dependency>
-			<groupId>org.mybatis.spring.boot</groupId>
-			<artifactId>mybatis-spring-boot-starter</artifactId>
-			<version>1.3.0</version>
+			<groupId>p6spy</groupId>
+			<artifactId>p6spy</artifactId>
+			<version>3.8.7</version>
 		</dependency>
 		
+		<!-- mybatis-plus -->
 		<dependency>
-			<groupId>org.mybatis.spring.boot</groupId>
-			<artifactId>mybatis-spring-boot-starter-test</artifactId>
-			<version>1.3.0</version>
-			<scope>test</scope>
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatis-plus-boot-starter</artifactId>
+			<version>3.0.7</version>
 		</dependency>
-		
+		<dependency>
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatis-plus</artifactId>
+			<version>3.0.7</version>
+		</dependency>
+		<dependency>
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatis-plus-generator</artifactId>
+			<version>3.0.7</version>
+		</dependency>
+
 		<!-- mybatis的分页插件 -->
 		<dependency>
 			<groupId>com.github.pagehelper</groupId>
 			<artifactId>pagehelper-spring-boot-starter</artifactId>
-			<version>1.2.3</version>
+			<version>1.2.13</version>
 		</dependency>
 
-		<!-- mybatis-plus -->
-		<dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.0.6</version>
-        </dependency>
-		
 		<!-- apo -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -118,14 +91,9 @@
 			<artifactId>spring-boot-starter-web</artifactId> </dependency> -->
 
 
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-pool2</artifactId>
-			<version>2.5.0</version>
-		</dependency>
-		
-		
-		
+
+
+
 	</dependencies>
 	
 </project>

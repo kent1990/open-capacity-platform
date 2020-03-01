@@ -37,9 +37,12 @@ import com.open.capacity.uaa.server.handle.OauthLogoutHandler;
 /**
  * @author owen 624191343@qq.com
  * @version 创建时间：2017年11月12日 上午22:57:51
+ * blog: https://blog.51cto.com/13005375 
+ * code: https://gitee.com/owenwangwen/open-capacity-platform
  */
 @Component
 @Configuration
+@SuppressWarnings("all") 
 public class SecurityHandlerConfig {
 
 	@Resource
@@ -115,6 +118,7 @@ public class SecurityHandlerConfig {
 
 	}
 
+	
 	@Bean
 	public WebResponseExceptionTranslator webResponseExceptionTranslator() {
 		return new DefaultWebResponseExceptionTranslator() {

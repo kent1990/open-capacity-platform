@@ -13,14 +13,16 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
- * @author 作者 owen E-mail: 624191343@qq.com
+ * @author 作者 owen 
  * @version 创建时间：2017年11月12日 上午22:57:51 
  * 用户实体
  */
 @Data
 @TableName("sys_user")
+@EqualsAndHashCode(callSuper=true)
 public class SysUser  extends Model<SysUser>  implements Serializable {
 
 	/**

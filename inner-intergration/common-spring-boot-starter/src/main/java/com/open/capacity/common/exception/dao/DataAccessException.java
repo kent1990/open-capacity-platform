@@ -4,6 +4,8 @@ import com.open.capacity.common.exception.BaseException;
 
 /**
  * 数据库相关异常
+ * blog: https://blog.51cto.com/13005375 
+ * code: https://gitee.com/owenwangwen/open-capacity-platform
  */
 
 public class DataAccessException extends BaseException {

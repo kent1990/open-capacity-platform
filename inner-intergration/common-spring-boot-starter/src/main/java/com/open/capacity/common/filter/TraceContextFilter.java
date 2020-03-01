@@ -21,6 +21,8 @@ import com.open.capacity.common.constant.TraceConstant;
  * 优先级
  * TracingFilter > TraceContextFilter
  * 此处理方式可以不用aop强行设置traceid，摆脱日志traceid强制使用log注解
+ * blog: https://blog.51cto.com/13005375 
+ * code: https://gitee.com/owenwangwen/open-capacity-platform
  */
 @Order(Ordered.HIGHEST_PRECEDENCE + 8)
 @ConditionalOnClass(WebMvcConfigurer.class)

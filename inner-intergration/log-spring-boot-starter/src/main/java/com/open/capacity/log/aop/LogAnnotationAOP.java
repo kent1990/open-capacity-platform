@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadLocalRandom;
 
-import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,12 +15,9 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.MDC;
-import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.sleuth.instrument.async.TraceableExecutorService;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.task.TaskExecutor;
-import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -42,7 +37,8 @@ import lombok.extern.slf4j.Slf4j;
  * @create 2017年7月2日
  * 日志AOP,标准日志格式logback-spring.xml
  * 如果开启日志记录，需要多数据配置
- * 
+ * blog: https://blog.51cto.com/13005375 
+ * code: https://gitee.com/owenwangwen/open-capacity-platform
  */
 @Slf4j 
 @Aspect

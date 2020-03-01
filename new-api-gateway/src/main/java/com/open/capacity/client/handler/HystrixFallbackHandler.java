@@ -28,6 +28,7 @@ import reactor.core.publisher.Mono;
  */
 @Slf4j
 @Component
+@SuppressWarnings("all")
 public class HystrixFallbackHandler implements HandlerFunction<ServerResponse> {
 
      

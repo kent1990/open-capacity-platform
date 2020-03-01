@@ -15,6 +15,8 @@ import com.open.capacity.common.constant.TraceConstant;
  * 经过filter-->  interceptor  -->aop  -->controller
  * 如果某些接口，比如filter --> userdetail  
  * 这种情况，aop mdc设置  后续log输出traceid
+ * blog: https://blog.51cto.com/13005375 
+ * code: https://gitee.com/owenwangwen/open-capacity-platform
  *
  */
 public class TraceUtil {

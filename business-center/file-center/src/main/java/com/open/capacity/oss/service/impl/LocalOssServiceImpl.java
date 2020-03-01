@@ -9,7 +9,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.open.capacity.oss.dao.FileDao;
 import com.open.capacity.oss.model.FileInfo;
 import com.open.capacity.oss.model.FileType;
-import com.open.capacity.oss.task.TaskUnZipCall;
 import com.open.capacity.oss.utils.FileUtil;
 
 /**

@@ -1,6 +1,5 @@
 package com.open.capacity.client.filter;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.MDC;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
@@ -24,6 +23,7 @@ import reactor.core.publisher.Mono;
  */
 @Slf4j
 @Component
+@SuppressWarnings("all")
 public class RequestFilter implements GlobalFilter, Ordered {
 
 
@@ -50,10 +50,6 @@ public class RequestFilter implements GlobalFilter, Ordered {
 		log.info("request url = " + exchange.getRequest().getURI() + ", traceId = " + traceId);
 		
 		ServerWebExchange build = exchange.mutate().request(traceHead).build();
-
-		
-		
-	 
 		
         return chain.filter(build);
 

@@ -4,8 +4,8 @@
 
 <p align="center"> 
  <img src="https://img.shields.io/circleci/project/vuejs/vue/dev.svg" alt="Build Status">
-  <img src="https://img.shields.io/badge/Spring%20Cloud-Greenwich.SR2.RELEASE-blue.svg" alt="Coverage Status">
-  <img src="https://img.shields.io/badge/Spring%20Boot-2.1.3.RELEASE-blue.svg" alt="Downloads">
+  <img src="https://img.shields.io/badge/Spring%20Cloud-Greenwich.SR5.RELEASE-blue.svg" alt="Coverage Status">
+  <img src="https://img.shields.io/badge/Spring%20Boot-2.1.12.RELEASE-blue.svg" alt="Downloads">
 </p>
 
 
@@ -31,8 +31,8 @@ http://59.110.164.254:8066/login.html  admin/admin
 
 
 # **监控演示** #
-<a target="_blank" href="http://106.13.3.200/verynginx/index.html">**实时监控**</a> 用户名/密码：verynginx/verynginx       
-<a target="_blank" href="http://106.13.3.200:3000/#">**grafana监控**</a> 用户名/密码：admin/1q2w3e4r    
+<a target="_blank" href="http://47.98.236.203/verynginx/index.html">**实时监控**</a> 用户名/密码：verynginx/verynginx       
+<a target="_blank" href="http://47.98.236.203:3000/#">**grafana监控**</a> 用户名/密码：admin/1q2w3e4r    
 
 # 开发手册  
  [https://www.kancloud.cn/owenwangwen/open-capacity-platform/content](https://www.kancloud.cn/owenwangwen/open-capacity-platform/content)
@@ -43,7 +43,8 @@ http://59.110.164.254:8066/login.html  admin/admin
 
 <table>
 	<tr>
-            <td><img src=https://images.gitee.com/uploads/images/2019/0604/143151_36a5c07e_869801.png "屏幕截图.png" />
+            <td><img src=https://images.gitee.com/uploads/images/2019/1209/121109_59a8822c_869801.png "屏幕截图.png"" />
+			<td><img src=https://images.gitee.com/uploads/images/2019/1209/121142_1f491d9b_869801.png "屏幕截图.png"" />
 	</tr>
 </table>
 
@@ -51,7 +52,7 @@ http://59.110.164.254:8066/login.html  admin/admin
 <table>
 	<tr>
 		<td><img src="https://images.gitee.com/uploads/images/2019/0523/091013_fffdcf8b_869801.png "屏幕截图.png"></td>
-		<td><img src="https://images.gitee.com/uploads/images/2019/0531/151440_a763b84e_869801.png "屏幕截图.png"></td>
+		<td><img src="https://images.gitee.com/uploads/images/2020/0225/110747_862eef4e_869801.png "屏幕截图.png""></td>
     </tr>
 	
 </table>
@@ -204,17 +205,16 @@ e.启动gray-center的discovery-console-desktop
 请参考
 [https://github.com/Nepxion/Docs/blob/master/discovery-doc/README_QUICK_START.md](https://github.com/Nepxion/Docs/blob/master/discovery-doc/README_QUICK_START.md)，感谢军哥分享  
 
-# 阿波罗配置中心
-Apollo（阿波罗）是携程框架部研发并开源的一款生产级的配置中心产品，它能够集中管理应用在不同环境、不同集群的配置，配置修改后能够实时推送到应用端，并且具备规范的权限、流程治理等特性，适用于微服务配置管理场景。  
-集成方案  
-https://gitee.com/owenwangwen/config-center  
-功能图  
-![](https://images.gitee.com/uploads/images/2019/0525/185527_3e2e61a9_1441068.jpeg)   
-阿波罗官方地址   
-https://github.com/ctripcorp/apollo  
 
-# Spring Cloud Alibaba 初探
+# Spring Cloud Alibaba 版本
 https://gitee.com/owenwangwen/open-capacity-platform/tree/alibaba
+
+# vue 版本
+vue 前端：https://gitee.com/owenwangwen/jeecp  
+vue 后端：https://gitee.com/owenwangwen/open-capacity-platform/tree/vue/
+
+# oracle 版本
+https://gitee.com/owenwangwen/open-capacity-platform/tree/oracle/
 
 # 用户权益 #
 - 允许免费用于学习、毕设、公司项目、私活等。

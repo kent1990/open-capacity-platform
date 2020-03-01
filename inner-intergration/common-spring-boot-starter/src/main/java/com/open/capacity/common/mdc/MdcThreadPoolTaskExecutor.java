@@ -1,13 +1,12 @@
 package com.open.capacity.common.mdc;
 
+import java.util.Map;
+
 import org.slf4j.MDC;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
-import java.util.Map;
-
 /**
  * 这是{@link ThreadPoolTaskExecutor}的一个简单替换，可以在每个任务之前设置子线程的MDC数据。
- * <p/>
  * 在记录日志的时候，一般情况下我们会使用MDC来存储每个线程的特有参数，如身份信息等，以便更好的查询日志。
  * 但是Logback在最新的版本中因为性能问题，不会自动的将MDC的内存传给子线程。所以Logback建议在执行异步线程前
  * 先通过MDC.getCopyOfContextMap()方法将MDC内存获取出来，再传给线程。
@@ -16,6 +15,7 @@ import java.util.Map;
  * https://logback.qos.ch/manual/mdc.html
  * @author yuhao.wang3
  */
+@SuppressWarnings("all") 
 public class MdcThreadPoolTaskExecutor extends ThreadPoolTaskExecutor {
 
     /**

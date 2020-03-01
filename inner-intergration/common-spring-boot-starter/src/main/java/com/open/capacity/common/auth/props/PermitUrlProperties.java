@@ -6,9 +6,11 @@ import java.util.List;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * @author 作者 owen E-mail: 624191343@qq.com
+ * @author 作者 owen 
  * @version 创建时间：2017年11月12日 上午22:57:51 
  * url白名单处理 application.yml中配置需要放权的url白名单
+ * blog: https://blog.51cto.com/13005375 
+ * code: https://gitee.com/owenwangwen/open-capacity-platform
  */
 // @ConfigurationProperties(prefix = "permit")
 @ConfigurationProperties(prefix = "security.oauth2")

@@ -14,6 +14,8 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * 切换数据源Advice
+ *  blog: https://blog.51cto.com/13005375 
+ * code: https://gitee.com/owenwangwen/open-capacity-platform
  */
 @Slf4j
 @Aspect

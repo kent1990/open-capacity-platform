@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
@@ -35,6 +36,7 @@ import reactor.core.publisher.Mono;
  * 修改历史 序号 日期 修改人 修改原因
  */
 @Component
+@SuppressWarnings("all")
 @EnableConfigurationProperties(PermitUrlProperties.class)
 public class AccessFilter implements GlobalFilter, Ordered {
 
@@ -46,6 +48,9 @@ public class AccessFilter implements GlobalFilter, Ordered {
 
 	@Resource
 	private PermitUrlProperties permitUrlProperties;
+	
+	@Value("${security.oauth2.token.store.type:}")
+	private String tokenType ;
 
 	@Override
 	public int getOrder() {
@@ -56,7 +61,10 @@ public class AccessFilter implements GlobalFilter, Ordered {
 	@Override
 	public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
 		// TODO Auto-generated method stub
-
+		
+		if(!"redis".equals(tokenType)){
+			return chain.filter(exchange);
+		}
 		String accessToken = TokenUtil.extractToken(exchange.getRequest());
 		 
 		

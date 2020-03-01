@@ -15,14 +15,12 @@ import org.springframework.web.bind.ServletRequestUtils;
 
 import com.open.capacity.uaa.server.service.ValidateCodeService;
 
-import lombok.extern.slf4j.Slf4j;
-
 /**
  * @author zlt
  * @date 2018/12/10
  */
-@Slf4j
 @Service
+@SuppressWarnings("all")
 public class ValidateCodeServiceImpl implements ValidateCodeService {
 	@Autowired
 	private RedisTemplate<String, Object> redisTemplate;
@@ -60,6 +58,7 @@ public class ValidateCodeServiceImpl implements ValidateCodeService {
 	 * @param deviceId
 	 *            前端唯一标识/手机号
 	 */
+	
 	@Override
 	public String getCode(String deviceId)  {
 

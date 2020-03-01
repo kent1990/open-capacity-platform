@@ -21,6 +21,7 @@ import reactor.core.publisher.Mono;
  * 403拒绝访问异常处理，转换为JSON
  */
 @Slf4j
+@SuppressWarnings("all")
 public class ResAccessDeniedHandler implements ServerAccessDeniedHandler {
     @Override
     public Mono<Void> handle(ServerWebExchange exchange, AccessDeniedException e) {

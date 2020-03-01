@@ -27,6 +27,7 @@ import java.util.concurrent.TimeoutException;
  * @date 2019/8/2715:14
  */
 @Slf4j
+@SuppressWarnings("all")
 public class FastBuildRabbitMqConsumer {
 
     private ConnectionFactory connectionFactory;
@@ -54,7 +55,8 @@ public class FastBuildRabbitMqConsumer {
             Channel channel;
             {channel = connection.createChannel(false);}
 
-            @Override
+           
+			@Override
             public DetailResponse consume() {
                 try {
                     //1 通过basicGet获取原始数据

@@ -17,11 +17,11 @@ import com.open.capacity.client.service.DynamicRouteService;
 import com.open.capacity.common.web.PageResult;
 import com.open.capacity.common.web.Result;
 
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("/route")
+@SuppressWarnings("all")
 public class RouteController {
 
     @Autowired

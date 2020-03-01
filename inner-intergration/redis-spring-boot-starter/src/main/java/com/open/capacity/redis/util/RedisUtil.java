@@ -8,7 +8,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.HashOperations;
-import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.SetOperations;
@@ -23,11 +22,12 @@ import lombok.extern.slf4j.Slf4j;
 
 
 /**
- * @author 作者 owen E-mail: 624191343@qq.com
+ * @author 作者 owen 
  * @version 创建时间：2017年04月23日 下午20:01:06 类说明
  * redis工具类
  */
 @Slf4j
+@SuppressWarnings("all")
 public class RedisUtil {
 
 	
@@ -303,7 +303,6 @@ public class RedisUtil {
 	 * @param key
 	 *            可以传一个值 或多个
 	 */
-	@SuppressWarnings("unchecked")
 	public void del(String... key) {
 		if (key != null && key.length > 0) {
 			if (key.length == 1) {

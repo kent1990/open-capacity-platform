@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 @Mapper
+@SuppressWarnings("all")
 public interface GatewayRoutesMapper {
     int deleteByPrimaryKey(String id);
 

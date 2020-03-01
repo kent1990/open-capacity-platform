@@ -5,7 +5,6 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 
@@ -26,7 +25,8 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * Hystrix传播ThreadLocal对象
  * copy from SleuthHystrixConcurrencyStrategy
- * http://www.itmuch.com/spring-cloud-sum/hystrix-threadlocal/
+ * blog: https://blog.51cto.com/13005375 
+ * code: https://gitee.com/owenwangwen/open-capacity-platform
  */
 @Slf4j
 public class RequestAttributeHystrixConcurrencyStrategy extends HystrixConcurrencyStrategy {

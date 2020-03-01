@@ -13,7 +13,9 @@ import java.util.Map;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@SuppressWarnings("all")
 public class GatewayPredicateDefinition {
     private String name;
+    @Builder.Default
     private Map<String, String> args = new LinkedHashMap<>();
 }

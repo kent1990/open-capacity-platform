@@ -12,7 +12,8 @@ import com.open.capacity.common.constant.TraceConstant;
 /**
  * @author owen
  * 首先创建拦截器，加入拦截列表中，在请求到达时生成traceId。
- *
+ * blog: https://blog.51cto.com/13005375 
+ * code: https://gitee.com/owenwangwen/open-capacity-platform
  */
 public class LogInterceptor implements HandlerInterceptor {
 	@Override

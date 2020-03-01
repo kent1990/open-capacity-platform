@@ -26,7 +26,7 @@ import com.open.capacity.oss.service.FileService;
 import io.swagger.annotations.Api;
 
 /**
- * @author 作者 owen E-mail: 624191343@qq.com
+ * @author 作者 owen 
  * @version 创建时间：2017年11月12日 上午22:57:51
 *  文件上传 同步oss db双写 目前仅实现了阿里云,七牛云
 *  参考src/main/view/upload.html

@@ -40,6 +40,7 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @Api(tags = "SERVICE API")
 @RequestMapping("/services")
+@SuppressWarnings("all")
 public class SysServiceController {
 
     @Autowired

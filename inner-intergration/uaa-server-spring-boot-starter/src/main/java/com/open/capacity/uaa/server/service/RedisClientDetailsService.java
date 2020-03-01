@@ -35,8 +35,11 @@ import lombok.extern.slf4j.Slf4j;
  * 将oauth_client_details表数据缓存到redis，这里做个缓存优化
  * layui模块中有对oauth_client_details的crud， 注意同步redis的数据
  * 注意对oauth_client_details清楚redis db部分数据的清空
+ * blog: https://blog.51cto.com/13005375 
+ * code: https://gitee.com/owenwangwen/open-capacity-platform
  */
 @Slf4j
+@SuppressWarnings("all")
 public class RedisClientDetailsService extends JdbcClientDetailsService {
 
 
@@ -95,7 +98,7 @@ public class RedisClientDetailsService extends JdbcClientDetailsService {
      * @param clientId
      * @return
      */
-    private ClientDetails cacheAndGetClient(String clientId) {
+	private ClientDetails cacheAndGetClient(String clientId) {
         // 从数据库读取
         ClientDetails clientDetails = null ;
         
@@ -195,7 +198,6 @@ public class RedisClientDetailsService extends JdbcClientDetailsService {
 			String json = rs.getString(10);
 			if (json != null) {
 				try {
-					@SuppressWarnings("unchecked")
 					Map<String, Object> additionalInformation = mapper.read(json, Map.class);
 					details.setAdditionalInformation(additionalInformation);
 				}
