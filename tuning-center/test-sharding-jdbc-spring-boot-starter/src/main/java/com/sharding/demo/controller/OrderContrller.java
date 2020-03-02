@@ -53,8 +53,8 @@ public class OrderContrller {
     public String batchSaveOrder() throws ParseException {
         Date now = new Date();
         Date nextDate = DateUtils.parseDate("2020", "YYYY");
-        List<CompletableFuture<Void>> futures = IntStream.range(0, 10).mapToObj(j->CompletableFuture.runAsync(()->{
-                    List<Order> list = IntStream.range(0, 500)
+        List<CompletableFuture<Void>> futures = IntStream.range(0, 5).mapToObj(j->CompletableFuture.runAsync(()->{
+                    List<Order> list = IntStream.range(0, 20)
                             .mapToObj(i ->Order.builder().orderName("Order."+i).createTime(nextDate).build())
                             .collect(Collectors.toList());
                     orderMapper.batchSave(list);
@@ -87,8 +87,8 @@ public class OrderContrller {
 	@GetMapping("/batchSaveUser")
     public String batchSaveUser() {
         String companyId = "2000";
-        List<CompletableFuture<Void>> futures = IntStream.range(0, 100).mapToObj(j->CompletableFuture.runAsync(()->{
-                List<UserInfo> list = IntStream.range(0, 500)
+        List<CompletableFuture<Void>> futures = IntStream.range(0, 5).mapToObj(j->CompletableFuture.runAsync(()->{
+                List<UserInfo> list = IntStream.range(0, 20)
                         .mapToObj(i -> createUser(companyId, i))
                         .collect(Collectors.toList());
                 userInfoMapper.batchSave(list);

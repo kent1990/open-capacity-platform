@@ -10,38 +10,48 @@ import com.open.capacity.common.constant.TraceConstant;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * 请求完成后，将trace_id设置到response header里面进行传递
+ * zuul 前置过虑器
+ * 设置traceid ，由于传递traceid跟踪
  * @author gitgeek
  *
  */
 @Slf4j
 @Component
-public class ResponseFilter extends ZuulFilter {
+public class RequestStatFilter extends ZuulFilter {
+	
 	private static final int FILTER_ORDER = 1;
 	private static final boolean SHOULD_FILTER = true;
-	private static final String FILTER_TYPE = "post";
+	private static final String FILTER_TYPE = "pre";
 
+	/*** filter类型，前置过虑器，后置过虑器和路由过虑器 */
 	@Override
 	public String filterType() {
 		return FILTER_TYPE;
 	}
 
+	/*** 返回一个整数值，表示filter执行顺序 */
 	@Override
 	public int filterOrder() {
 		return FILTER_ORDER;
 	}
 
+	/*** 返回一个boolean，表示该过虑器是否执行 */
 	@Override
 	public boolean shouldFilter() {
 		return SHOULD_FILTER;
 	}
 
-	@Override public Object run() {
+	/*** 每次filter执行的代码 */
+	@Override
+	public Object run() {
+		
+		String traceId = MDC.get(TraceConstant.LOG_B3_TRACEID);
+	    MDC.put(TraceConstant.LOG_TRACE_ID, traceId);
 		RequestContext requestContext = RequestContext.getCurrentContext();
 		String URL = requestContext.getRequest().getRequestURL().toString();
-		String traceId =  MDC.get(TraceConstant.LOG_B3_TRACEID) ;
-		log.info("response url " + URL + ", traceId = " + traceId);
-		requestContext.getResponse().addHeader(TraceConstant.HTTP_HEADER_TRACE_ID, traceId); 
+		requestContext.addZuulRequestHeader(TraceConstant.HTTP_HEADER_TRACE_ID, traceId);
+		log.info("request url = " + URL + ", traceId = " + traceId);
+//		RibbonFilterContextHolder.getContext().add("hello", "hello");
 		return null;
 	}
-	}
+}
