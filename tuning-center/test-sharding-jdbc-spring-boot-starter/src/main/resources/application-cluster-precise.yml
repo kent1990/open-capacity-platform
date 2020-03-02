@@ -6,12 +6,26 @@ sharding:
   jdbc:
     config:
       sharding:
-        binding-tables: t_order
+        binding-tables: t_order,t_user_info
+        broadcast-tables: t_company
         default-data-source-name: ds-0  
         props:
           sql:
             show: true
         tables:
+          t_order: 
+            ##分库策略
+            database-strategy:
+              standard:
+                ##分片键
+                sharding-column: company_id
+                precise-algorithm-class-name: com.sharding.demo.config.CompanyPreciseDBShardingAlgorithm
+            ##分表策略
+            key-generator-column-name: order_id  
+            table-strategy:
+              complex:
+                sharding-columns: create_time,order_id
+                algorithm-class-name: com.sharding.demo.config.OrderComplexShardingStrategy
           t_user_info: 
             database-strategy:
               standard:

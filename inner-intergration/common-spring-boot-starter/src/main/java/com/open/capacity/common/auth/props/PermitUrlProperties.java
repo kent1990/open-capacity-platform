@@ -21,6 +21,7 @@ public class PermitUrlProperties {
 	 */
 	private static final String[] ENDPOINTS = { 
 			"/**/actuator/**" , "/**/actuator/**/**" ,  //断点监控
+			"/**/doc.html" , "/doc.html" ,  //断点监控
 			"/v2/api-docs/**", "/swagger-ui.html", "/swagger-resources/**", "/webjars/**" ,			// api-gateway webflux swagger
 			"/**/v2/api-docs/**", "/**/swagger-ui.html", "/**/swagger-resources/**", "/**/webjars/**", //业务中心swagger
 			"/**/turbine.stream","/**/turbine.stream**/**", "/**/hystrix", "/**/hystrix.stream", "/**/hystrix/**", "/**/hystrix/**/**",	"/**/proxy.stream/**" , //熔断监控

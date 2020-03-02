@@ -15,7 +15,10 @@ public class CompanyPreciseDBShardingAlgorithm implements PreciseShardingAlgorit
     public String doSharding(Collection<String> availableTargetNames, PreciseShardingValue<BigDecimal> shardingValue) {
         log.info("Database: {}, companyShardingValue: {}",  JSON.toJSONString(availableTargetNames), JSON.toJSONString(shardingValue));
         return availableTargetNames.stream()
-                .filter(t -> t.endsWith(shardingValue.getValue().longValue() % availableTargetNames.size()+""))
+                .filter(t -> {
+                	boolean flag =  t.endsWith(Long.valueOf(shardingValue.getValue()+"") % availableTargetNames.size()+"") ;
+                	return flag ;
+                })
                 .findFirst()
                 .orElse(null);
     }

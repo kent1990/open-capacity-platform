@@ -31,9 +31,11 @@ public class SysUserUtil {
 	 * 
 	 * @return
 	 */
+	@SuppressWarnings("rawtypes")
 	public static LoginAppUser getLoginAppUser() {
 		
 		// 当OAuth2AuthenticationProcessingFilter设置当前登录时，直接返回
+		// 强认证时处理
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication instanceof OAuth2Authentication) {
 			OAuth2Authentication oAuth2Auth = (OAuth2Authentication) authentication;
@@ -66,15 +68,15 @@ public class SysUserUtil {
 			}
 		}
 
-		// 当内部服务，不带token时，内部服务
+		// 弱认证处理，当内部服务，不带token时，内部服务
 		String accessToken = TokenUtil.getToken();
 		
 		if(accessToken!=null){
 			RedisTemplate redisTemplate = SpringUtils.getBean(RedisTemplate.class);
-			Map<String, Object> params = (Map<String, Object>) redisTemplate.opsForValue()
+			LoginAppUser  loginAppUser= (LoginAppUser) redisTemplate.opsForValue()
 					.get(UaaConstant.TOKEN + ":" + accessToken);
-			if (params != null) {
-				return (LoginAppUser) params.get(UaaConstant.AUTH);
+			if (loginAppUser != null) {
+				return  loginAppUser ;
 			}
 		}
 		

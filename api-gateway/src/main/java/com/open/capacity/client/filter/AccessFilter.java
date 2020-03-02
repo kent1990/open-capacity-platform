@@ -1,6 +1,5 @@
 package com.open.capacity.client.filter;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,22 +21,20 @@ import com.open.capacity.common.util.TokenUtil;
 @SuppressWarnings("all") 
 public class AccessFilter extends ZuulFilter {
 
-     
+	@Override
+	public String filterType() {
+		return "pre";
+	}
 
-    @Override
-    public String filterType() {
-        return "pre";
-    }
+	@Override
+	public int filterOrder() {
+		return 0;
+	}
 
-    @Override
-    public int filterOrder() {
-        return 0;
-    }
-
-    @Override
-    public boolean shouldFilter() {
-        return true;
-    }
+	@Override
+	public boolean shouldFilter() {
+		return true;
+	}
 
 	@Override
 	public Object run() {

@@ -17,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Component
-public class RequestFilter extends ZuulFilter {
+public class RequestStatFilter extends ZuulFilter {
 	
 	private static final int FILTER_ORDER = 1;
 	private static final boolean SHOULD_FILTER = true;

@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Component
-public class ResponseFilter extends ZuulFilter {
+public class ResponseStatFilter extends ZuulFilter {
 	private static final int FILTER_ORDER = 1;
 	private static final boolean SHOULD_FILTER = true;
 	private static final String FILTER_TYPE = "post";

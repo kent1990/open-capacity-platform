@@ -13,10 +13,11 @@ import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferUtils;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
+import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.server.ServerWebExchange;
@@ -44,16 +45,14 @@ public class RateLimitFilter implements GlobalFilter, Ordered {
     private final AntPathMatcher pathMatcher = new AntPathMatcher();
     @Resource
     private RedisUtil redisUtil;
-
-    @Resource
-	private RedisTemplate<String, Object> redisTemplate ;
+ 
     
 	@Autowired
 	private RedisLimiterUtils redisLimiterUtils;
 	@Autowired
 	private ObjectMapper objectMapper;
-	
-	
+	@Autowired
+	private TokenStore tokenStore;
 
 	@Resource
 	SysClientServiceImpl sysClientServiceImpl;
@@ -123,11 +122,9 @@ public class RateLimitFilter implements GlobalFilter, Ordered {
 			String reqUrl = exchange.getRequest().getPath().value();
 
       // 1. 按accessToken查找对应的clientId
-			Map<String, Object> params =  (Map<String, Object>) redisTemplate.opsForValue().get("token:" + accessToken) ;
-//		
-			
-			if(params!=null){
-				String clientId = String.valueOf(params.get("clientId")) ;
+			OAuth2Authentication oauth2Authentication = tokenStore.readAuthentication(accessToken);
+			if(oauth2Authentication!=null){
+				String clientId = oauth2Authentication.getOAuth2Request().getClientId() ;
 				Map client = sysClientServiceImpl.getClient(clientId);
 				if(client!=null){
 					String flag = String.valueOf(client.get("if_limit") ) ;
