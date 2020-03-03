@@ -1,6 +1,7 @@
 package com.open.capacity.es.entity;
 
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.data.annotation.Id;
@@ -17,6 +18,6 @@ import lombok.Data;
 public class NinxLogDocument {
     @Id
     private String id;
-    public Map geoip  ;
+    public HashMap geoip  ;
     
 }
