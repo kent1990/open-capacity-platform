@@ -61,9 +61,9 @@ public class ResExceptionHandler extends DefaultErrorWebExceptionHandler {
 	 * @param errorAttributes
 	 */
 	@Override
-	protected HttpStatus getHttpStatus(Map<String, Object> errorAttributes) {
+	protected int getHttpStatus(Map<String, Object> errorAttributes) {
 		int statusCode = (int) errorAttributes.get("resp_code");
-		return HttpStatus.valueOf(statusCode);
+		return statusCode;
 	}
 
 	/**

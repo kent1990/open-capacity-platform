@@ -53,7 +53,7 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<docker.host>http://59.110.164.254:5555</docker.host>
 		<docker.image.prefix>owenwangwen</docker.image.prefix>
-		<spring-boot.version>2.2.1.RELEASE</spring-boot.version>
+		<spring-boot.version>2.2.2.RELEASE</spring-boot.version>
 		<spring-platform.version>Cairo-SR3</spring-platform.version>
 		<spring.social.version>1.1.6.RELEASE</spring.social.version>
 		<spring-security.version>5.1.1.RELEASE</spring-security.version>
