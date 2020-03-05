@@ -1,27 +1,27 @@
 package com.open.capacity.client.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.MediaType;
-import org.springframework.web.reactive.function.server.RequestPredicates;
-import org.springframework.web.reactive.function.server.RouterFunction;
-import org.springframework.web.reactive.function.server.RouterFunctions;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 
-import com.open.capacity.client.handler.HystrixFallbackHandler;
+import com.open.capacity.client.handler.SentinelExceptionHandler;
 
 @Configuration
 @SuppressWarnings("all")
 public class GatewayFallbackConfig {
-        @Autowired
-    private HystrixFallbackHandler hystrixFallbackHandler;
-
+    
+    /**
+     * 限流出现Block(限制通过)时，调用处理方法，在这里指定返回内容
+     * @return 返回对象
+     */
     @Bean
-    public RouterFunction routerFunction() {
-        return RouterFunctions.route(
-            RequestPredicates.GET("/defaultfallback")
-                .and(RequestPredicates.accept(MediaType.TEXT_PLAIN)), hystrixFallbackHandler);
+    @Order(Ordered.HIGHEST_PRECEDENCE)
+    public SentinelExceptionHandler sentinelGatewayBlockExceptionHandler() {
+        return new SentinelExceptionHandler();
     }
+
+    
 
 }
  
