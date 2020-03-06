@@ -111,7 +111,7 @@ http://59.110.164.254:8066/login.html  admin/admin
     </tr>
 	<tr>
 		<td><img src=https://images.gitee.com/uploads/images/2019/0908/220535_058f4e5c_869801.png "屏幕截图.png"/></td>
-		<td><img src=https://images.gitee.com/uploads/images/2019/0908/220908_e83f7a53_869801.png "屏幕截图.png"/></td>
+		<td><img src=https://images.gitee.com/uploads/images/2020/0306/151908_30cf8003_869801.png "屏幕截图.png""/></td>
 		<td><img src="https://images.gitee.com/uploads/images/2019/0329/212515_6b74c76a_869801.png "屏幕截图.png"/></td>
         <td><img src=https://images.gitee.com/uploads/images/2019/0731/144404_6e9f86e3_869801.png "屏幕截图.png"/></td>
     </tr>
