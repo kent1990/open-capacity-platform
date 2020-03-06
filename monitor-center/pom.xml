@@ -18,6 +18,7 @@
   	<module>transaction-center</module>
   	<!-- sentinel -->
   	<module>sentinel-dashboard</module>
-  	
+  	<!-- zipkin链路跟踪 -->
+	<module>zipkin-center</module>
   </modules>
 </project>
