@@ -244,6 +244,7 @@
 					<include>**/*.json</include>
 					<include>processes/*</include>
 					<include>**/spring.factories</include>
+					<include>META-INF/services/*</include>
 				</includes>
 				<filtering>false</filtering>
 			</resource>

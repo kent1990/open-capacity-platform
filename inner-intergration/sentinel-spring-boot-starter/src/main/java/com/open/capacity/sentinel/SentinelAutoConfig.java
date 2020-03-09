@@ -1,6 +1,7 @@
 package com.open.capacity.sentinel;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
@@ -39,8 +40,10 @@ public class SentinelAutoConfig {
     public class DefaultUrlBlockHandler implements UrlBlockHandler {
         @Override
         public void blocked(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, BlockException e) throws IOException {
+        	
+        	
         	httpServletResponse.setStatus(HttpStatus.TOO_MANY_REQUESTS.value());
-        	httpServletResponse.getWriter().print(JSONUtil.toJsonStr(Result.failed("flow-limiting")));
+        	httpServletResponse.getWriter().print(JSONUtil.toJsonStr(("{\"code\":403,\"message\":\"sentinel限流了\"}".getBytes(StandardCharsets.UTF_8))));
         }
     }
 }
