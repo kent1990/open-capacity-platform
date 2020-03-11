@@ -20,5 +20,6 @@
   	<module>sentinel-dashboard</module>
   	<!-- zipkin链路跟踪 -->
 	<module>zipkin-center</module>
+      <module>fescar-center</module>
   </modules>
 </project>
