@@ -81,13 +81,18 @@ public class RedisClientDetailsService extends JdbcClientDetailsService {
     public ClientDetails loadClientByClientId(String clientId) throws InvalidClientException {
         ClientDetails clientDetails = null;
 
-        // 先从redis获取
-        String value = (String) redisTemplate.boundHashOps(UaaConstant.CACHE_CLIENT_KEY).get(clientId);
-        if (StringUtils.isBlank(value)) {
-            clientDetails = cacheAndGetClient(clientId);
-        } else {
-            clientDetails = JSONObject.parseObject(value, BaseClientDetails.class);
-        }
+        try {
+			// 先从redis获取
+			String value = (String) redisTemplate.boundHashOps(UaaConstant.CACHE_CLIENT_KEY).get(clientId);
+			if (StringUtils.isBlank(value)) {
+			    clientDetails = cacheAndGetClient(clientId);
+			} else {
+			    clientDetails = (BaseClientDetails)JSONObject.parseObject(value, DefaultClientDetails.class);
+			}
+		} catch (Exception e) {
+			log.error("clientId:{},{}", clientId, clientId );
+            throw new InvalidClientException ("应用获取失败"){};
+		}
 
         return clientDetails;
     }
