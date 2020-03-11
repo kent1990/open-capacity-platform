@@ -124,14 +124,6 @@ public class SysClientServiceImpl implements SysClientService {
 
 		int i = sysClientDao.update(client) ;
 		
-		
-		ClientDetails clientDetails = jdbcClientDetailsService.loadClientByClientId(client.getClientId()); 
-		
-		if(enabled){
-			redisTemplate.boundHashOps(UaaConstant.CACHE_CLIENT_KEY).put(client.getClientId(), JSONObject.toJSONString(clientDetails));
-		}else{
-			redisTemplate.boundHashOps(UaaConstant.CACHE_CLIENT_KEY).delete(client.getClientId()) ;
-		}
 
 		log.info("应用状态修改：{}", client);
 

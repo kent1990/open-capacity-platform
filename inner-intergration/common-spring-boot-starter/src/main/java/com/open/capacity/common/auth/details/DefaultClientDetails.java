@@ -7,6 +7,7 @@ import org.springframework.security.oauth2.provider.client.BaseClientDetails;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 
 /**
@@ -18,6 +19,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @AllArgsConstructor
+@ToString(callSuper=true)
 @EqualsAndHashCode(callSuper=true)
 public class DefaultClientDetails extends BaseClientDetails implements Serializable {
 
@@ -38,5 +40,6 @@ public class DefaultClientDetails extends BaseClientDetails implements Serializa
 				  scopes,   grantTypes,   authorities,
 				  redirectUris);
 	}
+	
 	
 }
