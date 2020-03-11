@@ -48,7 +48,6 @@ public class RedisClientDetailsService extends JdbcClientDetailsService {
             "web_server_redirect_uri, authorities, access_token_validity, refresh_token_validity, additional_information, autoapprove ,if_limit, limit_count " +
             "from oauth_client_details where client_id = ? and `status` = 1 ";
 
-
     private static final String SELECT_FIND_STATEMENT = "select client_id, client_secret,resource_ids, scope, "
             + "authorized_grant_types, web_server_redirect_uri, authorities, access_token_validity, "
             + "refresh_token_validity, additional_information, autoapprove ,if_limit, limit_count    from oauth_client_details where `status` = 1 order by client_id " ;
@@ -87,7 +86,7 @@ public class RedisClientDetailsService extends JdbcClientDetailsService {
 			if (StringUtils.isBlank(value)) {
 			    clientDetails = cacheAndGetClient(clientId);
 			} else {
-			    clientDetails = (BaseClientDetails)JSONObject.parseObject(value, DefaultClientDetails.class);
+			    clientDetails = JSONObject.parseObject(value, BaseClientDetails.class);
 			}
 		} catch (Exception e) {
 			log.error("clientId:{},{}", clientId, clientId );
@@ -108,19 +107,16 @@ public class RedisClientDetailsService extends JdbcClientDetailsService {
         ClientDetails clientDetails = null ;
         
         try {
-    		try {
     			clientDetails = jdbcTemplate.queryForObject(SELECT_CLIENT_DETAILS_SQL, new ClientDetailsRowMapper(), clientId);
-    		}
-    		catch (EmptyResultDataAccessException e) {
-    			throw new NoSuchClientException("No client with requested id: " + clientId);
-    		}
 
             if (clientDetails != null) {
                 // 写入redis缓存
                 redisTemplate.boundHashOps(UaaConstant.CACHE_CLIENT_KEY).put(clientId, JSONObject.toJSONString(clientDetails));
                 log.info("缓存clientId:{},{}", clientId, clientDetails);
             }
-        }catch (NoSuchClientException e){
+        }catch (EmptyResultDataAccessException e) {
+			throw new NoSuchClientException("No client with requested id: " + clientId);
+		} catch (NoSuchClientException e){
         	log.error("clientId:{},{}", clientId, clientId );
             throw new AuthenticationException ("应用不存在"){};
         }catch (InvalidClientException e) {
