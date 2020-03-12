@@ -1,17 +1,15 @@
 package com.open.capacity.client.service.impl;
 
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 
 import com.alibaba.fastjson.JSONObject;
 import com.open.capacity.client.dao.SysClientDao;
+import com.open.capacity.client.service.SysClientService;
 import com.open.capacity.common.constant.UaaConstant;
 
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @SuppressWarnings("all")
 @Service("sysClientService")
-public class SysClientServiceImpl {
+public class SysClientServiceImpl implements SysClientService{
 
 	 
 
@@ -36,59 +34,16 @@ public class SysClientServiceImpl {
     
 	public Map getClient(String clientId){
 		// 先从redis获取
-		Map client ;
+		Map client =null ;
         String value = (String) redisTemplate.boundHashOps(UaaConstant.CACHE_CLIENT_KEY).get(clientId);
         if (StringUtils.isBlank(value)) {
-        	client = cacheAndGetClient(clientId);
+        // 没有从数据库读取	
+        	client =   sysClientDao.getClient(clientId);
         } else {
         	client = JSONObject.parseObject(value, Map.class);
         }
         return client ;
 	}
 	
-	/**
-     * 缓存client并返回client
-     *
-     * @param clientId
-     * @return
-     */
-    private Map cacheAndGetClient(String clientId) {
-        // 从数据库读取
-    	Map client = null ;
-        try {
-        	client = sysClientDao.getClient(clientId);
-            if (client != null) {
-                // 写入redis缓存
-                redisTemplate.boundHashOps(UaaConstant.CACHE_CLIENT_KEY).put(clientId, JSONObject.toJSONString(client));
-                log.info("缓存clientId:{},{}", clientId, client);
-            }
-        }catch (Exception e){
-        	log.info("clientId:{},{}", clientId, clientId );
-        }
-
-        return client;
-    }
-	
-    /**
-     * 将oauth_client_details全表刷入redis
-     */
-    public void loadAllClientToCache() {
-        if (redisTemplate.hasKey(UaaConstant.CACHE_CLIENT_KEY)) {
-            return;
-        }
-        log.info("将oauth_client_details全表刷入redis");
-
-        List<Map> list = sysClientDao.findAll();
-        if (CollectionUtils.isEmpty(list)) {
-        	log.error("oauth_client_details表数据为空，请检查");
-            return;
-        }
-
-        for(Iterator<Map> it = list.iterator() ; it.hasNext();){
-        	Map temp = it.next() ;
-        	redisTemplate.boundHashOps(UaaConstant.CACHE_CLIENT_KEY).put(String.valueOf(temp.get("client_id")), JSONObject.toJSONString(temp));
-        }
-        
-    }
- 
+	 
 }

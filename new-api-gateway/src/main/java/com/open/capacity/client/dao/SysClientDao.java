@@ -18,10 +18,5 @@ public interface SysClientDao {
 	 
 	@Select("select * from oauth_client_details t where t.client_id = #{clientId}")
 	Map getClient(String clientId);
-	
-	
-	@Select("select * from oauth_client_details t where status=1 ")
-	List<Map> findAll();
-
  
 }

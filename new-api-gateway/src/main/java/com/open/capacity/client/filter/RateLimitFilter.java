@@ -24,7 +24,7 @@ import org.springframework.web.server.ServerWebExchange;
 
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.open.capacity.client.service.impl.SysClientServiceImpl;
+import com.open.capacity.client.service.SysClientService;
 import com.open.capacity.client.utils.RedisLimiterUtils;
 import com.open.capacity.common.web.Result;
 import com.open.capacity.redis.util.RedisUtil;
@@ -55,7 +55,7 @@ public class RateLimitFilter implements GlobalFilter, Ordered {
 	private TokenStore tokenStore;
 
 	@Resource
-	SysClientServiceImpl sysClientServiceImpl;
+	SysClientService sysClientService;
 
 	 
     @Override
@@ -125,7 +125,7 @@ public class RateLimitFilter implements GlobalFilter, Ordered {
 			OAuth2Authentication oauth2Authentication = tokenStore.readAuthentication(accessToken);
 			if(oauth2Authentication!=null){
 				String clientId = oauth2Authentication.getOAuth2Request().getClientId() ;
-				Map client = sysClientServiceImpl.getClient(clientId);
+				Map client = sysClientService.getClient(clientId);
 				if(client!=null){
 					String flag = String.valueOf(client.get("if_limit") ) ;
 					
