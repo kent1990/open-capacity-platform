@@ -27,6 +27,12 @@ angular.module('sso', [ 'ngRoute', 'ngResource' ]).config(
 			delete $scope.user;
 			$scope.authenticated = false;
 			// Force reload of home page to reset all state after logout
+			// https://github.com/spring-guides/tut-spring-security-and-angular-js/issues/121
+			$http.post('http://127.0.0.1:9200/api-auth/logout', {}, {withCredentials:true})
+            .then(() => {
+                console.log('Logged out');
+            });
+			
 			$window.location.hash = '';
 		});
 	};
