@@ -40,12 +40,13 @@ public class SysClientServiceImpl implements SysClientService {
 
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
     
     @Autowired
+    private PasswordEncoder passwordEncoder;
+  
+    @Autowired
     private JdbcClientDetailsService jdbcClientDetailsService ;
+
 
 
      
@@ -87,16 +88,6 @@ public class SysClientServiceImpl implements SysClientService {
         PageInfo<SysClient> pageInfo = new PageInfo<>(list);
         return PageResult.<SysClient>builder().data(pageInfo.getList()).code(0).count(pageInfo.getTotal()).build()  ;
 
-//		// TODO Auto-generated method stub
-//		int total = clientDao.count(params);
-//		List<Client> list = Collections.emptyList();
-//
-//		if (total > 0) {
-//			PageUtil.pageParamConver(params, false);
-//			list = clientDao.findList(params);
-//
-//		}
-//		return PageResult.<Client>builder().data(list).code(0).count((long)total).build()  ;
 	}
 	public  SysClient getById(Long id) {
 		return sysClientDao.getById(id);
@@ -114,7 +105,6 @@ public class SysClientServiceImpl implements SysClientService {
 	public Result updateEnabled(Map<String, Object> params) {
 		Long id = MapUtils.getLong(params, "id");
 		Boolean enabled = MapUtils.getBoolean(params, "status");
-
 		SysClient client = sysClientDao.getById(id);
 		if (client == null) {
 			return Result.failed("应用不存在");
@@ -124,6 +114,20 @@ public class SysClientServiceImpl implements SysClientService {
 
 		int i = sysClientDao.update(client) ;
 		
+		ClientDetails clientDetails = jdbcClientDetailsService.loadClientByClientId(client.getClientId()); 
+		
+		if(enabled){
+			redisTemplate.boundHashOps(UaaConstant.CACHE_CLIENT_KEY).put(client.getClientId(), JSONObject.toJSONString(clientDetails));
+		}else{
+			redisTemplate.boundHashOps(UaaConstant.CACHE_CLIENT_KEY).delete(client.getClientId()) ;
+		}
+		
+		if(enabled){
+			redisTemplate.boundHashOps(UaaConstant.CACHE_CLIENT_KEY).put(client.getClientId(), JSONObject.toJSONString(clientDetails));
+		}else{
+			redisTemplate.boundHashOps(UaaConstant.CACHE_CLIENT_KEY).delete(client.getClientId()) ;
+		}
+
 
 		log.info("应用状态修改：{}", client);
 

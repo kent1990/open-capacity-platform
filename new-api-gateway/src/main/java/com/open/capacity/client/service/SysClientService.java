@@ -1,4 +1,4 @@
-package com.open.capacity.uaa.client.service;
+package com.open.capacity.client.service;
 
 import java.util.Map;
 

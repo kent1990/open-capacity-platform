@@ -42,6 +42,7 @@ import org.springframework.security.oauth2.provider.request.DefaultOAuth2Request
 import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -354,7 +355,7 @@ public class OAuth2Controller {
 	 * @return
 	 */
 	@ApiOperation(value = "当前登陆用户信息")
-	@RequestMapping(value = { "/oauth/userinfo" }, produces = "application/json") // 获取用户信息。/auth/user
+	@GetMapping(value = { "/oauth/userinfo" }, produces = "application/json") // 获取用户信息。/auth/user
 	@LogAnnotation(module = "auth-server", recordRequestParam = false)
 	public Map<String, Object> getCurrentUserDetail() {
 		Map<String, Object> userInfo = new HashMap<>();
