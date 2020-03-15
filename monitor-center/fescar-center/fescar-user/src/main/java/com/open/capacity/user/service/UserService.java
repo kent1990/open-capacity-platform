@@ -6,7 +6,7 @@ import com.open.capacity.user.entity.OcpTql;
 
 public interface UserService extends IService<OcpTql> {
 
-    Result deduction(String userId) ;
+    Result deduction(String userId) throws IllegalAccessException;
 
 
 }

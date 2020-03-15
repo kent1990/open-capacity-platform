@@ -21,7 +21,7 @@ public class OrderServiceImpl extends ServiceImpl<OcpOrderMapper, OcpOrder> impl
 
     @Override
     @GlobalTransactional
-    public String create(String userId) {
+    public String create(String userId) throws IllegalAccessException {
         OcpOrder order = OcpOrder.builder()
                 .userId(userId)
                 .createTime(new Date())

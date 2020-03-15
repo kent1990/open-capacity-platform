@@ -17,7 +17,7 @@ public interface UserFeignClient {
      * @return
      */
     @RequestMapping(value = "/deduction", method = RequestMethod.GET)
-    Result deduction(@RequestParam("userId") String userId);
+    Result deduction(@RequestParam("userId") String userId) throws IllegalAccessException;
 
 
 }

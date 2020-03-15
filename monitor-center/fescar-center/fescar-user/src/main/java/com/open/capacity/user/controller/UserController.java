@@ -16,7 +16,7 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping("/deduction")
-    public Result deduction(@NotNull String userId, HttpServletRequest request) {
+    public Result deduction(@NotNull String userId, HttpServletRequest request) throws IllegalAccessException {
         return  userService.deduction(userId);
     }
 

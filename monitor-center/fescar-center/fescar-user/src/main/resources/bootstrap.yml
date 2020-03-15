@@ -15,3 +15,6 @@ spring:
         tx-service-group: fsp_tx_group
   application:
     name: fescar-user
+seata:
+  service:
+    grouplist: 114.67.115.7:8091

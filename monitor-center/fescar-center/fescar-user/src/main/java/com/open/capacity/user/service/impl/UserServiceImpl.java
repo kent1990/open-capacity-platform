@@ -15,7 +15,14 @@ public class UserServiceImpl extends ServiceImpl<OcpTqlMapper, OcpTql> implement
 
 
     @Override
-    public Result deduction(String userId)  {
+    public Result deduction(String userId)  throws IllegalAccessException{
+
+        //模拟超时异常，全局事务回滚
+//        try {
+//            Thread.sleep(30*1000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
 
         // TODO: 2020/3/11 条件构造器
         Wrapper<OcpTql> wrapper = new QueryWrapper<OcpTql>()
@@ -26,11 +33,7 @@ public class UserServiceImpl extends ServiceImpl<OcpTqlMapper, OcpTql> implement
         if (i >= 0){
             ocpTql.setMoney(i);
         }else {
-            try {
-                throw new IllegalAccessException("资金不足");
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
+            throw new IllegalAccessException("资金不足");
         }
         return Result.succeedWith(baseMapper.updateById(ocpTql),0,null);
     }
