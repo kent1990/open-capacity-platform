@@ -15,6 +15,7 @@
         <module>fescar-order</module>
         <module>fescar-user</module>
         <module>fescar-api</module>
+        <module>fescar-item</module>
     </modules>
 
 

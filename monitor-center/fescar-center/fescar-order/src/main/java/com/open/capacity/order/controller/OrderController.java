@@ -1,5 +1,6 @@
 package com.open.capacity.order.controller;
 
+import com.open.capacity.common.web.Result;
 import com.open.capacity.order.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,8 @@ public class OrderController {
     private OrderService orderService;
 
     @RequestMapping("/create")
-    public String create(@NotNull String userId, HttpServletRequest request) throws IllegalAccessException {
+    public Result create(@NotNull String userId, HttpServletRequest request) throws IllegalAccessException {
         String orderId = orderService.create(userId);
-        return orderId;
+        return Result.succeed(orderId);
     }
 }
