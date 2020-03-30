@@ -1,6 +1,7 @@
 package com.open.capacity.order.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.open.capacity.api.feign.ItemFeignClient;
 import com.open.capacity.api.feign.UserFeignClient;
 import com.open.capacity.common.util.RandomUtil;
 import com.open.capacity.common.util.UUIDUtils;
@@ -21,9 +22,12 @@ public class OrderServiceImpl extends ServiceImpl<OcpOrderMapper, OcpOrder> impl
     @Autowired
     private UserFeignClient userFeignClient;
 
+    @Autowired
+    private ItemFeignClient itemFeignClient;
+
     @Override
     @GlobalTransactional
-    public String create(String userId) throws IllegalAccessException {
+    public String create(String userId,String productId) throws IllegalAccessException {
         log.info("-----> 开始新建订单");
         OcpOrder order = OcpOrder.builder()
                 .userId(userId)
@@ -35,8 +39,13 @@ public class OrderServiceImpl extends ServiceImpl<OcpOrderMapper, OcpOrder> impl
         log.info("-----> 结束新建订单");
 
 
+        log.info("-----> 开始扣除库存");
+        itemFeignClient.deductInventory(productId);
+        log.info("-----> 结束扣除库存");
+
+
         log.info("-----> 开始扣除用户金额，如果用户金额不够直接报错，回滚数据");
-        userFeignClient.deduction(userId);
+        userFeignClient.deductionAmount(userId);
 
         return order.getId();
     }

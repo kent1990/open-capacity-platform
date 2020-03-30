@@ -15,9 +15,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/deduction")
-    public Result deduction(@NotNull String userId, HttpServletRequest request) throws IllegalAccessException {
-        return  userService.deduction(userId);
+    @RequestMapping("/deductionAmount")
+    public Result deductionAmount(@NotNull String userId, HttpServletRequest request) throws IllegalAccessException {
+        return  userService.deductionAmount(userId);
     }
 
 }

@@ -6,18 +6,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
-@FeignClient("fescar-user")
-public interface UserFeignClient {
+@FeignClient("fescar-item")
+public interface ItemFeignClient {
 
 
     /**
-     * 扣款接口 Feign 方式调用
-     * @param userId
+     * 扣库存接口 Feign 方式调用
+     * @param productId
      * @return
      */
-    @RequestMapping(value = "/deductionAmount", method = RequestMethod.GET)
-    Result deductionAmount(@RequestParam("userId") String userId) throws IllegalAccessException;
+    @RequestMapping(value = "/deductInventory", method = RequestMethod.GET)
+    Result deductInventory(@RequestParam("productId") String productId) throws IllegalAccessException;
+
 
 
 }

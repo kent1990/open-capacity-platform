@@ -15,7 +15,7 @@ public class UserServiceImpl extends ServiceImpl<OcpTqlMapper, OcpTql> implement
 
 
     @Override
-    public Result deduction(String userId)  throws IllegalAccessException{
+    public Result deductionAmount(String userId)  throws IllegalAccessException{
 
         //模拟超时异常，全局事务回滚
 //        try {
