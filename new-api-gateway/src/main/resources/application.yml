@@ -14,7 +14,7 @@ spring:
            args:
              redis-rate-limiter.replenishRate: 1000  # 令牌桶的容积
              redis-rate-limiter.burstCapacity: 1000  # 流速 每秒
-             key-resolver: "#{@ipAddressKeyResolver}" #SPEL表达式去的对应的bean        
+             key-resolver: "#{@ipAddressKeyResolver}" #SPEL表达式去的对应的bean    
        routes:
         # =====================================
         - id: api-eureka
@@ -30,7 +30,6 @@ spring:
           predicates:
           - Path=/api-user/**   
           filters:
-          - GwSwaggerHeaderFilter
           - StripPrefix=1 
         - id: api-auth
           uri: lb://auth-server
@@ -38,7 +37,6 @@ spring:
           predicates:
           - Path=/api-auth/**
           filters:
-          - GwSwaggerHeaderFilter
           - PreserveHostHeader
           - StripPrefix=0
         - id: api-file
@@ -178,6 +176,16 @@ ribbon:
 #设置最大容错超时时间
 hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 90000
 
+# hystrix 信号量隔离，3秒后自动超时
+#hystrix:
+#  command:
+#    default:
+#      execution:
+#        isolation:
+#          strategy: SEMAPHORE
+#          thread:
+#            timeoutInMilliseconds: 3000
+#  shareSecurityContext: true
 
 
 #设置最大容错超时时间
@@ -200,16 +208,13 @@ hystrix:
             timeoutInMilliseconds: 900000
 
 
-# hystrix 信号量隔离，3秒后自动超时
-#hystrix:
-#  command:
-#    default:
-#      execution:
-#        isolation:
-#          strategy: SEMAPHORE
-#          thread:
-#            timeoutInMilliseconds: 3000
-#  shareSecurityContext: true
+swagger:
+  butler:
+    api-docs-path:  /v2/api-docs
+    auto-generate-from-scg-routes: true
+    ignore-routes:  api-eureka,api-generator,api-baidu
+
+
   
   
 

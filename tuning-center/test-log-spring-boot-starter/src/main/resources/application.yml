@@ -81,7 +81,9 @@ spring:
         max-wait: 100 # # 等待可用连接的最大时间，单位毫秒，默认值为-1，表示永不超时。如果超过等待时间，则直接抛出JedisConnectionException  
         min-idle: 2    # 连接池中的最小空闲连接 ，默认值也是0
       shutdown-timeout: 100ms
-mybatis-plus:        
+mybatis-plus:     
+  global-config:
+    banner: false   
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl 
   mapper-locations: classpath*:com/open/**/dao/*.xml  
