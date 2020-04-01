@@ -1,4 +1,4 @@
-package com.open.capacity.client.handler;
+package com.open.capacity.client.swagger;
 
 import java.util.Optional;
 

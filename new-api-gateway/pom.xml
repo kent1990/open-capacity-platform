@@ -70,7 +70,7 @@
 		
 		 
 		
-		<!-- API文档配置 -->
+		<!-- 认证授权 -->
 		<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
@@ -86,12 +86,13 @@
 			<artifactId>spring-security-oauth2</artifactId>
 		</dependency>
 		
-		<!-- API文档配置 -->
+ 		<!-- API文档配置 -->
 		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger2</artifactId>
-			<version>${swagger.version}</version>
-		</dependency>
+  			<groupId>com.open.capacity</groupId>
+  			<artifactId>swagger-spring-boot-starter</artifactId>
+  		</dependency>
+
+
 		
 		<!-- 熔断限流组件 -->
 		<dependency>

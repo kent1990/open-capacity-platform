@@ -36,11 +36,6 @@
 			<artifactId>swagger-bootstrap-ui</artifactId>
 			<version>1.9.1</version>
 		</dependency>
-		<dependency>
-			<groupId>com.zyplayer</groupId>
-			<artifactId>swagger-mg-ui</artifactId>
-			<version>${swagger.m.version}</version>
-		</dependency>
   </dependencies>
   
 </project>

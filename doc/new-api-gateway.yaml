@@ -52,7 +52,6 @@ spring:
          predicates:
          - Path=/api-user/**   
          filters:
-         - GwSwaggerHeaderFilter
          - StripPrefix=1 
        - id: api-auth
          uri: lb://auth-server
@@ -60,7 +59,6 @@ spring:
          predicates:
          - Path=/api-auth/**
          filters:
-         - GwSwaggerHeaderFilter
          - PreserveHostHeader
          - StripPrefix=0  
        - id: api-file
@@ -186,6 +184,12 @@ security:
       store:
         type: redis
  
+
+swagger:
+  butler:
+    api-docs-path:  /v2/api-docs
+    auto-generate-from-scg-routes: true
+    ignore-routes:  api-eureka,api-generator,api-baidu
 
 ribbon:
   eureka:
