@@ -42,6 +42,7 @@ http://59.110.164.254:8066/login.html  admin/admin
 	<tr>
             <td><img src=https://images.gitee.com/uploads/images/2019/1209/121109_59a8822c_869801.png "屏幕截图.png"" />
 			<td><img src=https://images.gitee.com/uploads/images/2019/1209/121142_1f491d9b_869801.png "屏幕截图.png"" />
+			<td><img src=https://images.gitee.com/uploads/images/2020/0401/194112_aa2542bd_869801.png "屏幕截图.png" />		
 	</tr>
 </table>
 
