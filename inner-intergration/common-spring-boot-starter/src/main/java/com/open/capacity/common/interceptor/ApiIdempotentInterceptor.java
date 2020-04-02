@@ -8,12 +8,13 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
 
 /**
- * blog: https://blog.51cto.com/13005375 
+ * blog: https://blog.51cto.com/13005375
  * code: https://gitee.com/owenwangwen/open-capacity-platform
  */
 
@@ -22,7 +23,8 @@ public class ApiIdempotentInterceptor implements HandlerInterceptor {
 
     private static final String VERSION_NAME = "version";
 
-    private RedisTemplate< String, Object> redisTemplate ;
+    @Resource
+    private RedisTemplate<String, Object> redisTemplate;
 
 
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

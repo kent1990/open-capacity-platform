@@ -18,6 +18,7 @@ public class ZuulErrorController implements ErrorController {
 
     public static final String ERROR_PATH = "/error";
 
+
     /**
      * 错误最终会到这里来
      */

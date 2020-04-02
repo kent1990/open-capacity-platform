@@ -101,10 +101,10 @@ public class SecurityHandlerConfig {
     			response.getWriter().write(objectMapper.writeValueAsString(rsp));
     			response.getWriter().flush();
     			response.getWriter().close();
-                
-			}
+
+}
 		};
-	}
+				}
 	@Bean
     public OAuth2WebSecurityExpressionHandler oAuth2WebSecurityExpressionHandler(ApplicationContext applicationContext) {
         OAuth2WebSecurityExpressionHandler expressionHandler = new OAuth2WebSecurityExpressionHandler();

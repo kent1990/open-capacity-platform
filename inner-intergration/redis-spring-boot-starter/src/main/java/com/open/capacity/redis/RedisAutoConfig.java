@@ -112,10 +112,10 @@ public class RedisAutoConfig {
 	 * redis工具类
 	 */
 	@Bean("redisUtil")
-	public RedisUtil redisUtil( RedisTemplate<String, Object>  redisTemplate ,StringRedisTemplate stringRedisTemplate,HashOperations<String, String, String> hashOperations) {
-		RedisUtil redisUtil = new RedisUtil(redisTemplate ,stringRedisTemplate , hashOperations); 
-		return redisUtil;
-	}
+    public RedisUtil redisUtil( RedisTemplate<String, Object>  redisTemplate ,StringRedisTemplate stringRedisTemplate,HashOperations<String, String, String> hashOperations) {
+        RedisUtil redisUtil = new RedisUtil(redisTemplate ,stringRedisTemplate , hashOperations);
+        return redisUtil;
+    }
 	
 	
 	@Bean(destroyMethod = "shutdown")

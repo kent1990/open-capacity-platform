@@ -48,7 +48,7 @@ public class AccessFilter extends ZuulFilter {
 			Map<String, List<String>> requestQueryParams = ctx.getRequestQueryParams();
 			Map<String, String> requestHeaders = ctx.getZuulRequestHeaders();
 			
-			
+
 			if (requestQueryParams == null) {
 				requestQueryParams = new HashMap<>();
 			}

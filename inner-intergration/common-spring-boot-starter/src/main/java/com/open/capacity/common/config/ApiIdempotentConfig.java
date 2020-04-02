@@ -14,26 +14,25 @@ import com.open.capacity.common.interceptor.ApiIdempotentInterceptor;
 import com.open.capacity.redis.util.RedisUtil;
 
 /**
- * blog: https://blog.51cto.com/13005375 
+ * blog: https://blog.51cto.com/13005375
  * code: https://gitee.com/owenwangwen/open-capacity-platform
- *
  */
 @Configuration
 @ConditionalOnClass(WebMvcConfigurer.class)
-public class ApiIdempotentConfig implements  WebMvcConfigurer {
+public class ApiIdempotentConfig implements WebMvcConfigurer {
 
 
     @Resource
-    private RedisTemplate< String, Object> redisTemplate ;
+    private RedisTemplate<String, Object> redisTemplate;
 
-    @Autowired
-	private RedisUtil redisUtil;
-    
+    @Resource
+    private RedisUtil redisUtil;
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-    	registry.addInterceptor(new AccessLimitInterceptor(redisUtil)) ;
-        registry.addInterceptor(new ApiIdempotentInterceptor(redisTemplate)).addPathPatterns("/**") ;
-        
-        
+        registry.addInterceptor(new AccessLimitInterceptor(redisUtil));
+        registry.addInterceptor(new ApiIdempotentInterceptor(redisTemplate)).addPathPatterns("/**");
+
+
     }
 }
