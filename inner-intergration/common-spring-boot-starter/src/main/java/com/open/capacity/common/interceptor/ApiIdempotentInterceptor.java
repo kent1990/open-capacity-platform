@@ -23,7 +23,6 @@ public class ApiIdempotentInterceptor implements HandlerInterceptor {
 
     private static final String VERSION_NAME = "version";
 
-    @Resource
     private RedisTemplate<String, Object> redisTemplate;
 
 
