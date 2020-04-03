@@ -2,22 +2,16 @@ package com.open.capacity.uaa.server.service;
 
 import java.util.concurrent.TimeUnit;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
-import org.springframework.data.redis.connection.RedisConnection;
-import org.springframework.data.redis.connection.RedisStringCommands.SetOption;
-import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.types.Expiration;
-import org.springframework.security.oauth2.common.util.SerializationUtils;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.code.RandomValueAuthorizationCodeServices;
-import org.springframework.stereotype.Service;
 
 /**
  * @author owen 624191343@qq.com
  * @version 创建时间：2017年11月12日 上午22:57:51
  * JdbcAuthorizationCodeServices替换
+ * blog: https://blog.51cto.com/13005375 
+ * code: https://gitee.com/owenwangwen/open-capacity-platform
  */
 public class RedisAuthorizationCodeServices extends RandomValueAuthorizationCodeServices {
 

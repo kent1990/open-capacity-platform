@@ -21,9 +21,9 @@ public class ApiIdempotentConfig implements  WebMvcConfigurer {
     @Resource
     private RedisTemplate< String, Object> redisTemplate ;
 
-    @Autowired
-	private RedisUtil redisUtil;
-    
+    @Resource
+    private RedisUtil redisUtil;
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
     	registry.addInterceptor(new AccessLimitInterceptor(redisUtil)) ;

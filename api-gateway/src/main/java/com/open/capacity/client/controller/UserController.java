@@ -28,6 +28,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @RestController
+@SuppressWarnings("all") 
 public class UserController {
 	
 	@Resource

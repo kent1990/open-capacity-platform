@@ -8,10 +8,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.open.capacity.common.filter.TraceContextFilter;
 @Configuration
+@SuppressWarnings("all") 
 @ConditionalOnClass(WebMvcConfigurer.class)
 public class TraceFilterConfig {
 	@Bean
-	
     public FilterRegistrationBean requestContextRepositoryFilterRegistrationBean() {
         FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
         filterRegistrationBean.setFilter(new TraceContextFilter());

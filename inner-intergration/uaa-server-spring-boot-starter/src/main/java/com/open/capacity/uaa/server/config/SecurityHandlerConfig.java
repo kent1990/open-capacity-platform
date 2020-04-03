@@ -37,9 +37,12 @@ import com.open.capacity.uaa.server.handle.OauthLogoutHandler;
 /**
  * @author owen 624191343@qq.com
  * @version 创建时间：2017年11月12日 上午22:57:51
+ * blog: https://blog.51cto.com/13005375 
+ * code: https://gitee.com/owenwangwen/open-capacity-platform
  */
 @Component
 @Configuration
+@SuppressWarnings("all") 
 public class SecurityHandlerConfig {
 
 	@Resource
@@ -127,7 +130,9 @@ public class SecurityHandlerConfig {
 				OAuth2Exception oAuth2Exception;
 				if (e.getMessage() != null && e.getMessage().equals(BAD_MSG)) {
 					oAuth2Exception = new InvalidGrantException("用户名或密码错误", e);
-				} else if (e instanceof InternalAuthenticationServiceException) {
+				}else if (e instanceof InvalidGrantException) {
+					oAuth2Exception = new InvalidGrantException(e.getMessage(), e);
+				}else if (e instanceof InternalAuthenticationServiceException) {
 					oAuth2Exception = new InvalidGrantException(e.getMessage(), e);
 				} else if (e instanceof RedirectMismatchException) {
 					oAuth2Exception = new InvalidGrantException(e.getMessage(), e);

@@ -1,7 +1,8 @@
 package com.open.capacity.common.util;
 
-import java.util.Map;
+import java.util.*;
 
+import cn.hutool.core.collection.CollectionUtil;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -11,52 +12,66 @@ import org.springframework.security.web.authentication.preauth.PreAuthenticatedA
 
 import com.open.capacity.common.auth.details.LoginAppUser;
 import com.open.capacity.common.constant.UaaConstant;
+import com.open.capacity.common.model.SysRole;
+
+import cn.hutool.core.bean.BeanUtil;
 
 /**
- * @author 作者 owen E-mail: 624191343@qq.com
+ * @author 作者 owen
  * @version 创建时间：2017年11月12日 上午22:57:51 获取用户信息
  */
+@SuppressWarnings("all")
 public class SysUserUtil {
 
-	/**
-	 * 获取登陆的 LoginAppUser
-	 * 
-	 * @return
-	 */
-	@SuppressWarnings("rawtypes")
-	public static LoginAppUser getLoginAppUser() {
-		
-		// 当OAuth2AuthenticationProcessingFilter设置当前登录时，直接返回
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		if (authentication instanceof OAuth2Authentication) {
-			OAuth2Authentication oAuth2Auth = (OAuth2Authentication) authentication;
-			authentication = oAuth2Auth.getUserAuthentication();
+    /**
+     * 获取登陆的 LoginAppUser
+     *
+     * @return
+     */
+    @SuppressWarnings("rawtypes")
+    public static LoginAppUser getLoginAppUser() {
 
-			if (authentication instanceof UsernamePasswordAuthenticationToken) {
-				UsernamePasswordAuthenticationToken authenticationToken = (UsernamePasswordAuthenticationToken) authentication;
-				return (LoginAppUser) authenticationToken.getPrincipal();
-			} else if (authentication instanceof PreAuthenticatedAuthenticationToken) {
-				// 刷新token方式
-				PreAuthenticatedAuthenticationToken authenticationToken = (PreAuthenticatedAuthenticationToken) authentication;
-				return (LoginAppUser) authenticationToken.getPrincipal();
+        // 当OAuth2AuthenticationProcessingFilter设置当前登录时，直接返回
+        // 强认证时处理
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof OAuth2Authentication) {
+            OAuth2Authentication oAuth2Auth = (OAuth2Authentication) authentication;
+            authentication = oAuth2Auth.getUserAuthentication();
 
-			}
-		}
+            if (authentication instanceof UsernamePasswordAuthenticationToken) {
+                UsernamePasswordAuthenticationToken authenticationToken = (UsernamePasswordAuthenticationToken) authentication;
 
-		// 当内部服务，不带token时，内部服务
-		String accessToken = TokenUtil.getToken();
-		
-		if(accessToken!=null){
-			RedisTemplate redisTemplate = SpringUtils.getBean(RedisTemplate.class);
-			LoginAppUser  loginAppUser= (LoginAppUser) redisTemplate.opsForValue()
-					.get(UaaConstant.TOKEN + ":" + accessToken);
-			if (loginAppUser != null) {
-				return  loginAppUser ;
-			}
-		}
-		
-		
+                if (authenticationToken.getPrincipal() instanceof LoginAppUser) {
+                    return (LoginAppUser) authenticationToken.getPrincipal();
+                } else if (authenticationToken.getPrincipal() instanceof Map) {
 
-		return null;
-	}
+                    LoginAppUser loginAppUser = BeanUtil.mapToBean((Map) authenticationToken.getPrincipal(), LoginAppUser.class, true);
+                    Set<SysRole> roles = new HashSet<>();
+                    if (CollectionUtil.isNotEmpty(loginAppUser.getSysRoles())) {
+                        loginAppUser.getSysRoles().stream().forEach(role -> {
+                            BeanUtil.mapToBean((Map) role, SysRole.class, true);
+                            roles.add(role);
+                        });
+                    }
+                    loginAppUser.setSysRoles(roles);
+                    return loginAppUser;
+                }
+            } else if (authentication instanceof PreAuthenticatedAuthenticationToken) {
+                // 刷新token方式
+                PreAuthenticatedAuthenticationToken authenticationToken = (PreAuthenticatedAuthenticationToken) authentication;
+                return (LoginAppUser) authenticationToken.getPrincipal();
+            }
+        }
+
+        // 弱认证处理，当内部服务，不带token时，内部服务
+        String accessToken = TokenUtil.getToken();
+        if (accessToken != null) {
+            RedisTemplate redisTemplate = SpringUtils.getBean(RedisTemplate.class);
+            LoginAppUser loginAppUser = (LoginAppUser) redisTemplate.opsForValue().get(UaaConstant.TOKEN + ":" + accessToken);
+            if (loginAppUser != null) {
+                return loginAppUser;
+            }
+        }
+        return null;
+    }
 }

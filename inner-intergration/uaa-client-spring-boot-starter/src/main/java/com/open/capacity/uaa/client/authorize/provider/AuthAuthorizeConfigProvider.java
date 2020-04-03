@@ -12,8 +12,10 @@ import com.open.capacity.common.auth.props.PermitUrlProperties;
 import com.open.capacity.uaa.client.authorize.AuthorizeConfigProvider;
 
 /**
- * @author 作者 owen E-mail: 624191343@qq.com
+ * @author 作者 owen 
  * @version 创建时间：2018年1月31日 下午9:11:36 类说明 白名单
+ * blog: https://blog.51cto.com/13005375 
+ * code: https://gitee.com/owenwangwen/open-capacity-platform
  */
 @Component
 @Order(Integer.MAX_VALUE - 1)

@@ -1,9 +1,7 @@
 package com.open.capacity.uaa.server.config;
 
-import javax.annotation.Resource;
 import javax.sql.DataSource;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +19,8 @@ import com.open.capacity.uaa.server.token.ResJwtAccessTokenConverter;
  * @version 创建时间：2017年11月12日 上午22:57:51
 * 类说明 
 * redis存储token
+* blog: https://blog.51cto.com/13005375 
+ * code: https://gitee.com/owenwangwen/open-capacity-platform
 */
 @Configuration
 public class TokenStoreConfig  {

@@ -16,7 +16,11 @@ import feign.Response;
 import feign.Util;
 import feign.codec.ErrorDecoder;
 import lombok.extern.slf4j.Slf4j;
-
+/**
+ * blog: https://blog.51cto.com/13005375 
+ * code: https://gitee.com/owenwangwen/open-capacity-platform
+ *
+ */
 @Slf4j
 public class FeignExceptionConfig {
     @Bean

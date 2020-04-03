@@ -63,8 +63,9 @@ spring:
     
     
 
-mybatis:
-  config-location: classpath:mybatis.cfg.xml
+mybatis-plus:
+  global-config:
+    banner: false
   mapper-locations: classpath*:com/open/**/dao/*.xml  
   
 

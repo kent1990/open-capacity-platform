@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,18 +19,16 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * @author 作者 owen E-mail: 624191343@qq.com
+ * @author 作者 owen
  * @version 创建时间：2017年11月12日 上午22:57:51
  * 用户实体绑定spring security
+ * blog: https://blog.51cto.com/13005375
+ * code: https://gitee.com/owenwangwen/open-capacity-platform
  */
-@Getter
-@Setter
+@Data
 public class LoginAppUser extends SysUser implements UserDetails {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -3685249101751401211L;
+    private static final long serialVersionUID = -3685249101751401211L;
 
 	private Set<SysRole> sysRoles;
 

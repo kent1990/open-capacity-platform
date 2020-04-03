@@ -4,6 +4,8 @@ import com.netflix.hystrix.exception.HystrixBadRequestException;
 
 /**
  * feign client 避免熔断异常处理
+ * blog: https://blog.51cto.com/13005375 
+ * code: https://gitee.com/owenwangwen/open-capacity-platform
  */
 public class HytrixException extends HystrixBadRequestException {
 

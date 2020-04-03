@@ -5,6 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
 
+@SuppressWarnings("all") 
 public class SmsCodeAuthenticationToken extends AbstractAuthenticationToken {
 
     // ~ Instance fields

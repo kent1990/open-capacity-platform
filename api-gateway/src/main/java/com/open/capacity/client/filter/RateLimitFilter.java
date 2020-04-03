@@ -30,6 +30,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Component
+@SuppressWarnings("all") 
 public class RateLimitFilter extends ZuulFilter {
 
 
@@ -74,7 +75,7 @@ public class RateLimitFilter extends ZuulFilter {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error("RateLimitFilter->run:{}" ,e.getMessage());
 		}
 		return null;
 	}

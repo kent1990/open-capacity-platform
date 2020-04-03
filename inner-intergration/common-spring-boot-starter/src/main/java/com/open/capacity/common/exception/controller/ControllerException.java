@@ -3,9 +3,8 @@ package com.open.capacity.common.exception.controller;
 import com.open.capacity.common.exception.BaseException;
 
 /**
- * <p>
- * Title: ControllerException
- * </p>
+ * blog: https://blog.51cto.com/13005375 
+ * code: https://gitee.com/owenwangwen/open-capacity-platform
  */
 
 public class ControllerException extends BaseException {

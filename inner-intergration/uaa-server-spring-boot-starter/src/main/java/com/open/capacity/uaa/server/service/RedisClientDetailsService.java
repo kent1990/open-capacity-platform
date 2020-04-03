@@ -35,8 +35,11 @@ import lombok.extern.slf4j.Slf4j;
  * 将oauth_client_details表数据缓存到redis，这里做个缓存优化
  * layui模块中有对oauth_client_details的crud， 注意同步redis的数据
  * 注意对oauth_client_details清楚redis db部分数据的清空
+ * blog: https://blog.51cto.com/13005375 
+ * code: https://gitee.com/owenwangwen/open-capacity-platform
  */
 @Slf4j
+@SuppressWarnings("all")
 public class RedisClientDetailsService extends JdbcClientDetailsService {
 
 
@@ -44,7 +47,6 @@ public class RedisClientDetailsService extends JdbcClientDetailsService {
     private static final String SELECT_CLIENT_DETAILS_SQL = "select client_id, client_secret, resource_ids, scope, authorized_grant_types, " +
             "web_server_redirect_uri, authorities, access_token_validity, refresh_token_validity, additional_information, autoapprove ,if_limit, limit_count " +
             "from oauth_client_details where client_id = ? and `status` = 1 ";
-
 
     private static final String SELECT_FIND_STATEMENT = "select client_id, client_secret,resource_ids, scope, "
             + "authorized_grant_types, web_server_redirect_uri, authorities, access_token_validity, "
@@ -78,13 +80,18 @@ public class RedisClientDetailsService extends JdbcClientDetailsService {
     public ClientDetails loadClientByClientId(String clientId) throws InvalidClientException {
         ClientDetails clientDetails = null;
 
-        // 先从redis获取
-        String value = (String) redisTemplate.boundHashOps(UaaConstant.CACHE_CLIENT_KEY).get(clientId);
-        if (StringUtils.isBlank(value)) {
-            clientDetails = cacheAndGetClient(clientId);
-        } else {
-            clientDetails = JSONObject.parseObject(value, BaseClientDetails.class);
-        }
+        try {
+			// 先从redis获取
+			String value = (String) redisTemplate.boundHashOps(UaaConstant.CACHE_CLIENT_KEY).get(clientId);
+			if (StringUtils.isBlank(value)) {
+			    clientDetails = cacheAndGetClient(clientId);
+			} else {
+			    clientDetails = JSONObject.parseObject(value, BaseClientDetails.class);
+			}
+		} catch (Exception e) {
+			log.error("clientId:{},{}", clientId, clientId );
+            throw new InvalidClientException ("应用获取失败"){};
+		}
 
         return clientDetails;
     }
@@ -95,24 +102,21 @@ public class RedisClientDetailsService extends JdbcClientDetailsService {
      * @param clientId
      * @return
      */
-    private ClientDetails cacheAndGetClient(String clientId) {
+	private ClientDetails cacheAndGetClient(String clientId) {
         // 从数据库读取
         ClientDetails clientDetails = null ;
         
         try {
-    		try {
     			clientDetails = jdbcTemplate.queryForObject(SELECT_CLIENT_DETAILS_SQL, new ClientDetailsRowMapper(), clientId);
-    		}
-    		catch (EmptyResultDataAccessException e) {
-    			throw new NoSuchClientException("No client with requested id: " + clientId);
-    		}
 
             if (clientDetails != null) {
                 // 写入redis缓存
                 redisTemplate.boundHashOps(UaaConstant.CACHE_CLIENT_KEY).put(clientId, JSONObject.toJSONString(clientDetails));
                 log.info("缓存clientId:{},{}", clientId, clientDetails);
             }
-        }catch (NoSuchClientException e){
+        }catch (EmptyResultDataAccessException e) {
+			throw new NoSuchClientException("No client with requested id: " + clientId);
+		} catch (NoSuchClientException e){
         	log.error("clientId:{},{}", clientId, clientId );
             throw new AuthenticationException ("应用不存在"){};
         }catch (InvalidClientException e) {
@@ -195,7 +199,6 @@ public class RedisClientDetailsService extends JdbcClientDetailsService {
 			String json = rs.getString(10);
 			if (json != null) {
 				try {
-					@SuppressWarnings("unchecked")
 					Map<String, Object> additionalInformation = mapper.read(json, Map.class);
 					details.setAdditionalInformation(additionalInformation);
 				}

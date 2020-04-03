@@ -6,6 +6,8 @@ import org.springframework.core.type.AnnotationMetadata;
 /**
  * @author owen
  * log-spring-boot-starter 自动装配 
+ * blog: https://blog.51cto.com/13005375 
+ * code: https://gitee.com/owenwangwen/open-capacity-platform
  */
 
 

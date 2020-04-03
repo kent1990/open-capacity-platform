@@ -16,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
+@SuppressWarnings("all") 
 public class RedisLimiterUtils {
     public static final String API_WEB_TIME_KEY = "time_key:";
     public static final String API_WEB_COUNTER_KEY = "counter_key:";
@@ -81,7 +82,7 @@ public class RedisLimiterUtils {
 
     public Result clientPathRateLimiter(String clientid, String access_path, int limit, int timeout) {
         String identifier = UUID.randomUUID().toString();
-        LocalDate today = LocalDate.now();
+		LocalDate today = LocalDate.now();
         String time_key = "time_key:clientid:" + clientid + ":path:" + access_path;
         String counter_key = "counter_key:clientid:" + clientid + ":path:" + access_path;
 
@@ -105,7 +106,7 @@ public class RedisLimiterUtils {
 
         if (!redisUtil.hasKey(time_key) || redisUtil.getExpire(time_key) <= 0) {
             //当天首次访问，初始化访问计数=0，有效期24h
-            redisUtil.set(time_key, identifier, 24 * 60 * 60);
+            redisUtil.set(time_key, identifier, 24L * 60L * 60L);
             redisUtil.set(counter_key, 0);
         }
 
