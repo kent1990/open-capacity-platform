@@ -49,7 +49,7 @@ http://59.110.164.254:8066/login.html  admin/admin
 # 技术介绍
 <table>
 	<tr>
-		<td><img src="https://images.gitee.com/uploads/images/2019/0523/091013_fffdcf8b_869801.png "屏幕截图.png"></td>
+		<td><img src="https://images.gitee.com/uploads/images/2020/0403/163537_aed5c59f_869801.png "屏幕截图.png"></td>
 		<td><img src="https://images.gitee.com/uploads/images/2020/0225/110747_862eef4e_869801.png "屏幕截图.png""></td>
     </tr>
 </table>
