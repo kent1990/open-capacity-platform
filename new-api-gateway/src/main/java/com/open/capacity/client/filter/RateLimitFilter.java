@@ -33,7 +33,7 @@ import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
 /**
- * Created by owen on 2018/12/10. 
+ * Created by owen on 2018/12/10.
  * 根据应用 url 限流 oauth_client_details if_limit 限流开关
  * limit_count 阈值
  */
@@ -45,19 +45,19 @@ public class RateLimitFilter implements GlobalFilter, Ordered {
     private final AntPathMatcher pathMatcher = new AntPathMatcher();
     @Resource
     private RedisUtil redisUtil;
- 
-    
-	@Autowired
-	private RedisLimiterUtils redisLimiterUtils;
-	@Autowired
-	private ObjectMapper objectMapper;
-	@Autowired
-	private TokenStore tokenStore;
 
-	@Resource
-	SysClientService sysClientService;
 
-	 
+    @Autowired
+    private RedisLimiterUtils redisLimiterUtils;
+    @Autowired
+    private ObjectMapper objectMapper;
+    @Autowired
+    private TokenStore tokenStore;
+
+    @Resource
+    SysClientService sysClientService;
+
+
     @Override
     public int getOrder() {
         return -500;
@@ -70,6 +70,7 @@ public class RateLimitFilter implements GlobalFilter, Ordered {
      * 2.2 判断请求的服务service是否有效
      * 2.3 判断clientId是否有权限访问service
      * 3. 判断 clientId+service 每日限流
+     *
      * @param exchange
      * @param accessToken
      * @return
@@ -77,27 +78,27 @@ public class RateLimitFilter implements GlobalFilter, Ordered {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-    	String accessToken = extractToken(exchange.getRequest());
+        String accessToken = extractToken(exchange.getRequest());
         if (!checkRateLimit(exchange, accessToken)) {
-                log.error("TOO MANY REQUESTS!");
-                exchange.getResponse().setStatusCode(HttpStatus.TOO_MANY_REQUESTS);
-                
-                ServerHttpResponse response = exchange.getResponse();
-                JSONObject message = new JSONObject();
-                message.put("resp_code", -1);
-                message.put("resp_msg", "TOO MANY REQUESTS!");
-                byte[] bits = message.toJSONString().getBytes(StandardCharsets.UTF_8);
-                DataBuffer buffer = response.bufferFactory().wrap(bits);
-                response.setStatusCode(HttpStatus.TOO_MANY_REQUESTS);
-                //指定编码，否则在浏览器中会中文乱码
-                response.getHeaders().add("Content-Type", "application/json;charset=UTF-8");
-                return response.writeWith(Mono.just(buffer)).doOnError((error) -> {
-                    DataBufferUtils.release(buffer);
-                });
+            log.error("TOO MANY REQUESTS!");
+            exchange.getResponse().setStatusCode(HttpStatus.TOO_MANY_REQUESTS);
+
+            ServerHttpResponse response = exchange.getResponse();
+            JSONObject message = new JSONObject();
+            message.put("resp_code", -1);
+            message.put("resp_msg", "TOO MANY REQUESTS!");
+            byte[] bits = message.toJSONString().getBytes(StandardCharsets.UTF_8);
+            DataBuffer buffer = response.bufferFactory().wrap(bits);
+            response.setStatusCode(HttpStatus.TOO_MANY_REQUESTS);
+            //指定编码，否则在浏览器中会中文乱码
+            response.getHeaders().add("Content-Type", "application/json;charset=UTF-8");
+            return response.writeWith(Mono.just(buffer)).doOnError((error) -> {
+                DataBufferUtils.release(buffer);
+            });
 
         }
 
- 
+
         return chain.filter(exchange);
     }
 
@@ -116,45 +117,40 @@ public class RateLimitFilter implements GlobalFilter, Ordered {
         return authToken;
     }
 
-    
+
     private Boolean checkRateLimit(ServerWebExchange exchange, String accessToken) {
         try {
-			String reqUrl = exchange.getRequest().getPath().value();
+            String reqUrl = exchange.getRequest().getPath().value();
 
-      // 1. 按accessToken查找对应的clientId
-			OAuth2Authentication oauth2Authentication = tokenStore.readAuthentication(accessToken);
-			if(oauth2Authentication!=null){
-				String clientId = oauth2Authentication.getOAuth2Request().getClientId() ;
-				Map client = sysClientService.getClient(clientId);
-				if(client!=null){
-					String flag = String.valueOf(client.get("if_limit") ) ;
-					
-					if("1".equals(flag)){
-						String accessLimitCount =   String.valueOf(client.get("limit_count") ) ;
-						if (!accessLimitCount.isEmpty()) {
-							Result result = redisLimiterUtils.rateLimitOfDay(clientId,  reqUrl ,
-									Long.parseLong(accessLimitCount));
-							if (-1 == result.getResp_code()) {
-								log.error("token:" + accessToken + result.getResp_msg());
-								// ((ResultMsg)
-								// this.error_info.get()).setMsg("clientid:" +
-								// client_id + ":token:" + accessToken + ":" +
-								// result.getMsg());
-								// ((ResultMsg) this.error_info.get()).setCode(401);
-								return false;
-							}
-						}
-					}
-				}
-				
-				
-			}
-		} catch (Exception e) {
-			StackTraceElement stackTraceElement= e.getStackTrace()[0];
-			log.error("checkRateLimit:" + "---|Exception:" +stackTraceElement.getLineNumber()+"----"+ e.getMessage());
-		}
-        
-       return true;
+            // 1. 按accessToken查找对应的clientId
+            OAuth2Authentication oauth2Authentication = tokenStore.readAuthentication(accessToken);
+            if (oauth2Authentication != null) {
+                String clientId = oauth2Authentication.getOAuth2Request().getClientId();
+                Map client = sysClientService.getClient(clientId);
+                if (client != null) {
+                    String flag = String.valueOf(client.get("if_limit"));
+
+                    if ("1".equals(flag)) {
+                        String accessLimitCount = String.valueOf(client.get("limit_count"));
+                        if (!accessLimitCount.isEmpty()) {
+                            Result result = redisLimiterUtils.rateLimitOfDay(clientId, reqUrl,
+                                    Long.parseLong(accessLimitCount));
+                            if (-1 == result.getResp_code()) {
+                                log.error("token:" + accessToken + result.getResp_msg());
+                                return false;
+                            }
+                        }
+                    }
+                }
+
+
+            }
+        } catch (Exception e) {
+            StackTraceElement stackTraceElement = e.getStackTrace()[0];
+            log.error("checkRateLimit:" + "---|Exception:" + stackTraceElement.getLineNumber() + "----" + e.getMessage());
+        }
+
+        return true;
     }
-     
+
 }
