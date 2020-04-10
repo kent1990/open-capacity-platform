@@ -1,4 +1,5 @@
-package com.open.capacity.uaa.server.config;
+package com.open.capacity.common.auth;
+
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

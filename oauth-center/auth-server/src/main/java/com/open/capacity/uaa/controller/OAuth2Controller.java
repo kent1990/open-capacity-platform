@@ -359,12 +359,13 @@ public class OAuth2Controller {
 	@LogAnnotation(module = "auth-server", recordRequestParam = false)
 	public Map<String, Object> getCurrentUserDetail() {
 		Map<String, Object> userInfo = new HashMap<>();
-		userInfo.put("user", SysUserUtil.getLoginAppUser());
-		log.debug("认证详细信息:" + SysUserUtil.getLoginAppUser().toString());
+		LoginAppUser loginUser =  SysUserUtil.getLoginAppUser() ;
+		userInfo.put("user",loginUser );
+		log.debug("认证详细信息:" + loginUser.toString());
 
 		List<SysPermission> permissions = new ArrayList<>();
 
-		new ArrayList(SysUserUtil.getLoginAppUser().getAuthorities()).forEach(o -> {
+		new ArrayList(loginUser.getAuthorities()).forEach(o -> {
 			SysPermission sysPermission = new SysPermission();
 			sysPermission.setPermission(o.toString());
 			permissions.add(sysPermission);

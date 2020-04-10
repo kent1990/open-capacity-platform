@@ -119,6 +119,7 @@ public class RedisAutoConfig {
 	
 	
 	@Bean(destroyMethod = "shutdown")
+	@ConditionalOnProperty(name = "spring.redis.redisson.enable", matchIfMissing = false, havingValue = "true")
     @ConditionalOnMissingBean(RedissonClient.class)
     public RedissonClient redissonClient() throws IOException {
         Config config = null;
