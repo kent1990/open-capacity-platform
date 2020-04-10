@@ -1,6 +1,7 @@
 package com.open.capacity.uaa.client.authorize.provider;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
@@ -30,6 +31,7 @@ public class AuthAuthorizeConfigProvider implements AuthorizeConfigProvider {
 
 		// 免token登录设置
 		config.antMatchers(permitUrlProperties.getIgnored()).permitAll();
+		config.requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll() ;//监控断点放权
 		//前后分离时需要带上
 		config.antMatchers(HttpMethod.OPTIONS).permitAll();
         

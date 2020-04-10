@@ -48,15 +48,6 @@ public class SecurityHandlerConfig {
 	@Resource
 	private ObjectMapper objectMapper; // springmvc启动时自动装配json处理类
 
-//	@Autowired
-//	private AuthorizationServerTokenServices authorizationServerTokenServices;
-
-//	@Autowired
-//	private ClientDetailsService clientDetailsService;
-
-//	@Autowired(required = false)
-//	private AuthenticationEntryPoint authenticationEntryPoint;
-
 	// url匹配器
 //	private AntPathMatcher pathMatcher = new AntPathMatcher();
 

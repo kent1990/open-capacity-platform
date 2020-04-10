@@ -54,16 +54,10 @@ public class UAAClientAutoConfig extends ResourceServerConfigurerAdapter {
 	@Resource
 	private ObjectMapper objectMapper; // springmvc启动时自动装配json处理类
 
-	@Resource
-	private TokenStore redisTokenStore ;
-	
-	
- 
 
 	@Autowired(required = false)
-	private JwtTokenStore jwtTokenStore;
-	@Autowired(required = false)
-	private JwtAccessTokenConverter jwtAccessTokenConverter;
+	private TokenStore tokenStore;
+ 
 
 	@Autowired
 	private AuthenticationEntryPoint authenticationEntryPoint;
@@ -92,15 +86,12 @@ public class UAAClientAutoConfig extends ResourceServerConfigurerAdapter {
 	@Override
 	public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
 
-		if (jwtTokenStore != null) {
-			resources.tokenStore(jwtTokenStore);
-		} else if (redisTokenStore != null) {
-			resources.tokenStore(redisTokenStore);
-		}
+		if (tokenStore != null) {
+			resources.tokenStore(tokenStore);
+		}  
 		resources.stateless(true);
-
+		// 自定义异常处理端口 
 		resources.authenticationEntryPoint(authenticationEntryPoint);
-
 		resources.expressionHandler(expressionHandler);
 		resources.accessDeniedHandler(oAuth2AccessDeniedHandler);
 
