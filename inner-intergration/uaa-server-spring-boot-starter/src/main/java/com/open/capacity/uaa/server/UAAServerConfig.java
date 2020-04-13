@@ -1,19 +1,30 @@
 
 package com.open.capacity.uaa.server;
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.annotation.Resource;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -23,20 +34,26 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.code.RandomValueAuthorizationCodeServices;
+import org.springframework.security.oauth2.provider.error.OAuth2AccessDeniedHandler;
 import org.springframework.security.oauth2.provider.error.WebResponseExceptionTranslator;
+import org.springframework.security.oauth2.provider.expression.OAuth2WebSecurityExpressionHandler;
+import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.open.capacity.common.auth.props.PermitUrlProperties;
+import com.open.capacity.common.constant.UaaConstant;
 import com.open.capacity.common.feign.FeignInterceptorConfig;
 import com.open.capacity.common.rest.RestTemplateConfig;
 import com.open.capacity.uaa.server.service.RedisAuthorizationCodeServices;
 import com.open.capacity.uaa.server.service.RedisClientDetailsService;
-import com.open.capacity.uaa.server.token.RedisTemplateTokenStore;
 
 /**
  * @author owen 624191343@qq.com
@@ -90,10 +107,9 @@ public class UAAServerConfig {
         @Autowired
         private UserDetailsService userDetailsService;
         @Autowired(required = false)
-        private RedisTemplateTokenStore redisTokenStore;
+        private TokenStore tokenStore;
 
-        @Autowired(required = false)
-        private JwtTokenStore jwtTokenStore;
+   
         @Autowired(required = false)
         private JwtAccessTokenConverter jwtAccessTokenConverter;
 
@@ -107,33 +123,25 @@ public class UAAServerConfig {
         @Autowired(required = false)
         private RandomValueAuthorizationCodeServices authorizationCodeServices;
 
+
         /**
          * 配置身份认证器，配置认证方式，TokenStore，TokenGranter，OAuth2RequestFactory
          */
 		public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-
-            if (jwtTokenStore != null) {
-                endpoints.tokenStore(jwtTokenStore).authenticationManager(authenticationManager)
-                        // 支持
-                        .userDetailsService(userDetailsService);
-                // password
-                // grant
-                // type;
-            } else if (redisTokenStore != null) {
-                endpoints.tokenStore(redisTokenStore).authenticationManager(authenticationManager)
-                        // 支持
-                        .userDetailsService(userDetailsService);
-                // password
-                // grant
-                // type;
-            }
-
-            if (jwtAccessTokenConverter != null) {
-                endpoints.accessTokenConverter(jwtAccessTokenConverter);
-            }
-
+			
+			
+			//通用处理
+			endpoints.tokenStore(tokenStore).authenticationManager(authenticationManager)
+            // 支持
+            .userDetailsService(userDetailsService);
+			
+			if(tokenStore instanceof JwtTokenStore){
+				endpoints.accessTokenConverter(jwtAccessTokenConverter);
+			}
+             
+            //处理授权码
             endpoints.authorizationCodeServices(authorizationCodeServices);
-
+            // 处理 ExceptionTranslationFilter 抛出的异常
             endpoints.exceptionTranslator(webResponseExceptionTranslator);
 
         }
@@ -145,21 +153,7 @@ public class UAAServerConfig {
         @Override
         public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 
-            // if(clientDetailsService!=null){
-            // clients.withClientDetails(clientDetailsService);
-            // }else{
-            // clients.inMemory().withClient("neusoft1").secret("neusoft1")
-            // .authorizedGrantTypes("authorization_code", "password",
-            // "refresh_token").scopes("all")
-            // .resourceIds(SERVER_RESOURCE_ID).accessTokenValiditySeconds(1200)
-            // .refreshTokenValiditySeconds(50000)
-            // .and().withClient("neusoft2").secret("neusoft2")
-            // .authorizedGrantTypes("authorization_code", "password",
-            // "refresh_token").scopes("all")
-            // .resourceIds(SERVER_RESOURCE_ID).accessTokenValiditySeconds(1200)
-            // .refreshTokenValiditySeconds(50000)
-            // ;
-            // }
+       
             clients.withClientDetails(redisClientDetailsService);
             redisClientDetailsService.loadAllClientToCache();
         }
@@ -169,6 +163,7 @@ public class UAAServerConfig {
          */
         @Override
         public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+        	
             // url:/oauth/token_key,exposes
             security.tokenKeyAccess("permitAll()")
                     /// public key for token
@@ -178,10 +173,7 @@ public class UAAServerConfig {
                     .checkTokenAccess("isAuthenticated()")
                     // allow check token
                     .allowFormAuthenticationForClients();
-
-            // security.allowFormAuthenticationForClients();
-            //// security.tokenKeyAccess("permitAll()");
-            // security.tokenKeyAccess("isAuthenticated()");
+ 
         }
 
     }
@@ -193,12 +185,71 @@ public class UAAServerConfig {
 
         @Autowired
         private PermitUrlProperties permitUrlProperties;
+        @Autowired(required = false)
+        private TokenStore tokenStore;
+        @Autowired 
+    	private ObjectMapper objectMapper ; //springmvc启动时自动装配json处理类
+        
+        @Autowired
+    	private OAuth2WebSecurityExpressionHandler expressionHandler;
 
         public void configure(WebSecurity web) throws Exception {
             web.ignoring().antMatchers("/health");
             web.ignoring().antMatchers("/oauth/user/token");
             web.ignoring().antMatchers("/oauth/client/token");
         }
+        
+        @Override
+    	public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
+
+    		if (tokenStore != null) {
+    			resources.tokenStore(tokenStore);
+    		}  
+    		resources.stateless(true);
+    		resources.expressionHandler(expressionHandler);
+    		// 自定义异常处理端口 
+    		resources.authenticationEntryPoint(new AuthenticationEntryPoint() {
+
+    			@Override
+    			public void commence(HttpServletRequest request, HttpServletResponse response,
+    					AuthenticationException authException) throws IOException, ServletException {
+    				
+    				Map<String ,String > rsp =new HashMap<>();  
+    				
+    				response.setStatus(HttpStatus.UNAUTHORIZED.value() );
+    				
+    				rsp.put("resp_code", HttpStatus.UNAUTHORIZED.value() + "") ;
+                    rsp.put("resp_msg", authException.getMessage()) ;
+                    
+                    response.setContentType("application/json;charset=UTF-8");
+        			response.getWriter().write(objectMapper.writeValueAsString(rsp));
+        			response.getWriter().flush();
+        			response.getWriter().close();
+
+    			}
+    		});
+    		resources.accessDeniedHandler(new OAuth2AccessDeniedHandler(){
+        	    
+        	    @Override
+        	    public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException authException) throws IOException, ServletException {
+
+        	    	Map<String ,String > rsp =new HashMap<>();  
+        	    	response.setContentType("application/json;charset=UTF-8");
+
+        	        response.setStatus(HttpStatus.UNAUTHORIZED.value() );
+    				
+    				rsp.put("resp_code", HttpStatus.UNAUTHORIZED.value() + "") ;
+                    rsp.put("resp_msg", authException.getMessage()) ;
+                    
+                    response.setContentType("application/json;charset=UTF-8");
+        			response.getWriter().write(objectMapper.writeValueAsString(rsp));
+        			response.getWriter().flush();
+        			response.getWriter().close();
+        	        
+        	    }
+        	});
+    		
+    	}
 
         @Override
         public void configure(HttpSecurity http) throws Exception {
@@ -217,44 +268,49 @@ public class UAAServerConfig {
                             }
 
                             // 头部的Authorization值以Bearer开头
-                            String auth = request.getHeader("Authorization");
+                            String auth = request.getHeader(UaaConstant.AUTHORIZTION);
                             if (auth != null) {
                                 if (auth.startsWith(OAuth2AccessToken.BEARER_TYPE)) {
                                     return true;
                                 }
                             }
-                            if (antPathMatcher.match(request.getRequestURI(), "/oauth/userinfo")) {
+                            
+                            // 认证中心url特殊处理，返回true的，不会跳转login.html页面
+                            if (antPathMatcher.match(request.getRequestURI(), "/api-auth/oauth/userinfo")) {
                                 return true;
                             }
-                            if (antPathMatcher.match(request.getRequestURI(), "/oauth/remove/token")) {
+                            if (antPathMatcher.match(request.getRequestURI(), "/api-auth/oauth/remove/token")) {
                                 return true;
                             }
-                            if (antPathMatcher.match(request.getRequestURI(), "/oauth/get/token")) {
+                            if (antPathMatcher.match(request.getRequestURI(), "/api-auth/oauth/get/token")) {
                                 return true;
                             }
-                            if (antPathMatcher.match(request.getRequestURI(), "/oauth/refresh/token")) {
-                                return true;
-                            }
-
-                            if (antPathMatcher.match(request.getRequestURI(), "/oauth/token/list")) {
-                                return true;
-                            }
-
-                            if (antPathMatcher.match("/clients/**", request.getRequestURI())) {
+                            if (antPathMatcher.match(request.getRequestURI(), "/api-auth/oauth/refresh/token")) {
                                 return true;
                             }
 
-                            if (antPathMatcher.match("/services/**", request.getRequestURI())) {
+                            if (antPathMatcher.match(request.getRequestURI(), "/api-auth/oauth/token/list")) {
                                 return true;
                             }
-                            if (antPathMatcher.match("/redis/**", request.getRequestURI())) {
+
+                            if (antPathMatcher.match("/**/clients/**", request.getRequestURI())) {
                                 return true;
                             }
+
+                            if (antPathMatcher.match("/**/services/**", request.getRequestURI())) {
+                                return true;
+                            }
+                            if (antPathMatcher.match("/**/redis/**", request.getRequestURI())) {
+                                return true;
+                            }
+                            
                             return false;
                         }
                     }
 
-            ).authorizeRequests().antMatchers(permitUrlProperties.getIgnored()).permitAll().anyRequest()
+            ).authorizeRequests().antMatchers(permitUrlProperties.getIgnored()).permitAll()
+            .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
+            .anyRequest()
                     .authenticated();
         }
 

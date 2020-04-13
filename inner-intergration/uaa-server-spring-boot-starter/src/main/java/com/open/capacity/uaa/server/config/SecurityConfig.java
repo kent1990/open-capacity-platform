@@ -27,7 +27,7 @@ import com.open.capacity.uaa.server.provider.SmsCodeAuthenticationProvider;
  * 
  * @author owen 624191343@qq.com
  * @version 创建时间：2017年11月12日 上午22:57:51 2017年10月16日
- *          在WebSecurityConfigurerAdapter不拦截oauth要开放的资源
+ * 在WebSecurityConfigurerAdapter不拦截oauth要开放的资源
  * blog: https://blog.51cto.com/13005375 
  * code: https://gitee.com/owenwangwen/open-capacity-platform
  */
@@ -41,10 +41,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private AuthenticationSuccessHandler authenticationSuccessHandler;
 	@Autowired
 	private AuthenticationFailureHandler authenticationFailureHandler;
-	// @Autowired
-	// private LogoutSuccessHandler logoutSuccessHandler;
 	@Autowired(required = false)
-	private AuthenticationEntryPoint authenticationEntryPoint;
+	private AuthenticationEntryPoint authenticationEntryPoint; // 自定义异常处理端口 默认空
 	@Autowired
 	private UserDetailsService userDetailsService;
 

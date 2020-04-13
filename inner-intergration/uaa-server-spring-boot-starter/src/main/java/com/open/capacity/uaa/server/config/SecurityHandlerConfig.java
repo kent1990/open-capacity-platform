@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
@@ -24,6 +25,7 @@ import org.springframework.security.oauth2.common.exceptions.RedirectMismatchExc
 import org.springframework.security.oauth2.common.exceptions.UnsupportedResponseTypeException;
 import org.springframework.security.oauth2.provider.error.DefaultWebResponseExceptionTranslator;
 import org.springframework.security.oauth2.provider.error.WebResponseExceptionTranslator;
+import org.springframework.security.oauth2.provider.expression.OAuth2WebSecurityExpressionHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
@@ -47,15 +49,6 @@ public class SecurityHandlerConfig {
 
 	@Resource
 	private ObjectMapper objectMapper; // springmvc启动时自动装配json处理类
-
-//	@Autowired
-//	private AuthorizationServerTokenServices authorizationServerTokenServices;
-
-//	@Autowired
-//	private ClientDetailsService clientDetailsService;
-
-//	@Autowired(required = false)
-//	private AuthenticationEntryPoint authenticationEntryPoint;
 
 	// url匹配器
 //	private AntPathMatcher pathMatcher = new AntPathMatcher();
@@ -153,7 +146,14 @@ public class SecurityHandlerConfig {
 
 		};
 	}
-	 
+	
+	@Bean
+    public OAuth2WebSecurityExpressionHandler oAuth2WebSecurityExpressionHandler(ApplicationContext applicationContext) {
+        OAuth2WebSecurityExpressionHandler expressionHandler = new OAuth2WebSecurityExpressionHandler();
+        expressionHandler.setApplicationContext(applicationContext);
+        return expressionHandler;
+    }
+	
 	@Bean
 	public OauthLogoutHandler oauthLogoutHandler() {
 		return new OauthLogoutHandler();

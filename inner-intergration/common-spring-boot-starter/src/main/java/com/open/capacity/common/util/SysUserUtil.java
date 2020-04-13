@@ -48,12 +48,12 @@ public class SysUserUtil {
                     LoginAppUser loginAppUser = BeanUtil.mapToBean((Map) authenticationToken.getPrincipal(), LoginAppUser.class, true);
                     Set<SysRole> roles = new HashSet<>();
                     if (CollectionUtil.isNotEmpty(loginAppUser.getSysRoles())) {
-                        loginAppUser.getSysRoles().stream().forEach(role -> {
-                            BeanUtil.mapToBean((Map) role, SysRole.class, true);
-                            roles.add(role);
-                        });
+    					for(Iterator<SysRole> it = loginAppUser.getSysRoles().iterator(); it.hasNext();){
+    						SysRole role =  BeanUtil.mapToBean((Map) it.next() , SysRole.class, false);
+    						roles.add(role) ;
+    					}
                     }
-                    loginAppUser.setSysRoles(roles);
+                    loginAppUser.setSysRoles(roles); 
                     return loginAppUser;
                 }
             } else if (authentication instanceof PreAuthenticatedAuthenticationToken) {
