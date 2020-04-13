@@ -11,6 +11,7 @@
   <properties>
 		<orika-version>1.5.2</orika-version>
 		<modelmapper-version>2.3.3</modelmapper-version>
+		<xss-version>1.5.5</xss-version>
   </properties>
   
 	<dependencies>
@@ -45,6 +46,15 @@
 			<artifactId>spring-security-oauth2</artifactId>
 			<optional>true</optional>
 		</dependency>
+		
+		<!-- XSS -->
+        <dependency>
+            <groupId>org.owasp.antisamy</groupId>
+            <artifactId>antisamy</artifactId>
+            <version>${xss-version}</version>
+        </dependency>
+		
+		
 		<!--  feign http rpc -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
