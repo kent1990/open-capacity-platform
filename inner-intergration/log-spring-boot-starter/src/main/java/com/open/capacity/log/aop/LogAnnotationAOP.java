@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ThreadLocalRandom;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,11 +17,14 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.task.TaskExecutor;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.github.structlog4j.StructLog4J;
+import com.github.structlog4j.json.JsonFormatter;
 import com.open.capacity.common.auth.details.LoginAppUser;
 import com.open.capacity.common.constant.TraceConstant;
 import com.open.capacity.common.model.SysLog;
@@ -52,15 +56,25 @@ public class LogAnnotationAOP {
 	
 	@Autowired
 	private TaskExecutor taskExecutor;
+	
+	@Value("${spring.profiles.active:NA}")
+    private String activeProfile;
 
-//	@Autowired
-//  private BeanFactory beanFactory;
-//  private TraceableExecutorService traceableExecutorService ;
-//	@PostConstruct
-//	public void init() {
-//		traceableExecutorService =   new TraceableExecutorService(beanFactory, Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors()) ,
-//		        "logAop");
-//	}
+    @Value("${spring.application.name:NA}")
+    private String appName;
+	
+	@PostConstruct
+	public void init(){
+		
+		StructLog4J.setFormatter(JsonFormatter.getInstance());
+		
+		StructLog4J.setMandatoryContextSupplier(()-> new Object[]{
+			"env",	activeProfile,
+			"serviceName",appName 
+		});
+		
+	}
+
 	
 	@Around("@annotation(ds)")
 	public Object logSave(ProceedingJoinPoint joinPoint, LogAnnotation ds) throws Throwable {

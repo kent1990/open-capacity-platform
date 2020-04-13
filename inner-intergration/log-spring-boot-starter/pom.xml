@@ -8,9 +8,25 @@
   <artifactId>log-spring-boot-starter</artifactId>
   <description>日志支撑</description>
   
+  
+  <properties>
+  	<log-version>1.0.0</log-version>
+  </properties>
   <dependencies>
   
-  		<dependency>
+  		
+		<dependency>
+            <groupId>structlog4j</groupId>
+            <artifactId>structlog4j-api</artifactId>
+            <version>${log-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>structlog4j</groupId>
+            <artifactId>structlog4j-json</artifactId>
+            <version>${log-version}</version>
+        </dependency>
+        
+		<dependency>
   			<groupId>com.open.capacity</groupId>
   			<artifactId>common-spring-boot-starter</artifactId>
   			<optional>true</optional>
