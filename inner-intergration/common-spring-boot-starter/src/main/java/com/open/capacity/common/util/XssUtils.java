@@ -2,7 +2,7 @@ package com.open.capacity.common.util;
 
 import java.io.InputStream;
 
-import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.owasp.validator.html.AntiSamy;
 import org.owasp.validator.html.CleanResults;
 import org.owasp.validator.html.Policy;
@@ -41,7 +41,7 @@ public class XssUtils {
 			final CleanResults cr = antiSamy.scan(taintedHTML, policy);
 			// AntiSamy会把“&nbsp;”转换成乱码，把双引号转换成"&quot;"
 			// 先将&nbsp;的乱码替换为空，双引号的乱码替换为双引号
-			String str = StringEscapeUtils.unescapeHtml(cr.getCleanHTML());
+			String str = StringEscapeUtils.unescapeHtml3(cr.getCleanHTML())  ;
 			str = str.replaceAll(antiSamy.scan("&nbsp;", policy).getCleanHTML(), "");
 			str = str.replaceAll(antiSamy.scan("\"", policy).getCleanHTML(), "\"");
 			return str;
