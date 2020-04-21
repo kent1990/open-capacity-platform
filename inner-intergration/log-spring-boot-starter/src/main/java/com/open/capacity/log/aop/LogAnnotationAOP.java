@@ -80,7 +80,7 @@ public class LogAnnotationAOP {
 	public Object logSave(ProceedingJoinPoint joinPoint, LogAnnotation ds) throws Throwable {
 
 		// 请求流水号
-		String transid = StringUtils.defaultString(TraceUtil.getTrace(), MDC.get(TraceConstant.LOG_TRACE_ID));
+		String traceId = StringUtils.defaultString(TraceUtil.getTrace(), MDC.get(TraceConstant.LOG_TRACE_ID));
 		// 记录开始时间
 		long start = System.currentTimeMillis();
 		// 获取方法参数
@@ -118,7 +118,7 @@ public class LogAnnotationAOP {
 			params = JSONObject.toJSONString(httpReqArgs);
 			sysLog.setParams(params);
 			// 打印请求参数参数
-			log.info("开始请求，transid={},  url={} , httpMethod={}, reqData={} ", transid, url, httpMethod, params);
+			log.info("开始请求，traceId={},  url={} , httpMethod={}, reqData={} ", traceId, url, httpMethod, params);
 		} catch (Exception e) {
 			log.error("记录参数失败：{}", e.getMessage());
 		}
@@ -130,7 +130,7 @@ public class LogAnnotationAOP {
 		} catch (Exception e) {
 			sysLog.setFlag(Boolean.FALSE);
 			sysLog.setRemark(e.getMessage());
-			log.error("请求报错，transid={},  url={} , httpMethod={}, reqData={} ,error ={} ", transid, url, httpMethod, params,e.getMessage());
+			log.error("请求报错，traceId={},  url={} , httpMethod={}, reqData={} ,error ={} ", traceId, url, httpMethod, params,e.getMessage());
 			throw e;
 		} finally {
 			
@@ -157,7 +157,7 @@ public class LogAnnotationAOP {
 			}
 			 
 			// 获取回执报文及耗时
-			log.info("请求完成, transid={}, 耗时={}, resp={}:", transid, (System.currentTimeMillis() - start),
+			log.info("请求完成, traceId={}, 耗时={}, resp={}:", traceId, (System.currentTimeMillis() - start),
 					result == null ? null : JSON.toJSONString(result));
 
 		}
