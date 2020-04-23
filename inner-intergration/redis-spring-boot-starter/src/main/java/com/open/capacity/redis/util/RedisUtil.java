@@ -5,8 +5,10 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
+import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -16,6 +18,8 @@ import org.springframework.data.redis.core.TimeoutUtils;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.RedisSerializer;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.util.CollectionUtils;
 
 import lombok.extern.slf4j.Slf4j;
@@ -35,6 +39,8 @@ public class RedisUtil {
 
     private HashOperations<String, String, String> hashOperations;
 
+	private LettuceConnectionFactory lettuceConnectionFactory;
+ 
     /**
      * json序列化方式
      */
@@ -52,11 +58,21 @@ public class RedisUtil {
      * @param stringRedisTemplate
      * @param hashOperations
      */
-    public RedisUtil(RedisTemplate<String, Object> redisTemplate, StringRedisTemplate stringRedisTemplate,
+    public RedisUtil( LettuceConnectionFactory lettuceConnectionFactory, StringRedisTemplate stringRedisTemplate,
                      HashOperations<String, String, String> hashOperations) {
-        this.redisTemplate = redisTemplate;
+        this.lettuceConnectionFactory = lettuceConnectionFactory;
         this.stringRedisTemplate = stringRedisTemplate;
         this.hashOperations = hashOperations;
+        
+        RedisTemplate<String, Object> redisTemplate = new RedisTemplate<String, Object>();
+		RedisSerializer redisObjectSerializer = new GenericJackson2JsonRedisSerializer();
+		redisTemplate.setConnectionFactory(lettuceConnectionFactory);
+		redisTemplate.setKeySerializer(new StringRedisSerializer()); // key的序列化类型
+		redisTemplate.setValueSerializer(redisObjectSerializer); // value的序列化类型
+		redisTemplate.setHashValueSerializer(redisObjectSerializer); 
+		redisTemplate.afterPropertiesSet();
+        
+		this.redisTemplate = redisTemplate ;
     }
 
 
