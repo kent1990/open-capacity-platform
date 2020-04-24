@@ -30,7 +30,7 @@ public class SysUserUtil {
      */
     @SuppressWarnings("rawtypes")
     public static LoginAppUser getLoginAppUser() {
-
+        
         // 当OAuth2AuthenticationProcessingFilter设置当前登录时，直接返回
         // 强认证时处理
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -62,7 +62,6 @@ public class SysUserUtil {
                 return (LoginAppUser) authenticationToken.getPrincipal();
             }
         }
-
         // 弱认证处理，当内部服务，不带token时，内部服务
         String accessToken = TokenUtil.getToken();
         if (accessToken != null) {
@@ -72,6 +71,7 @@ public class SysUserUtil {
                 return loginAppUser;
             }
         }
+       
         return null;
     }
 }

@@ -58,15 +58,6 @@ public class UserController {
     }
 	
 	
-	@GetMapping("/del/{accessToken}/{refreshToken}")
-	public String hello2(@PathVariable String accessToken,@PathVariable String refreshToken) {
-		RedisTemplateTokenStore redisTemplateStore = new RedisTemplateTokenStore();
-		redisTemplateStore.setRedisTemplate(redisTemplate);
-		redisTemplateStore.removeAccessToken(accessToken);
-		redisTemplateStore.removeRefreshToken(refreshToken);
-		return "delR";
-	}
-
 	
 	@GetMapping("/getVersion")
 	public Result token() {
