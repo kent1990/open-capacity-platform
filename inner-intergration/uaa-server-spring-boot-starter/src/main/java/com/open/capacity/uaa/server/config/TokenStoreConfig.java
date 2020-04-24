@@ -5,6 +5,7 @@ import javax.sql.DataSource;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
@@ -38,12 +39,10 @@ public class TokenStoreConfig  {
 	}
 	@Bean
 	@ConditionalOnProperty(prefix="security.oauth2.token.store",name="type" ,havingValue="redis" ,matchIfMissing=true)
-	public RedisTemplateTokenStore redisTokenStore(RedisTemplate<String, Object>  redisTemplate ){
+	public RedisTemplateTokenStore redisTokenStore(RedisConnectionFactory connectionFactory ){
 //		return new RedisTokenStore( redisTemplate.getConnectionFactory() ) ; //单台redis服务器
-		Assert.state(redisTemplate != null, "RedisTemplate must be provided");
-
-		RedisTemplateTokenStore redisTemplateStore = new RedisTemplateTokenStore()  ;
-		redisTemplateStore.setRedisTemplate(redisTemplate);
+		Assert.state(connectionFactory != null, "connectionFactory must be provided");
+		RedisTemplateTokenStore redisTemplateStore = new RedisTemplateTokenStore(connectionFactory)  ;
 		return redisTemplateStore ;
 		 
 
