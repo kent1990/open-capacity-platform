@@ -14,6 +14,7 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.util.Assert;
 
+import com.open.capacity.common.constant.UaaConstant;
 import com.open.capacity.common.util.StringUtil;
 
 import lombok.extern.slf4j.Slf4j;
@@ -69,7 +70,7 @@ public class OauthLogoutHandler implements LogoutHandler {
 	}
 
 	protected String extractHeaderToken(HttpServletRequest request) {
-		Enumeration<String> headers = request.getHeaders("Authorization");
+		Enumeration<String> headers = request.getHeaders(UaaConstant.AUTHORIZTION);
 		while (headers.hasMoreElements()) { // typically there is only one (most
 											// servers enforce that)
 			String value = headers.nextElement();
