@@ -34,7 +34,7 @@ import com.open.capacity.common.auth.details.LoginAppUser;
  *          https://blog.51cto.com/13005375 code:
  *          https://gitee.com/owenwangwen/open-capacity-platform
  */
-@SuppressWarnings("all") 
+@SuppressWarnings("all")
 public class RedisTemplateTokenStore implements TokenStore {
 
 	private static final String ACCESS = "access:";
@@ -278,12 +278,23 @@ public class RedisTemplateTokenStore implements TokenStore {
 		byte[] key = serializeKey(ACCESS + tokenValue);
 
 		OAuth2Authentication authentication = this.readAuthentication(tokenValue);
-		byte[] serializedAccessToken = serialize(tokenValue);
-		byte[] accessKey = serializeKey(ACCESS + tokenValue);
-		byte[] authKey = serializeKey(AUTH + tokenValue);
-		byte[] authToAccessKey = serializeKey(AUTH_TO_ACCESS + authenticationKeyGenerator.extractKey(authentication));
-		byte[] approvalKey = serializeKey(UNAME_TO_ACCESS + getApprovalKey(authentication));
-		byte[] clientId = serializeKey(CLIENT_ID_TO_ACCESS + authentication.getOAuth2Request().getClientId());
+
+		byte[] serializedAccessToken = null;
+		byte[] accessKey = null;
+		byte[] authKey = null;
+		byte[] authToAccessKey = null;
+		byte[] approvalKey = null;
+		byte[] clientId = null;
+
+		if (authentication != null) {
+			serializedAccessToken = serialize(tokenValue);
+			accessKey = serializeKey(ACCESS + tokenValue);
+			authKey = serializeKey(AUTH + tokenValue);
+			authToAccessKey = serializeKey(AUTH_TO_ACCESS + authenticationKeyGenerator.extractKey(authentication));
+			approvalKey = serializeKey(UNAME_TO_ACCESS + getApprovalKey(authentication));
+			clientId = serializeKey(CLIENT_ID_TO_ACCESS + authentication.getOAuth2Request().getClientId());
+		}
+
 		byte[] tokenKey = serializeKey(TOKEN + tokenValue);
 
 		byte[] bytes = null;
@@ -295,7 +306,7 @@ public class RedisTemplateTokenStore implements TokenStore {
 		}
 		OAuth2AccessToken oauth2AccessToken = deserializeAccessToken(bytes);
 
-		if (oauth2AccessToken.getExpiresIn() < 180) {
+		if (oauth2AccessToken !=null && oauth2AccessToken.getExpiresIn() < 180) {
 
 			if (oauth2AccessToken instanceof DefaultOAuth2AccessToken) {
 				DefaultOAuth2AccessToken token = (DefaultOAuth2AccessToken) oauth2AccessToken;
@@ -311,12 +322,16 @@ public class RedisTemplateTokenStore implements TokenStore {
 
 				RedisConnection con = getConnection();
 				try {
-					con.expire(accessKey, seconds);
-					con.expire(authKey, seconds);
-					con.expire(tokenKey, seconds);
-					con.expire(authToAccessKey, seconds);
-					con.expire(clientId, seconds);
-					con.expire(approvalKey, seconds);
+
+					if (authentication != null) {
+						con.expire(accessKey, seconds);
+						con.expire(authKey, seconds);
+						con.expire(tokenKey, seconds);
+						con.expire(authToAccessKey, seconds);
+						con.expire(clientId, seconds);
+						con.expire(approvalKey, seconds);
+					}
+
 				} finally {
 					con.close();
 				}
