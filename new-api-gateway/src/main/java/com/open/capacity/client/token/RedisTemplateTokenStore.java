@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.Cursor;
@@ -279,21 +280,7 @@ public class RedisTemplateTokenStore implements TokenStore {
 
 		OAuth2Authentication authentication = this.readAuthentication(tokenValue);
 
-		byte[] serializedAccessToken = null;
-		byte[] accessKey = null;
-		byte[] authKey = null;
-		byte[] authToAccessKey = null;
-		byte[] approvalKey = null;
-		byte[] clientId = null;
-
-		if (authentication != null) {
-			serializedAccessToken = serialize(tokenValue);
-			accessKey = serializeKey(ACCESS + tokenValue);
-			authKey = serializeKey(AUTH + tokenValue);
-			authToAccessKey = serializeKey(AUTH_TO_ACCESS + authenticationKeyGenerator.extractKey(authentication));
-			approvalKey = serializeKey(UNAME_TO_ACCESS + getApprovalKey(authentication));
-			clientId = serializeKey(CLIENT_ID_TO_ACCESS + authentication.getOAuth2Request().getClientId());
-		}
+		
 
 		byte[] tokenKey = serializeKey(TOKEN + tokenValue);
 
@@ -306,37 +293,50 @@ public class RedisTemplateTokenStore implements TokenStore {
 		}
 		OAuth2AccessToken oauth2AccessToken = deserializeAccessToken(bytes);
 
-		if (oauth2AccessToken !=null && oauth2AccessToken.getExpiresIn() < 180) {
+		try {
+			if (oauth2AccessToken !=null && oauth2AccessToken.getExpiresIn() < 180) {
 
-			if (oauth2AccessToken instanceof DefaultOAuth2AccessToken) {
-				DefaultOAuth2AccessToken token = (DefaultOAuth2AccessToken) oauth2AccessToken;
+				if (oauth2AccessToken instanceof DefaultOAuth2AccessToken) {
+					DefaultOAuth2AccessToken token = (DefaultOAuth2AccessToken) oauth2AccessToken;
 
-				/**
-				 * 自动续费 30分钟
-				 */
-				java.util.Date date = new Date(System.currentTimeMillis() + 1800000);
+					/**
+					 * 自动续费 30分钟
+					 */
+					java.util.Date date = new Date(System.currentTimeMillis() + 1800000);
 
-				token.setExpiration(date);
+					token.setExpiration(date);
 
-				int seconds = token.getExpiresIn();
+					int seconds = token.getExpiresIn();
 
-				RedisConnection con = getConnection();
-				try {
+					RedisConnection con = getConnection();
+					try {
+						
+						if (authentication != null) {
+							
+							byte[] serializedAccessToken = serializedAccessToken = serialize(tokenValue);
+							byte[] accessKey = serializeKey(ACCESS + tokenValue);
+							byte[] authKey = serializeKey(AUTH + tokenValue);
+							byte[] authToAccessKey = serializeKey(AUTH_TO_ACCESS + authenticationKeyGenerator.extractKey(authentication));
+							byte[] approvalKey = serializeKey(UNAME_TO_ACCESS + getApprovalKey(authentication));
+							byte[] clientId = serializeKey(CLIENT_ID_TO_ACCESS + authentication.getOAuth2Request().getClientId());
 
-					if (authentication != null) {
-						con.expire(accessKey, seconds);
-						con.expire(authKey, seconds);
-						con.expire(tokenKey, seconds);
-						con.expire(authToAccessKey, seconds);
-						con.expire(clientId, seconds);
-						con.expire(approvalKey, seconds);
+							 
+							con.expire(accessKey, seconds);
+							con.expire(authKey, seconds);
+							con.expire(tokenKey, seconds);
+							con.expire(authToAccessKey, seconds);
+							con.expire(clientId, seconds);
+							con.expire(approvalKey, seconds);
+						}
+
+					} finally {
+						con.close();
 					}
 
-				} finally {
-					con.close();
 				}
-
 			}
+		} catch (Exception e) {
+			throw new RuntimeException(e);
 		}
 
 		return oauth2AccessToken;
