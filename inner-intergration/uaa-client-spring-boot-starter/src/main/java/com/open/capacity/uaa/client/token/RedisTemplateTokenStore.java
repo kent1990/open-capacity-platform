@@ -202,7 +202,10 @@ public class RedisTemplateTokenStore implements TokenStore {
 					this.redisConnectionSet_2_0.invoke(conn, accessKey, serializedAccessToken);
 					this.redisConnectionSet_2_0.invoke(conn, authKey, serializedAuth);
 					this.redisConnectionSet_2_0.invoke(conn, authToAccessKey, serializedAccessToken);
-					this.redisConnectionSet_2_0.invoke(conn, tokenKey, serializedToken);
+					if(serializedToken!=null){
+						this.redisConnectionSet_2_0.invoke(conn, tokenKey, serializedToken);
+					}
+					
 				} catch (Exception ex) {
 					throw new RuntimeException(ex);
 				}
@@ -210,7 +213,10 @@ public class RedisTemplateTokenStore implements TokenStore {
 				conn.set(accessKey, serializedAccessToken);
 				conn.set(authKey, serializedAuth);
 				conn.set(authToAccessKey, serializedAccessToken);
-				conn.set(tokenKey, serializedToken);
+				if(serializedToken!=null){
+					conn.set(tokenKey, serializedToken);
+				}
+				
 			}
 			if (!authentication.isClientOnly()) {
 				conn.sAdd(approvalKey, serializedAccessToken);
