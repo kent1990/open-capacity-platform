@@ -5,9 +5,9 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisCallback;
@@ -39,7 +39,7 @@ public class RedisUtil {
 
     private HashOperations<String, String, String> hashOperations;
 
-	private LettuceConnectionFactory lettuceConnectionFactory;
+	private RedisConnectionFactory redisConnectionFactory;
  
     /**
      * json序列化方式
@@ -58,15 +58,15 @@ public class RedisUtil {
      * @param stringRedisTemplate
      * @param hashOperations
      */
-    public RedisUtil( LettuceConnectionFactory lettuceConnectionFactory, StringRedisTemplate stringRedisTemplate,
+    public RedisUtil( RedisConnectionFactory redisConnectionFactory, StringRedisTemplate stringRedisTemplate,
                      HashOperations<String, String, String> hashOperations) {
-        this.lettuceConnectionFactory = lettuceConnectionFactory;
+        this.redisConnectionFactory = redisConnectionFactory;
         this.stringRedisTemplate = stringRedisTemplate;
         this.hashOperations = hashOperations;
         
         RedisTemplate<String, Object> redisTemplate = new RedisTemplate<String, Object>();
 		RedisSerializer redisObjectSerializer = new GenericJackson2JsonRedisSerializer();
-		redisTemplate.setConnectionFactory(lettuceConnectionFactory);
+		redisTemplate.setConnectionFactory(redisConnectionFactory);
 		redisTemplate.setKeySerializer(new StringRedisSerializer()); // key的序列化类型
 		redisTemplate.setValueSerializer(redisObjectSerializer); // value的序列化类型
 		redisTemplate.setHashValueSerializer(redisObjectSerializer); 
