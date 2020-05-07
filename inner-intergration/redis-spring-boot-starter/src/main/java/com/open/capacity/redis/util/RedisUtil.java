@@ -58,15 +58,14 @@ public class RedisUtil {
      * @param stringRedisTemplate
      * @param hashOperations
      */
-    public RedisUtil( RedisConnectionFactory redisConnectionFactory, StringRedisTemplate stringRedisTemplate,
+    public RedisUtil(LettuceConnectionFactory lettuceConnectionFactory, StringRedisTemplate stringRedisTemplate,
                      HashOperations<String, String, String> hashOperations) {
         this.redisConnectionFactory = redisConnectionFactory;
         this.stringRedisTemplate = stringRedisTemplate;
         this.hashOperations = hashOperations;
-        
         RedisTemplate<String, Object> redisTemplate = new RedisTemplate<String, Object>();
 		RedisSerializer redisObjectSerializer = new GenericJackson2JsonRedisSerializer();
-		redisTemplate.setConnectionFactory(redisConnectionFactory);
+		redisTemplate.setConnectionFactory(lettuceConnectionFactory);
 		redisTemplate.setKeySerializer(new StringRedisSerializer()); // key的序列化类型
 		redisTemplate.setValueSerializer(redisObjectSerializer); // value的序列化类型
 		redisTemplate.setHashValueSerializer(redisObjectSerializer); 
