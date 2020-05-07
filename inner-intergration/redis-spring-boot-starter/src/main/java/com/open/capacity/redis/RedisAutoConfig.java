@@ -16,6 +16,7 @@ import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
@@ -28,7 +29,6 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.Resource;
 import org.springframework.data.redis.connection.RedisClusterConfiguration;
 import org.springframework.data.redis.connection.RedisConfiguration;
-import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisNode;
 import org.springframework.data.redis.connection.RedisPassword;
 import org.springframework.data.redis.connection.RedisSentinelConfiguration;
@@ -46,6 +46,7 @@ import org.springframework.util.ReflectionUtils;
 import com.open.capacity.redis.serializer.RedisObjectSerializer;
 import com.open.capacity.redis.util.RedisUtil;
 
+import io.lettuce.core.RedisClient;
 import io.lettuce.core.cluster.ClusterClientOptions;
 import io.lettuce.core.cluster.ClusterTopologyRefreshOptions;
 
@@ -70,7 +71,8 @@ public class RedisAutoConfig {
 	private ApplicationContext ctx;
 
 	@Bean(destroyMethod = "destroy")
-	public RedisConnectionFactory redisConnectionFactory(GenericObjectPoolConfig genericObjectPoolConfig) {
+	@ConditionalOnClass(RedisClient.class)
+	public LettuceConnectionFactory lettuceConnectionFactory(GenericObjectPoolConfig genericObjectPoolConfig) {
 		Method clusterMethod = ReflectionUtils.findMethod(RedisProperties.class, "getCluster");
 		Method timeoutMethod = ReflectionUtils.findMethod(RedisProperties.class, "getTimeout");
 		Object timeoutValue = ReflectionUtils.invokeMethod(timeoutMethod, redisProperties);
@@ -182,9 +184,9 @@ public class RedisAutoConfig {
 	@Bean("redisTemplate")
 	// 没有此属性就不会装配bean 如果是单个redis 将此注解注释掉
 	@ConditionalOnProperty(name = "spring.redis.cluster.nodes", matchIfMissing = false)
-	public RedisTemplate<String, Object> getRedisTemplate(RedisConnectionFactory redisConnectionFactory) {
+	public RedisTemplate<String, Object> getRedisTemplate(LettuceConnectionFactory lettuceConnectionFactory) {
 		RedisTemplate<String, Object> redisTemplate = new RedisTemplate<String, Object>();
-		redisTemplate.setConnectionFactory(redisConnectionFactory);
+		redisTemplate.setConnectionFactory(lettuceConnectionFactory);
 		RedisSerializer stringSerializer = new StringRedisSerializer();
 		// RedisSerializer redisObjectSerializer = new RedisObjectSerializer();
 		RedisSerializer redisObjectSerializer = new RedisObjectSerializer();
@@ -206,10 +208,10 @@ public class RedisAutoConfig {
 	@Primary
 	@Bean("redisTemplate")
 	@ConditionalOnProperty(name = "spring.redis.host", matchIfMissing = true)
-	public RedisTemplate<String, Object> getSingleRedisTemplate(RedisConnectionFactory redisConnectionFactory) {
+	public RedisTemplate<String, Object> getSingleRedisTemplate(LettuceConnectionFactory lettuceConnectionFactory) {
 		RedisTemplate<String, Object> redisTemplate = new RedisTemplate<String, Object>();
 		RedisSerializer redisObjectSerializer = new RedisObjectSerializer();
-		redisTemplate.setConnectionFactory(redisConnectionFactory);
+		redisTemplate.setConnectionFactory(lettuceConnectionFactory);
 		redisTemplate.setKeySerializer(new StringRedisSerializer()); // key的序列化类型
 		redisTemplate.setValueSerializer(redisObjectSerializer); // value的序列化类型
 		redisTemplate.setHashValueSerializer(redisObjectSerializer);
@@ -226,9 +228,9 @@ public class RedisAutoConfig {
 	 * redis工具类
 	 */
 	@Bean("redisUtil")
-	public RedisUtil redisUtil(RedisConnectionFactory redisConnectionFactory,
+	public RedisUtil redisUtil(LettuceConnectionFactory lettuceConnectionFactory,
 			StringRedisTemplate stringRedisTemplate, HashOperations<String, String, String> hashOperations) {
-		RedisUtil redisUtil = new RedisUtil(redisConnectionFactory, stringRedisTemplate, hashOperations);
+		RedisUtil redisUtil = new RedisUtil(lettuceConnectionFactory, stringRedisTemplate, hashOperations);
 		return redisUtil;
 	}
 
