@@ -22,13 +22,7 @@ public class RedisLimiterUtils {
     public static final String API_WEB_TIME_KEY = "time_key:";
     public static final String API_WEB_COUNTER_KEY = "counter_key:";
     private static final String EXCEEDS_LIMIT = "规定的时间内超出了访问的限制！";
-    @Resource
-    RedisTemplate<Object, Object> redisTemplate;
-    @Resource(name = "stringRedisTemplate")
-    ValueOperations<String, String> ops;
-    @Resource(name = "redisTemplate")
-    ValueOperations<Object, Object> objOps;
-
+   
     @Resource
     private RedisUtil redisUtil;
 
@@ -45,7 +39,7 @@ public class RedisLimiterUtils {
             log.info(EXCEEDS_LIMIT);
             return Result.failedWith(null, -1, EXCEEDS_LIMIT);
         }
-        return Result.succeedWith(null, 0,  "调用次数:" + this.ops.get(counter_key) );
+        return Result.succeedWith(null, 0,  "调用次数:" +   redisUtil.get(counter_key)   );
     }
 
 
@@ -61,7 +55,7 @@ public class RedisLimiterUtils {
             log.info(EXCEEDS_LIMIT);
             return Result.failedWith(null, -1, EXCEEDS_LIMIT);
         }
-        return Result.succeedWith(null, 0,  "调用次数:" + this.ops.get(counter_key) );
+        return Result.succeedWith(null, 0,  "调用次数:" +  redisUtil.get(counter_key)   );
     }
 
 
@@ -77,7 +71,7 @@ public class RedisLimiterUtils {
             log.info(EXCEEDS_LIMIT);
             return Result.failedWith(null, -1, EXCEEDS_LIMIT);
         }
-        return Result.succeedWith(null, 0,  "调用次数:" + this.ops.get(counter_key) );
+        return Result.succeedWith(null, 0,  "调用次数:" +  redisUtil.get(counter_key)   );
     }
 
 
@@ -95,7 +89,7 @@ public class RedisLimiterUtils {
             log.info(EXCEEDS_LIMIT);
             return Result.failedWith(null, -1, EXCEEDS_LIMIT);
         }
-        return Result.succeedWith(null, 0,  "调用次数:" + this.ops.get(counter_key) );
+        return Result.succeedWith(null, 0,  "调用次数:" + redisUtil.get(counter_key)   );
     }
 
 
@@ -116,7 +110,7 @@ public class RedisLimiterUtils {
             log.info("日内超出了访问的限制！");
             return Result.failedWith(null, -1, "日内超出了访问的限制!");
         }
-        return Result.succeedWith(null, 0,  "调用总次数:" + this.ops.get(counter_key) );
+        return Result.succeedWith(null, 0,  "调用总次数:" +  redisUtil.get(counter_key)   );
     }
 
 
@@ -134,7 +128,7 @@ public class RedisLimiterUtils {
             log.info(EXCEEDS_LIMIT);
             return Result.failedWith(null, -1, EXCEEDS_LIMIT);
         }
-        return Result.succeedWith(null, 0,  "调用次数:" + this.ops.get(counter_key) );
+        return Result.succeedWith(null, 0,  "调用次数:" +  redisUtil.get(counter_key)   );
     }
 
 

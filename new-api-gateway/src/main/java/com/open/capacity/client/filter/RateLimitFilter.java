@@ -43,9 +43,6 @@ import reactor.core.publisher.Mono;
 public class RateLimitFilter implements GlobalFilter, Ordered {
     // url匹配器
     private final AntPathMatcher pathMatcher = new AntPathMatcher();
-    @Resource
-    private RedisUtil redisUtil;
-
 
     @Autowired
     private RedisLimiterUtils redisLimiterUtils;

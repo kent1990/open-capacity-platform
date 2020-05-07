@@ -16,6 +16,7 @@ import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
@@ -46,6 +47,7 @@ import org.springframework.util.ReflectionUtils;
 import com.open.capacity.redis.serializer.RedisObjectSerializer;
 import com.open.capacity.redis.util.RedisUtil;
 
+import io.lettuce.core.RedisClient;
 import io.lettuce.core.cluster.ClusterClientOptions;
 import io.lettuce.core.cluster.ClusterTopologyRefreshOptions;
 
@@ -70,6 +72,7 @@ public class RedisAutoConfig {
 	private ApplicationContext ctx;
 
 	@Bean(destroyMethod = "destroy")
+	@ConditionalOnClass(RedisClient.class)
 	public RedisConnectionFactory redisConnectionFactory(GenericObjectPoolConfig genericObjectPoolConfig) {
 		Method clusterMethod = ReflectionUtils.findMethod(RedisProperties.class, "getCluster");
 		Method timeoutMethod = ReflectionUtils.findMethod(RedisProperties.class, "getTimeout");
