@@ -28,6 +28,7 @@ import com.github.structlog4j.json.JsonFormatter;
 import com.open.capacity.common.auth.details.LoginAppUser;
 import com.open.capacity.common.constant.TraceConstant;
 import com.open.capacity.common.model.SysLog;
+import com.open.capacity.common.util.IPUtils;
 import com.open.capacity.common.util.SysUserUtil;
 import com.open.capacity.log.annotation.LogAnnotation;
 import com.open.capacity.log.service.LogService;
@@ -52,30 +53,12 @@ public class LogAnnotationAOP {
 	
 	@Autowired(required=false)
 	private LogService logService ;
-
 	
 	@Autowired
 	private TaskExecutor taskExecutor;
 	
-	@Value("${spring.profiles.active:NA}")
-    private String activeProfile;
+ 
 
-    @Value("${spring.application.name:NA}")
-    private String appName;
-	
-	@PostConstruct
-	public void init(){
-		
-		StructLog4J.setFormatter(JsonFormatter.getInstance());
-		
-		StructLog4J.setMandatoryContextSupplier(()-> new Object[]{
-			"env",	activeProfile,
-			"serviceName",appName 
-		});
-		
-	}
-
-	
 	@Around("@annotation(ds)")
 	public Object logSave(ProceedingJoinPoint joinPoint, LogAnnotation ds) throws Throwable {
 

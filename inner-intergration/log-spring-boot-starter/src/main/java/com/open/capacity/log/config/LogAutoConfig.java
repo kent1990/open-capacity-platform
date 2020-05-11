@@ -1,9 +1,15 @@
 package com.open.capacity.log.config;
 
+import javax.annotation.PostConstruct;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.github.structlog4j.StructLog4J;
+import com.github.structlog4j.json.JsonFormatter;
+import com.open.capacity.common.util.IPUtils;
 import com.open.capacity.log.interceptor.LogInterceptor;
 
 /**
@@ -16,6 +22,23 @@ import com.open.capacity.log.interceptor.LogInterceptor;
 @ConditionalOnClass(WebMvcConfigurer.class)
 public class LogAutoConfig implements WebMvcConfigurer {
  
+	@Value("${spring.application.name:NA}")
+    private String appName;
+	
+	@PostConstruct
+	/*
+	 * 初始化StructLog4J配置
+	 */
+	public void init(){
+		
+		StructLog4J.setFormatter(JsonFormatter.getInstance());
+		
+		StructLog4J.setMandatoryContextSupplier(()-> new Object[]{
+			"host",	IPUtils.getHostIp(),
+			"appName",appName 
+		});
+		
+	}
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
  
