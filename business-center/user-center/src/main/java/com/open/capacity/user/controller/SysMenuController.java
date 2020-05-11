@@ -61,13 +61,8 @@ public class SysMenuController {
 	public Result delete(@PathVariable Long id) throws ControllerException {
 
 		try {
-			try {
 				menuService.delete(id);
 				return Result.succeed("操作成功");
-			} catch (Exception ex) {
-				log.error("SysMenuController->run:{}" ,ex.getMessage());
-				return Result.failed("操作失败");
-			}
 		} catch (Exception e) {
 			throw new ControllerException(e);
 		}

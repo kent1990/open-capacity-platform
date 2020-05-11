@@ -15,11 +15,6 @@ public class LogImportSelector implements ImportSelector {
 
 	@Override
 	public String[] selectImports(AnnotationMetadata importingClassMetadata) {
-		// TODO Auto-generated method stub
-//		importingClassMetadata.getAllAnnotationAttributes(EnableEcho.class.getName());
-		
-		
-		
 		
 		return new String[] { 
 				"com.open.capacity.log.aop.LogAnnotationAOP",

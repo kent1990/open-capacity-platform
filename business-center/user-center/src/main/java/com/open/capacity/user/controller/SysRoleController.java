@@ -20,6 +20,8 @@ import com.open.capacity.common.model.SysRole;
 import com.open.capacity.common.web.PageResult;
 import com.open.capacity.common.web.Result;
 import com.open.capacity.log.annotation.LogAnnotation;
+import com.open.capacity.log.dto.LogEntry;
+import com.open.capacity.log.monitor.BizLog;
 import com.open.capacity.user.service.SysRoleService;
 
 import io.swagger.annotations.Api;
@@ -53,6 +55,7 @@ public class SysRoleController {
 	@LogAnnotation(module="user-center",recordRequestParam=false)
 	public PageResult<SysRole> findRoles(@RequestParam Map<String, Object> params) throws ControllerException {
 		try {
+//			BizLog.info("ssss", LogEntry.builder().msg("hello").build());
 			return sysRoleService.findRoles(params);
 		} catch (ServiceException e) {
 			 throw new ControllerException(e);

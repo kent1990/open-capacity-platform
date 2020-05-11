@@ -3,7 +3,7 @@
     <contextName>${APP_NAME}</contextName>
     <springProperty name="APP_NAME" scope="context" source="spring.application.name"/>
     <springProperty name="LOG_FILE" scope="context" source="logging.file" defaultValue="../logs/${APP_NAME}"/>
-    <springProperty name="LOG_POINT_FILE" scope="context" source="logging.file" defaultValue="../logs/point"/>
+    <springProperty name="LOG_POINT_FILE" scope="context" source="logging.file" defaultValue="../logs/biz"/>
     <springProperty name="LOG_MAXFILESIZE" scope="context" source="logback.filesize" defaultValue="50MB"/>
     <springProperty name="LOG_FILEMAXDAY" scope="context" source="logback.filemaxday" defaultValue="7"/>
     <springProperty name="ServerIP" scope="context" source="spring.cloud.client.ip-address" defaultValue="0.0.0.0"/>
@@ -74,16 +74,16 @@
         </filter>
     </appender>
     
-	<!-- 
-    <appender name="point_log" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOG_POINT_FILE}/point.log</file>
+	<!-- 业务日志 -->
+    <appender name="biz_log" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_POINT_FILE}/biz.log</file>
         <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss}|${APP_NAME}|%msg%n</pattern>
+            <pattern>%msg%n</pattern>
             <charset>UTF-8</charset>
         </encoder>
          
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_POINT_FILE}/point.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <fileNamePattern>${LOG_POINT_FILE}/biz.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
          
             <maxHistory>${LOG_FILEMAXDAY}</maxHistory>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
@@ -95,14 +95,14 @@
         </filter>
     </appender>
 
-    <appender name="point_log_async" class="ch.qos.logback.classic.AsyncAppender">
+    <appender name="biz_log_async" class="ch.qos.logback.classic.AsyncAppender">
         <discardingThreshold>0</discardingThreshold>
-        <appender-ref ref="point_log"/>
+        <appender-ref ref="biz_log"/>
     </appender>
     <logger name="com.open.capacity.log.monitor" level="info" addtivity="false">
-        <appender-ref ref="point_log_async" />
+        <appender-ref ref="biz_log_async" />
     </logger>
-	 -->
+	
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="ERROR"/>
