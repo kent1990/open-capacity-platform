@@ -55,7 +55,7 @@ public class SysRoleController {
 	@LogAnnotation(module="user-center",recordRequestParam=false)
 	public PageResult<SysRole> findRoles(@RequestParam Map<String, Object> params) throws ControllerException {
 		try {
-//			BizLog.info("ssss", LogEntry.builder().msg("hello").build());
+//			BizLog.info("角色列表", LogEntry.builder().clazz(this.getClass().getName()).method("findRoles").msg("hello").path("/roles").build());
 			return sysRoleService.findRoles(params);
 		} catch (ServiceException e) {
 			 throw new ControllerException(e);

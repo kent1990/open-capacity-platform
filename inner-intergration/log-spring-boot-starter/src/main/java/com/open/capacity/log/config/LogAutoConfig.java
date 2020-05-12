@@ -1,21 +1,21 @@
 package com.open.capacity.log.config;
 
 import javax.annotation.PostConstruct;
-
+import cn.hutool.core.date.SystemClock;
+import com.github.structlog4j.StructLog4J;
+import com.github.structlog4j.json.JsonFormatter;
+import com.open.capacity.common.util.IPUtils;
+import com.open.capacity.log.interceptor.LogInterceptor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import com.github.structlog4j.StructLog4J;
-import com.github.structlog4j.json.JsonFormatter;
-import com.open.capacity.common.util.IPUtils;
-import com.open.capacity.log.interceptor.LogInterceptor;
-
 /**
  * @author owen
  * @create 2017年7月2日
  * 日志拦截器，排除对spring cloud gateway的影响 (WebMvcConfigurer)
+ * 配合 EnableLogging 使用
  * blog: https://blog.51cto.com/13005375 
  * code: https://gitee.com/owenwangwen/open-capacity-platform
  */
@@ -35,7 +35,8 @@ public class LogAutoConfig implements WebMvcConfigurer {
 		
 		StructLog4J.setMandatoryContextSupplier(()-> new Object[]{
 			"host",	IPUtils.getHostIp(),
-			"appName",appName 
+			"appName",appName ,
+			"logTime",SystemClock.nowDate()
 		});
 		
 	}
