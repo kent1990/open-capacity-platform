@@ -28,7 +28,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 /**
-* @author 作者 owen E-mail: 624191343@qq.com
+* @author 作者 owen 
 * @version 创建时间：2017年11月12日 上午22:57:51
 * 角色管理
  */
@@ -55,7 +55,7 @@ public class SysRoleController {
 	@LogAnnotation(module="user-center",recordRequestParam=false)
 	public PageResult<SysRole> findRoles(@RequestParam Map<String, Object> params) throws ControllerException {
 		try {
-//			BizLog.info("ssss", LogEntry.builder().msg("hello").build());
+//			BizLog.info("角色列表", LogEntry.builder().clazz(this.getClass().getName()).method("findRoles").msg("hello").path("/roles").build());
 			return sysRoleService.findRoles(params);
 		} catch (ServiceException e) {
 			 throw new ControllerException(e);
