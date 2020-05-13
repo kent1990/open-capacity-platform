@@ -18,14 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
  * @version 创建时间：2017年11月24日 下午5:34:47 类说明
  */
 @RestController
-public class Controller {
+public class MailController {
 	@Autowired
 	private JavaMailSender javaMailSender;
 
 	@GetMapping("/send")
 	public String send() {
 		SimpleMailMessage message = new SimpleMailMessage();
-
 		message.setFrom("18579068155@163.com");
 		message.setTo("wang.wen@neusoft.com");
 		message.setSubject("测试邮件");

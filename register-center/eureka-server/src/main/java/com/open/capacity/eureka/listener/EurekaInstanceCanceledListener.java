@@ -15,6 +15,7 @@ import com.netflix.eureka.registry.PeerAwareInstanceRegistry;
 
 import lombok.extern.slf4j.Slf4j;
 
+
 /**
  * 用于监听eureka服务停机通知
  * Created by ace on 2017/7/8.
@@ -35,8 +36,9 @@ public class EurekaInstanceCanceledListener implements ApplicationListener {
             applications.getRegisteredApplications().forEach((registeredApplication) -> {
                 registeredApplication.getInstances().forEach((instance) -> {
                     if (instance.getInstanceId().equals(event.getServerId())) {
-                        log.debug("服务：" + instance.getAppName() + " 挂啦。。。");
+                        log.error("服务：" + instance.getAppName() + " 挂啦。。。");
                         // // TODO: 2017/9/3 扩展消息提醒 邮件、手机短信、微信等
+//                        CountDownLatch
                     }
                 });
             });
@@ -45,14 +47,14 @@ public class EurekaInstanceCanceledListener implements ApplicationListener {
         }
         if (applicationEvent instanceof EurekaInstanceRegisteredEvent) {
             EurekaInstanceRegisteredEvent event = (EurekaInstanceRegisteredEvent) applicationEvent;
-            log.debug("服务：" + event.getInstanceInfo().getAppName() + " 注册成功啦。。。");
+            log.info("服务：" + event.getInstanceInfo().getAppName() + " 注册成功啦。。。");
         }
         if (applicationEvent instanceof EurekaInstanceRenewedEvent) {
             EurekaInstanceRenewedEvent event = (EurekaInstanceRenewedEvent) applicationEvent;
-            log.debug("心跳检测服务：" + event.getInstanceInfo().getAppName() + "。。");
+            log.info("心跳检测服务：" + event.getInstanceInfo().getAppName() + "。。");
         }
         if (applicationEvent instanceof EurekaRegistryAvailableEvent) {
-            log.debug("服务 Aualiable。。");
+            log.info("服务 Aualiable。。");
         }
 
     }

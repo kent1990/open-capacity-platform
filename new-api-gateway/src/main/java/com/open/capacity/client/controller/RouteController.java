@@ -28,8 +28,8 @@ public class RouteController {
     private DynamicRouteService dynamicRouteService;
 
     //增加路由
-	@PostMapping("/add")
-    public Mono<Result>   add(@RequestBody GatewayRouteDefinition gatewayRouteDefinition) {
+    @PostMapping("/add")
+    public Mono<Result> add(@RequestBody GatewayRouteDefinition gatewayRouteDefinition) {
         return Mono.just(Result.succeed(dynamicRouteService.add(gatewayRouteDefinition)));
     }
 
@@ -47,25 +47,22 @@ public class RouteController {
 
     //获取全部数据
     @GetMapping("/findAll")
-    public Mono<PageResult>  findAll(@RequestParam Map<String, Object> params){
+    public Mono<PageResult> findAll(@RequestParam Map<String, Object> params) {
         return Mono.just(dynamicRouteService.findAll(params));
     }
 
     //同步redis数据 从mysql中同步过去
     @GetMapping("/synchronization")
-    public Mono<Result>  synchronization() {
+    public Mono<Result> synchronization() {
         return Mono.just(Result.succeed(dynamicRouteService.synchronization()));
     }
 
 
     //修改路由状态
     @GetMapping("/updateFlag")
-    public Mono<Result>  updateFlag(@RequestParam Map<String, Object> params) {
+    public Mono<Result> updateFlag(@RequestParam Map<String, Object> params) {
         return Mono.just(Result.succeed(dynamicRouteService.updateFlag(params)));
     }
-
-
-
 
 
 }

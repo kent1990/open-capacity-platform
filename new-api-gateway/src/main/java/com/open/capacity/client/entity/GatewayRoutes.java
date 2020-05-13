@@ -1,7 +1,10 @@
 package com.open.capacity.client.entity;
 
+import lombok.Getter;
+
 import java.util.Date;
 
+@Getter
 public class GatewayRoutes {
     private String id;
 
@@ -21,75 +24,49 @@ public class GatewayRoutes {
 
     private Date updateTime;
 
-    public String getId() {
-        return id;
-    }
 
     public void setId(String id) {
         this.id = id == null ? null : id.trim();
     }
 
-    public String getUri() {
-        return uri;
-    }
 
     public void setUri(String uri) {
         this.uri = uri == null ? null : uri.trim();
     }
 
-    public String getPredicates() {
-        return predicates;
-    }
 
     public void setPredicates(String predicates) {
         this.predicates = predicates == null ? null : predicates.trim();
     }
 
-    public String getFilters() {
-        return filters;
-    }
 
     public void setFilters(String filters) {
         this.filters = filters == null ? null : filters.trim();
     }
 
-    public Integer getOrder() {
-        return order;
-    }
 
     public void setOrder(Integer order) {
-        this.order = order;
-    }
-
-    public String getDescription() {
-        return description;
+        this.order = order == null ? 0 : order;
     }
 
     public void setDescription(String description) {
         this.description = description == null ? null : description.trim();
     }
 
-    public Integer getDelFlag() {
-        return delFlag;
-    }
-
+    /**
+     * 一般delFlag==1表示删除，delFlag==0表示存在
+     */
     public void setDelFlag(Integer delFlag) {
-        this.delFlag = delFlag;
+        this.delFlag = delFlag == null ? 0 : delFlag;
     }
 
-    public Date getCreateTime() {
-        return createTime;
-    }
 
     public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+        this.createTime = createTime == null ? new Date(System.currentTimeMillis()) : createTime;
     }
 
-    public Date getUpdateTime() {
-        return updateTime;
-    }
 
     public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
+        this.updateTime = updateTime == null ? new Date(System.currentTimeMillis()) : updateTime;
     }
 }

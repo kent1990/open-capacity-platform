@@ -37,7 +37,8 @@ public class ApiIdempotentInterceptor implements HandlerInterceptor {
         // TODO: 2019-08-27 获取目标方法上的幂等注解
         ApiIdempotent methodAnnotation = method.getAnnotation(ApiIdempotent.class);
         if (methodAnnotation != null) {
-            checkApiIdempotent(request);// 幂等性校验, 校验通过则放行, 校验失败则抛出异常, 并通过统一异常处理返回友好提示
+            // 幂等性校验, 校验通过则放行, 校验失败则抛出异常, 并通过统一异常处理返回友好提示
+            checkApiIdempotent(request);
         }
         return true;
     }
@@ -51,11 +52,9 @@ public class ApiIdempotentInterceptor implements HandlerInterceptor {
                 throw new IllegalArgumentException("无效的参数");
             }
         }
-
         if (!redisTemplate.hasKey(version)) {
             throw new IllegalArgumentException("不存在对应的参数");
         }
-
         Boolean bool = redisTemplate.delete(version);
         if (!bool) {
             throw new IllegalArgumentException("没有删除对应的version");

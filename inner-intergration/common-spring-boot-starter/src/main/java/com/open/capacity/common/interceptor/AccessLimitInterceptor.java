@@ -2,6 +2,7 @@ package com.open.capacity.common.interceptor;
 
 import java.io.OutputStream;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -27,6 +28,7 @@ import lombok.AllArgsConstructor;
 @SuppressWarnings("all")
 public class AccessLimitInterceptor extends HandlerInterceptorAdapter {
 
+    @Resource
     private RedisUtil redisUtil;
 
     @Override

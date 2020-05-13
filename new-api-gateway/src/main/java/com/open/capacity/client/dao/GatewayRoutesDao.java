@@ -1,4 +1,4 @@
-package com.open.capacity.client.mapper;
+package com.open.capacity.client.dao;
 
 import com.open.capacity.client.entity.GatewayRoutes;
 import org.apache.ibatis.annotations.Mapper;
@@ -6,9 +6,10 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 import java.util.Map;
 
+
 @Mapper
 @SuppressWarnings("all")
-public interface GatewayRoutesMapper {
+public interface GatewayRoutesDao {
     int deleteByPrimaryKey(String id);
 
     int insert(GatewayRoutes record);

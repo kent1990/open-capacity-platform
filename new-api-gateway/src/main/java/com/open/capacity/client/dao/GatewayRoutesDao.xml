@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.open.capacity.client.mapper.GatewayRoutesMapper" >
+<mapper namespace="com.open.capacity.client.dao.GatewayRoutesDao" >
   <resultMap id="BaseResultMap" type="com.open.capacity.client.entity.GatewayRoutes" >
     <id column="id" property="id" jdbcType="CHAR" />
     <result column="uri" property="uri" jdbcType="VARCHAR" />
