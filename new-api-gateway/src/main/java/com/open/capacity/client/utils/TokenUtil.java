@@ -10,7 +10,7 @@ import com.open.capacity.common.constant.UaaConstant;
 
 public class TokenUtil {
 	public  static String extractToken(ServerHttpRequest request) {
-		List<String> strings = request.getHeaders().get(UaaConstant.AUTHORIZTION);
+		List<String> strings = request.getHeaders().get(UaaConstant.AUTHORIZATION);
 		String authToken = "";
 		if(!StringUtil.isEmpty(strings) && strings.get(0).contains("Bearer")){
 			authToken = strings.get(0).substring("Bearer".length()).trim();
@@ -21,7 +21,6 @@ public class TokenUtil {
 				authToken = strings.get(0);
 			}
 		}
-
 		return authToken;
 	}
 }

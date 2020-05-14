@@ -15,7 +15,7 @@ public class TokenUtil {
 		try {
 			HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
 
-			String header = request.getHeader(UaaConstant.AUTHORIZTION);
+			String header = request.getHeader(UaaConstant.AUTHORIZATION);
 
 			token = StringUtil.isBlank(StringUtil.substringAfter(header, OAuth2AccessToken.BEARER_TYPE + " ")) ? request.getParameter(OAuth2AccessToken.ACCESS_TOKEN) : StringUtil.substringAfter(header, OAuth2AccessToken.BEARER_TYPE + " ");
 

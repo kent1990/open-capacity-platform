@@ -9,7 +9,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Import;
 
-import com.open.capacity.common.feign.GolbalFeignConfig;
+import com.open.capacity.common.feign.GlobalFeignConfig;
 import com.open.capacity.common.port.PortApplicationEnvironmentPreparedEventListener;
 import com.open.capacity.log.annotation.EnableLogging;
 import com.open.capacity.uaa.server.UAAServerConfig;
@@ -23,7 +23,7 @@ import com.open.capacity.uaa.server.UAAServerConfig;
 @EnableDiscoveryClient
 @SpringBootApplication
 @Import(UAAServerConfig.class)
-@EnableFeignClients(defaultConfiguration=GolbalFeignConfig.class)
+@EnableFeignClients(defaultConfiguration=GlobalFeignConfig.class)
 public class AuthServerApp {
 	
 	public static void main(String[] args) {

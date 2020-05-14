@@ -16,8 +16,6 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
 import org.springframework.security.oauth2.provider.error.OAuth2AccessDeniedHandler;
 import org.springframework.security.oauth2.provider.expression.OAuth2WebSecurityExpressionHandler;
 import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
-import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
@@ -25,7 +23,7 @@ import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.open.capacity.common.auth.props.PermitUrlProperties;
 import com.open.capacity.common.feign.FeignInterceptorConfig;
-import com.open.capacity.common.feign.GolbalFeignConfig;
+import com.open.capacity.common.feign.GlobalFeignConfig;
 import com.open.capacity.common.rest.RestTemplateConfig;
 import com.open.capacity.uaa.client.authorize.AuthorizeConfigManager;
 
@@ -42,7 +40,7 @@ import com.open.capacity.uaa.client.authorize.AuthorizeConfigManager;
 @AutoConfigureAfter(TokenStore.class)
 @EnableConfigurationProperties(PermitUrlProperties.class)
 @Import({RestTemplateConfig.class,FeignInterceptorConfig.class})
-@EnableFeignClients(defaultConfiguration=GolbalFeignConfig.class)
+@EnableFeignClients(defaultConfiguration= GlobalFeignConfig.class)
 //开启spring security 注解
 //@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class UAAClientAutoConfig extends ResourceServerConfigurerAdapter {

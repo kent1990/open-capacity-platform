@@ -19,6 +19,6 @@ public class UaaConstant {
     
     public static final String TOKEN = "token" ;
     
-    public static final String AUTHORIZTION = "Authorization" ;
+    public static final String AUTHORIZATION = "Authorization" ;
     
 }

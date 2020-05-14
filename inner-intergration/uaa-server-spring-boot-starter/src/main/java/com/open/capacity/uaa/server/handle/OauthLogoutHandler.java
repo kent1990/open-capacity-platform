@@ -70,7 +70,7 @@ public class OauthLogoutHandler implements LogoutHandler {
 	}
 
 	protected String extractHeaderToken(HttpServletRequest request) {
-		Enumeration<String> headers = request.getHeaders(UaaConstant.AUTHORIZTION);
+		Enumeration<String> headers = request.getHeaders(UaaConstant.AUTHORIZATION);
 		while (headers.hasMoreElements()) { // typically there is only one (most
 											// servers enforce that)
 			String value = headers.nextElement();

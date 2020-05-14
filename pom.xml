@@ -369,6 +369,11 @@
 			<name>finally</name>
 			<email>1363946966@qq.com</email>
 		</developer>
+		<developer>
+           	 	<id>13</id>
+            	 	<name>adonis</name>
+            	 	<email>1977334800@qq.com</email>
+        	</developer>
 	</developers>
 
 </project>

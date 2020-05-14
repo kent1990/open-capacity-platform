@@ -319,13 +319,40 @@ public class RedisTemplateTokenStore implements TokenStore {
 						
 						if (authentication != null) {
 							
-							byte[] serializedAccessToken = serializedAccessToken = serialize(tokenValue);
-							byte[] accessKey = serializeKey(ACCESS + tokenValue);
-							byte[] authKey = serializeKey(AUTH + tokenValue);
-							byte[] authToAccessKey = serializeKey(AUTH_TO_ACCESS + authenticationKeyGenerator.extractKey(authentication));
-							byte[] approvalKey = serializeKey(UNAME_TO_ACCESS + getApprovalKey(authentication));
-							byte[] clientId = serializeKey(CLIENT_ID_TO_ACCESS + authentication.getOAuth2Request().getClientId());
+							byte[] serializedAccessToken = serialize(token);
+                            byte[] serializedAuth = serialize(authentication);
+                            byte[] accessKey = serializeKey(ACCESS + tokenValue);
+                            byte[] authKey = serializeKey(AUTH + tokenValue);
+                            byte[] authToAccessKey = serializeKey(AUTH_TO_ACCESS + authenticationKeyGenerator.extractKey(authentication));
+                            byte[] approvalKey = serializeKey(UNAME_TO_ACCESS + getApprovalKey(authentication));
+                            byte[] clientId = serializeKey(CLIENT_ID_TO_ACCESS + authentication.getOAuth2Request().getClientId());
+                            byte[] serializedToken = (authentication.getUserAuthentication() instanceof UsernamePasswordAuthenticationToken)
+                                    ? serialize((LoginAppUser) ((UsernamePasswordAuthenticationToken) authentication.getUserAuthentication())
+                                    .getPrincipal())
+                                    : null;
 
+                            
+                            if (springDataRedis_2_0) {
+                                try {
+                                    this.redisConnectionSet_2_0.invoke(conn, accessKey, serializedAccessToken);
+                                    this.redisConnectionSet_2_0.invoke(conn, authKey, serializedAuth);
+                                    this.redisConnectionSet_2_0.invoke(conn, authToAccessKey, serializedAccessToken);
+                                    if (serializedToken != null) {
+                                        this.redisConnectionSet_2_0.invoke(conn, tokenKey, serializedToken);
+                                    }
+
+                                } catch (Exception ex) {
+                                    throw new RuntimeException(ex);
+                                }
+                            } else {
+                                conn.set(accessKey, serializedAccessToken);
+                                conn.set(authKey, serializedAuth);
+                                conn.set(authToAccessKey, serializedAccessToken);
+                                if (serializedToken != null) {
+                                    conn.set(tokenKey, serializedToken);
+                                }
+
+                            }
 							 
 							con.expire(accessKey, seconds);
 							con.expire(authKey, seconds);

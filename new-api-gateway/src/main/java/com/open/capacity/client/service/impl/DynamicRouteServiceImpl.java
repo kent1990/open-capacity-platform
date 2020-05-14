@@ -34,7 +34,7 @@ import com.open.capacity.client.dto.GatewayFilterDefinition;
 import com.open.capacity.client.dto.GatewayPredicateDefinition;
 import com.open.capacity.client.dto.GatewayRouteDefinition;
 import com.open.capacity.client.entity.GatewayRoutes;
-import com.open.capacity.client.mapper.GatewayRoutesMapper;
+import com.open.capacity.client.dao.GatewayRoutesDao;
 import com.open.capacity.client.service.DynamicRouteService;
 import com.open.capacity.client.vo.GatewayRoutesVO;
 import com.open.capacity.common.web.PageResult;
@@ -48,22 +48,22 @@ import ma.glasnost.orika.impl.DefaultMapperFactory;
 public class DynamicRouteServiceImpl implements ApplicationEventPublisherAware, DynamicRouteService {
 
     @Autowired
-    private StringRedisTemplate redisTemplate;
+    private StringRedisTemplate stringRedisTemplate;
 
     @Resource
     private RouteDefinitionWriter routeDefinitionWriter;
 
-    private ApplicationEventPublisher publisher;
-
     @Autowired
-    private GatewayRoutesMapper gatewayRoutesMapper;
+    private GatewayRoutesDao gatewayRoutesDao;
 
+    private ApplicationEventPublisher publisher;
 
     /**
      * 初始化 转化对象
      */
     private static MapperFacade routeDefinitionMapper;
     private static MapperFacade routeVOMapper;
+
     static {
         MapperFactory mapperFactory = new DefaultMapperFactory.Builder().build();
         mapperFactory.classMap(GatewayRouteDefinition.class, GatewayRoutes.class)
@@ -71,18 +71,16 @@ public class DynamicRouteServiceImpl implements ApplicationEventPublisherAware, 
                 .exclude("predicates")
                 .byDefault();
         routeDefinitionMapper = mapperFactory.getMapperFacade();
-
         //  routeVOMapper
-        mapperFactory.classMap(GatewayRoutes.class, GatewayRoutesVO.class)
-                .byDefault();
+        mapperFactory.classMap(GatewayRoutes.class, GatewayRoutesVO.class).byDefault();
         routeVOMapper = mapperFactory.getMapperFacade();
 
     }
 
 
     /**
-     *  给spring注册事件
-     *      刷新路由
+     * 给spring注册事件
+     * 刷新路由
      */
     private void notifyChanged() {
         this.publisher.publishEvent(new RefreshRoutesEvent(this));
@@ -101,36 +99,6 @@ public class DynamicRouteServiceImpl implements ApplicationEventPublisherAware, 
         this.publisher = applicationEventPublisher;
     }
 
-//    @Override
-//    public String add(RouteDefinition definition) {
-//        redisTemplate.opsForValue().set(GATEWAY_ROUTES_PREFIX + definition.getId(), JSONObject.toJSONString(definition));
-//        routeDefinitionWriter.save(Mono.just(definition)).subscribe();
-//        notifyChanged();
-//        return "success";
-//    }
-//
-//    @Override
-//    public String update(RouteDefinition definition) {
-//        redisTemplate.delete(GATEWAY_ROUTES_PREFIX + definition.getId());
-//        redisTemplate.opsForValue().set(GATEWAY_ROUTES_PREFIX + definition.getId(), JSONObject.toJSONString(definition));
-//        return "success";
-//        try {
-//            this.routeDefinitionWriter.delete(Mono.just(definition.getId()));
-//        } catch (Exception e) {
-//            return "update fail,not find route  routeId: " + definition.getId();
-//        }
-//        try {
-//            routeDefinitionWriter.save(Mono.just(definition)).subscribe();
-//            notifyChanged();
-//            return "success";
-//        } catch (Exception e) {
-//            return "update route  fail";
-//        }
-//    }
-
-
-
-
     /**
      * 新增路由
      *
@@ -143,13 +111,9 @@ public class DynamicRouteServiceImpl implements ApplicationEventPublisherAware, 
         gatewayRoutes.setDelFlag(0);
         gatewayRoutes.setCreateTime(new Date());
         gatewayRoutes.setUpdateTime(new Date());
-        gatewayRoutesMapper.insertSelective(gatewayRoutes);
-
+        gatewayRoutesDao.insertSelective(gatewayRoutes);
         gatewayRouteDefinition.setId(gatewayRoutes.getId());
-       
-        redisTemplate.boundHashOps(GATEWAY_ROUTES_PREFIX).put(gatewayRouteDefinition.getId(),  JSONObject.toJSONString(gatewayRouteDefinition));
-        
-        
+        stringRedisTemplate.boundHashOps(GATEWAY_ROUTES_PREFIX).put(gatewayRouteDefinition.getId(), JSONObject.toJSONString(gatewayRouteDefinition));
         return gatewayRoutes.getId();
     }
 
@@ -164,28 +128,24 @@ public class DynamicRouteServiceImpl implements ApplicationEventPublisherAware, 
         GatewayRoutes gatewayRoutes = transformToGatewayRoutes(gatewayRouteDefinition);
         gatewayRoutes.setCreateTime(new Date());
         gatewayRoutes.setUpdateTime(new Date());
-        gatewayRoutesMapper.updateByPrimaryKeySelective(gatewayRoutes);
-
-        
-    	redisTemplate.boundHashOps(GATEWAY_ROUTES_PREFIX).delete(gatewayRouteDefinition.getId()); 
-        
-        redisTemplate.boundHashOps(GATEWAY_ROUTES_PREFIX).put(gatewayRouteDefinition.getId(),  JSONObject.toJSONString(gatewayRouteDefinition));
-        
-        
+        gatewayRoutesDao.updateByPrimaryKeySelective(gatewayRoutes);
+        stringRedisTemplate.boundHashOps(GATEWAY_ROUTES_PREFIX).delete(gatewayRouteDefinition.getId());
+        stringRedisTemplate.boundHashOps(GATEWAY_ROUTES_PREFIX).put(gatewayRouteDefinition.getId(), JSONObject.toJSONString(gatewayRouteDefinition));
         return gatewayRouteDefinition.getId();
     }
 
 
     /**
      * 删除路由
+     *
      * @param id
      * @return
      */
     @Override
     public String delete(String id) {
-        gatewayRoutesMapper.deleteByPrimaryKey(id);
-        redisTemplate.boundHashOps(GATEWAY_ROUTES_PREFIX).delete( id ); 
-        
+        gatewayRoutesDao.deleteByPrimaryKey(id);
+        stringRedisTemplate.boundHashOps(GATEWAY_ROUTES_PREFIX).delete(id);
+
         return "success";
 //        try {
 //            this.routeDefinitionWriter.delete(Mono.just(id));
@@ -204,8 +164,8 @@ public class DynamicRouteServiceImpl implements ApplicationEventPublisherAware, 
      */
     @Override
     public PageResult<GatewayRoutesVO> findAll(Map<String, Object> params) {
-        PageHelper.startPage(MapUtils.getInteger(params, "page"),MapUtils.getInteger(params, "limit"),true);
-        List<GatewayRoutes> alls = gatewayRoutesMapper.findAll(new HashMap());
+        PageHelper.startPage(MapUtils.getInteger(params, "page"), MapUtils.getInteger(params, "limit"), true);
+        List<GatewayRoutes> alls = gatewayRoutesDao.findAll(new HashMap());
         PageInfo<GatewayRoutesVO> pageInfo = new PageInfo<>(routeVOMapper.mapAsList(alls, GatewayRoutesVO.class));
         return PageResult.<GatewayRoutesVO>builder().data(pageInfo.getList()).code(0).count(pageInfo.getTotal()).build();
     }
@@ -217,24 +177,21 @@ public class DynamicRouteServiceImpl implements ApplicationEventPublisherAware, 
     public String synchronization() {
         HashMap map = new HashMap();
         map.put("delFlag", 0);
-        List<GatewayRoutes> alls = gatewayRoutesMapper.findAll(map);
-
-        for (GatewayRoutes route:   alls) {
+        List<GatewayRoutes> gatewayRoutes = gatewayRoutesDao.findAll(map);
+        for (GatewayRoutes route : gatewayRoutes) {
             GatewayRouteDefinition gatewayRouteDefinition = GatewayRouteDefinition.builder()
                     .description(route.getDescription())
                     .id(route.getId())
                     .order(route.getOrder())
                     .uri(route.getUri())
                     .build();
-
             List<GatewayFilterDefinition> gatewayFilterDefinitions = JSONArray.parseArray(route.getFilters(), GatewayFilterDefinition.class);
             List<GatewayPredicateDefinition> gatewayPredicateDefinitions = JSONArray.parseArray(route.getPredicates(), GatewayPredicateDefinition.class);
             gatewayRouteDefinition.setPredicates(gatewayPredicateDefinitions);
             gatewayRouteDefinition.setFilters(gatewayFilterDefinitions);
+            stringRedisTemplate.boundHashOps(GATEWAY_ROUTES_PREFIX).put(route.getId(), JSONObject.toJSONString(gatewayRouteDefinition));
 
-            redisTemplate.boundHashOps(GATEWAY_ROUTES_PREFIX).put( route.getId() ,  JSONObject.toJSONString(gatewayRouteDefinition));
-            
-            
+
         }
 
         return "success";
@@ -250,54 +207,48 @@ public class DynamicRouteServiceImpl implements ApplicationEventPublisherAware, 
     public String updateFlag(Map<String, Object> params) {
         String id = MapUtils.getString(params, "id");
         Integer flag = MapUtils.getInteger(params, "flag");
-
-        GatewayRoutes gatewayRoutes = gatewayRoutesMapper.selectByPrimaryKey(id);
+        GatewayRoutes gatewayRoutes = gatewayRoutesDao.selectByPrimaryKey(id);
         if (gatewayRoutes == null) {
-            return "路由不存在";
+            return "route is empty";
         }
 
-        if (flag == 1){
-            redisTemplate.boundHashOps(GATEWAY_ROUTES_PREFIX).delete( id ); 
-            
-        }else {
+        if (flag == 1) {
+            stringRedisTemplate.boundHashOps(GATEWAY_ROUTES_PREFIX).delete(id);
+        } else {
             GatewayRouteDefinition gatewayRouteDefinition = GatewayRouteDefinition.builder()
                     .description(gatewayRoutes.getDescription())
                     .id(gatewayRoutes.getId())
                     .order(gatewayRoutes.getOrder())
                     .uri(gatewayRoutes.getUri())
                     .build();
-
             List<GatewayFilterDefinition> gatewayFilterDefinitions = JSONArray.parseArray(gatewayRoutes.getFilters(), GatewayFilterDefinition.class);
             List<GatewayPredicateDefinition> gatewayPredicateDefinitions = JSONArray.parseArray(gatewayRoutes.getPredicates(), GatewayPredicateDefinition.class);
             gatewayRouteDefinition.setPredicates(gatewayPredicateDefinitions);
             gatewayRouteDefinition.setFilters(gatewayFilterDefinitions);
-
-            redisTemplate.boundHashOps(GATEWAY_ROUTES_PREFIX).put( gatewayRoutes.getId() ,  JSONObject.toJSONString(gatewayRouteDefinition));
-            
+            stringRedisTemplate.boundHashOps(GATEWAY_ROUTES_PREFIX).put(gatewayRoutes.getId(), JSONObject.toJSONString(gatewayRouteDefinition));
         }
 
         gatewayRoutes.setDelFlag(flag);
         gatewayRoutes.setUpdateTime(new Date());
-        int i = gatewayRoutesMapper.updateByPrimaryKeySelective(gatewayRoutes);
-        return i > 0 ? "更新成功": "更新失败";
+        int success = gatewayRoutesDao.updateByPrimaryKeySelective(gatewayRoutes);
+        return success > 0 ? "更新成功" : "更新失败";
     }
 
     /**
      * 转化路由对象  GatewayRoutes
+     *
      * @param gatewayRouteDefinition
      * @return
      */
-    private GatewayRoutes transformToGatewayRoutes(GatewayRouteDefinition gatewayRouteDefinition){
+    private GatewayRoutes transformToGatewayRoutes(GatewayRouteDefinition gatewayRouteDefinition) {
         GatewayRoutes definition = new GatewayRoutes();
-        routeDefinitionMapper.map(gatewayRouteDefinition,definition);
+        routeDefinitionMapper.map(gatewayRouteDefinition, definition);
         //设置路由id
-        if (!StringUtils.isNotBlank(definition.getId())){
-            definition.setId(java.util.UUID.randomUUID().toString().toUpperCase().replace("-",""));
+        if (!StringUtils.isNotBlank(definition.getId())) {
+            definition.setId(java.util.UUID.randomUUID().toString().toUpperCase().replace("-", ""));
         }
-
         String filters = JSONArray.toJSONString(gatewayRouteDefinition.getFilters());
         String predicates = JSONArray.toJSONString(gatewayRouteDefinition.getPredicates());
-
         definition.setFilters(filters);
         definition.setPredicates(predicates);
 
@@ -335,6 +286,6 @@ public class DynamicRouteServiceImpl implements ApplicationEventPublisherAware, 
         definition.setPredicates(Arrays.asList(predicate));
 
         System.out.println("definition:" + JSON.toJSONString(definition));
-        redisTemplate.opsForHash().put(GATEWAY_ROUTES_PREFIX, "key", JSON.toJSONString(definition));
+        stringRedisTemplate.opsForHash().put(GATEWAY_ROUTES_PREFIX, "key", JSON.toJSONString(definition));
     }
 }

@@ -22,7 +22,7 @@ import com.open.capacity.common.util.StringUtil;
 import cn.hutool.core.util.StrUtil;
 
 /**
- * blog: https://blog.51cto.com/13005375 
+ * blog: https://blog.51cto.com/13005375
  * code: https://gitee.com/owenwangwen/open-capacity-platform
  */
 public class RestTemplateInterceptor implements ClientHttpRequestInterceptor {
@@ -31,24 +31,24 @@ public class RestTemplateInterceptor implements ClientHttpRequestInterceptor {
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
         ServletRequestAttributes attributes = (ServletRequestAttributes) requestAttributes;
         HttpServletRequest httpRequest = attributes.getRequest();
-        String header = httpRequest.getHeader(UaaConstant.AUTHORIZTION);
+        String header = httpRequest.getHeader(UaaConstant.AUTHORIZATION);
 
-        
-		String token = StringUtil.isBlank(StringUtil.substringAfter(header, OAuth2AccessToken.BEARER_TYPE+" ")) ? httpRequest.getParameter(OAuth2AccessToken.ACCESS_TOKEN) :  StringUtil.substringAfter(header, OAuth2AccessToken.BEARER_TYPE +" ");
-		
-		token = StringUtil.isBlank(httpRequest.getHeader(UaaConstant.TOKEN_HEADER)) ? token : httpRequest.getHeader(UaaConstant.TOKEN_HEADER) ;
-		
-		
-		//传递token
+
+        String token = StringUtil.isBlank(StringUtil.substringAfter(header, OAuth2AccessToken.BEARER_TYPE + " ")) ? httpRequest.getParameter(OAuth2AccessToken.ACCESS_TOKEN) : StringUtil.substringAfter(header, OAuth2AccessToken.BEARER_TYPE + " ");
+
+        token = StringUtil.isBlank(httpRequest.getHeader(UaaConstant.TOKEN_HEADER)) ? token : httpRequest.getHeader(UaaConstant.TOKEN_HEADER);
+
+
+        //传递token
         HttpHeaders headers = request.getHeaders();
-        headers.add(UaaConstant.TOKEN_HEADER,  token);
+        headers.add(UaaConstant.TOKEN_HEADER, token);
 
-       //传递traceId
-        String traceId = StrUtil.isNotEmpty(MDC.get(TraceConstant.LOG_TRACE_ID))  ?  MDC.get(TraceConstant.LOG_TRACE_ID) :  MDC.get(TraceConstant.LOG_B3_TRACEID) ;
+        //传递traceId
+        String traceId = StrUtil.isNotEmpty(MDC.get(TraceConstant.LOG_TRACE_ID)) ? MDC.get(TraceConstant.LOG_TRACE_ID) : MDC.get(TraceConstant.LOG_B3_TRACEID);
         if (StrUtil.isNotEmpty(traceId)) {
-            headers.add(TraceConstant.HTTP_HEADER_TRACE_ID,  traceId);
+            headers.add(TraceConstant.HTTP_HEADER_TRACE_ID, traceId);
         }
-        
+
         // 保证请求继续执行
         return execution.execute(request, body);
     }
