@@ -48,7 +48,7 @@ import ma.glasnost.orika.impl.DefaultMapperFactory;
 public class DynamicRouteServiceImpl implements ApplicationEventPublisherAware, DynamicRouteService {
 
     @Autowired
-    private StringRedisTemplate redisTemplate;
+    private StringRedisTemplate stringRedisTemplate;
 
     @Resource
     private RouteDefinitionWriter routeDefinitionWriter;
@@ -113,7 +113,7 @@ public class DynamicRouteServiceImpl implements ApplicationEventPublisherAware, 
         gatewayRoutes.setUpdateTime(new Date());
         gatewayRoutesDao.insertSelective(gatewayRoutes);
         gatewayRouteDefinition.setId(gatewayRoutes.getId());
-        redisTemplate.boundHashOps(GATEWAY_ROUTES_PREFIX).put(gatewayRouteDefinition.getId(), JSONObject.toJSONString(gatewayRouteDefinition));
+        stringRedisTemplate.boundHashOps(GATEWAY_ROUTES_PREFIX).put(gatewayRouteDefinition.getId(), JSONObject.toJSONString(gatewayRouteDefinition));
         return gatewayRoutes.getId();
     }
 
@@ -129,8 +129,8 @@ public class DynamicRouteServiceImpl implements ApplicationEventPublisherAware, 
         gatewayRoutes.setCreateTime(new Date());
         gatewayRoutes.setUpdateTime(new Date());
         gatewayRoutesDao.updateByPrimaryKeySelective(gatewayRoutes);
-        redisTemplate.boundHashOps(GATEWAY_ROUTES_PREFIX).delete(gatewayRouteDefinition.getId());
-        redisTemplate.boundHashOps(GATEWAY_ROUTES_PREFIX).put(gatewayRouteDefinition.getId(), JSONObject.toJSONString(gatewayRouteDefinition));
+        stringRedisTemplate.boundHashOps(GATEWAY_ROUTES_PREFIX).delete(gatewayRouteDefinition.getId());
+        stringRedisTemplate.boundHashOps(GATEWAY_ROUTES_PREFIX).put(gatewayRouteDefinition.getId(), JSONObject.toJSONString(gatewayRouteDefinition));
         return gatewayRouteDefinition.getId();
     }
 
@@ -144,7 +144,7 @@ public class DynamicRouteServiceImpl implements ApplicationEventPublisherAware, 
     @Override
     public String delete(String id) {
         gatewayRoutesDao.deleteByPrimaryKey(id);
-        redisTemplate.boundHashOps(GATEWAY_ROUTES_PREFIX).delete(id);
+        stringRedisTemplate.boundHashOps(GATEWAY_ROUTES_PREFIX).delete(id);
 
         return "success";
 //        try {
@@ -189,7 +189,7 @@ public class DynamicRouteServiceImpl implements ApplicationEventPublisherAware, 
             List<GatewayPredicateDefinition> gatewayPredicateDefinitions = JSONArray.parseArray(route.getPredicates(), GatewayPredicateDefinition.class);
             gatewayRouteDefinition.setPredicates(gatewayPredicateDefinitions);
             gatewayRouteDefinition.setFilters(gatewayFilterDefinitions);
-            redisTemplate.boundHashOps(GATEWAY_ROUTES_PREFIX).put(route.getId(), JSONObject.toJSONString(gatewayRouteDefinition));
+            stringRedisTemplate.boundHashOps(GATEWAY_ROUTES_PREFIX).put(route.getId(), JSONObject.toJSONString(gatewayRouteDefinition));
 
 
         }
@@ -213,7 +213,7 @@ public class DynamicRouteServiceImpl implements ApplicationEventPublisherAware, 
         }
 
         if (flag == 1) {
-            redisTemplate.boundHashOps(GATEWAY_ROUTES_PREFIX).delete(id);
+            stringRedisTemplate.boundHashOps(GATEWAY_ROUTES_PREFIX).delete(id);
         } else {
             GatewayRouteDefinition gatewayRouteDefinition = GatewayRouteDefinition.builder()
                     .description(gatewayRoutes.getDescription())
@@ -225,7 +225,7 @@ public class DynamicRouteServiceImpl implements ApplicationEventPublisherAware, 
             List<GatewayPredicateDefinition> gatewayPredicateDefinitions = JSONArray.parseArray(gatewayRoutes.getPredicates(), GatewayPredicateDefinition.class);
             gatewayRouteDefinition.setPredicates(gatewayPredicateDefinitions);
             gatewayRouteDefinition.setFilters(gatewayFilterDefinitions);
-            redisTemplate.boundHashOps(GATEWAY_ROUTES_PREFIX).put(gatewayRoutes.getId(), JSONObject.toJSONString(gatewayRouteDefinition));
+            stringRedisTemplate.boundHashOps(GATEWAY_ROUTES_PREFIX).put(gatewayRoutes.getId(), JSONObject.toJSONString(gatewayRouteDefinition));
         }
 
         gatewayRoutes.setDelFlag(flag);
@@ -286,6 +286,6 @@ public class DynamicRouteServiceImpl implements ApplicationEventPublisherAware, 
         definition.setPredicates(Arrays.asList(predicate));
 
         System.out.println("definition:" + JSON.toJSONString(definition));
-        redisTemplate.opsForHash().put(GATEWAY_ROUTES_PREFIX, "key", JSON.toJSONString(definition));
+        stringRedisTemplate.opsForHash().put(GATEWAY_ROUTES_PREFIX, "key", JSON.toJSONString(definition));
     }
 }

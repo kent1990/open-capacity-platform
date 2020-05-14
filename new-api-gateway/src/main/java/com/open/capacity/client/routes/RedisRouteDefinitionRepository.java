@@ -29,7 +29,7 @@ public class RedisRouteDefinitionRepository implements RouteDefinitionRepository
     public static final String GATEWAY_ROUTES_PREFIX = "GETEWAY_ROUTES";
 
     @Resource
-    private StringRedisTemplate redisTemplate;
+    private StringRedisTemplate stringRedisTemplate;
 
     private Set<RouteDefinition> routeDefinitions = new HashSet<>();
 
@@ -44,7 +44,7 @@ public class RedisRouteDefinitionRepository implements RouteDefinitionRepository
          * 从redis 中 获取 全部路由,因为保存在redis ,mysql 中 频繁读取mysql 有可能会带来不必要的问题
          */
         routeDefinitions.clear();
-        BoundHashOperations<String, String, String> boundHashOperations = redisTemplate.boundHashOps(GATEWAY_ROUTES_PREFIX);
+        BoundHashOperations<String, String, String> boundHashOperations = stringRedisTemplate.boundHashOps(GATEWAY_ROUTES_PREFIX);
         Map<String, String> map = boundHashOperations.entries();
         Iterator<Map.Entry<String, String>> it = map.entrySet().iterator();
         while (it.hasNext()) {
