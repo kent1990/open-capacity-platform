@@ -2,10 +2,11 @@
 package com.open.capacity.uaa.server;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,10 +36,21 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.ClientDetailsService;
+import org.springframework.security.oauth2.provider.CompositeTokenGranter;
+import org.springframework.security.oauth2.provider.OAuth2RequestFactory;
+import org.springframework.security.oauth2.provider.TokenGranter;
+import org.springframework.security.oauth2.provider.client.ClientCredentialsTokenGranter;
+import org.springframework.security.oauth2.provider.code.AuthorizationCodeServices;
+import org.springframework.security.oauth2.provider.code.AuthorizationCodeTokenGranter;
 import org.springframework.security.oauth2.provider.code.RandomValueAuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.error.OAuth2AccessDeniedHandler;
 import org.springframework.security.oauth2.provider.error.WebResponseExceptionTranslator;
 import org.springframework.security.oauth2.provider.expression.OAuth2WebSecurityExpressionHandler;
+import org.springframework.security.oauth2.provider.implicit.ImplicitTokenGranter;
+import org.springframework.security.oauth2.provider.password.ResourceOwnerPasswordTokenGranter;
+import org.springframework.security.oauth2.provider.refresh.RefreshTokenGranter;
+import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
@@ -127,7 +139,6 @@ public class UAAServerConfig {
          */
         public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 
-
             //通用处理
             endpoints.tokenStore(tokenStore).authenticationManager(authenticationManager)
                     // 支持
@@ -141,6 +152,33 @@ public class UAAServerConfig {
             endpoints.authorizationCodeServices(authorizationCodeServices);
             // 处理 ExceptionTranslationFilter 抛出的异常
             endpoints.exceptionTranslator(webResponseExceptionTranslator);
+            
+            //处理oauth 模式
+            ClientDetailsService clientDetails = endpoints.getClientDetailsService();
+            AuthorizationServerTokenServices tokenServices = endpoints.getTokenServices();
+            AuthorizationCodeServices authorizationCodeServices = endpoints.getAuthorizationCodeServices();
+            OAuth2RequestFactory requestFactory = endpoints.getOAuth2RequestFactory();
+     
+            //tokenGranters添加oauth模式 ，可以让/oauth/token支持自定义模式，继承AbstractTokenGranter 扩展 
+            List<TokenGranter> tokenGranters = new ArrayList<>();
+            //客户端模式   GRANT_TYPE = "client_credentials"; 
+            tokenGranters.add(new ClientCredentialsTokenGranter(tokenServices, clientDetails, requestFactory));
+            //密码模式	  GRANT_TYPE = "password"; 	
+            tokenGranters.add(new ResourceOwnerPasswordTokenGranter(authenticationManager, tokenServices,clientDetails, requestFactory));
+            //授权码模式   GRANT_TYPE = "authorization_code";
+            tokenGranters.add(new AuthorizationCodeTokenGranter(tokenServices, authorizationCodeServices, clientDetails,requestFactory));
+            //刷新模式	  GRANT_TYPE = "refresh_token";
+            tokenGranters.add(new RefreshTokenGranter(tokenServices, clientDetails, requestFactory));
+            //简易模式	  GRANT_TYPE = "implicit";
+            tokenGranters.add(new ImplicitTokenGranter(tokenServices, clientDetails, requestFactory));
+            //短信模式	  GRANT_TYPE = "sms"; 参考ResourceOwnerPasswordTokenGranter重写
+            
+    
+            
+            //组合模式
+            endpoints.tokenGranter(new CompositeTokenGranter(tokenGranters));
+
+            
 
         }
 
