@@ -18,7 +18,6 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-@Primary
 @SuppressWarnings("all")
 public class UserDetailServiceImpl implements UserDetailsService {
 
@@ -26,16 +25,16 @@ public class UserDetailServiceImpl implements UserDetailsService {
     private UserFeignClient  userFeignClient;
 
     @Override
-    @LogAnnotation(module="auth-server",recordRequestParam=false)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         LoginAppUser loginAppUser = null;
 
+      
         if (StringUtil.isPhone(username)){
+        	  //手机
             loginAppUser = userFeignClient.findByMobile(username);
         }else {
-            //      后续考虑集成spring socail,支持多种类型登录
-            loginAppUser = userFeignClient.findByUsername(username);   			  //方式1  feign调用       对外feign resttemplate
-//        loginAppUser = userLoginGrpc.findByUsername(username);		  //方式2  gprc调用		对内grpc dubbo
+            // 用户名
+            loginAppUser = userFeignClient.findByUsername(username);   			  
         }
 
         if (loginAppUser == null) {

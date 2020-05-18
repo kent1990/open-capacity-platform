@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.open.capacity.common.auth.details.LoginAppUser;
 import com.open.capacity.common.feign.FeignExceptionConfig;
+import com.open.capacity.uaa.feign.fallback.UserFeignClientFallbackFactory;
 
 /**
 * @author 作者 owen 
@@ -13,7 +14,8 @@ import com.open.capacity.common.feign.FeignExceptionConfig;
 * 调用用户中心中的userdetail对象，用户oauth中的登录
 * 获取的用户与页面输入的密码 进行BCryptPasswordEncoder匹配
  */
-@FeignClient(value="user-center",configuration = FeignExceptionConfig.class)
+
+@FeignClient(value="user-center",configuration = FeignExceptionConfig.class ,fallbackFactory = UserFeignClientFallbackFactory.class, decode404 = true)
 public interface UserFeignClient {
 
 	/**

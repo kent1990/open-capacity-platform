@@ -64,8 +64,11 @@ import com.open.capacity.common.auth.props.PermitUrlProperties;
 import com.open.capacity.common.constant.UaaConstant;
 import com.open.capacity.common.feign.FeignInterceptorConfig;
 import com.open.capacity.common.rest.RestTemplateConfig;
+import com.open.capacity.common.util.SpringUtils;
 import com.open.capacity.uaa.server.service.RedisAuthorizationCodeServices;
 import com.open.capacity.uaa.server.service.RedisClientDetailsService;
+import com.open.capacity.uaa.server.service.ValidateCodeService;
+import com.open.capacity.uaa.server.token.SMSCodeTokenGranter;
 
 /**
  * @author owen 624191343@qq.com
@@ -118,6 +121,9 @@ public class UAAServerConfig {
         @Autowired
         private UserDetailsService userDetailsService;
 
+        @Autowired
+        private ValidateCodeService validateCodeService ;
+        
         @Autowired(required = false)
         private TokenStore tokenStore;
 
@@ -172,9 +178,7 @@ public class UAAServerConfig {
             //简易模式	  GRANT_TYPE = "implicit";
             tokenGranters.add(new ImplicitTokenGranter(tokenServices, clientDetails, requestFactory));
             //短信模式	  GRANT_TYPE = "sms"; 参考ResourceOwnerPasswordTokenGranter重写
-            
-    
-            
+            tokenGranters.add(new SMSCodeTokenGranter( userDetailsService,  validateCodeService  ,  tokenServices, clientDetails, requestFactory));
             //组合模式
             endpoints.tokenGranter(new CompositeTokenGranter(tokenGranters));
 

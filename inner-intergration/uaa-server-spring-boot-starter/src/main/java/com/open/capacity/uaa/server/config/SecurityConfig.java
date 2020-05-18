@@ -115,10 +115,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler())
 				.addLogoutHandler(oauthLogoutHandler).clearAuthentication(true);
 
-
-		http
-				// 注册到AuthenticationManager中去
-				.authenticationProvider(smsCodeAuthenticationProvider);
+		//注册到AuthenticationManager中去 增加支持SmsCodeAuthenticationToken
+		http.authenticationProvider(smsCodeAuthenticationProvider);
 
 		//增加验证码处理
 		http.apply(validateCodeConfig) ;
