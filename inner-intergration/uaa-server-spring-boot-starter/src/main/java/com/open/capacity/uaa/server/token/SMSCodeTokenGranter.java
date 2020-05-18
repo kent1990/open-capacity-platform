@@ -7,7 +7,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.common.exceptions.InvalidGrantException;
@@ -49,7 +48,6 @@ public class SMSCodeTokenGranter extends AbstractTokenGranter {
 
 		Map<String, String> parameters = new LinkedHashMap<String, String>(tokenRequest.getRequestParameters());
 		String deviceId = parameters.get("deviceId"); // 客户端提交的用户名
-		String phone = parameters.get("phone"); // 客户端提交的用户名
 		String validCode = parameters.get("validCode"); // 客户端提交的验证码
 
 		if (StringUtils.isBlank(deviceId)) {
@@ -57,9 +55,6 @@ public class SMSCodeTokenGranter extends AbstractTokenGranter {
 		}
 		if (StringUtils.isBlank(validCode)) {
 			throw new InvalidGrantException("用户没有输入validCode");
-		}
-		if (StringUtils.isBlank(phone)) {
-			throw new InvalidGrantException("用户没有输入phone");
 		}
 
 		// 得到生成的验证码
@@ -79,7 +74,7 @@ public class SMSCodeTokenGranter extends AbstractTokenGranter {
 		// 根据手机号查询用户
 		UserDetails user = null;
 		try {
-			user = userDetailsService.loadUserByUsername(phone);
+			user = userDetailsService.loadUserByUsername(deviceId);
 			if (!user.isEnabled()) {
 				throw new InvalidGrantException("用户状态已禁用");
 			}

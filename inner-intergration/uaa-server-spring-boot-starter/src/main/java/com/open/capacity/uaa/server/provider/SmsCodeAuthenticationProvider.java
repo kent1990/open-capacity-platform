@@ -17,14 +17,13 @@ import com.open.capacity.common.token.SmsCodeAuthenticationToken;
 public class SmsCodeAuthenticationProvider implements  AuthenticationProvider {
 
     @Autowired(required = false)
-    @Qualifier("smsUserDetailServiceImpl")
-    private UserDetailsService smsUserDetailServiceImpl;
+    private UserDetailsService userDetailsService;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         SmsCodeAuthenticationToken token = (SmsCodeAuthenticationToken) authentication;
 
-        UserDetails userDetails = smsUserDetailServiceImpl.loadUserByUsername((String) token.getPrincipal());
+        UserDetails userDetails = userDetailsService.loadUserByUsername((String) token.getPrincipal());
 
         if (userDetails == null) {
             throw new AuthenticationCredentialsNotFoundException("用户不存在");
