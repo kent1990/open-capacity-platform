@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -44,21 +43,22 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.open.capacity.common.auth.details.LoginAppUser;
 import com.open.capacity.common.model.SysPermission;
 import com.open.capacity.common.token.SmsCodeAuthenticationToken;
+import com.open.capacity.common.util.ResponseUtil;
 import com.open.capacity.common.util.SysUserUtil;
 import com.open.capacity.common.web.PageResult;
 import com.open.capacity.log.annotation.LogAnnotation;
 import com.open.capacity.uaa.server.service.RedisClientDetailsService;
+import com.open.capacity.uaa.service.SysTokenService;
 import com.open.capacity.uaa.utils.SpringUtil;
 
 import io.swagger.annotations.Api;
@@ -67,7 +67,7 @@ import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author 作者 owen 
+ * @author 作者 owen
  * @version 创建时间：2018年4月28日 下午2:18:54 类说明
  */
 @Slf4j
@@ -76,95 +76,36 @@ import lombok.extern.slf4j.Slf4j;
 @SuppressWarnings("all")
 public class OAuth2Controller {
 
-	@Resource
-	private ObjectMapper objectMapper; // springmvc启动时自动装配json处理类
 	@Autowired
-	private PasswordEncoder passwordEncoder;
-
-	@Autowired
-	private TokenStore tokenStore;
-
-	@Autowired
-	private RedisTemplate<String, Object> redisTemplate;
+	private SysTokenService sysTokenService;
 
 	@ApiOperation(value = "用户名密码获取token")
 	@PostMapping("/oauth/user/token")
 	@LogAnnotation(module = "auth-server", recordRequestParam = false)
 	public void getUserTokenInfo(
 			@ApiParam(required = true, name = "username", value = "账号") @RequestParam(value = "username") String username,
-			@ApiParam(required = true, name = "password", value = "密码") @RequestParam(value = "password") String password,
-			HttpServletRequest request, HttpServletResponse response) {
-		String clientId = request.getHeader("client_id");
-		String clientSecret = request.getHeader("client_secret");
+			@ApiParam(required = true, name = "password", value = "密码") @RequestParam(value = "password") String password) {
 
+		ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder
+				.getRequestAttributes();
+		HttpServletRequest request = servletRequestAttributes.getRequest();
+		HttpServletResponse response = servletRequestAttributes.getResponse();
 		try {
 
-			if (clientId == null || "".equals(clientId)) {
-				throw new UnapprovedClientAuthenticationException("请求头中无client_id信息");
-			}
+			String clientId = request.getHeader("client_id");
+			String clientSecret = request.getHeader("client_secret");
 
-			if (clientSecret == null || "".equals(clientSecret)) {
-				throw new UnapprovedClientAuthenticationException("请求头中无client_secret信息");
-			}
+			OAuth2AccessToken oAuth2AccessToken = sysTokenService.getUserTokenInfo(clientId, clientSecret, username,
+					password);
 
-			RedisClientDetailsService clientDetailsService = SpringUtil.getBean(RedisClientDetailsService.class);
-
-			ClientDetails clientDetails = clientDetailsService.loadClientByClientId(clientId);
-
-			if (clientDetails == null) {
-				throw new UnapprovedClientAuthenticationException("clientId对应的信息不存在");
-			} else if (!passwordEncoder.matches(clientSecret, clientDetails.getClientSecret())) {
-				throw new UnapprovedClientAuthenticationException("clientSecret不匹配");
-			}
-
-			
-			TokenRequest tokenRequest = new TokenRequest(MapUtils.EMPTY_MAP, clientId, clientDetails.getScope(),
-					"customer");
-
-			OAuth2Request oAuth2Request = tokenRequest.createOAuth2Request(clientDetails);
-
-			UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
-
-			AuthenticationManager authenticationManager = SpringUtil.getBean(AuthenticationManager.class);
-
-			Authentication authentication = authenticationManager.authenticate(token);
-			SecurityContextHolder.getContext().setAuthentication(authentication);
-
-			OAuth2Authentication oAuth2Authentication = new OAuth2Authentication(oAuth2Request, authentication);
-
-			AuthorizationServerTokenServices authorizationServerTokenServices = SpringUtil
-					.getBean("defaultAuthorizationServerTokenServices", AuthorizationServerTokenServices.class);
-
-			OAuth2AccessToken oAuth2AccessToken = authorizationServerTokenServices
-					.createAccessToken(oAuth2Authentication);
-
-			oAuth2Authentication.setAuthenticated(true);
-
-			response.setContentType("application/json;charset=UTF-8");
-			response.getWriter().write(objectMapper.writeValueAsString(oAuth2AccessToken));
-			response.getWriter().flush();
-			response.getWriter().close();
+			ResponseUtil.renderJson(response, oAuth2AccessToken);
 
 		} catch (Exception e) {
-
-			response.setStatus(HttpStatus.UNAUTHORIZED.value());
-
-			response.setContentType("application/json;charset=UTF-8");
 
 			Map<String, String> rsp = new HashMap<>();
 			rsp.put("resp_code", HttpStatus.UNAUTHORIZED.value() + "");
 			rsp.put("resp_msg", e.getMessage());
-
-			try {
-				response.getWriter().write(objectMapper.writeValueAsString(rsp));
-				response.getWriter().flush();
-				response.getWriter().close();
-			} catch (JsonProcessingException e1) {
-				// TODO Auto-generated catch block
-				log.error("OAuth2Controller -> getUserTokenInfo1 : {}" + e1.getMessage());
-			} catch (IOException e1) {
-				log.error("OAuth2Controller -> getUserTokenInfo2 : {}" + e1.getMessage());
-			}
+			ResponseUtil.renderJsonError(response, rsp, HttpStatus.UNAUTHORIZED.value());
 
 		}
 	}
@@ -172,72 +113,27 @@ public class OAuth2Controller {
 	@ApiOperation(value = "clientId获取token")
 	@PostMapping("/oauth/client/token")
 	@LogAnnotation(module = "auth-server", recordRequestParam = false)
-	public void getClientTokenInfo(HttpServletRequest request, HttpServletResponse response) {
+	public void getClientTokenInfo() {
 
-		String clientId = request.getHeader("client_id");
-		String clientSecret = request.getHeader("client_secret");
+		ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder
+				.getRequestAttributes();
+		HttpServletRequest request = servletRequestAttributes.getRequest();
+		HttpServletResponse response = servletRequestAttributes.getResponse();
+
 		try {
+			String clientId = request.getHeader("client_id");
+			String clientSecret = request.getHeader("client_secret");
+			OAuth2AccessToken oAuth2AccessToken = sysTokenService.getClientTokenInfo(clientId, clientSecret);
 
-			if (clientId == null || "".equals(clientId)) {
-				throw new UnapprovedClientAuthenticationException("请求参数中无clientId信息");
-			}
-
-			if (clientSecret == null || "".equals(clientSecret)) {
-				throw new UnapprovedClientAuthenticationException("请求参数中无clientSecret信息");
-			}
-
-			RedisClientDetailsService clientDetailsService = SpringUtil.getBean(RedisClientDetailsService.class);
-
-			ClientDetails clientDetails = clientDetailsService.loadClientByClientId(clientId);
-
-			if (clientDetails == null) {
-				throw new UnapprovedClientAuthenticationException("clientId对应的信息不存在");
-			} else if (!passwordEncoder.matches(clientSecret, clientDetails.getClientSecret())) {
-				throw new UnapprovedClientAuthenticationException("clientSecret不匹配");
-			}
-
-			Map<String, String> map = new HashMap<>();
-			map.put("client_secret", clientSecret);
-			map.put("client_id", clientId);
-			map.put("grant_type", "client_credentials");
-			TokenRequest tokenRequest = new TokenRequest(map, clientId, clientDetails.getScope(), "client_credentials");
-
-			OAuth2Request oAuth2Request = tokenRequest.createOAuth2Request(clientDetails);
-
-			AuthorizationServerTokenServices authorizationServerTokenServices = SpringUtil
-					.getBean("defaultAuthorizationServerTokenServices", AuthorizationServerTokenServices.class);
-			OAuth2RequestFactory requestFactory = new DefaultOAuth2RequestFactory(clientDetailsService);
-			ClientCredentialsTokenGranter clientCredentialsTokenGranter = new ClientCredentialsTokenGranter(
-					authorizationServerTokenServices, clientDetailsService, requestFactory);
-
-			clientCredentialsTokenGranter.setAllowRefresh(true);
-			OAuth2AccessToken oAuth2AccessToken = clientCredentialsTokenGranter.grant("client_credentials",
-					tokenRequest);
-
-			response.setContentType("application/json;charset=UTF-8");
-			response.getWriter().write(objectMapper.writeValueAsString(oAuth2AccessToken));
-			response.getWriter().flush();
-			response.getWriter().close();
+			ResponseUtil.renderJson(response, oAuth2AccessToken);
 
 		} catch (Exception e) {
 
-			response.setStatus(HttpStatus.UNAUTHORIZED.value());
-			response.setContentType("application/json;charset=UTF-8");
 			Map<String, String> rsp = new HashMap<>();
 			rsp.put("resp_code", HttpStatus.UNAUTHORIZED.value() + "");
 			rsp.put("resp_msg", e.getMessage());
 
-			try {
-				response.getWriter().write(objectMapper.writeValueAsString(rsp));
-				response.getWriter().flush();
-				response.getWriter().close();
-			} catch (JsonProcessingException e1) {
-				// TODO Auto-generated catch block
-				log.error("OAuth2Controller->getClientTokenInfo:{}" ,e1.getMessage());
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				log.error("OAuth2Controller->getClientTokenInfo:{}" ,e1.getMessage());
-			}
+			ResponseUtil.renderJsonError(response, rsp, HttpStatus.UNAUTHORIZED.value());
 
 		}
 	}
@@ -245,70 +141,23 @@ public class OAuth2Controller {
 	@ApiOperation(value = "access_token刷新token")
 	@PostMapping(value = "/oauth/refresh/token", params = "access_token")
 	@LogAnnotation(module = "auth-server", recordRequestParam = false)
-	public void refreshTokenInfo(String access_token, HttpServletRequest request, HttpServletResponse response) {
+	public void refreshTokenInfo(String access_token) {
+		ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder
+				.getRequestAttributes();
+		HttpServletRequest request = servletRequestAttributes.getRequest();
+		HttpServletResponse response = servletRequestAttributes.getResponse();
 
-		// 拿到当前用户信息
-		try (PrintWriter out = response.getWriter()) {
+		try {
 
-			try {
-				Authentication user = SecurityContextHolder.getContext().getAuthentication();
+			OAuth2AccessToken oAuth2AccessToken = sysTokenService.getRefreshTokenInfo(access_token);
 
-				if (user != null) {
-					if (user instanceof OAuth2Authentication) {
-						Authentication athentication = (Authentication) user;
-						OAuth2AuthenticationDetails details = (OAuth2AuthenticationDetails) athentication.getDetails();
-					}
+			ResponseUtil.renderJson(response, oAuth2AccessToken);
 
-				}
-				OAuth2AccessToken accessToken = tokenStore.readAccessToken(access_token);
-				OAuth2Authentication auth = (OAuth2Authentication) user;
-				RedisClientDetailsService clientDetailsService = SpringUtil.getBean(RedisClientDetailsService.class);
-
-				if (auth != null) {
-					ClientDetails clientDetails = clientDetailsService
-							.loadClientByClientId(auth.getOAuth2Request().getClientId());
-
-					AuthorizationServerTokenServices authorizationServerTokenServices = SpringUtil
-							.getBean("defaultAuthorizationServerTokenServices", AuthorizationServerTokenServices.class);
-					OAuth2RequestFactory requestFactory = new DefaultOAuth2RequestFactory(clientDetailsService);
-
-					RefreshTokenGranter refreshTokenGranter = new RefreshTokenGranter(authorizationServerTokenServices,
-							clientDetailsService, requestFactory);
-
-					Map<String, String> map = new HashMap<>();
-					map.put("grant_type", "refresh_token");
-					map.put("refresh_token", accessToken.getRefreshToken().getValue());
-					TokenRequest tokenRequest = new TokenRequest(map, auth.getOAuth2Request().getClientId(),
-							auth.getOAuth2Request().getScope(), "refresh_token");
-
-					OAuth2AccessToken oAuth2AccessToken = refreshTokenGranter.grant("refresh_token", tokenRequest);
-
-					tokenStore.removeAccessToken(accessToken);
-
-					response.setContentType("application/json;charset=UTF-8");
-					out.write(objectMapper.writeValueAsString(oAuth2AccessToken));
-					out.flush();
-					response.getWriter().close();
-				}
-			} catch (Exception e) {
-				response.setStatus(HttpStatus.UNAUTHORIZED.value());
-				response.setContentType("application/json;charset=UTF-8");
-				Map<String, String> rsp = new HashMap<>();
-				rsp.put("resp_code", HttpStatus.UNAUTHORIZED.value() + "");
-				rsp.put("resp_msg", e.getMessage());
-
-				try {
-					out.write(objectMapper.writeValueAsString(rsp));
-				} catch (JsonProcessingException e1) {
-					// TODO Auto-generated catch block
-					log.error("OAuth2Controller->refreshTokenInfo1:{}" ,e1.getMessage());
-				}
-				out.flush();
-			}
-
-		} catch (IOException e2) {
-			// TODO Auto-generated catch block
-			log.error("OAuth2Controller->refreshTokenInfo2:{}" ,e2.getMessage());
+		} catch (Exception e) {
+			Map<String, String> rsp = new HashMap<>();
+			rsp.put("resp_code", HttpStatus.UNAUTHORIZED.value() + "");
+			rsp.put("resp_msg", e.getMessage());
+			ResponseUtil.renderJsonError(response, rsp, HttpStatus.UNAUTHORIZED.value());
 		}
 
 	}
@@ -323,17 +172,7 @@ public class OAuth2Controller {
 	@LogAnnotation(module = "auth-server", recordRequestParam = false)
 	public void removeToken(String access_token) {
 
-		OAuth2AccessToken accessToken = tokenStore.readAccessToken(access_token);
-		if (accessToken != null) {
-			// 移除access_token
-			tokenStore.removeAccessToken(accessToken);
-
-			// 移除refresh_token
-			if (accessToken.getRefreshToken() != null) {
-				tokenStore.removeRefreshToken(accessToken.getRefreshToken());
-			}
-
-		}
+		sysTokenService.removeToken(access_token);
 	}
 
 	@ApiOperation(value = "获取token信息")
@@ -341,9 +180,7 @@ public class OAuth2Controller {
 	@LogAnnotation(module = "auth-server", recordRequestParam = false)
 	public OAuth2AccessToken getTokenInfo(String access_token) {
 
-		OAuth2AccessToken accessToken = tokenStore.readAccessToken(access_token);
-
-		return accessToken;
+		return sysTokenService.getTokenInfo(access_token);
 
 	}
 
@@ -359,8 +196,8 @@ public class OAuth2Controller {
 	@LogAnnotation(module = "auth-server", recordRequestParam = false)
 	public Map<String, Object> getCurrentUserDetail() {
 		Map<String, Object> userInfo = new HashMap<>();
-		LoginAppUser loginUser =  SysUserUtil.getLoginAppUser() ;
-		userInfo.put("user",loginUser );
+		LoginAppUser loginUser = SysUserUtil.getLoginAppUser();
+		userInfo.put("user", loginUser);
 		log.debug("认证详细信息:" + loginUser.toString());
 
 		List<SysPermission> permissions = new ArrayList<>();
@@ -385,192 +222,38 @@ public class OAuth2Controller {
 	@ApiOperation(value = "token列表")
 	@PostMapping("/oauth/token/list")
 	@LogAnnotation(module = "auth-server", recordRequestParam = false)
-	public PageResult<HashMap<String, String>> getUserTokenInfo(@RequestParam Map<String, Object> params)
-			throws Exception {
-		List<HashMap<String, String>> list = new ArrayList<>();
+	public PageResult<Map<String, String>> getTokenList(@RequestParam Map<String, Object> params) throws Exception {
 
-		Set<String> keys = Optional.ofNullable(redisTemplate.keys("access:" + "*")).orElse(Sets.newHashSet(""));
-		// Object key1 = keys.toArray()[0];
-		// Object token1 = redisTemplate.opsForValue().get(key1);
-		// 根据分页参数获取对应数据
-		// List<String> pages = findKeysForPage("access:" + "*",
-		// MapUtils.getInteger(params, "page"),MapUtils.getInteger(params,
-		// "limit"));
+		return sysTokenService.getTokenList(params);
 
-		for (Object key : keys.toArray()) {
-			// String key = page;
-			// String accessToken = StringUtils.substringAfter(key, "access:");
-			// OAuth2AccessToken token =
-			// tokenStore.readAccessToken(accessToken);
-			OAuth2AccessToken token = (OAuth2AccessToken) redisTemplate.opsForValue().get(key);
-			HashMap<String, String> map = new HashMap<String, String>();
-
-			try {
-				
-				if(token!=null){
-					map.put("token_type", token.getTokenType());
-					map.put("token_value", token.getValue());
-					map.put("expires_in", token.getExpiresIn() + "");
-				}
-				OAuth2Authentication oAuth2Auth = tokenStore.readAuthentication(token);
-				Authentication authentication = oAuth2Auth.getUserAuthentication();
-
-				map.put("client_id", oAuth2Auth.getOAuth2Request().getClientId());
-				map.put("grant_type", oAuth2Auth.getOAuth2Request().getGrantType());
-
-				if (authentication instanceof UsernamePasswordAuthenticationToken) {
-					UsernamePasswordAuthenticationToken authenticationToken = (UsernamePasswordAuthenticationToken) authentication;
-
-					if (authenticationToken.getPrincipal() instanceof LoginAppUser) {
-						LoginAppUser user = (LoginAppUser) authenticationToken.getPrincipal();
-						map.put("user_id", user.getId() + "");
-						map.put("user_name", user.getUsername() + "");
-						map.put("user_head_imgurl", user.getHeadImgUrl() + "");
-					}
-
-				} else if (authentication instanceof PreAuthenticatedAuthenticationToken) {
-					// 刷新token方式
-					PreAuthenticatedAuthenticationToken authenticationToken = (PreAuthenticatedAuthenticationToken) authentication;
-					if (authenticationToken.getPrincipal() instanceof LoginAppUser) {
-						LoginAppUser user = (LoginAppUser) authenticationToken.getPrincipal();
-						map.put("user_id", user.getId() + "");
-						map.put("user_name", user.getUsername() + "");
-						map.put("user_head_imgurl", user.getHeadImgUrl() + "");
-					}
-
-				}
-				list.add(map);
-			} catch (Exception e) {
-
-			}
-
-			
-
-		}
-
-		return PageResult.<HashMap<String, String>>builder().data(list).code(0).count((long) keys.size()).build();
-
-	}
-
-	public List<String> findKeysForPage(String patternKey, int pageNum, int pageSize) {
-
-		Set<String> execute = redisTemplate.execute(new RedisCallback<Set<String>>() {
-
-			@Override
-			public Set<String> doInRedis(RedisConnection connection) throws DataAccessException {
-
-				Set<String> binaryKeys = new HashSet<>();
-
-				Cursor<byte[]> cursor = connection
-						.scan(new ScanOptions.ScanOptionsBuilder().match(patternKey).count(1000).build());
-				int tmpIndex = 0;
-				int startIndex = (pageNum - 1) * pageSize;
-				int end = pageNum * pageSize;
-				while (cursor.hasNext()) {
-					if (tmpIndex >= startIndex && tmpIndex < end) {
-						binaryKeys.add(new String(cursor.next()));
-						tmpIndex++;
-						continue;
-					}
-
-					// 获取到满足条件的数据后,就可以退出了
-					if (tmpIndex >= end) {
-						break;
-					}
-
-					tmpIndex++;
-					cursor.next();
-				}
-				connection.close();
-				return binaryKeys;
-			}
-		});
-
-		List<String> result = new ArrayList<String>(pageSize);
-		
-		Optional.ofNullable(result).orElse(Lists.newArrayList("")).addAll(execute);
-		return result;
 	}
 
 	@PostMapping("/authentication/sms")
 	public void getMobileInfo(
 			@ApiParam(required = true, name = "deviceId", value = "手机号") @RequestParam(value = "deviceId") String deviceId,
-			@ApiParam(required = true, name = "validCode", value = "验证码") @RequestParam(value = "validCode", required = false) String validCode,
-			HttpServletRequest request, HttpServletResponse response) {
-		String clientId = request.getHeader("client_id");
-		String clientSecret = request.getHeader("client_secret");
+			@ApiParam(required = true, name = "validCode", value = "验证码") @RequestParam(value = "validCode", required = false) String validCode) {
+
+		ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder
+				.getRequestAttributes();
+		HttpServletRequest request = servletRequestAttributes.getRequest();
+		HttpServletResponse response = servletRequestAttributes.getResponse();
 
 		try {
-			if (clientId == null || "".equals(clientId)) {
-				throw new UnapprovedClientAuthenticationException("请求头中无client_id信息");
-			}
+			String clientId = request.getHeader("client_id");
+			String clientSecret = request.getHeader("client_secret");
+			OAuth2AccessToken oAuth2AccessToken = sysTokenService.getMobileTokenInfo(clientId, clientSecret, deviceId,
+					validCode);
 
-			if (clientSecret == null || "".equals(clientSecret)) {
-				throw new UnapprovedClientAuthenticationException("请求头中无client_secret信息");
-			}
-
-			RedisClientDetailsService clientDetailsService = SpringUtil.getBean(RedisClientDetailsService.class);
-
-			ClientDetails clientDetails = clientDetailsService.loadClientByClientId(clientId);
-
-			if (clientDetails == null) {
-				throw new UnapprovedClientAuthenticationException("clientId对应的信息不存在");
-			} else if (!passwordEncoder.matches(clientSecret, clientDetails.getClientSecret())) {
-				throw new UnapprovedClientAuthenticationException("clientSecret不匹配");
-			}
-
-			TokenRequest tokenRequest = new TokenRequest(MapUtils.EMPTY_MAP, clientId, clientDetails.getScope(),
-					"customer");
-
-			OAuth2Request oAuth2Request = tokenRequest.createOAuth2Request(clientDetails);
-
-			SmsCodeAuthenticationToken token = new SmsCodeAuthenticationToken(deviceId);
-			// UsernamePasswordAuthenticationToken token = new
-			// UsernamePasswordAuthenticationToken(username, password);
-
-			AuthenticationManager authenticationManager = SpringUtil.getBean(AuthenticationManager.class);
-
-			Authentication authentication = authenticationManager.authenticate(token);
-			SecurityContextHolder.getContext().setAuthentication(authentication);
-
-			OAuth2Authentication oAuth2Authentication = new OAuth2Authentication(oAuth2Request, authentication);
-
-			AuthorizationServerTokenServices authorizationServerTokenServices = SpringUtil
-					.getBean("defaultAuthorizationServerTokenServices", AuthorizationServerTokenServices.class);
-
-			OAuth2AccessToken oAuth2AccessToken = authorizationServerTokenServices
-					.createAccessToken(oAuth2Authentication);
-
-			oAuth2Authentication.setAuthenticated(true);
-
-			response.setContentType("application/json;charset=UTF-8");
-			response.getWriter().write(objectMapper.writeValueAsString(oAuth2AccessToken));
-			response.getWriter().flush();
-			response.getWriter().close();
+			ResponseUtil.renderJson(response, oAuth2AccessToken);
 
 		} catch (Exception e) {
-
-			response.setStatus(HttpStatus.UNAUTHORIZED.value());
-
-			response.setContentType("application/json;charset=UTF-8");
 
 			Map<String, String> rsp = new HashMap<>();
 			rsp.put("resp_code", HttpStatus.UNAUTHORIZED.value() + "");
 			rsp.put("resp_msg", e.getMessage());
 
-			try {
-				response.getWriter().write(objectMapper.writeValueAsString(rsp));
-				response.getWriter().flush();
-				response.getWriter().close();
-			} catch (JsonProcessingException e1) {
-				// TODO Auto-generated catch block
-				log.error("OAuth2Controller->getMobileInfo:{}" ,e1.getMessage());
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				log.error("OAuth2Controller->getMobileInfo:{}" ,e1.getMessage());
-			}
-
+			ResponseUtil.renderJsonError(response, rsp, HttpStatus.UNAUTHORIZED.value());
 		}
 	}
-	  
+
 }
