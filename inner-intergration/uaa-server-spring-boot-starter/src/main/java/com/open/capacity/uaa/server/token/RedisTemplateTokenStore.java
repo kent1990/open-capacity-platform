@@ -7,7 +7,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.Cursor;
@@ -24,6 +23,7 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.redis.JdkSerializationStrategy;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStoreSerializationStrategy;
+import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ReflectionUtils;
 
@@ -192,7 +192,11 @@ public class RedisTemplateTokenStore implements TokenStore {
 				? serialize(
 						(LoginAppUser) ((UsernamePasswordAuthenticationToken) authentication.getUserAuthentication())
 								.getPrincipal())
-				: null;
+				: ((authentication.getUserAuthentication() instanceof PreAuthenticatedAuthenticationToken ) ? 
+						serialize(
+								(LoginAppUser) ((PreAuthenticatedAuthenticationToken) authentication.getUserAuthentication())
+										.getPrincipal())
+						: null );
 
 		RedisConnection conn = getConnection();
 		try {
