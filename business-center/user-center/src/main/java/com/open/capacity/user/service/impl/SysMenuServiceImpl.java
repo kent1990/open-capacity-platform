@@ -11,6 +11,8 @@ import org.springframework.util.CollectionUtils;
 
 import com.open.capacity.common.exception.service.ServiceException;
 import com.open.capacity.common.model.SysMenu;
+import com.open.capacity.log.dto.LogEntry;
+import com.open.capacity.log.monitor.BizLog;
 import com.open.capacity.user.dao.SysMenuDao;
 import com.open.capacity.user.dao.SysRoleMenuDao;
 import com.open.capacity.user.service.SysMenuService;
@@ -36,6 +38,7 @@ public class SysMenuServiceImpl implements SysMenuService {
 			menuDao.save(menu);
 			log.info("新增菜单：{}", menu);
 		} catch (Exception e) {
+//			BizLog.info("菜单保存处理失败", LogEntry.builder().clazz(this.getClass().getName()).method("save").error(e.getMessage()).build());
 			throw new ServiceException(e) ;
 		}
 	}
@@ -49,6 +52,7 @@ public class SysMenuServiceImpl implements SysMenuService {
 			menuDao.updateByOps(menu);
 			log.info("修改菜单：{}", menu);
 		} catch (Exception e) {
+//			BizLog.info("菜单修改处理失败", LogEntry.builder().clazz(this.getClass().getName()).method("update").error(e.getMessage()).build());
 			throw new ServiceException(e) ;
 		}
 	}
@@ -64,6 +68,7 @@ public class SysMenuServiceImpl implements SysMenuService {
 
 			log.info("删除菜单：{}", menu);
 		} catch (Exception e) {
+//			BizLog.info("菜单删除处理失败", LogEntry.builder().clazz(this.getClass().getName()).method("delete").error(e.getMessage()).build());
 			throw new ServiceException(e) ;
 		}
 	}
@@ -80,6 +85,7 @@ public class SysMenuServiceImpl implements SysMenuService {
 				});
 			}
 		} catch (Exception e) {
+//			BizLog.info("菜单角色处理失败", LogEntry.builder().clazz(this.getClass().getName()).method("setMenuToRole").error(e.getMessage()).build());
 			throw new ServiceException(e);
 		}
 	}
@@ -89,6 +95,7 @@ public class SysMenuServiceImpl implements SysMenuService {
 		try {
 			return roleMenuDao.findMenusByRoleIds(roleIds);
 		} catch (Exception e) {
+//			BizLog.info("角色菜单处理失败", LogEntry.builder().clazz(this.getClass().getName()).method("findByRoles").error(e.getMessage()).build());
 			throw new ServiceException(e);
 		}
 	}
@@ -98,6 +105,7 @@ public class SysMenuServiceImpl implements SysMenuService {
 		try {
 			return menuDao.findAll();
 		} catch (Exception e) {
+//			BizLog.info("菜单列表失败", LogEntry.builder().clazz(this.getClass().getName()).method("findAll").error(e.getMessage()).build());
 			throw new ServiceException(e);
 		}
 	}
