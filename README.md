@@ -12,9 +12,7 @@
 [![star](https://gitee.com/owenwangwen/open-capacity-platform/badge/star.svg?theme=white)](https://gitee.com/owenwangwen/open-capacity-platform/stargazers)
 [![Fork me on Gitee](https://gitee.com/owenwangwen/open-capacity-platform/widgets/widget_6.svg)](https://gitee.com/owenwangwen/open-capacity-platform)
 [![fork](https://gitee.com/owenwangwen/open-capacity-platform/badge/fork.svg?theme=white)](https://gitee.com/owenwangwen/open-capacity-platform/members)
-
-
-
+ 
 简称ocp是基于layui+springcloud的企业级微服务框架(用户权限管理，配置中心管理，应用管理，....),其核心的设计目标是分离前后端，快速开发部署，学习简单，功能强大，提供快速接入核心接口能力，其目标是帮助企业搭建一套类似百度能力开放平台的框架；  
 - 基于layui前后端分离的企业级微服务架构  
 - 兼容spring cloud netflix & spring cloud alibaba  
@@ -48,11 +46,12 @@ http://59.110.164.254:8066/login.html  admin/admin
 	</tr>
 </table>
 
+
 # 技术介绍
 <table>
 	<tr>
-		<td><img src="https://images.gitee.com/uploads/images/2020/0306/153453_a2c27e1d_869801.png "屏幕截图.png""></td>
-		
+		<td><img src="https://images.gitee.com/uploads/images/2019/0523/091013_fffdcf8b_869801.png "屏幕截图.png"></td>
+		<td><img src="https://images.gitee.com/uploads/images/2020/0531/225148_0dff4506_1441068.png "屏幕截图.png"></td>
     </tr>
 	
 </table>
@@ -90,7 +89,7 @@ http://59.110.164.254:8066/login.html  admin/admin
    
 ## 代码结构  
     
-![输入图片说明](https://images.gitee.com/uploads/images/2019/0819/214757_e3408bdc_869801.png "屏幕截图.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2020/0531/225255_8134df97_1441068.png "屏幕截图.png")
 
 ## 能力开放管理平台   
 
