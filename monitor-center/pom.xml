@@ -21,5 +21,6 @@
   	<!-- zipkin链路跟踪 -->
 	<module>zipkin-center</module>
       <module>fescar-center</module>
+      <module>report-center</module>
   </modules>
 </project>
