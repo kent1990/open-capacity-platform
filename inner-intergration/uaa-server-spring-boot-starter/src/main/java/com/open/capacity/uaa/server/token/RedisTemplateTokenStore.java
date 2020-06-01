@@ -331,9 +331,15 @@ public class RedisTemplateTokenStore implements TokenStore {
                             byte[] approvalKey = serializeKey(UNAME_TO_ACCESS + getApprovalKey(authentication));
                             byte[] clientId = serializeKey(CLIENT_ID_TO_ACCESS + authentication.getOAuth2Request().getClientId());
                             byte[] serializedToken = (authentication.getUserAuthentication() instanceof UsernamePasswordAuthenticationToken)
-                                    ? serialize((LoginAppUser) ((UsernamePasswordAuthenticationToken) authentication.getUserAuthentication())
-                                    .getPrincipal())
-                                    : null;
+                    				? serialize(
+                    						(LoginAppUser) ((UsernamePasswordAuthenticationToken) authentication.getUserAuthentication())
+                    								.getPrincipal())
+                    				: ((authentication.getUserAuthentication() instanceof PreAuthenticatedAuthenticationToken ) ? 
+                    						serialize(
+                    								(LoginAppUser) ((PreAuthenticatedAuthenticationToken) authentication.getUserAuthentication())
+                    										.getPrincipal())
+                    						: null );
+
 
                             
                             if (springDataRedis_2_0) {
